@@ -4,23 +4,42 @@
 
 ## Description
 
-miniRT est un projet de l'école 42 visant à créer un simple raytracer capable de générer des images basées sur une description scénique minimale. Ce projet permet d'explorer les bases de la génération d'images par ray tracing, un algorithme de rendu graphique.
+miniRT is a project from school 42 aiming to create a simple raytracer capable of generating images based on minimal scene description. This project allows exploring the basics of image generation by ray tracing, a computer graphics rendering algorithm.
 
-## Table des matières
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Fonctionnalités](#fonctionnalités)
-- [Structure du Projet](#structure-du-projet)
-- [Contributeurs](#contributeurs)
-- [Ressources](#ressources)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Contributors](#contributors)
+- [Resources](#resources)
 
 ## Installation
 
-Pour installer le projet, suivez les étapes suivantes :
+To install the project, follow these steps:
 
-1. Clonez le dépôt :
+1. Clone the repository:
    ```bash
    git clone https://github.com/IlYAN-FISHERMAN/miniRT-42
    cd miniRT-42
    ```
+2. Compile the project:
+   ```bash
+   make
+   ```
+
+## Usage
+
+To execute the raytracer, use the following command:
+   ```bash
+   ./miniRT [path/to/scene_file.rt]
+   ```
+
+## Features
+
+- Loading scenes from .rt files
+- Support for multiple primitives (spheres, planes, etc.)
+- Management of light sources
+- Basic shadows and reflections
+- Configurable camera
