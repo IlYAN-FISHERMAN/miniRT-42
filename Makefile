@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
+#    By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/09 21:08:55 by ilyanar           #+#    #+#              #
-#    Updated: 2024/06/09 23:25:48 by ilyanar          ###   LAUSANNE.ch        #
+#    Updated: 2024/06/10 12:38:55 by rude-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,18 +14,36 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -Ofast
 
-MLXFLAGS = -framework OpenGL -framework AppKit
+OS =
+
+MINILIBX_MACOS_PATH = libs/minilibx_opengl/
+MINILIBX_LINUX_PATH = libs/minilibx-linux/
+MINILIBX_LIB = libmlx.a
+MINILIBX_PATH =
+
+UNAME_S = $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
+	OS = linux
+endif
+
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -framework OpenGL -framework AppKit
+	MINILIBX_PATH = $(MINILIBX_MACOS_PATH)
+	OS = macos
+endif
 
 RM = rm -rf
 
 NAME = miniRT
 
 LIBFT_PATH = ./libs/betterft/
-MLX_PATH = ./libs/minilibx/
 FILES_PATH = ./src/
 
+MINILIBX_LIB := $(MINILIBX_PATH:%=%$(MINILIBX_LIB))
 LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
-MLX = $(MLX_PATH:%=%libmlx.a)
 
 FILES = $(FILES_PATH)miniRT
 
@@ -36,7 +54,7 @@ all : $(NAME)
 clean :
 	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ \n"
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@$(MAKE) -C $(MLX_PATH) clean
+	@$(MAKE) -C $(MINILIBX_PATH) clean
 
 fclean : clean
 	@echo "\n [$(NAME)] - Supressions du reste... 🗑️\n"
@@ -46,20 +64,20 @@ re :
 	@make fclean
 	@make all
 
-debug : $(CFILES) $(LIBFT_LIB) $(MLX)
-	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MLX) $(MLXFLAGS) -o $(NAME)
+debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\33[2K"
 
-$(NAME): $(CFILES) $(LIBFT_LIB) $(MLX)
-	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) $(MLX) $(MLXFLAGS) -o $(NAME)
+$(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
-$(MLX): $(MLX_PATH)Makefile
-	@make -C $(MLX_PATH) all
+$(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
+	@make -C $(MINILIBX_PATH) all
 	@printf "\33[2K"
 
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
