@@ -42,12 +42,12 @@ CFILES = $(FILES:%=%.c)
 all : $(NAME)
 
 clean :
-	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ \n"
+	@echo "\n [$(NAME)] - Cleaning residual files... ♻️ \n"
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) -C $(MINILIBX_PATH) clean
 
 fclean : clean
-	@echo "\n [$(NAME)] - Supressions du reste... 🗑️\n"
+	@echo "\n [$(NAME)] - Deletions of the rest... 🗑️\n"
 	@rm -f $(NAME)
 
 re :
