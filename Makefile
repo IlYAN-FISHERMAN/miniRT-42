@@ -33,7 +33,9 @@ FILES_PATH = ./src/
 MINILIBX_LIB := $(MINILIBX_PATH:%=%$(MINILIBX_LIB))
 LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
 
-FILES = $(FILES_PATH)miniRT
+FILES =	$(FILES_PATH)main \
+		$(FILES_PATH)miniRT \
+		$(FILES_PATH)/exit_handler/exit_handler_$(OS) \
 
 CFILES = $(FILES:%=%.c)
 
@@ -53,8 +55,12 @@ re :
 	@make all
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
+	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@echo " \t$(NAME) compiled (debug) ✅"
+
+debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@echo " \t$(NAME) compiled (debug_g) ✅"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -71,4 +77,4 @@ $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 	@make -C $(LIBFT_PATH) all
 
-.PHONY : clean fclean all debug re
+.PHONY : clean fclean all debug debug_g re
