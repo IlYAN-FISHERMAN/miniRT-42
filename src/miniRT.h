@@ -12,7 +12,8 @@
 #  include "../libs/minilibx-linux/mlx.h"
 # endif
 
-typedef struct s_minirt {
+typedef struct s_minirt
+{
 	void	*mlx;
 	void	*win;
 }				t_minirt;
