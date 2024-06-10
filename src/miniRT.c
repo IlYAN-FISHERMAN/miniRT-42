@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include "miniRT.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	printf("test\n");
 }
