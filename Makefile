@@ -61,7 +61,7 @@ debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@printf "\33[2K"
 
 $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) -o $(NAME)
+	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
