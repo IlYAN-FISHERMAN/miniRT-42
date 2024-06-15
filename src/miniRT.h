@@ -3,6 +3,9 @@
 
 # include "../libs/betterft/betterft.h"
 
+# define WIDTH 1000
+# define HEIGHT 1000
+
 //	minilibx include
 # ifdef __APPLE__
 #  include "../libs/minilibx_opengl/mlx.h"

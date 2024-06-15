@@ -13,7 +13,7 @@ static void	*init_minirt_mlx(t_minirt *minirt)
 	minirt->mlx = mlx_init();
 	if (!minirt->mlx)
 		exit(1);
-	minirt->win = mlx_new_window(minirt->mlx, 1920, 1080, "miniRT");
+	minirt->win = mlx_new_window(minirt->mlx, HEIGHT, WIDTH, "miniRT");
 	if (!minirt->win)
 		crash_exit(minirt);
 	init_hooks(minirt);
