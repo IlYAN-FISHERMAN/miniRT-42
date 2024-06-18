@@ -10,7 +10,7 @@ t_vector	vnormalized(t_vector v)
 	return (vdiv(v, vlength(v)));
 }
 
-t_vector	vnormalize(t_vector *v)
+t_vector	*vnormalize(t_vector *v)
 {
 	t_vector	norm;
 
@@ -18,4 +18,5 @@ t_vector	vnormalize(t_vector *v)
 	v->x = norm.x;
 	v->y = norm.y;
 	v->z = norm.z;
+    return (v);
 }

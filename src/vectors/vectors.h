@@ -42,4 +42,12 @@ float	vdot(t_vector v, t_vector u);
 //	Returns: The cross product of the two vectors as a new vector
 t_vector	vcross(t_vector v, t_vector u);
 
+//	vnormalized: Normalize a vector
+//	Returns: The normalized vector as a new vector
+t_vector	vnormalized(t_vector v);
+
+//	vnormalize: Normalize a vector
+//	Returns: Normalize and return the vector as a pointer
+t_vector	*vnormalize(t_vector *v);
+
 #endif
