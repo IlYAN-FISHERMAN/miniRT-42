@@ -15,7 +15,7 @@ typedef t_vector	t_point;
 //	vlength: Get the length of a vector
 //	@param v The vector
 //	@return The length of the vector
-float	vlength(t_vector v);
+float		vlength(t_vector v);
 
 //	vadd: Add two vectors
 //	@param v The first vector
@@ -45,7 +45,7 @@ t_vector	vdiv(t_vector v, float scalar);
 //	@param v The first vector
 //	@param u The second vector
 //	@return The dot product of the two vectors
-float	vdot(t_vector v, t_vector u);
+float		vdot(t_vector v, t_vector u);
 
 //	vcross: Get the cross product of two vectors
 //	@param v The first vector

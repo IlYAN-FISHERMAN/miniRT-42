@@ -4,10 +4,11 @@
 # include "../objects/objects.h"
 # include "../vectors/vectors.h"
 
-//	Define the minimum and maximum t values for the ray, preventing the ray from intersecting with itself
-#define RAY_T_MIN 0.0001f
+//	Define the minimum and maximum t values for the ray, preventing
+//	the ray from intersecting with itself
+# define RAY_T_MIN 0.0001f
 //	Define the maximum t value for the ray
-#define RAY_T_MAX 1.0e30f
+# define RAY_T_MAX 1.0e30f
 
 typedef struct s_ray
 {
