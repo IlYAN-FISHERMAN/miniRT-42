@@ -9,6 +9,7 @@ typedef struct intersect
 	t_point		pos;
 	float		t;
 	t_object	*object;
+	bool		intersected;
 }	t_intersect;
 
 //	new_intersect: Create a new intersection
