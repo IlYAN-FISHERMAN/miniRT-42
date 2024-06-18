@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Ofast
+CFLAGS = -Wall -Werror -Wextra -lm -Ofast
 
 OS =
 
@@ -12,7 +12,7 @@ MINILIBX_PATH =
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	CFLAGS += -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	CFLAGS += -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lz
 	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
 	OS = linux
 endif
