@@ -18,5 +18,5 @@ t_vector	*vnormalize(t_vector *v)
 	v->x = norm.x;
 	v->y = norm.y;
 	v->z = norm.z;
-    return (v);
+	return (v);
 }
