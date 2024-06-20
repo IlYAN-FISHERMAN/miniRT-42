@@ -23,8 +23,8 @@ t_object	*new_plane(t_point origin, t_vector normal)
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
-	object->type = plane;
-	object->data = o_plane;
+	object->type = o_plane;
+	object->data = plane;
 	object->intersect = intersect_plane;
 	object->does_intersect = does_intersect_plane;
 	return (object);

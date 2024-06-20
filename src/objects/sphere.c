@@ -23,7 +23,7 @@ t_object	*new_sphere(t_point origin, double radius)
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
-	object->type = sphere;
-	object->object = o_sphere;
+	object->type = o_sphere;
+	object->data = sphere;
 	return (object);
 }

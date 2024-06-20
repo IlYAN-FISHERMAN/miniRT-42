@@ -24,7 +24,7 @@ typedef struct s_objects
 //	t_object: An object in the scene
 typedef struct s_object
 {
-	t_objects_type	*type;
+	t_objects_type	type;
 	void			*data;
 	bool			(*intersect)(t_intersect *intersect, t_object *object);
 	bool			(*does_intersect)(t_ray ray, t_object *object);
