@@ -24,6 +24,42 @@ t_object	*new_plane(t_point origin, t_vector normal)
 	if (!object)
 		return (0);
 	object->type = plane;
-	object->object = o_plane;
+	object->data = o_plane;
+	object->intersect = intersect_plane;
+	object->does_intersect = does_intersect_plane;
 	return (object);
+}
+
+bool	intersect_plane(t_intersect *intersect, t_object *object)
+{
+	t_plane	*plane;
+	float	dotn;
+	float	t;
+
+	plane = (t_plane *)object->data;
+	dotn = vdot(intersect->ray.direction, plane->normal);
+	if (dotn == 0.0f)
+		return (false);
+	t = vdot(vsub(plane->origin, intersect->ray.origin), plane->normal) / dotn;
+	if (t <= RAY_T_MIN || t >= intersect->t)
+		return (false);
+	intersect->t = t;
+	intersect->object = object;
+	return (true);
+}
+
+bool	does_intersect_plane(t_ray ray, t_object *object)
+{
+	t_plane	*plane;
+	float	dotn;
+	float	t;
+
+	plane = (t_plane *)object->type;
+	dotn = vdot(ray.direction, plane->normal);
+	if (dotn == 0.0f)
+		return (false);
+	t = vdot(vsub(plane->origin, ray.origin), plane->normal) / dotn;
+	if (t <= RAY_T_MIN || t >= RAY_T_MAX)
+		return (false);
+	return (true);
 }

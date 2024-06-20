@@ -3,6 +3,8 @@
 
 # include "rays.h"
 
+typedef struct s_object	t_object;
+
 typedef struct intersect
 {
 	t_ray		ray;
