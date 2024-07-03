@@ -18,6 +18,26 @@ typedef struct s_vector3
 
 typedef t_vector3	t_point3;
 
+//	vector2: Create a new 2D vector
+//	@param u The u component
+//	@param v The v component
+//	@return A new 2D vector
+t_vector2	vector2(float u, float v);
+
+//	vector3: Create a new 3D vector
+//	@param x The x component
+//	@param y The y component
+//	@param z The z component
+//	@return A new 3D vector
+t_vector3	vector3(float x, float y, float z);
+
+//	point3: Create a new 3D point
+//	@param x The x component
+//	@param y The y component
+//	@param z The z component
+//	@return A new 3D point
+t_point3	point3(float x, float y, float z);
+
 //	vlength: Get the length of a vector
 //	@param v The vector
 //	@return The length of the vector
