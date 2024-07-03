@@ -25,6 +25,8 @@ t_object	*new_sphere(t_point3 origin, float radius)
 		return (0);
 	object->type = o_sphere;
 	object->data = sphere;
+	object->intersect = intersect_sphere;
+	object->does_intersect = does_intersect_sphere;
 	return (object);
 }
 
