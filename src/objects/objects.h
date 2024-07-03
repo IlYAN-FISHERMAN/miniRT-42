@@ -19,7 +19,7 @@ typedef t_list t_scene;
 typedef struct s_object	t_object;
 typedef struct s_object
 {
-	t_scene_type	type;
+	t_objects_type	type;
 	void			*data;
 	bool			(*intersect)(t_intersect *, t_object *);
 	bool			(*does_intersect)(t_ray, t_object *);
