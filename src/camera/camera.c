@@ -6,7 +6,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, t_vector3 upguide)
 
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
-		return (NULL);
+		return (0);
 	camera->origin = origin;
 	camera->forward = vnormalized(vsub(target, origin));
 	camera->right = vnormalized(vcross(camera->forward, upguide));
