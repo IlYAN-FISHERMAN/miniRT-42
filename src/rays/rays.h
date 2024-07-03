@@ -1,7 +1,6 @@
 #ifndef RAYS_H
 # define RAYS_H
 
-# include "../objects/objects.h"
 # include "../vectors/vectors.h"
 
 //	Define the minimum and maximum t values for the ray, preventing
