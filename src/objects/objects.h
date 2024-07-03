@@ -13,7 +13,7 @@ typedef enum e_objects_type
 }	t_objects_type;
 
 // t_scene: A linked list of objects
-typedef t_list t_scene;
+typedef t_list			t_scene;
 
 //	t_object: An object in the scene
 typedef struct s_object	t_object;
