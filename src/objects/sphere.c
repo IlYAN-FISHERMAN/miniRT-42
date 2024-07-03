@@ -52,6 +52,7 @@ static bool	find_intersection(t_intersect *intersect, float a, float b, float c)
 		intersect->t = t2;
 	else
 		return (false);
+	return (true);
 }
 
 bool	intersect_sphere(t_intersect *intersect, t_object *object)
