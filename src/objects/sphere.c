@@ -50,7 +50,7 @@ static bool	find_intersection(t_intersect *intersect, float a, float b, float c)
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
 	if (t1 > RAY_T_MIN && t1 < intersect->t)
 		intersect->t = t1;
-	if (t2 > RAY_T_MIN && t2 < intersect->t)
+	else if (t2 > RAY_T_MIN && t2 < intersect->t)
 		intersect->t = t2;
 	else
 		return (false);
@@ -66,6 +66,7 @@ bool	intersect_sphere(t_intersect *intersect, t_object *object)
 	float		c;
 
 	sphere = (t_sphere *)object->data;
+	local_ray = intersect->ray;
 	local_ray.origin = vsub(intersect->ray.origin, sphere->origin);
 	a = vlength2(intersect->ray.direction);
 	b = 2.0f * vdot(local_ray.direction, local_ray.origin);
@@ -85,9 +86,10 @@ bool	does_intersect_sphere(t_ray ray, t_object *object)
 	float		c;
 
 	sphere = (t_sphere *)object->data;
+	local_ray = ray;
 	local_ray.origin = vsub(ray.origin, sphere->origin);
 	a = vlength2(ray.direction);
-	b = 2.0f * vdot(local_ray.direction, ray.direction);
+	b = 2.0f * vdot(local_ray.direction, local_ray.origin);
 	c = vlength2(local_ray.origin) - (sphere->radius * sphere->radius);
 	if (b * b - 4 * a * c < 0.0f)
 		return (false);
