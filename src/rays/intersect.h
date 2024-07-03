@@ -7,11 +7,11 @@ typedef struct s_object	t_object;
 
 typedef struct intersect
 {
-	t_ray		ray;
-	t_point		pos;
-	float		t;
-	t_object	*object;
-	bool		intersected;
+	t_ray			ray;
+	t_point3		pos;
+	float			t;
+	t_object		*object;
+	bool			intersected;
 }	t_intersect;
 
 //	new_intersect: Create a new intersection

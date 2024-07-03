@@ -12,16 +12,22 @@
 
 typedef struct s_ray
 {
-	t_point		origin;
-	t_vector	direction;
-	float		t;
+	t_point3		origin;
+	t_vector3		direction;
+	float			t;
 }	t_ray;
+
+//	ray: Create a new stack-allocated ray
+//  @param origin The origin of the ray
+//  @param direction The direction of the ray
+//  @return A new ray
+t_ray		ray(t_point3 origin, t_vector3 direction);
 
 //	ray_at: Calculate the point at a given t value along a ray
 //  @param ray The ray to calculate the point along
 //  @param t The t value to calculate the point at
 //  math: p + t * d
 //  @return The point at the given t value along the ray
-t_point	ray_at(t_ray ray, float t);
+t_point3	ray_at(t_ray ray, float t);
 
 #endif

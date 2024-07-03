@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-t_sphere	*new_raw_sphere(t_point origin, float radius)
+t_sphere	*new_raw_sphere(t_point3 origin, float radius)
 {
 	t_sphere	*sphere;
 
@@ -12,7 +12,7 @@ t_sphere	*new_raw_sphere(t_point origin, float radius)
 	return (sphere);
 }
 
-t_object	*new_sphere(t_point origin, float radius)
+t_object	*new_sphere(t_point3 origin, float radius)
 {
 	t_sphere	*sphere;
 	t_object	*object;

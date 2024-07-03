@@ -1,21 +1,21 @@
 #include "vectors.h"
 
-t_vector	vadd(t_vector v, t_vector u)
+t_vector3	vadd(t_vector3 v, t_vector3 u)
 {
-	return ((t_vector){v.x + u.x, v.y + u.y, v.z + u.z});
+	return ((t_vector3){v.x + u.x, v.y + u.y, v.z + u.z});
 }
 
-t_vector	vsub(t_vector v, t_vector u)
+t_vector3	vsub(t_vector3 v, t_vector3 u)
 {
-	return ((t_vector){v.x - u.x, v.y - u.y, v.z - u.z});
+	return ((t_vector3){v.x - u.x, v.y - u.y, v.z - u.z});
 }
 
-t_vector	vmul(t_vector v, float scalar)
+t_vector3	vmul(t_vector3 v, float scalar)
 {
-	return ((t_vector){v.x * scalar, v.y * scalar, v.z * scalar});
+	return ((t_vector3){v.x * scalar, v.y * scalar, v.z * scalar});
 }
 
-t_vector	vdiv(t_vector v, float scalar)
+t_vector3	vdiv(t_vector3 v, float scalar)
 {
-	return ((t_vector){v.x / scalar, v.y / scalar, v.z / scalar});
+	return ((t_vector3){v.x / scalar, v.y / scalar, v.z / scalar});
 }

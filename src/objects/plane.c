@@ -1,6 +1,6 @@
 #include "plane.h"
 
-t_plane	*new_raw_plane(t_point origin, t_vector normal)
+t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal)
 {
 	t_plane	*plane;
 
@@ -12,7 +12,7 @@ t_plane	*new_raw_plane(t_point origin, t_vector normal)
 	return (plane);
 }
 
-t_object	*new_plane(t_point origin, t_vector normal)
+t_object	*new_plane(t_point3 origin, t_vector3 normal)
 {
 	t_plane		*plane;
 	t_object	*object;
