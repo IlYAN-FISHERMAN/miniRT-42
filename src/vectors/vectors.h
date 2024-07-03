@@ -17,6 +17,11 @@ typedef t_vector	t_point;
 //	@return The length of the vector
 float		vlength(t_vector v);
 
+//	vlength2: Get the squared length of a vector
+//	@param v The vector
+//	@return The squared length of the vector
+float		vlength2(t_vector v);
+
 //	vadd: Add two vectors
 //	@param v The first vector
 //	@param u The second vector
