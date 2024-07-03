@@ -2,7 +2,7 @@
 
 float	vlength2(t_vector v)
 {
-	return (pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
+	return (v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
 float	vlength(t_vector v)
