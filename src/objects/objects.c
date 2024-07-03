@@ -11,6 +11,7 @@ bool	does_intersect(t_ray ray, t_scene *objects)
 			return (true);
 		objects = objects->next;
 	}
+	return (false);
 }
 
 bool	intersect(t_intersect *intersect, t_scene *objects)
