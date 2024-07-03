@@ -12,29 +12,30 @@ typedef enum e_objects_type
 	o_sphere,
 }	t_objects_type;
 
-// t_objects: A linked list of objects
-typedef t_list t_objects;
+// t_scene: A linked list of objects
+typedef t_list t_scene;
 
 //	t_object: An object in the scene
+typedef struct s_object	t_object;
 typedef struct s_object
 {
-	t_objects_type	type;
+	t_scene_type	type;
 	void			*data;
-	bool			(*intersect)(t_intersect *, struct s_object *);
-	bool			(*does_intersect)(t_ray, struct s_object *);
+	bool			(*intersect)(t_intersect *, t_object *);
+	bool			(*does_intersect)(t_ray, t_object *);
 }	t_object;
 
 //	does_intersect: Check if a ray intersects any object in the object list
-//	Also updates the intersection data
-//	@param intersect The intersection data
-//	@param objects The object list to check
+//	@param ray The ray to check
+//	@param scene The object list to check
 //	@return true if the ray intersects any object, false otherwise
-bool	does_intersect(t_intersect *intersect, t_objects *objects);
+bool	does_intersect(t_ray ray, t_scene *scene);
 
 //	intersect: Check if a ray intersects any object in the object list
-//	@param ray The ray to check
-//	@param objects The object list to check
+//	Also updates the intersection data
+//	@param intersect The intersection data
+//	@param scene The object list to check
 //	@return true if the ray intersects any object, false otherwise
-bool	intersect(t_ray ray, t_objects *objects);
+bool	intersect(t_intersect *intersect, t_scene *scene);
 
 #endif
