@@ -26,8 +26,8 @@ typedef struct s_object
 {
 	t_objects_type	type;
 	void			*data;
-	bool			(*intersect)(t_intersect *intersect, t_object *object);
-	bool			(*does_intersect)(t_ray ray, t_object *object);
+	bool			(*intersect)(t_intersect *, t_object *);
+	bool			(*does_intersect)(t_ray, t_object *);
 }	t_object;
 
 //	does_intersect: Check if a ray intersects any object in the object list
