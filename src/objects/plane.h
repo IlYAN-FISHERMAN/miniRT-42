@@ -3,7 +3,8 @@
 
 # include "objects.h"
 
-typedef struct s_plane {
+typedef struct s_plane
+{
 	t_point		origin;
 	t_vector	normal;
 }	t_plane;
