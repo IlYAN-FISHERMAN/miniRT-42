@@ -5,8 +5,8 @@
 
 typedef struct s_vector2
 {
-	float	x;
-	float	y;
+	float	u;
+	float	v;
 }	t_vector2;
 
 typedef struct s_vector3
