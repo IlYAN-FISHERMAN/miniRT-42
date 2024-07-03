@@ -54,7 +54,7 @@ bool	does_intersect_plane(t_ray ray, t_object *object)
 	float	dotn;
 	float	t;
 
-	plane = (t_plane *)object->type;
+	plane = (t_plane *)object->data;
 	dotn = vdot(ray.direction, plane->normal);
 	if (dotn == 0.0f)
 		return (false);
