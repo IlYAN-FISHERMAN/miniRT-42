@@ -13,21 +13,15 @@ typedef enum e_objects_type
 }	t_objects_type;
 
 // t_objects: A linked list of objects
-typedef struct s_objects	t_objects;
-typedef struct s_objects
-{
-	t_object	*content;
-	t_objects	*next;
-	t_objects	*prev;
-}	t_objects;
+typedef t_list t_objects;
 
 //	t_object: An object in the scene
 typedef struct s_object
 {
 	t_objects_type	type;
 	void			*data;
-	bool			(*intersect)(t_intersect *, t_object *);
-	bool			(*does_intersect)(t_ray, t_object *);
+	bool			(*intersect)(t_intersect *, struct s_object *);
+	bool			(*does_intersect)(t_ray, struct s_object *);
 }	t_object;
 
 //	does_intersect: Check if a ray intersects any object in the object list
