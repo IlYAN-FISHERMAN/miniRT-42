@@ -16,9 +16,9 @@ int	secure_exit(void *data)
 	exit(0);
 }
 
-int	crash_exit(void *data, char **context, char *msg)
+int	crash_exit(t_minirt *minirt, char **context, char *msg)
 {
-	(void)data;
+	(void)minirt;
 	while (context && *context)
 	{
 		ft_putstr_fd(*context, STDERR_FILENO);

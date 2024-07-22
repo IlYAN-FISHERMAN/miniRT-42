@@ -10,7 +10,7 @@ int	main(void)
 	image = new_image(WIDTH, HEIGHT);
 	if (!image)
 		return (1);
-	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), M_PI / 4.0f, WIDTH / HEIGHT);
+	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), 90, WIDTH / HEIGHT);
 	if (!camera)
 	{
 		gfree(image->data);
