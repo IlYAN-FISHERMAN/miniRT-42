@@ -4,7 +4,7 @@
 float window_width = 1920;
 float window_height = 1080;
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_image		*image;
 	t_camera	*camera;
@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1));
 	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5));
 	ray_trace(image, camera, scene);
-	t_minirt	*minirt;
-	minirt = init_minirt(argc, argv);
+	t_minirt	minirt;
+	init_minirt_mlx(&minirt);
 	for (int i = 0; i < window_width; i++)
 	{
 		for (int j = 0; j < window_height; j++)
@@ -35,10 +35,10 @@ int	main(int argc, char **argv)
 				color = 0xFFFFFFFF;
 			else
 				color = 0x00000000;
-			mlx_pixel_put(minirt->mlx, minirt->win, i, j, color);
+			mlx_pixel_put(minirt.win.mlx, minirt.win.windo, i, j, color);
 		}
 	}
-	mlx_loop(minirt->mlx);
+	mlx_loop(minirt.win.mlx);
 	gfree(image->data);
 	gfree(image);
 	gfree(camera);

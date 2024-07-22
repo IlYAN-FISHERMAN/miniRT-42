@@ -5,8 +5,8 @@
 # include "../../libs/betterft/betterft.h"
 
 //	secure_exit: Securely exit the program
-int	secure_exit(void *data);
+int	secure_exit(t_minirt *data);
 //	crash_exit: Exit the program with an error message
-int	crash_exit(void *data);
+int	crash_exit(t_minirt *minirt, char **context, char *msg);
 
 #endif

@@ -1,28 +1,30 @@
 #include "exit_handler.h"
 
-int	secure_exit(void *data)
+int	secure_exit(t_minirt *minirt)
 {
-	t_minirt	*minirt;
-
-	minirt = (t_minirt *)data;
-	if (minirt->mlx)
-		mlx_destroy_window(minirt->mlx, minirt->win);
-	gfree(minirt);
+	if (minirt && minirt->win.mlx)
+		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
+	if (minirt)
+		gfree(minirt);
 	cleargarbage();
-	exit(0);
+	exit(1);
 }
 
-int	crash_exit(void *data)
+int	crash_exit(t_minirt *minirt, char **context, char *msg)
 {
-	t_minirt	*minirt;
-
-	perror(C_RED"miniRT error"C_RESET);
-	minirt = (t_minirt *)data;
-	if (minirt->mlx && minirt->win)
-		mlx_destroy_window(minirt->mlx, minirt->win);
-	if (minirt->mlx)
-		gfree(minirt->mlx);
-	gfree(minirt);
+	(void)minirt;
+	while (context && *context)
+	{
+		ft_putstr_fd(*context, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		if (!context[1] && !ft_strcmp(*context, "warning"))
+			ft_putstr_fd(C_YELLOW, STDERR_FILENO);
+		else if (!context[1])
+			ft_putstr_fd(C_RED, STDERR_FILENO);
+		context++;
+	}
+	ft_putendl_fd(msg, STDERR_FILENO);
+	ft_putstr_fd(C_RESET, STDERR_FILENO);
 	cleargarbage();
-	exit(0);
+	exit(1);
 }

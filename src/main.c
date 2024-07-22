@@ -2,9 +2,10 @@
 
 int	main(int argc, char **argv)
 {
-	t_minirt	*minirt;
+	t_minirt	minirt;
 
-	minirt = init_minirt(argc, argv);
-	mlx_loop(minirt->mlx);
+	init_minirt(&minirt, argc, argv);
+	init_minirt_mlx(&minirt);
+	mlx_loop(minirt.win.mlx);
 	exit(0);
 }
