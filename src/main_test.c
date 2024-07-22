@@ -13,14 +13,13 @@ int	main(int argc, char **argv)
 	image = new_image(window_width, window_height);
 	if (!image)
 		return (1);
-	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), vector3(0, 1, 0));
+	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), M_PI / 4.0f, window_width / window_height);
 	if (!camera)
 	{
 		gfree(image->data);
 		gfree(image);
 		return (1);
 	}
-	set_fov(camera, M_PI / 4.0f, window_width / window_height);
 	scene = ft_lstadd(0, new_plane(point3(0, 0, 0), vector3(0, 1, 0)));
 	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1));
 	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5));
