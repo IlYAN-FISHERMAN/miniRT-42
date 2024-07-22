@@ -1,19 +1,16 @@
 #include "camera/image.h"
 #include "miniRT.h"
 
-float window_width = 1920;
-float window_height = 1080;
-
 int	main(void)
 {
 	t_image		*image;
 	t_camera	*camera;
 	t_scene		*scene;
 
-	image = new_image(window_width, window_height);
+	image = new_image(WIDTH, HEIGHT);
 	if (!image)
 		return (1);
-	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), M_PI / 4.0f, window_width / window_height);
+	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), M_PI / 4.0f, WIDTH / HEIGHT);
 	if (!camera)
 	{
 		gfree(image->data);
@@ -26,11 +23,11 @@ int	main(void)
 	ray_trace(image, camera, scene);
 	t_minirt	minirt;
 	init_minirt_mlx(&minirt);
-	for (int i = 0; i < window_width; i++)
+	for (int i = 0; i < WIDTH; i++)
 	{
-		for (int j = 0; j < window_height; j++)
+		for (int j = 0; j < HEIGHT; j++)
 		{
-			int color = image->data[(int)(j * window_width + i)];
+			int color = image->data[(int)(j * WIDTH + i)];
 			if (color == 1)
 				color = 0xFFFFFFFF;
 			else
