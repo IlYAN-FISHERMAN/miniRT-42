@@ -12,7 +12,7 @@ void	*init_minirt_mlx(t_minirt *minirt)
 	if (!minirt->win.mlx)
 		crash_exit(minirt, NULL, "ntm");
 	minirt->win.windo = \
-		mlx_new_window(minirt->win.mlx, HEIGHT, WIDTH, "miniRT");
+		mlx_new_window(minirt->win.mlx, WIDTH, HEIGHT, "miniRT");
 	if (!minirt->win.windo)
 		crash_exit(minirt, NULL, "rui je t\'aime");
 	init_hooks(minirt);
