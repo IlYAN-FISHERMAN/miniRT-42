@@ -18,15 +18,11 @@ typedef struct s_camera
 //  @param origin The origin of the camera
 //  @param target The target of the camera
 //  @param upguide The upguide of the camera
-//  @return A new camera
-t_camera	*new_camera(t_point3 origin, t_vector3 target, t_vector3 upguide);
-
-//	set_fov: Set the field of view of the camera
-//  @param camera The camera to set the field of view of
-//  @param fov The field of view to set
+//  @param fov The field of view of the camera
 //  @param aspect The aspect ratio of the camera
-//  @return The camera with the field of view set
-t_camera	*set_fov(t_camera *camera, float fov, float aspect);
+//  @return A new camera
+t_camera	*new_camera(t_point3 origin, t_vector3 target,
+				float fov, float aspect);
 
 //	make_ray: Create a ray from the camera to a point on the screen
 //  @param camera The camera to create the ray from

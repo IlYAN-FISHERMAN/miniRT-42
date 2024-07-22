@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1));
 	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5));
 	ray_trace(image, camera, scene);
-	//print_image(image);
 	t_minirt	*minirt;
 	minirt = init_minirt(argc, argv);
 	for (int i = 0; i < window_width; i++)

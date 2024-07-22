@@ -23,8 +23,4 @@ t_image	*new_image(int width, int height);
 //	@param scene The scene to render
 void	ray_trace(t_image *image, t_camera *camera, t_scene *scene);
 
-//	print_image: Print the image to the console
-//	@param image The image to print
-void	print_image(t_image *image);
-
 #endif

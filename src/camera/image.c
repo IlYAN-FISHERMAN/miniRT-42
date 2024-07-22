@@ -45,25 +45,3 @@ void	ray_trace(t_image *image, t_camera *camera, t_scene *objects)
 		}
 	}
 }
-
-void	print_image(t_image *image)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < image->height)
-	{
-		j = 0;
-		while (j < image->width)
-		{
-			if (image->data[(int)(i * image->width + j)] == 0)
-				ft_printf(".");
-			else
-				ft_printf("#");
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-}
