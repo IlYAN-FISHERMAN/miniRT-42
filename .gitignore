@@ -4,6 +4,7 @@ miniRT
 test*.c
 test*.txt
 heaptrack*
+libs/minilibx-linux/test/mlx-test
 
 # Prerequisites
 *.d
