@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:19:26 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/05/10 20:54:17 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:51:51 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <signal.h>
 # include <dirent.h>
 # include <sys/types.h>
+# include <math.h>
 # include "src/colors.h"
 
 //	betetrft settings

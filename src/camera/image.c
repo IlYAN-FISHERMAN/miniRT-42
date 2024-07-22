@@ -1,0 +1,47 @@
+#include "image.h"
+
+t_image	*new_image(int width, int height)
+{
+	t_image	*image;
+
+	image = galloc(sizeof(t_image));
+	if (!image)
+		return (0);
+	image->width = width;
+	image->height = height;
+	image->data = galloc(sizeof(int) * width * height);
+	if (!image->data)
+	{
+		gfree(image);
+		return (0);
+	}
+	return (image);
+}
+
+void	ray_trace(t_image *image, t_camera *camera, t_scene *objects)
+{
+	t_intersect	inter;
+	t_ray		ray;
+	t_vector2	point;
+	int			x;
+	int			y;
+
+	x = -1;
+	while (x++, x < image->width)
+	{
+		y = -1;
+		while (y++, y < image->height)
+		{
+			point = vector2((2.0f * x) / image->width - 1.0f,
+					(-2.0f * y) / image->height + 1.0f);
+			ray = make_ray(camera, point);
+			inter.ray = ray;
+			inter.t = RAY_T_MAX;
+			inter.intersected = false;
+			if (intersect(&inter, objects))
+				image->data[(int)(y * image->width + x)] = 1;
+			else
+				image->data[(int)(y * image->width + x)] = 0;
+		}
+	}
+}
