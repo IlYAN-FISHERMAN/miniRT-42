@@ -27,7 +27,7 @@ int	main(void)
 	{
 		for (int j = 0; j < HEIGHT; j++)
 		{
-			int color = image->data[(int)(j * WIDTH + i)];
+			int color = image->data[j][i];
 			if (color == 1)
 				color = 0xFFFFFFFF;
 			else
