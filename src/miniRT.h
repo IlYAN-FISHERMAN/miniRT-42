@@ -5,8 +5,8 @@
 # include "camera/camera.h"
 # include "objects/objects.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1920.0f
+# define HEIGHT 1080.0f
 
 //	minilibx include
 # ifdef __APPLE__
