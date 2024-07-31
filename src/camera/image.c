@@ -58,7 +58,8 @@ void	ray_trace(t_image *image, t_camera *camera, t_scene *objects)
 			inter.t = RAY_T_MAX;
 			inter.intersected = false;
 			if (intersect(&inter, objects))
-				image->data[y][x] = color_hex(inter.color);
+				image->data[y][x] = color_hex(apply_gamma(inter.color,
+							DEFAULT_GAMMA, DEFAULT_EXPOSURE));
 			else
 				image->data[y][x] = 0;
 		}

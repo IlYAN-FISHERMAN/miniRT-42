@@ -3,13 +3,22 @@
 
 # include "../../libs/betterft/betterft.h"
 
+// Defines
+
+// DEFAULT_EXPOSURE: The default exposure value
+# define DEFAULT_EXPOSURE 1.0f
+// DEFAULT_GAMMA: The default gamma value
+# define DEFAULT_GAMMA 2.2f
+
+// Typedefs
+
+// t_color: A color in RGB format
 typedef struct s_color
 {
 	t_byte	r;
 	t_byte	g;
 	t_byte	b;
 }	t_color;
-
 
 //  color: Create a new color
 //	Use byte_clamp to ensure the values are between 0 and 255
@@ -46,5 +55,12 @@ t_color	color_mult(t_color c, t_color d);
 // @param scalar The scalar
 // @return The product of the color and the scalar
 t_color	color_scalar(t_color c, float scalar);
+
+// apply_gamma: Apply gamma correction to a color
+// @param c The color to apply gamma to
+// @param gamma The gamma value
+// @param exposure The exposure value
+// @return The color with gamma applied
+t_color	apply_gamma(t_color c, float gamma, float exposure);
 
 #endif

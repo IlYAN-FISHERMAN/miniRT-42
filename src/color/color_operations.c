@@ -20,3 +20,10 @@ t_color	color_scalar(t_color c, float scalar)
 			byte_clamp((int)c.g * scalar),
 			byte_clamp((int)c.b * scalar)));
 }
+
+t_color	apply_gamma(t_color c, float gamma, float exposure)
+{
+	return (color(byte_clamp(pow((int)c.r * exposure, gamma)),
+			byte_clamp(pow((int)c.g * exposure, gamma)),
+			byte_clamp(pow((int)c.b * exposure, gamma))));
+}
