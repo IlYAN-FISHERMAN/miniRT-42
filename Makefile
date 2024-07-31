@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -lm -Ofast
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast
 
 OS =
 
@@ -35,9 +35,39 @@ LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
 
 FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)miniRT \
-		$(FILES_PATH)/exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)camera/camera \
+		$(FILES_PATH)camera/image \
+		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)objects/objects \
+		$(FILES_PATH)objects/sphere \
+		$(FILES_PATH)objects/plane \
+		$(FILES_PATH)rays/rays \
+		$(FILES_PATH)vectors/vectors_instance \
+		$(FILES_PATH)vectors/vectors_operations \
+		$(FILES_PATH)vectors/vectors_products \
+		$(FILES_PATH)vectors/vectors_properties \
+		$(FILES_PATH)color/color \
+		$(FILES_PATH)color/color_operations \
 
 CFILES = $(FILES:%=%.c)
+
+FILES_TEST = $(FILES_PATH)main_test \
+			 $(FILES_PATH)miniRT \
+			 $(FILES_PATH)camera/camera \
+			 $(FILES_PATH)camera/image \
+			 $(FILES_PATH)exit_handler/exit_handler_$(OS) \
+			 $(FILES_PATH)objects/objects \
+			 $(FILES_PATH)objects/sphere \
+			 $(FILES_PATH)objects/plane \
+			 $(FILES_PATH)rays/rays \
+			 $(FILES_PATH)vectors/vectors_instance \
+			 $(FILES_PATH)vectors/vectors_operations \
+			 $(FILES_PATH)vectors/vectors_products \
+			 $(FILES_PATH)vectors/vectors_properties \
+			 $(FILES_PATH)color/color \
+			 $(FILES_PATH)color/color_operations \
+
+CFILES_TEST = $(FILES_TEST:%=%.c)
 
 all : $(NAME)
 
@@ -53,6 +83,10 @@ fclean : clean
 re :
 	@make fclean
 	@make all
+
+test : $(NAME) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
