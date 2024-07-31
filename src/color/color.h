@@ -36,7 +36,7 @@ t_byte	byte_clamp(float value);
 // color_hex: Convert a t_color to a hexadecimal value
 // @param c The color to convert
 // @return The hexadecimal value of the color
-int	color_hex(t_color c);
+int		color_hex(t_color c);
 
 // color_add: Add two colors together
 // @param c The first color
