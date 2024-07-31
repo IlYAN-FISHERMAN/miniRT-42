@@ -1,6 +1,6 @@
 #include "plane.h"
 
-t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal)
+t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
 	t_plane	*plane;
 
@@ -9,15 +9,16 @@ t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal)
 		return (0);
 	plane->origin = origin;
 	plane->normal = normal;
+	plane->color = color;
 	return (plane);
 }
 
-t_object	*new_plane(t_point3 origin, t_vector3 normal)
+t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
 	t_plane		*plane;
 	t_object	*object;
 
-	plane = new_raw_plane(origin, normal);
+	plane = new_raw_plane(origin, normal, color);
 	if (!plane)
 		return (0);
 	object = galloc(sizeof(t_object));
@@ -45,6 +46,7 @@ bool	intersect_plane(t_intersect *intersect, t_object *object)
 		return (false);
 	intersect->t = t;
 	intersect->object = object;
+	intersect->color = plane->color;
 	return (true);
 }
 

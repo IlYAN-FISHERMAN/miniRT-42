@@ -2,6 +2,7 @@
 # define INTERSECT_H
 
 # include "rays.h"
+# include "../color/color.h"
 
 typedef struct s_object	t_object;
 
@@ -12,6 +13,7 @@ typedef struct intersect
 	float			t;
 	t_object		*object;
 	bool			intersected;
+	t_color			color;
 }	t_intersect;
 
 #endif

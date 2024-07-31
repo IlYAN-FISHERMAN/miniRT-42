@@ -7,19 +7,20 @@ typedef struct s_plane
 {
 	t_point3		origin;
 	t_vector3		normal;
+	t_color			color;
 }	t_plane;
 
 //  new_raw_plane: Create a new plane
 //  @param origin The origin of the plane
 //  @param normal The normal of the plane
 //  @return A new plane
-t_plane		*new_raw_plane(t_point3 origin, t_vector3 normal);
+t_plane		*new_raw_plane(t_point3 origin, t_vector3 normal, t_color color);
 
 //  new_plane: Create a new plane object
 //  @param origin The origin of the plane
 //  @param normal The normal of the plane
 //  @return A new plane object
-t_object	*new_plane(t_point3 origin, t_vector3 normal);
+t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color);
 
 //  intersect_plane: Check if ray intersects plane and update intersection data
 //  @param intersect The intersection data
