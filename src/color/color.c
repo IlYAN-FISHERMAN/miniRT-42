@@ -21,7 +21,11 @@ t_byte	byte_clamp(float value)
 
 int	color_hex(t_color c)
 {
-	return ((int)c.r << 16
-		| (int)c.g << 8
-		| (int)c.b);
+	int	hex;
+
+	hex = 0;
+	hex |= c.r << 16;
+	hex |= c.g << 8;
+	hex |= c.b;
+	return (hex);
 }
