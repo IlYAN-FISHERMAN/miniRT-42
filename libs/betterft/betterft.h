@@ -52,6 +52,9 @@ typedef struct s_garbcol
 	struct s_garbcol	*next;
 }					t_garbcol;
 
+//		TYPEDEFS
+typedef unsigned char	t_byte;
+
 //		GARBAGE COLLECTOR
 //	getgarbage: Retrieves a pointer to a static garbage collector.
 //	Returns NULL if the allocation fails.
