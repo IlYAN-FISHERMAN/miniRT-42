@@ -84,7 +84,7 @@ re :
 	@make fclean
 	@make all
 
-test : $(NAME) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
+test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@echo " \t$(NAME) test compiled ✅"
 
