@@ -11,9 +11,9 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target,
 		return (0);
 	upguide = vector3(0, 1, 0);
 	camera->origin = origin;
-	camera->forward = vnormalized(vsub(target, origin));
-	camera->right = vnormalized(vcross(camera->forward, upguide));
-	camera->up = vcross(camera->right, camera->forward);
+	camera->forward = vnormalized(target);
+	camera->right = vmul(vnormalized(vcross(camera->forward, upguide)), -1);
+	camera->up = vmul(vcross(camera->right, camera->forward), -1);
 	camera->h = tanf((fov * (M_PI / 180.0f)) / 2.0f);
 	camera->w = camera->h * aspect;
 	return (camera);
