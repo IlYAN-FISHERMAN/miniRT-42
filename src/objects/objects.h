@@ -4,6 +4,7 @@
 # include "../../libs/betterft/betterft.h"
 # include "../vectors/vectors.h"
 # include "../rays/intersect.h"
+# include "../color/color.h"
 
 //	t_objects_type: The type of object
 typedef enum e_objects_type

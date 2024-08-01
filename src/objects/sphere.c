@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-t_sphere	*new_raw_sphere(t_point3 origin, float radius)
+t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
 {
 	t_sphere	*sphere;
 
@@ -9,15 +9,16 @@ t_sphere	*new_raw_sphere(t_point3 origin, float radius)
 		return (0);
 	sphere->origin = origin;
 	sphere->radius = radius;
+	sphere->color = color;
 	return (sphere);
 }
 
-t_object	*new_sphere(t_point3 origin, float radius)
+t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 {
 	t_sphere	*sphere;
 	t_object	*object;
 
-	sphere = new_raw_sphere(origin, radius);
+	sphere = new_raw_sphere(origin, radius, color);
 	if (!sphere)
 		return (0);
 	object = galloc(sizeof(t_object));
@@ -74,6 +75,7 @@ bool	intersect_sphere(t_intersect *intersect, t_object *object)
 	if (!find_intersection(intersect, a, b, c))
 		return (false);
 	intersect->object = object;
+	intersect->color = sphere->color;
 	return (true);
 }
 

@@ -8,7 +8,7 @@ typedef struct s_image
 {
 	float	width;
 	float	height;
-	int		*data;
+	int		**data;
 }	t_image;
 
 //	new_image: Create a new image

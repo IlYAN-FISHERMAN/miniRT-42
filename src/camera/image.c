@@ -1,5 +1,24 @@
 #include "image.h"
 
+static t_image	*allocate_image(t_image *image)
+{
+	int	i;
+
+	i = -1;
+	while (i++, i < image->height)
+	{
+		image->data[i] = galloc(sizeof(int) * image->width);
+		if (!image->data[i])
+		{
+			while (i--)
+				gfree(image->data[i]);
+			gfree(image->data);
+			return (0);
+		}
+	}
+	return (image);
+}
+
 t_image	*new_image(int width, int height)
 {
 	t_image	*image;
@@ -9,13 +28,13 @@ t_image	*new_image(int width, int height)
 		return (0);
 	image->width = width;
 	image->height = height;
-	image->data = galloc(sizeof(int) * width * height);
+	image->data = galloc(sizeof(int *) * height);
 	if (!image->data)
 	{
 		gfree(image);
 		return (0);
 	}
-	return (image);
+	return (allocate_image(image));
 }
 
 void	ray_trace(t_image *image, t_camera *camera, t_scene *objects)
@@ -39,9 +58,10 @@ void	ray_trace(t_image *image, t_camera *camera, t_scene *objects)
 			inter.t = RAY_T_MAX;
 			inter.intersected = false;
 			if (intersect(&inter, objects))
-				image->data[(int)(y * image->width + x)] = 1;
+				image->data[y][x] = color_hex(apply_gamma(inter.color,
+							DEFAULT_GAMMA, DEFAULT_EXPOSURE));
 			else
-				image->data[(int)(y * image->width + x)] = 0;
+				image->data[y][x] = 0;
 		}
 	}
 }

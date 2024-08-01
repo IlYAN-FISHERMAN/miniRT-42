@@ -7,8 +7,8 @@
 # include "objects/objects.h"
 #include "vectors/vectors.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1920.0f
+# define HEIGHT 1080.0f
 
 //	minilibx include
 # ifdef __APPLE__

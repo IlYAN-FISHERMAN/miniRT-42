@@ -17,9 +17,9 @@ int	main(void)
 		gfree(image);
 		return (1);
 	}
-	scene = ft_lstadd(0, new_plane(point3(0, 0, 0), vector3(0, 1, 0)));
-	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1));
-	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5));
+	scene = ft_lstadd(0, new_plane(point3(0, 0, 0), vector3(0, 1, 0), color(255, 255, 255)));
+	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1, color(255, 0, 0)));
+	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5, color(0, 255, 0)));
 	ray_trace(image, camera, scene);
 	t_minirt	minirt;
 	init_minirt_mlx(&minirt);
@@ -27,11 +27,7 @@ int	main(void)
 	{
 		for (int j = 0; j < HEIGHT; j++)
 		{
-			int color = image->data[(int)(j * WIDTH + i)];
-			if (color == 1)
-				color = 0xFFFFFFFF;
-			else
-				color = 0x00000000;
+			int color = image->data[j][i];
 			mlx_pixel_put(minirt.win.mlx, minirt.win.windo, i, j, color);
 		}
 	}
