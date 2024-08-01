@@ -24,6 +24,7 @@ typedef struct s_object
 	void			*data;
 	bool			(*intersect)(t_intersect *, t_object *);
 	bool			(*does_intersect)(t_ray, t_object *);
+	t_vector3		(*normal_at)(t_object *, t_point3);
 }	t_object;
 
 //	does_intersect: Check if a ray intersects any object in the object list

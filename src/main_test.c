@@ -17,6 +17,9 @@ int	main(void)
 		gfree(image);
 		return (1);
 	}
+	t_object *sphere = new_sphere(point3(0, 1, 0), 1, color(255, 0, 0));
+	t_vector3 n = sphere->normal_at(sphere, point3(0, 1.70711, -0.70711));
+	printf("Normal: %f %f %f\n", n.x, n.y, n.z);
 	scene = ft_lstadd(0, new_plane(point3(0, 0, 0), vector3(0, 1, 0), color(255, 255, 255)));
 	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1, color(255, 0, 0)));
 	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5, color(0, 255, 0)));

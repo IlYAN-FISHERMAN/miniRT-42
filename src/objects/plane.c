@@ -1,8 +1,9 @@
 #include "plane.h"
 
-t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal, t_color color)
+t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
-	t_plane	*plane;
+	t_plane		*plane;
+	t_object	*object;
 
 	plane = galloc(sizeof(t_plane));
 	if (!plane)
@@ -10,24 +11,17 @@ t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal, t_color color)
 	plane->origin = origin;
 	plane->normal = normal;
 	plane->color = color;
-	return (plane);
-}
-
-t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
-{
-	t_plane		*plane;
-	t_object	*object;
-
-	plane = new_raw_plane(origin, normal, color);
-	if (!plane)
-		return (0);
 	object = galloc(sizeof(t_object));
 	if (!object)
+	{
+		gfree(plane);
 		return (0);
+	}
 	object->type = o_plane;
 	object->data = plane;
 	object->intersect = intersect_plane;
 	object->does_intersect = does_intersect_plane;
+	object->normal_at = normal_at_plane;
 	return (object);
 }
 
@@ -64,4 +58,13 @@ bool	does_intersect_plane(t_ray ray, t_object *object)
 	if (t <= RAY_T_MIN || t >= RAY_T_MAX)
 		return (false);
 	return (true);
+}
+
+t_vector3	normal_at_plane(t_object *object, t_point3 point)
+{
+	t_plane		*plane;
+
+	plane = (t_plane *)object->data;
+	(void)point;
+	return (plane->normal);
 }

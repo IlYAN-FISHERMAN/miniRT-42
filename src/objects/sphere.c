@@ -1,8 +1,9 @@
 #include "sphere.h"
 
-t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
+t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 {
 	t_sphere	*sphere;
+	t_object	*object;
 
 	sphere = galloc(sizeof(t_sphere));
 	if (!sphere)
@@ -10,24 +11,17 @@ t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
 	sphere->origin = origin;
 	sphere->radius = radius;
 	sphere->color = color;
-	return (sphere);
-}
-
-t_object	*new_sphere(t_point3 origin, float radius, t_color color)
-{
-	t_sphere	*sphere;
-	t_object	*object;
-
-	sphere = new_raw_sphere(origin, radius, color);
-	if (!sphere)
-		return (0);
 	object = galloc(sizeof(t_object));
 	if (!object)
+	{
+		gfree(sphere);
 		return (0);
+	}
 	object->type = o_sphere;
 	object->data = sphere;
 	object->intersect = intersect_sphere;
 	object->does_intersect = does_intersect_sphere;
+	object->normal_at = normal_at_sphere;
 	return (object);
 }
 
@@ -102,4 +96,14 @@ bool	does_intersect_sphere(t_ray ray, t_object *object)
 		&& (-b + sqrt(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
 		return (true);
 	return (false);
+}
+
+t_vector3	normal_at_sphere(t_object *object, t_point3 point)
+{
+	t_sphere	*sphere;
+	t_vector3	normal;
+
+	sphere = (t_sphere *)object->data;
+	normal = vnormalized(vsub(point, sphere->origin));
+	return (normal);
 }

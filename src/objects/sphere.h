@@ -11,12 +11,6 @@ typedef struct s_sphere
 	t_color		color;	
 }	t_sphere;
 
-//  new_raw_sphere: Create a new sphere
-//  @param origin The origin of the sphere
-//  @param radius The radius of tshe sphere
-//  @return A new sphere
-t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color);
-
 //  new_sphere: Create a new sphere object
 //  @param origin The origin of the sphere
 //  @param radius The radius of the sphere
@@ -39,5 +33,11 @@ bool		intersect_sphere(t_intersect *intersect, t_object *object);
 //	math: if t2 > RAY_T_MIN && t2 < intersect->t, intersect->t = t2
 //  @return true if the ray intersects the sphere, false otherwise
 bool		does_intersect_sphere(t_ray ray, t_object *object);
+
+//  normal_at_sphere: Get the normal vector at a point on a sphere
+//  @param object The sphere object
+//  @param point The point to get the normal at
+//  @return The normal vector at the point
+t_vector3	normal_at_sphere(t_object *object, t_point3 point);
 
 #endif
