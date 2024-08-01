@@ -1,7 +1,10 @@
 #include "exit_handler.h"
 
-int	secure_exit(t_minirt *minirt)
+int	secure_exit(void *data)
 {
+	t_minirt	*minirt;
+
+	minirt = data;
 	if (minirt && minirt->win.mlx)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt)

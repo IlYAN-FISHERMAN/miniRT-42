@@ -3,7 +3,9 @@
 
 # include "../libs/betterft/betterft.h"
 # include "camera/camera.h"
+# include "camera/image.h"
 # include "objects/objects.h"
+#include "vectors/vectors.h"
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -32,8 +34,8 @@ typedef struct s_size
 typedef struct s_minirt
 {
 	int			fd;
-	t_size		size;
 	t_win		win;
+	t_image		*size;
 	t_scene		*scene;
 	t_camera	*cam;
 }	t_minirt;
