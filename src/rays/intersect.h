@@ -9,7 +9,8 @@ typedef struct s_object	t_object;
 typedef struct intersect
 {
 	t_ray			ray;
-	t_point3		pos;
+	t_point3		position;
+	t_vector3		normal;
 	float			t;
 	t_object		*object;
 	bool			intersected;

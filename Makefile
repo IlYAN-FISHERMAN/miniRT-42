@@ -39,6 +39,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
 		$(FILES_PATH)objects/objects \
+		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
 		$(FILES_PATH)rays/rays \
@@ -57,6 +58,7 @@ FILES_TEST = $(FILES_PATH)main_test \
 			 $(FILES_PATH)camera/image \
 			 $(FILES_PATH)exit_handler/exit_handler_$(OS) \
 			 $(FILES_PATH)objects/objects \
+			 $(FILES_PATH)objects/light \
 			 $(FILES_PATH)objects/sphere \
 			 $(FILES_PATH)objects/plane \
 			 $(FILES_PATH)rays/rays \

@@ -9,6 +9,7 @@
 //	t_objects_type: The type of object
 typedef enum e_objects_type
 {
+	o_light,
 	o_plane,
 	o_sphere,
 }	t_objects_type;

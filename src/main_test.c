@@ -10,7 +10,7 @@ int	main(void)
 	image = new_image(WIDTH, HEIGHT);
 	if (!image)
 		return (1);
-	camera = new_camera(point3(5, 1, 0), vector3(0, 1, 0), 90, WIDTH / HEIGHT);
+	camera = new_camera(point3(0, 5, -10), vector3(0, 0, 1), 90, WIDTH / HEIGHT);
 	if (!camera)
 	{
 		gfree(image->data);
@@ -21,8 +21,10 @@ int	main(void)
 	t_vector3 n = sphere->normal_at(sphere, point3(0, 1.70711, -0.70711));
 	printf("Normal: %f %f %f\n", n.x, n.y, n.z);
 	scene = ft_lstadd(0, new_plane(point3(0, 0, 0), vector3(0, 1, 0), color(255, 255, 255)));
-	ft_lstpush(scene, new_sphere(point3(0, 2.5, 0), 2.1, color(255, 0, 0)));
-	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5, color(0, 255, 0)));
+	ft_lstpush(scene, new_sphere(point3(0, 0, 0), 1, color(100, 100, 100)));
+	ft_lstpush(scene, new_sphere(point3(0, 5, 0), 1, color(255, 0, 0)));
+	ft_lstpush(scene, new_sphere(point3(0, 0, 5), 1, color(0, 255, 0)));
+	ft_lstpush(scene, new_sphere(point3(5, 0, 0), 1, color(0, 0, 255)));
 	ray_trace(image, camera, scene);
 	t_minirt	minirt;
 	init_minirt_mlx(&minirt);
