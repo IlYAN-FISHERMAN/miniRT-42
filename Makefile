@@ -48,6 +48,10 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)vectors/vectors_properties \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
+		$(FILES_PATH)generator/rt_generator \
+		$(FILES_PATH)generator/rt_generate_nbr \
+		$(FILES_PATH)generator/rt_generate_scene \
+		$(FILES_PATH)generator/rt_generator_obj
 
 CFILES = $(FILES:%=%.c)
 

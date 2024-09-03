@@ -5,12 +5,15 @@
 # include "../vectors/vectors.h"
 # include "../rays/intersect.h"
 # include "../color/color.h"
+# include "cylinder.h"
 
 //	t_objects_type: The type of object
 typedef enum e_objects_type
 {
 	o_plane,
 	o_sphere,
+	o_light,
+	o_cylin,
 }	t_objects_type;
 
 // t_scene: A linked list of objects
