@@ -83,6 +83,7 @@ clean :
 fclean : clean
 	@echo "\n [$(NAME)] - Deletions of the rest... 🗑️\n"
 	@rm -f $(NAME)
+	@rm -rf $(NAME).dSYM
 
 re :
 	@make fclean

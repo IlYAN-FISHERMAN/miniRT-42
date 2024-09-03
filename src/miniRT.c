@@ -183,7 +183,8 @@ void	check_size_format(char **str, t_minirt **minirt)
 {
 	if (ft_strlen_tab(str) != 3)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad format");
+			(char *[]){"miniRT", "parsing", NULL}, "L bad format, \
+				too many information");
 	if ((!only_digit(str[1])) || (!only_digit(str[2])))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Size: only digit accepted");
@@ -191,10 +192,6 @@ void	check_size_format(char **str, t_minirt **minirt)
 		|| (ft_atoi(str[2]) > 7680 || ft_atoi(str[1]) < 100))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Size: range >100/<7680");
-	if (str[4])
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL},
-			"Too many information with size");
 }
 
 void	check_cam_format(char **str, t_minirt **minirt)
@@ -272,17 +269,13 @@ void	check_amb_format(t_minirt **minirt, char **str)
 {
 	if (ft_strlen_tab(str) != 3)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad format");
+			(char *[]){"miniRT", "parsing", NULL}, "L number of arg");
 	if (!only_float(str[1]))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing", NULL},
 			"Amb, only ambient ratio in float");
 	if (!only_digit_xyz(str[2], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing", NULL},
 			"Amb, rgb bad format");
-	if (str[3])
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL},
-			"Too many information with amb");
 }
 
 void	get_amb(char **str, t_minirt **minirt)
@@ -365,10 +358,18 @@ void	check_pl_info(char **str, t_minirt *minirt)
 	if (ft_strlen_tab(str) != 4)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "pl bad number of arg");
-	if (!only_float_xyz(str[1], minirt) || !only_float(str[2])
-		|| !only_digit_xyz(str[3], minirt))
+	if (!only_float_xyz(str[1], minirt))
 		crash_exit(minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "pl bad number format");
+			(char *[]){"miniRT",
+			"parsing: pl bad number format", NULL}, str[1]);
+	if (!only_float_xyz(str[2], minirt))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: pl bad number format", NULL}, str[2]);
+	if (!only_digit_xyz(str[3], minirt))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: pl bad number format", NULL}, str[3]);
 }
 
 void	check_cy_info(char **str, t_minirt *minirt)
@@ -376,11 +377,26 @@ void	check_cy_info(char **str, t_minirt *minirt)
 	if (ft_strlen_tab(str) != 6)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "cy bad number of arg");
-	if (!only_float_xyz(str[1], minirt) || !only_float_xyz(str[2], minirt)
-		|| only_float(str[3]) || only_float(str[4])
-		|| only_digit_xyz(str[5], minirt))
+	if (!only_float_xyz(str[1], minirt))
 		crash_exit(minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "sp bad number format");
+			(char *[]){"miniRT",
+			"parsing: cy bad number format", NULL}, str[1]);
+	if (!only_float_xyz(str[2], minirt))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: cy bad number format", NULL}, str[2]);
+	if (!only_float(str[3]))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: cy bad number format", NULL}, str[3]);
+	if (!only_float(str[4]))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: cy bad number format", NULL}, str[4]);
+	if (!only_digit_xyz(str[5], minirt))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: cy bad number format", NULL}, str[5]);
 }
 
 void	check_sp_info(char **str, t_minirt *minirt)
@@ -388,10 +404,18 @@ void	check_sp_info(char **str, t_minirt *minirt)
 	if (ft_strlen_tab(str) != 4)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "sp bad number of arg");
-	if (!only_float_xyz(str[1], minirt) || !only_float(str[2])
-		|| !only_digit_xyz(str[3], minirt))
+	if (!only_float_xyz(str[1], minirt))
 		crash_exit(minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "sp bad number format");
+			(char *[]){"miniRT",
+			"parsing: sp bad number format", NULL}, str[1]);
+	if (!only_float(str[2]))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: sp bad number format", NULL}, str[2]);
+	if (!only_digit_xyz(str[3], minirt))
+		crash_exit(minirt,
+			(char *[]){"miniRT",
+			"parsing: sp bad number format", NULL}, str[3]);
 }
 
 void	get_pl(char **str, t_minirt **minirt)
@@ -413,6 +437,7 @@ void	get_pl(char **str, t_minirt **minirt)
 		ft_split(str[2], ','));
 	ft_atoi_xyz(&tmp->color.r, &tmp->color.g, &tmp->color.b,
 		ft_split(str[3], ','));
+	ft_lstadd_back(&(*minirt)->scene, scene);
 }
 
 void	get_cy(char **str, t_minirt **minirt)
@@ -436,6 +461,7 @@ void	get_cy(char **str, t_minirt **minirt)
 	tmp->height = ft_atof(str[4]);
 	ft_atoi_xyz(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
 		ft_split(str[5], ','));
+	ft_lstadd_back(&(*minirt)->scene, scene);
 }
 
 void	get_sp(char **str, t_minirt **minirt)
@@ -456,15 +482,16 @@ void	get_sp(char **str, t_minirt **minirt)
 	tmp->radius = ft_atof(str[2]);
 	ft_atoi_xyz(&tmp->color.r, &tmp->color.g, &tmp->color.b,
 		ft_split(str[3], ','));
+	ft_lstadd_back(&(*minirt)->scene, scene);
 }
 
 void	get_obj(char **str, t_minirt **minirt)
 {
-	if (ft_strcmp(str[0], "pl"))
+	if (!ft_strcmp(str[0], "pl"))
 		get_pl(str, minirt);
-	else if (ft_strcmp(str[0], "cy"))
+	else if (!ft_strcmp(str[0], "cy"))
 		get_cy(str, minirt);
-	else if (ft_strcmp(str[0], "sp"))
+	else if (!ft_strcmp(str[0], "sp"))
 		get_sp(str, minirt);
 }
 
@@ -532,7 +559,7 @@ void	pars_map(char **av, t_minirt **minirt, int j)
 		}
 		gfree(gnl);
 	}
-	if (!(*minirt)->scene)
+	if (!(*minirt)->size)
 		get_size_default(minirt);
 }
 

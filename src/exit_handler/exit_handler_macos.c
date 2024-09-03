@@ -13,9 +13,6 @@ int	secure_exit(void *data)
 
 void	clear_memory(t_minirt *minirt)
 {
-	t_scene		*tmp;
-
-	tmp = minirt->scene;
 	if (minirt && minirt->win.mlx)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt->size)
@@ -24,12 +21,6 @@ void	clear_memory(t_minirt *minirt)
 		gfree(minirt->amb);
 	if (minirt->cam)
 		gfree(minirt->cam);
-	while (tmp)
-	{
-		if (tmp->content)
-			gfree(tmp->content);
-		tmp = tmp->next;
-	}
 	if (minirt->scene)
 		ft_lstclear(&minirt->scene, &gfree);
 }

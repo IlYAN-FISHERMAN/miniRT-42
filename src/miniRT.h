@@ -10,7 +10,6 @@
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
-# define Red1 [033;0m
 
 //	minilibx include
 # ifdef __APPLE__
