@@ -32,9 +32,27 @@ t_vector3	vm4mul(t_matrix4 m, t_vector3 v);
 //  @param m The matrix
 //  @return The identity matrix
 t_matrix4	m4identity(t_matrix4 m);
-//  m4rotate: Invert columns and rows of a matrix
+//  m4transpose: Invert columns and rows of a matrix
 //  @param m The matrix
 //  @return The rotated matrix
-t_matrix4	m4rotate(t_matrix4 m);
+t_matrix4	m4transpose(t_matrix4 m);
+//  m3subm: Get the t_matrix3 submatrix of a t_matrix4
+//  @param m The matrix
+//  @param row The row to remove
+//  @param col The column to remove
+//  @return The submatrix
+t_matrix3	m3subm(t_matrix4 m, int row, int col);
+//  m2subm: Get the t_matrix2 submatrix of a t_matrix3
+//  @param m The matrix
+//  @param row The row to remove
+//  @param col The column to remove
+//  @return The submatrix
+t_matrix2	m2subm(t_matrix3 m, int row, int col);
+//  m3minor: Get the minor of a t_matrix3
+//  @param m The matrix
+//  @param row The row to remove
+//  @param col The column to remove
+//  @return The minor
+float		m3minor(t_matrix3 m, int row, int col);
 
 #endif
