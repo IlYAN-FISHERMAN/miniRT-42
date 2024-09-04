@@ -51,11 +51,8 @@ float	ft_atof(char *str)
 	nb = 0;
 	j = 0;
 	sign = 1;
-	if (str[0] == '-')
-	{
+	if (str[0] == '-' && !++i)
 		sign = -1;
-		i++;
-	}
 	while (str[++i])
 	{
 		if (str[i] == '.')
@@ -183,8 +180,8 @@ void	check_size_format(char **str, t_minirt **minirt)
 {
 	if (ft_strlen_tab(str) != 3)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad format, \
-				too many information");
+			(char *[]){"miniRT", "parsing", NULL},
+			"too many information with L");
 	if ((!only_digit(str[1])) || (!only_digit(str[2])))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Size: only digit accepted");
@@ -215,10 +212,6 @@ void	check_cam_format(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL},
 			"Cam: bad number >0/<180");
-	if (str[4])
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL},
-			"Too many information with cam");
 }
 
 void	get_size(char **str, t_minirt **minirt)
@@ -541,7 +534,7 @@ void	pars_map(char **av, t_minirt **minirt, int j)
 	char	*gnl;
 
 	(*minirt)->fd = open(av[1], O_RDONLY);
-	if ((*minirt)->fd == -1 && ft_printf("miniRT: %s: No such file or directory", av[1]))
+	if ((*minirt)->fd == -1 && printf("miniRT: %s: No such file or directory", av[1]))
 		secure_exit(*minirt);
 	while (av[++j])
 	{
@@ -550,7 +543,7 @@ void	pars_map(char **av, t_minirt **minirt, int j)
 			break ;
 		if (correct_dl(gnl) && gnl[0] != '\0')
 		{
-			str = ft_split(gnl, 32);
+			str = ft_split_sp_tab(gnl);
 			if (!str)
 				crash_exit(*minirt,
 					(char *[]){"miniRT", "parsing", NULL}, "Malloc fail");
@@ -569,13 +562,56 @@ void	check_error(int ac, char **av)
 		secure_exit(NULL);
 	if ((!ft_strchr(av[1], '.') \
 		|| ft_strncmp(ft_strchr(av[1], '.'), ".rt", 4))
-		&& ft_printf("miniRT: bad format file, only .rt file accepted\n"))
+		&& printf("miniRT: bad format file, only .rt file accepted\n"))
 		exit(EXIT_FAILURE);
+}
+
+void	print_token(t_minirt *rt)
+{
+	t_scene		*tmp;
+	t_object	*obj;
+	t_plane		*pl;
+	t_cylin		*cy;
+	t_sphere	*sp;
+	t_light		*lig;
+
+	printf("miniRT struct\n-----------\n\nfd: %d\n\n", rt->fd);
+	if (rt->size)
+		printf("R: %f.2 %f.2\n", rt->size->height, rt->size->width);
+	if (rt->amb)
+		printf("A: Lratio: %f.2  RGB: %d,%d,%d\n",
+			rt->amb->light, rt->amb->rgb.r, rt->amb->rgb.g, rt->amb->rgb.b);
+	if (rt->cam)
+		printf("C: XYZ: %f.2,%f.2,%f.2  vector: %f.2,%f.2,%f.2  FOV: %f.2\n",
+			rt->cam->origin.x, rt->cam->origin.y, rt->cam->origin.z, rt->cam->forward.x,
+			rt->cam->forward.y, rt->cam->forward.z, rt->cam->h);
+	tmp = rt->scene;
+	while (tmp && tmp->content)
+	{
+		obj = tmp->content;
+		if (obj->type == o_light)
+		{
+			lig = obj->data;
+			if (lig)
+				printf("L: XYZ: %f.2%f.2%f.2  Lratio: %f.2  rgb: %d%d%d\n",
+					lig->pos.x, lig->pos.y, lig->pos.z, lig->bright,
+					lig->rgb.r, lig->rgb.g, lig->rgb.b);
+		}
+		else if (obj->type == o_cylin)
+			cy = obj->data;
+		else if (obj->type == o_plane)
+			pl = obj->data;
+		else if (obj->type == o_sphere)
+			sp = obj->data;
+		tmp = tmp->next;
+	}
 }
 
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 {
 	check_error(argc, argv);
 	pars_map(argv, &minirt, -1);
+	if (PRINT)
+		print_token(minirt);
 	return (minirt);
 }

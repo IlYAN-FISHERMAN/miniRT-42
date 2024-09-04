@@ -10,6 +10,7 @@
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
+# define PRINT 0
 
 //	minilibx include
 # ifdef __APPLE__
@@ -69,5 +70,6 @@ typedef struct s_minirt
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv);
 void		*memcheck(t_minirt *minirt, void *new);
 void		*init_minirt_mlx(t_minirt *minirt);
+char		**ft_split_sp_tab(char const *s);
 
 #endif

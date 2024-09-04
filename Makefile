@@ -51,7 +51,8 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \
 		$(FILES_PATH)generator/rt_generate_scene \
-		$(FILES_PATH)generator/rt_generator_obj
+		$(FILES_PATH)generator/rt_generator_obj \
+		$(FILES_PATH)utils/ft_split_sp_tab
 
 CFILES = $(FILES:%=%.c)
 
@@ -98,7 +99,7 @@ debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo " \t$(NAME) compiled (debug) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) -D PRINT=1
 	@echo " \t$(NAME) compiled (debug_g) ✅"
 
 %.o: %.c
