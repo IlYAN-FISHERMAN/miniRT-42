@@ -2,6 +2,7 @@
 #include "camera/camera.h"
 #include "camera/image.h"
 #include "exit_handler/exit_handler.h"
+#include "generator/rt_generate.h"
 #include "objects/cylinder.h"
 #include "objects/objects.h"
 #include "objects/plane.h"
@@ -196,7 +197,7 @@ void	check_cam_format(char **str, t_minirt **minirt)
 {
 	if (ft_strlen_tab(str) != 4)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad format");
+			(char *[]){"miniRT", "parsing", NULL}, "C bad format");
 	if (!only_float_xyz(str[1], *minirt))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing",
@@ -299,10 +300,13 @@ void	check_light_format(char **str, t_minirt **minirt, bool *bonus)
 {
 	if (ft_strlen_tab(str) < 3 || ft_strlen_tab(str) > 4)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad format");
-	if (!only_digit_xyz(str[1], *minirt) || !only_float(str[2]))
+			(char *[]){"miniRT", "parsing", NULL}, "L bad number of arg");
+	if (!only_digit_xyz(str[1], *minirt) && !only_float_xyz(str[1], *minirt))
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L digit format");
+			(char *[]){"miniRT", "parsing: bad format", NULL}, str[1]);
+	if (!only_float(str[2]))
+		crash_exit(*minirt,
+			(char *[]){"miniRT", "parsing: L bad format", NULL}, str[2]);
 	if (str[3])
 		if (only_digit_xyz(str[3], *minirt))
 			*bonus = true;

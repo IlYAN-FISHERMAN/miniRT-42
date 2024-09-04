@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 22:38:27 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/07/22 15:20:31 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/09/05 01:17:18 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	exit_generator(int fd, const char *name)
 
 int	rt_generator(char *height, char *width, bool bonus)
 {
-	const char	name[] = "generate_map.rt";
+	const char	name[] = "maps/standard/generate_map.rt";
 	int			fd;
 
 	srand((unsigned int)time(NULL));

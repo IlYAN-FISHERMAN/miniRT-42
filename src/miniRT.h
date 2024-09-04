@@ -7,6 +7,7 @@
 # include "objects/objects.h"
 # include "vectors/vectors.h"
 # include "color/color.h"
+# include "generator/rt_generate.h"
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
