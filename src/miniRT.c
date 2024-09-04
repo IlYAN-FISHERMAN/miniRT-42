@@ -8,6 +8,7 @@
 #include "objects/sphere.h"
 #include "rays/intersect.h"
 #include "vectors/vectors.h"
+#include <stdio.h>
 
 static void	init_hooks(t_minirt *minirt)
 {
@@ -111,7 +112,7 @@ int	only_float(char *str)
 	int		i;
 
 	i = -1;
-	if (!str || str[0] == '.' || !ft_strchr(str, '.'))
+	if (!str || str[0] == '.')
 		return (0);
 	if (str[0] == '-' || str[0] == '+')
 		i++;
@@ -164,7 +165,7 @@ int	only_float_xyz(char *split, t_minirt *minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	while (str[++j])
 	{
-		if (!only_float(str[j]))
+		if (!only_float(str[j]) && !only_digit(str[j]))
 		{
 			ft_free_tab(str);
 			return (0);
@@ -248,10 +249,10 @@ void	get_cam(char **str, t_minirt **minirt)
 	check_cam_format(str, minirt);
 	get_cam_info(&origin, &target, *minirt, str);
 	if ((*minirt)->size)
-		(*minirt)->cam = new_camera(origin, target, (float)ft_atoi(str[3]),
+		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]),
 				(float)((*minirt)->size->width / (*minirt)->size->height));
 	else
-		(*minirt)->cam = new_camera(origin, target, (float)ft_atoi(str[3]),
+		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]),
 				(float)WIDTH / HEIGHT);
 	if (!(*minirt)->cam)
 		crash_exit(*minirt,
@@ -263,7 +264,7 @@ void	check_amb_format(t_minirt **minirt, char **str)
 	if (ft_strlen_tab(str) != 3)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "L number of arg");
-	if (!only_float(str[1]))
+	if (!only_float(str[1]) && !only_digit(str[1]))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing", NULL},
 			"Amb, only ambient ratio in float");
 	if (!only_digit_xyz(str[2], *minirt))
@@ -378,11 +379,11 @@ void	check_cy_info(char **str, t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT",
 			"parsing: cy bad number format", NULL}, str[2]);
-	if (!only_float(str[3]))
+	if (!only_float(str[3]) && !only_digit(str[3]))
 		crash_exit(minirt,
 			(char *[]){"miniRT",
 			"parsing: cy bad number format", NULL}, str[3]);
-	if (!only_float(str[4]))
+	if (!only_float(str[4]) && !only_digit(str[4]))
 		crash_exit(minirt,
 			(char *[]){"miniRT",
 			"parsing: cy bad number format", NULL}, str[4]);
@@ -401,7 +402,7 @@ void	check_sp_info(char **str, t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT",
 			"parsing: sp bad number format", NULL}, str[1]);
-	if (!only_float(str[2]))
+	if (!only_float(str[2]) && !only_digit(str[2]))
 		crash_exit(minirt,
 			(char *[]){"miniRT",
 			"parsing: sp bad number format", NULL}, str[2]);
@@ -490,16 +491,13 @@ void	get_obj(char **str, t_minirt **minirt)
 
 void	pars_obj(char **str, t_minirt **minirt)
 {
-	int	j;
-
-	j = -1;
 	if (str)
 	{
 		if (!ft_strcmp(str[0], "R"))
 			get_size(str, minirt);
 		else if (!ft_strcmp(str[0], "A"))
 			get_amb(str, minirt);
-		else if (!ft_strcmp(str[0], "C"))
+		else if (!ft_strcmp(str[0], "C") || !ft_strcmp(str[0], "c"))
 			get_cam(str, minirt);
 		else if (!ft_strcmp(str[0], "L") || !ft_strcmp(str[0], "l"))
 			get_light(str, minirt);
@@ -509,7 +507,7 @@ void	pars_obj(char **str, t_minirt **minirt)
 		else
 			crash_exit(*minirt,
 				(char *[]){"miniRT", "parsing: bad string format", NULL},
-				str[j]);
+				str[0]);
 	}
 }
 
@@ -528,7 +526,7 @@ void	get_size_default(t_minirt **minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 }
 
-void	pars_map(char **av, t_minirt **minirt, int j)
+void	pars_map(char **av, t_minirt **minirt)
 {
 	char	**str;
 	char	*gnl;
@@ -536,12 +534,12 @@ void	pars_map(char **av, t_minirt **minirt, int j)
 	(*minirt)->fd = open(av[1], O_RDONLY);
 	if ((*minirt)->fd == -1 && printf("miniRT: %s: No such file or directory", av[1]))
 		secure_exit(*minirt);
-	while (av[++j])
+	while (true)
 	{
 		gnl = ft_get_next_line((*minirt)->fd);
 		if (!gnl)
 			break ;
-		if (correct_dl(gnl) && gnl[0] != '\0')
+		if (gnl[0] != '\n' && correct_dl(gnl))
 		{
 			str = ft_split_sp_tab(gnl);
 			if (!str)
@@ -575,16 +573,16 @@ void	print_token(t_minirt *rt)
 	t_sphere	*sp;
 	t_light		*lig;
 
-	printf("miniRT struct\n-----------\n\nfd: %d\n\n", rt->fd);
+	printf("\nminiRT struct\n-----------\n\nfd: %d\n\n", rt->fd);
 	if (rt->size)
-		printf("R: %f.2 %f.2\n", rt->size->height, rt->size->width);
+		printf("R: %.0fx%.0f\n\n", rt->size->height, rt->size->width);
 	if (rt->amb)
-		printf("A: Lratio: %f.2  RGB: %d,%d,%d\n",
+		printf("A: Lratio: %.2f\nRGB: %d,%d,%d\n\n",
 			rt->amb->light, rt->amb->rgb.r, rt->amb->rgb.g, rt->amb->rgb.b);
 	if (rt->cam)
-		printf("C: XYZ: %f.2,%f.2,%f.2  vector: %f.2,%f.2,%f.2  FOV: %f.2\n",
+		printf("C: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f\nFOV: %2.f\n\n",
 			rt->cam->origin.x, rt->cam->origin.y, rt->cam->origin.z, rt->cam->forward.x,
-			rt->cam->forward.y, rt->cam->forward.z, rt->cam->h);
+			rt->cam->forward.y, rt->cam->forward.z, rt->cam->fov);
 	tmp = rt->scene;
 	while (tmp && tmp->content)
 	{
@@ -593,16 +591,36 @@ void	print_token(t_minirt *rt)
 		{
 			lig = obj->data;
 			if (lig)
-				printf("L: XYZ: %f.2%f.2%f.2  Lratio: %f.2  rgb: %d%d%d\n",
+				printf("L: XYZ: %.2f,%.2f,%.2f\nLratio: %.2f\nRGB: %d,%d,%d\n\n",
 					lig->pos.x, lig->pos.y, lig->pos.z, lig->bright,
 					lig->rgb.r, lig->rgb.g, lig->rgb.b);
 		}
 		else if (obj->type == o_cylin)
+		{
 			cy = obj->data;
+			if (cy)
+				printf("cy: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f\nDiameter: %.2f\nheight: %.2f\nRGB: %d,%d,%d\n\n",
+					cy->origin.x, cy->origin.y, cy->origin.z, cy->normal.x,
+					cy->normal.y, cy->normal.z, cy->diam, cy->height, cy->rgb.r, cy->rgb.g, cy->rgb.b);
+		}
 		else if (obj->type == o_plane)
+		{
 			pl = obj->data;
+			if (pl)
+				printf("pl: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f\nRGB: %d,%d,%d\n\n", \
+					pl->origin.x, pl->origin.y, pl->origin.z, pl->normal.x, pl->normal.y,
+		   			pl->normal.z, pl->color.r, pl->color.g, pl->color.b);
+		}
 		else if (obj->type == o_sphere)
+		{
 			sp = obj->data;
+			if (sp)
+			{
+				printf("sp: XYZ: %.2f,%.2f,%.2f\nDiameter: %.2f\nRGB: %d,%d,%d\n\n", \
+		   			sp->origin.x, sp->origin.y, sp->origin.z, sp->radius, 
+		   			sp->color.r, sp->color.g, sp->color.b);
+			}
+		}
 		tmp = tmp->next;
 	}
 }
@@ -610,8 +628,8 @@ void	print_token(t_minirt *rt)
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 {
 	check_error(argc, argv);
-	pars_map(argv, &minirt, -1);
-	if (PRINT)
+	pars_map(argv, &minirt);
+	if (DEBUG)
 		print_token(minirt);
 	return (minirt);
 }

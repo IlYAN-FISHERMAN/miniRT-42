@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm -Ofast
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast -D DEBUG=1
 
 OS =
 
@@ -99,7 +99,7 @@ debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo " \t$(NAME) compiled (debug) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) -D PRINT=1
+	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) 
 	@echo " \t$(NAME) compiled (debug_g) ✅"
 
 %.o: %.c

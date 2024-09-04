@@ -12,6 +12,7 @@ typedef struct s_camera
 	t_vector3		right;
 	float			h;
 	float			w;
+	float			fov;
 }	t_camera;
 
 //	new_camera: Create a new camera, note that fov is not set by default

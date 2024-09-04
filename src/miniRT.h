@@ -10,7 +10,10 @@
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
-# define PRINT 0
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 //	minilibx include
 # ifdef __APPLE__

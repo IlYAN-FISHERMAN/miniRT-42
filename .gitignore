@@ -49,10 +49,12 @@ libs/minilibx-linux/test/mlx-test
 *.su
 *.idb
 *.pdb
+.DS_Store
 
 # Kernel Module Compile Results
 *.mod*
 *.cmd
+miniRT
 .tmp_versions/
 modules.order
 Module.symvers
