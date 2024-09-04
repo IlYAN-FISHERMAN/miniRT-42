@@ -34,26 +34,8 @@ t_size	*get_size(char **str, t_minirt **minirt)
 
 void	pars_obj(char **str, t_minirt **minirt)
 {
-	int	j;
-
-	j = 0;
-	if (!str || !*str)
-		return ;
-	while (str[j])
-	{
-		if (!ft_strcmp(str[j], "R"))
-			get_size(str, minirt);
-		else if (!ft_strcmp(str[j], "A"))
-			;
-		else if (!ft_strcmp(str[j], "C"))
-			;
-		else if (!ft_strcmp(str[j], "L"))
-			;
-		else if (!ft_strcmp(str[j], "pl"))
-			;
-		else if (!ft_strcmp(str[j], "cy"))
-			;
-	}
+	(void)str;
+	(void)minirt;
 }
 
 void	pars_map(char **av, t_minirt **minirt)
