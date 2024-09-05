@@ -1,5 +1,4 @@
-#include "../miniRT.h"
-#include "../exit_handler/exit_handler.h"
+#include "parsing.h"
 
 t_scene	*get_scene_struct(t_minirt **minirt)
 {

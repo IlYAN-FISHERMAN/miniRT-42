@@ -1,5 +1,4 @@
-#include "../miniRT.h"
-#include "../exit_handler/exit_handler.h"
+#include "parsing.h"
 
 void	check_pl_info(char **str, t_minirt *minirt)
 {
