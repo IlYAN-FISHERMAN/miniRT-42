@@ -16,6 +16,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target,
 	camera->up = vcross(camera->right, camera->forward);
 	camera->h = tanf((fov * (M_PI / 180.0f)) / 2.0f);
 	camera->w = camera->h * aspect;
+	camera->fov = fov;
 	return (camera);
 }
 

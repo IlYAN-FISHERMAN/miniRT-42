@@ -3,10 +3,19 @@
 
 # include "../libs/betterft/betterft.h"
 # include "camera/camera.h"
+# include "camera/image.h"
 # include "objects/objects.h"
+# include "vectors/vectors.h"
+# include "color/color.h"
+# include "generator/rt_generate.h"
+# include "objects/shape.h"
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 //	minilibx include
 # ifdef __APPLE__
@@ -23,19 +32,14 @@ typedef struct s_win
 	void	*windo;
 }	t_win;
 
-typedef struct s_size
-{
-	int	height;
-	int	width;
-}	t_size;
-
 typedef struct s_minirt
 {
 	int			fd;
-	t_size		size;
 	t_win		win;
-	t_scene		*scene;
+	t_image		*size;
 	t_camera	*cam;
+	t_amb		*amb;
+	t_scene		*scene;
 }	t_minirt;
 
 //	init_minirt: Initialize the miniRT minirt structure
