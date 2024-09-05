@@ -1,18 +1,32 @@
 #include "exit_handler.h"
 
-int	secure_exit(t_minirt *minirt)
+int	secure_exit(void *data)
 {
+	t_minirt	*minirt;
+
+	minirt = data;
 	if (minirt && minirt->win.mlx)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
-	if (minirt)
-		gfree(minirt);
 	cleargarbage();
 	exit(1);
 }
 
+void	clear_memory(t_minirt *minirt)
+{
+	if (minirt && minirt->win.mlx)
+		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
+	if (minirt->size)
+		gfree(minirt->size);
+	if (minirt->amb)
+		gfree(minirt->amb);
+	if (minirt->cam)
+		gfree(minirt->cam);
+	if (minirt->scene)
+		ft_lstclear(&minirt->scene, &gfree);
+}
+
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
 {
-	(void)minirt;
 	while (context && *context)
 	{
 		ft_putstr_fd(*context, STDERR_FILENO);
@@ -25,6 +39,7 @@ int	crash_exit(t_minirt *minirt, char **context, char *msg)
 	}
 	ft_putendl_fd(msg, STDERR_FILENO);
 	ft_putstr_fd(C_RESET, STDERR_FILENO);
+	clear_memory(minirt);
 	cleargarbage();
 	exit(1);
 }

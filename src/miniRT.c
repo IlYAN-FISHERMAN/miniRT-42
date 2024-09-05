@@ -1,5 +1,7 @@
 #include "miniRT.h"
+#include "camera/image.h"
 #include "exit_handler/exit_handler.h"
+#include "parsing/parsing.h"
 
 static void	init_hooks(t_minirt *minirt)
 {
@@ -10,70 +12,21 @@ void	*init_minirt_mlx(t_minirt *minirt)
 {
 	minirt->win.mlx = mlx_init();
 	if (!minirt->win.mlx)
-		crash_exit(minirt, NULL, "ntm");
+		crash_exit(minirt, NULL, "mlx failed");
 	minirt->win.windo = \
-		mlx_new_window(minirt->win.mlx, WIDTH, HEIGHT, "miniRT");
+		mlx_new_window(minirt->win.mlx, minirt->size->width,
+			minirt->size->height, "miniRT");
 	if (!minirt->win.windo)
-		crash_exit(minirt, NULL, "rui je t\'aime");
+		crash_exit(minirt, NULL, "windo malloc fail");
 	init_hooks(minirt);
 	return (minirt);
-}
-
-t_size	*get_size(char **str, t_minirt **minirt)
-{
-	int		j;
-	t_size	*size;
-
-	j = 1;
-	(void)j;
-	(void)size;
-	(void)str;
-	(void)minirt;
-	return (NULL);
-}
-
-void	pars_obj(char **str, t_minirt **minirt)
-{
-	(void)str;
-	(void)minirt;
-}
-
-void	pars_map(char **av, t_minirt **minirt)
-{
-	int		j;
-	char	**str;
-	char	*gnl;
-
-	j = -1;
-	str = NULL;
-	(*minirt)->fd = open(av[1], O_RDONLY);
-	if ((*minirt)->fd == -1
-		&& ft_printf("miniRT: %s: No such file or directory", av[1]))
-		secure_exit(*minirt);
-	while (av[++j])
-	{
-		gnl = ft_get_next_line((*minirt)->fd);
-		if (!gnl)
-			break ;
-		str = ft_split(gnl, 32);
-		pars_obj(str, minirt);
-		ft_free_tab(str);
-	}
-}
-
-void	check_error(int ac, char **av)
-{
-	if (ac <= 1 && printf("miniRT: Need <*.rt> file\n"))
-		secure_exit(NULL);
-	if ((!ft_strchr(av[1], '.') \
-		|| ft_strncmp(ft_strchr(av[1], '.'), ".rt", 4))
-		&& ft_printf("miniRT: bad format file, only .rt file accepted\n"))
-		exit(EXIT_FAILURE);
 }
 
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 {
 	check_error(argc, argv);
 	pars_map(argv, &minirt);
+	if (DEBUG)
+		print_token(minirt, minirt->scene);
 	return (minirt);
 }

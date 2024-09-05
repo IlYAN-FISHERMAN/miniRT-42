@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:19:26 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/06/10 17:51:51 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:18:13 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ char		*ft_memtostr(void *mem, size_t size);
 //	ft_free_tab: Frees the memory allocated for a null-terminated
 //	array of strings.
 //	Each string in the array must have been allocated dynamically.
-void		ft_free_tab(char **tab);
+int			ft_free_tab(char **tab);
 // Split all string of **str and return a char * joind by all the string.
 char		*ft_joint_all(char **str);
 

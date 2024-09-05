@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include "../objects/shapes.h"
+# include "../objects/shape.h"
 # include "../rays/rays.h"
 
 typedef struct s_camera
@@ -12,6 +12,7 @@ typedef struct s_camera
 	t_vector3		right;
 	float			h;
 	float			w;
+	float			fov;
 }	t_camera;
 
 //	new_camera: Create a new camera, note that fov is not set by default
