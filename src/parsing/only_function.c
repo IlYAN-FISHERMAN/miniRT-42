@@ -1,5 +1,4 @@
-#include "../miniRT.h"
-#include "../exit_handler/exit_handler.h"
+#include "parsing.h"
 
 int	only_digit(char *str)
 {

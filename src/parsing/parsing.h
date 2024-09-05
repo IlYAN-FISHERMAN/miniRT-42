@@ -77,7 +77,7 @@ void		pars_obj(char **str, t_minirt **minirt);
 void		pars_map(char **av, t_minirt **minirt);
 //	the fonction for print t_minirt token
 void		print_token(t_minirt *rt, t_scene *tmp);
-//	atoi for rgb t_color struc
+//	atoi for rgb t_color struct
 int			ft_atoi_rgb(unsigned char *x, unsigned char *y,
 				unsigned char *z, char **str);
 

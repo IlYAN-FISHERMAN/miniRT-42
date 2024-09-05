@@ -1,5 +1,4 @@
-#include "../miniRT.h"
-#include "../objects/cylinder.h"
+#include "parsing.h"
 
 void	print_obj1(t_plane *pl, t_sphere *sp, t_cylin *cy)
 {
