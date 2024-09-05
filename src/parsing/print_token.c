@@ -10,8 +10,8 @@ void	print_obj1(t_plane *pl, t_sphere *sp, t_cylin *cy)
 			cy->normal.y, cy->normal.z, cy->diam, cy->height,
 			cy->rgb.r, cy->rgb.g, cy->rgb.b);
 	else if (pl)
-		printf("pl: XYZ: %.2f,%.2f,%.2f\n\
-		vector: %.2f,%.2f,%.2f\nRGB: %d,%d,%d\n\n", \
+		printf("pl: XYZ: %.2f,%.2f,%.2f\n"\
+			"vector: %.2f,%.2f,%.2f\nRGB: %d,%d,%d\n\n", \
 			pl->origin.x, pl->origin.y, pl->origin.z,
 			pl->normal.x, pl->normal.y,
 			pl->normal.z, pl->color.r, pl->color.g, pl->color.b);
@@ -24,10 +24,9 @@ void	print_obj1(t_plane *pl, t_sphere *sp, t_cylin *cy)
 void	print_light(t_light *lig)
 {
 	if (lig)
-		if (lig)
-			printf("L: XYZ: %.2f,%.2f,%.2f\nLratio: %.2f\nRGB: %d,%d,%d\n\n",
-				lig->pos.x, lig->pos.y, lig->pos.z, lig->bright,
-				lig->rgb.r, lig->rgb.g, lig->rgb.b);
+		printf("L: XYZ: %.2f,%.2f,%.2f\nLratio: %.2f\nRGB: %d,%d,%d\n\n",
+			lig->pos.x, lig->pos.y, lig->pos.z, lig->bright,
+			lig->rgb.r, lig->rgb.g, lig->rgb.b);
 }
 
 void	print_obj_main(t_scene *tmp)

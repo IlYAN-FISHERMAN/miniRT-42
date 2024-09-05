@@ -37,7 +37,10 @@ void	get_pl(char **str, t_minirt **minirt)
 		ft_split(str[1], ','));
 	ft_atof_xyz(&tmp->normal.x, &tmp->normal.y, &tmp->normal.z,
 		ft_split(str[2], ','));
-	ft_atoi_xyz(&tmp->color.r, &tmp->color.g, &tmp->color.b,
-		ft_split(str[3], ','));
+	if (!ft_atoi_rgb(&tmp->color.r, &tmp->color.g, &tmp->color.b,
+			ft_split(str[3], ',')))
+		crash_exit(*minirt,
+			(char *[]){"miniRT",
+			"parsing: pl bad number format", NULL}, str[3]);
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }

@@ -1,6 +1,4 @@
-#include "../miniRT.h"
-#include "../objects/cylinder.h"
-#include "../exit_handler/exit_handler.h"
+# include "parsing.h"
 
 void	check_cy_info(char **str, t_minirt *minirt)
 {
@@ -48,7 +46,9 @@ void	get_cy(char **str, t_minirt **minirt)
 		ft_split(str[2], ','));
 	tmp->diam = ft_atof(str[3]);
 	tmp->height = ft_atof(str[4]);
-	ft_atoi_xyz(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
-		ft_split(str[5], ','));
+	if (!ft_atoi_rgb(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
+			ft_split(str[5], ',')))
+		crash_exit(*minirt,
+			(char *[]){"miniRT", "parsing: cy bad rgb format", NULL}, str[5]);
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }

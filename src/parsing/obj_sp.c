@@ -36,7 +36,10 @@ void	get_sp(char **str, t_minirt **minirt)
 	ft_atof_xyz(&tmp->origin.x, &tmp->origin.y, &tmp->origin.z,
 		ft_split(str[1], ','));
 	tmp->radius = ft_atof(str[2]);
-	ft_atoi_xyz(&tmp->color.r, &tmp->color.g, &tmp->color.b,
-		ft_split(str[3], ','));
+	if (!ft_atoi_rgb(&tmp->color.r, &tmp->color.g, &tmp->color.b,
+			ft_split(str[3], ',')))
+		crash_exit(*minirt,
+			(char *[]){"miniRT",
+			"parsing: sp bad rgb format", NULL}, str[3]);
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }

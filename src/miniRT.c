@@ -1,6 +1,7 @@
 #include "miniRT.h"
 #include "camera/image.h"
 #include "exit_handler/exit_handler.h"
+#include "parsing/parsing.h"
 
 static void	init_hooks(t_minirt *minirt)
 {

@@ -2,7 +2,7 @@
 # define IMAGE_H
 
 # include "camera.h"
-# include "../objects/shapes.h"
+# include "../objects/shape.h"
 
 typedef struct s_image
 {
@@ -10,6 +10,12 @@ typedef struct s_image
 	float	height;
 	int		**data;
 }	t_image;
+
+typedef struct s_size
+{
+	int	height;
+	int	width;
+}	t_size;
 
 //	new_image: Create a new image
 //  @param width The width of the image

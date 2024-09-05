@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include "../objects/shapes.h"
+# include "../objects/shape.h"
 # include "../rays/rays.h"
 
 typedef struct s_camera

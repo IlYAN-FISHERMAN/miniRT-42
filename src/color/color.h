@@ -15,9 +15,9 @@
 // t_color: A color in RGB format
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	t_byte	r;
+	t_byte	g;
+	t_byte	b;
 }	t_color;
 
 //  color: Create a new color

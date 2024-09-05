@@ -36,7 +36,10 @@ void	get_light(char **str, t_minirt **minirt)
 	ft_atof_xyz(&tmp->pos.x, &tmp->pos.y, &tmp->pos.z, ft_split(str[1], ','));
 	tmp->bright = ft_atof(str[2]);
 	if (bonus)
-		ft_atoi_xyz(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
-			ft_split(str[3], ','));
+		if (!ft_atoi_rgb(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
+				ft_split(str[3], ',')))
+			crash_exit(*minirt,
+				(char *[]){"miniRT", "parsing: L rgb bad format",
+				NULL}, str[3]);
 	ft_lstadd_back(&(*minirt)->scene, light);
 }
