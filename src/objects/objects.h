@@ -5,7 +5,6 @@
 # include "../vectors/vectors.h"
 # include "../rays/intersect.h"
 # include "../color/color.h"
-# include "cylinder.h"
 
 //	t_objects_type: The type of object
 typedef enum e_objects_type

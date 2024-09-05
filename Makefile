@@ -52,7 +52,21 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)generator/rt_generate_nbr \
 		$(FILES_PATH)generator/rt_generate_scene \
 		$(FILES_PATH)generator/rt_generator_obj \
-		$(FILES_PATH)utils/ft_split_sp_tab
+		$(FILES_PATH)utils/ft_split_sp_tab \
+		$(FILES_PATH)utils/ft_strlen_tab \
+		$(FILES_PATH)parsing/error_handling \
+		$(FILES_PATH)utils/ft_atof \
+		$(FILES_PATH)parsing/parsing \
+		$(FILES_PATH)parsing/get_amb \
+		$(FILES_PATH)parsing/get_cam \
+		$(FILES_PATH)parsing/get_obj \
+		$(FILES_PATH)parsing/get_size \
+		$(FILES_PATH)parsing/obj_cy \
+		$(FILES_PATH)parsing/obj_lig \
+		$(FILES_PATH)parsing/obj_pl \
+		$(FILES_PATH)parsing/obj_sp \
+		$(FILES_PATH)parsing/only_function \
+		$(FILES_PATH)parsing/print_token
 
 CFILES = $(FILES:%=%.c)
 
