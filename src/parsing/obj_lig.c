@@ -4,13 +4,19 @@ void	check_light_format(char **str, t_minirt **minirt, bool *bonus)
 {
 	if (ft_strlen_tab(str) < 3 || ft_strlen_tab(str) > 4)
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "L bad number of arg");
+			(char *[]){"miniRT", "parsing", NULL}, "L bad number of arg [3/4]");
 	if (!only_digit_xyz(str[1], *minirt) && !only_float_xyz(str[1], *minirt))
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing: L bad format", NULL}, str[1]);
+			(char *[]){"miniRT", "parsing:\nL only\
+0,0,0 xyz_float [><255]", NULL}, str[1]);
 	if (!only_float(str[2]) && !only_digit(str[2]))
 		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing: L bad format", NULL}, str[2]);
+			(char *[]){"miniRT", "parsing: L only one\
+float number", NULL}, str[2]);
+	if (str[3] && !only_digit_xyz(str[3], *minirt))
+		crash_exit(*minirt,
+			(char *[]){"miniRT", "parsing:\nL only\
+0,0,0 rgb_digit [>0<255]", NULL}, str[3]);
 	if (str[3])
 		if (only_digit_xyz(str[3], *minirt))
 			*bonus = true;

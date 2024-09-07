@@ -1,11 +1,11 @@
 #include "../miniRT.h"
 
-float	ft_atof(char *str)
+double	ft_atof(char *str)
 {
-	float	nb;
+	double	nb;
 	int		i;
-	int		j;
-	int		sign;
+	double	j;
+	double	sign;
 
 	i = -1;
 	nb = 0;
@@ -18,7 +18,7 @@ float	ft_atof(char *str)
 		if (str[i] == '.')
 		{
 			while (str[++i] && ++j)
-				nb = (nb * (float)pow(10, j) + (str[i] - 48)) / pow(10, j);
+				nb = (nb * (double)pow(10, j) + (str[i] - 48)) / pow(10, j);
 			return (nb * sign);
 		}
 		nb = nb * 10 + (str[i] - 48);
@@ -26,7 +26,7 @@ float	ft_atof(char *str)
 	return (nb * sign);
 }
 
-int	ft_atof_xyz(float *x, float *y, float *z, char **str)
+int	ft_atof_xyz(double *x, double *y, double *z, char **str)
 {
 	if (!str)
 		return (0);

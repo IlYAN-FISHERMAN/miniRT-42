@@ -34,8 +34,8 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 bool	intersect_plane(t_intersect *intersect, t_object *object)
 {
 	t_plane	*plane;
-	float	dotn;
-	float	t;
+	double	dotn;
+	double	t;
 
 	plane = (t_plane *)object->data;
 	dotn = vdot(intersect->ray.direction, plane->normal);
@@ -53,8 +53,8 @@ bool	intersect_plane(t_intersect *intersect, t_object *object)
 bool	does_intersect_plane(t_ray ray, t_object *object)
 {
 	t_plane	*plane;
-	float	dotn;
-	float	t;
+	double	dotn;
+	double	t;
 
 	plane = (t_plane *)object->data;
 	dotn = vdot(ray.direction, plane->normal);

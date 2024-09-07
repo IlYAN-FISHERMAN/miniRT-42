@@ -7,7 +7,7 @@
 typedef struct s_sphere
 {
 	t_point3	origin;
-	float		radius;
+	double		radius;
 	t_color		color;	
 }	t_sphere;
 
@@ -15,13 +15,13 @@ typedef struct s_sphere
 //  @param origin The origin of the sphere
 //  @param radius The radius of tshe sphere
 //  @return A new sphere
-t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color);
+t_sphere	*new_raw_sphere(t_point3 origin, double radius, t_color color);
 
 //  new_sphere: Create a new sphere object
 //  @param origin The origin of the sphere
 //  @param radius The radius of the sphere
 //  @return A new sphere object
-t_object	*new_sphere(t_point3 origin, float radius, t_color color);
+t_object	*new_sphere(t_point3 origin, double radius, t_color color);
 
 //  intersect_sphere: Check if ray intersects sphere and update
 //	intersection data

@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm -Ofast -D DEBUG=1
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast
 
 OS =
 
@@ -109,7 +109,7 @@ test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME)
 	@echo " \t$(NAME) compiled (debug) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
