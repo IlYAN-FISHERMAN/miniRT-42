@@ -24,3 +24,26 @@ void	get_obj(char **str, t_minirt **minirt)
 	else if (!ft_strcmp(str[0], "sp"))
 		get_sp(str, minirt);
 }
+
+void	pars_obj(char **str, t_minirt **minirt)
+{
+	if (str)
+	{
+		if (!ft_strcmp(str[0], "R") || !ft_strcmp(str[0], "r"))
+			get_size(str, minirt);
+		else if (!ft_strcmp(str[0], "A") || !ft_strcmp(str[0], "a"))
+			get_amb(str, minirt);
+		else if (!ft_strcmp(str[0], "C") || !ft_strcmp(str[0], "c"))
+			get_cam(str, minirt);
+		else if (!ft_strcmp(str[0], "L") || !ft_strcmp(str[0], "l"))
+			get_light(str, minirt);
+		else if (!ft_strcmp(str[0], "pl") || !ft_strcmp(str[0], "cy")
+			|| !ft_strcmp(str[0], "sp"))
+			get_obj(str, minirt);
+		else
+			crash_exit(*minirt,
+				(char *[]){"miniRT", "parsing: bad string format\n"
+				"unknown object:", NULL},
+				str[0]);
+	}
+}

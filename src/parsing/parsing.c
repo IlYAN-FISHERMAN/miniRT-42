@@ -1,27 +1,5 @@
 #include "parsing.h"
 
-void	pars_obj(char **str, t_minirt **minirt)
-{
-	if (str)
-	{
-		if (!ft_strcmp(str[0], "R"))
-			get_size(str, minirt);
-		else if (!ft_strcmp(str[0], "A"))
-			get_amb(str, minirt);
-		else if (!ft_strcmp(str[0], "C") || !ft_strcmp(str[0], "c"))
-			get_cam(str, minirt);
-		else if (!ft_strcmp(str[0], "L") || !ft_strcmp(str[0], "l"))
-			get_light(str, minirt);
-		else if (!ft_strcmp(str[0], "pl") || !ft_strcmp(str[0], "cy")
-			|| !ft_strcmp(str[0], "sp"))
-			get_obj(str, minirt);
-		else
-			crash_exit(*minirt,
-				(char *[]){"miniRT", "parsing: bad string format", NULL},
-				str[0]);
-	}
-}
-
 void	pars_map(char **av, t_minirt **minirt)
 {
 	char	**str;
@@ -47,6 +25,6 @@ void	pars_map(char **av, t_minirt **minirt)
 		}
 		gfree(gnl);
 	}
-	if (!(*minirt)->size)
+	if (check_standare_shape(*minirt) && !(*minirt)->size)
 		get_size_default(minirt);
 }

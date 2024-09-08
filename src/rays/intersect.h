@@ -10,7 +10,7 @@ typedef struct intersect
 {
 	t_ray			ray;
 	t_point3		pos;
-	float			t;
+	double			t;
 	t_object		*object;
 	bool			intersected;
 	t_color			color;

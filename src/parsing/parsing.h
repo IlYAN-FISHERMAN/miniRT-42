@@ -80,5 +80,13 @@ void		print_token(t_minirt *rt, t_scene *tmp);
 //	atoi for rgb t_color struct
 int			ft_atoi_rgb(unsigned char *x, unsigned char *y,
 				unsigned char *z, char **str);
+// check xyz range format
+void		check_xyz_range(char **context, char *str, t_minirt *minirt);
+//	check vector range range
+void		check_vector_range(char **context, char *str, t_minirt *minirt);
+//	check rgb range
+void		check_rgb_range(char **context, char *str, t_minirt *minirt);
+// check if necessery obj is set
+int			check_standare_shape(t_minirt *minirt);
 
 #endif

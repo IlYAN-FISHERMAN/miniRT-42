@@ -17,6 +17,10 @@
 #  define DEBUG 0
 # endif
 
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
 //	minilibx include
 # ifdef __APPLE__
 #  include "../libs/minilibx_opengl/mlx.h"

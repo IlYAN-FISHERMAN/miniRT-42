@@ -16,6 +16,15 @@ void	get_size_default(t_minirt **minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 }
 
+int	check_standare_shape(t_minirt *minirt)
+{
+	if (!minirt->cam)
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, \
+			"No cam set");
+	return (1);
+}
+
 void	check_error(int ac, char **av)
 {
 	if (ac <= 1 && printf("miniRT: Need <*.rt> file\n"))

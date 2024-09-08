@@ -51,20 +51,11 @@ int	ft_atoi_xyz(int *x, int *y, int *z, char **str)
 int	ft_atoi_rgb(unsigned char *x, unsigned char *y,
 				unsigned char *z, char **str)
 {
-	int		r;
-	int		g;
-	int		b;
-
 	if (!str)
 		return (0);
-	r = ft_atoi(str[0]);
-	g = ft_atoi(str[1]);
-	b = ft_atoi(str[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (0);
-	*x = r;
-	*y = g;
-	*z = b;
+	*x = ft_atoi(str[0]);
+	*y = ft_atoi(str[1]);
+	*z = ft_atoi(str[2]);
 	ft_free_tab(str);
 	return (1);
 }
