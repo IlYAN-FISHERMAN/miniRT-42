@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm -Ofast -D DEBUG=1
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast
 
 OS =
 
@@ -66,6 +66,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)parsing/obj_pl \
 		$(FILES_PATH)parsing/obj_sp \
 		$(FILES_PATH)parsing/only_function \
+		$(FILES_PATH)parsing/check_range_format \
 		$(FILES_PATH)parsing/print_token
 
 CFILES = $(FILES:%=%.c)
@@ -109,7 +110,11 @@ test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME)
+	@echo " \t$(NAME) compiled (debug) ✅"
+
+debug_b : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME)
 	@echo " \t$(NAME) compiled (debug) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
@@ -124,6 +129,11 @@ $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@echo " \t$(NAME) compiled ✅"
 
+bonus : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME)
+	@echo " \t$(NAME) compiled with bonus ✅"
+
+
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@make -C $(MINILIBX_PATH) all
 	@printf "\33[2K"
@@ -131,4 +141,4 @@ $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 	@make -C $(LIBFT_PATH) all
 
-.PHONY : clean fclean all debug debug_g re
+.PHONY : clean fclean all debug debug_g bonus re

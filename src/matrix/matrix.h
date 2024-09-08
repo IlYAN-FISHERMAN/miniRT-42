@@ -5,17 +5,17 @@
 
 typedef struct s_matrix4
 {
-	float	data[4][4];
+	double	data[4][4];
 }	t_matrix4;
 
 typedef struct s_matrix3
 {
-	float	data[3][3];
+	double	data[3][3];
 }	t_matrix3;
 
 typedef struct s_matrix2
 {
-	float	data[2][2];
+	double	data[2][2];
 }	t_matrix2;
 
 // m4mul: Multiply two matrices
@@ -53,6 +53,7 @@ t_matrix2	m2subm(t_matrix3 m, int row, int col);
 //  @param row The row to remove
 //  @param col The column to remove
 //  @return The minor
-float		m3minor(t_matrix3 m, int row, int col);
+double		m3minor(t_matrix3 m, int row, int col);
+double		m2det(t_matrix2 m);
 
 #endif

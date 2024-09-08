@@ -22,9 +22,9 @@ void		get_size_default(t_minirt **minirt);
 //	check basic error for parsing
 void		check_error(int ac, char **av);
 //	return a conver float of the string av
-float		ft_atof(char *str);
+double		ft_atof(char *str);
 //	do a ft_atof of x, y and z float. with a splited str gonna be free
-int			ft_atof_xyz(float *x, float *y, float *z, char **str);
+int			ft_atof_xyz(double *x, double *y, double *z, char **str);
 //	do a ft_atoi of x, y and z int. with a splited str gonna be free
 int			ft_atoi_xyz(int *x, int *y, int *z, char **str);
 //	check the format string of ambiance
@@ -80,5 +80,13 @@ void		print_token(t_minirt *rt, t_scene *tmp);
 //	atoi for rgb t_color struct
 int			ft_atoi_rgb(unsigned char *x, unsigned char *y,
 				unsigned char *z, char **str);
+// check xyz range format
+void		check_xyz_range(char **context, char *str, t_minirt *minirt);
+//	check vector range range
+void		check_vector_range(char **context, char *str, t_minirt *minirt);
+//	check rgb range
+void		check_rgb_range(char **context, char *str, t_minirt *minirt);
+// check if necessery obj is set
+int			check_standare_shape(t_minirt *minirt);
 
 #endif

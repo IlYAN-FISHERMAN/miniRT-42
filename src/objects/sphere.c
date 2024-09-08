@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
+t_sphere	*new_raw_sphere(t_point3 origin, double radius, t_color color)
 {
 	t_sphere	*sphere;
 
@@ -13,7 +13,7 @@ t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
 	return (sphere);
 }
 
-t_object	*new_sphere(t_point3 origin, float radius, t_color color)
+t_object	*new_sphere(t_point3 origin, double radius, t_color color)
 {
 	t_sphere	*sphere;
 	t_object	*object;
@@ -38,11 +38,11 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
 //	@return true if the intersection was found, false otherwise
-static bool	find_intersection(t_intersect *intersect, float a, float b, float c)
+static bool	find_intersection(t_intersect *intersect, double a, double b, double c)
 {
-	float	discriminant;
-	float	t1;
-	float	t2;
+	double	discriminant;
+	double	t1;
+	double	t2;
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
@@ -62,9 +62,9 @@ bool	intersect_sphere(t_intersect *intersect, t_object *object)
 {
 	t_sphere	*sphere;
 	t_ray		local_ray;
-	float		a;
-	float		b;
-	float		c;
+	double		a;
+	double		b;
+	double		c;
 
 	sphere = (t_sphere *)object->data;
 	local_ray = intersect->ray;
@@ -83,9 +83,9 @@ bool	does_intersect_sphere(t_ray ray, t_object *object)
 {
 	t_sphere	*sphere;
 	t_ray		local_ray;
-	float		a;
-	float		b;
-	float		c;
+	double		a;
+	double		b;
+	double		c;
 
 	sphere = (t_sphere *)object->data;
 	local_ray = ray;

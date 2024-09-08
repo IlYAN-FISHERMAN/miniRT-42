@@ -15,7 +15,7 @@ void	print_obj1(t_plane *pl, t_sphere *sp, t_cylin *cy)
 			pl->normal.x, pl->normal.y,
 			pl->normal.z, pl->color.r, pl->color.g, pl->color.b);
 	else if (sp)
-		printf("sp: XYZ: %.2f,%.2f,%.2f\nDiameter: %.2f\nRGB: %d,%d,%d\n\n", \
+		printf("sp: XYZ: %.2f,%.2f,%.2f\ndiameter: %.2f\nRGB: %d,%d,%d\n\n", \
 			sp->origin.x, sp->origin.y, sp->origin.z, sp->radius,
 			sp->color.r, sp->color.g, sp->color.b);
 }
@@ -49,7 +49,8 @@ void	print_obj_main(t_scene *tmp)
 
 void	print_token(t_minirt *rt, t_scene *tmp)
 {
-	printf("\nminiRT struct\n-----------\n\nfd: %d\n\n", rt->fd);
+	printf("\nminiRT struct\n\033[0;35m__________________________\033[0m"
+		"\n\nfd: %d\n\n", rt->fd);
 	if (rt->size)
 		printf("R: %.0fx%.0f\n\n", rt->size->height, rt->size->width);
 	if (rt->amb)
@@ -62,4 +63,6 @@ void	print_token(t_minirt *rt, t_scene *tmp)
 			rt->cam->fov);
 	if (tmp)
 		print_obj_main(tmp);
+	printf("\nEND\n\033[0;35m__________________________\033[0m"
+		"\n\n");
 }

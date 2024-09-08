@@ -24,19 +24,19 @@ t_matrix3	m3subm(t_matrix4 m, int row, int col)
 	return (res);
 }
 
-float	m3minor(t_matrix3 m, int row, int col)
+double	m3minor(t_matrix3 m, int row, int col)
 {
 	t_matrix2	subm;
-	float		det;
+	double		det;
 
 	subm = m2subm(m, row, col);
 	det = m2det(subm);
 	return (det);
 }
 
-float	m3cofactor(t_matrix3 m, int row, int col)
+double	m3cofactor(t_matrix3 m, int row, int col)
 {
-	float	minor;
+	double	minor;
 
 	minor = m3minor(m, row, col);
 	if ((row + col) % 2)

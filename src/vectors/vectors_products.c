@@ -1,6 +1,6 @@
 #include "vectors.h"
 
-float	vdot(t_vector3 v, t_vector3 u)
+double	vdot(t_vector3 v, t_vector3 u)
 {
 	return (v.x * u.x + v.y * u.y + v.z * u.z);
 }

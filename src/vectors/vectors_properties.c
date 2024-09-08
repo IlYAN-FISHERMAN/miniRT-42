@@ -1,11 +1,11 @@
 #include "vectors.h"
 
-float	vlength2(t_vector3 v)
+double	vlength2(t_vector3 v)
 {
 	return (v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-float	vlength(t_vector3 v)
+double	vlength(t_vector3 v)
 {
 	return (sqrt(vlength2(v)));
 }

@@ -7,8 +7,8 @@ typedef struct s_cylin
 {
 	t_vector3	origin;
 	t_vector3	normal;
-	float		diam;
-	float		height;
+	double		diam;
+	double		height;
 	t_color		rgb;
 }	t_cylin;
 
