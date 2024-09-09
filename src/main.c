@@ -6,7 +6,6 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&minirt, sizeof(minirt));
 	init_minirt(&minirt, argc, argv);
-	exit(1);
 	init_minirt_mlx(&minirt);
 	mlx_loop(minirt.win.mlx);
 	exit(0);
