@@ -26,20 +26,12 @@ t_matrix3	m3subm(t_matrix4 m, int row, int col)
 
 double	m3minor(t_matrix3 m, int row, int col)
 {
-	t_matrix2	subm;
-	double		det;
-
-	subm = m2subm(m, row, col);
-	det = m2det(subm);
-	return (det);
+	return (m2det(m2subm(m, row, col)));
 }
 
 double	m3cofactor(t_matrix3 m, int row, int col)
 {
-	double	minor;
-
-	minor = m3minor(m, row, col);
 	if ((row + col) % 2)
-		return (-minor);
-	return (minor);
+		return (-m3minor(m, row, col));
+	return (m3minor(m, row, col));
 }

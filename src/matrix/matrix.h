@@ -54,6 +54,14 @@ t_matrix2	m2subm(t_matrix3 m, int row, int col);
 //  @param col The column to remove
 //  @return The minor
 double		m3minor(t_matrix3 m, int row, int col);
+//	m2det: Get the determinant of a t_matrix2
+//	@param m The matrix
+//	@return The determinant
 double		m2det(t_matrix2 m);
-
+//	m3cofactor: Get the cofactor of a t_matrix3
+//	@param m The matrix
+//	@param row The row to remove
+//	@param col The column to remove
+//	@return The cofactor
+double		m3cofactor(t_matrix3 m, int row, int col);
 #endif
