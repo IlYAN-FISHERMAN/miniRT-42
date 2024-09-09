@@ -24,7 +24,7 @@ t_matrix2	m4subm(t_matrix3 m, int row, int col)
 	return (res);
 }
 
-float	m2det(t_matrix2 m)
+double	m2det(t_matrix2 m)
 {
 	return (m.data[0][0] * m.data[1][1] - m.data[0][1] * m.data[1][0]);
 }
