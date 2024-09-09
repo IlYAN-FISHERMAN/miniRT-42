@@ -33,12 +33,12 @@ t_object	*new_sphere(t_point3 origin, double radius, t_color color)
 
 //	find_intersection: Find the intersection of a ray with a sphere
 //	and store the result in the given intersection
-//	@param intersect The intersection to store the result in
+//	@param inter The intersection to store the result in
 //	@param a The a value of the quadratic equation
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
 //	@return true if the intersection was found, false otherwise
-static bool	find_intersection(t_intersect *intersect, double a, double b, double c)
+static bool	find_intersection(t_intersect *inter, double a, double b, double c)
 {
 	double	discriminant;
 	double	t1;
@@ -49,10 +49,10 @@ static bool	find_intersection(t_intersect *intersect, double a, double b, double
 		return (false);
 	t1 = (-b - sqrt(discriminant)) / (2 * a);
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
-	if (t1 > RAY_T_MIN && t1 < intersect->t)
-		intersect->t = t1;
-	else if (t2 > RAY_T_MIN && t2 < intersect->t)
-		intersect->t = t2;
+	if (t1 > RAY_T_MIN && t1 < inter->t)
+		inter->t = t1;
+	else if (t2 > RAY_T_MIN && t2 < inter->t)
+		inter->t = t2;
 	else
 		return (false);
 	return (true);
