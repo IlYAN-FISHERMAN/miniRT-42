@@ -51,44 +51,44 @@ t_vector3	vector3(double x, double y, double z);
 //	@return A new 3D point
 t_point3	point3(double x, double y, double z);
 
-//	vlength: Get the length of a vector
+//	vlength: Get the length (magnitude) of a vector
 //	@param v The vector
 //	@return The length of the vector
 double		vlength(t_vector3 v);
 
-//	vlength2: Get the squared length of a vector
+//	vlength2: Get the squared length (magnitude) of a vector
 //	@param v The vector
 //	@return The squared length of the vector
 double		vlength2(t_vector3 v);
 
-//	vadd: Add two vectors
-//	@param v The first vector
-//	@param u The second vector
-//	@return The sum of the two vectors
-t_vector3	vadd(t_vector3 v, t_vector3 u);
+//	vadd: Add two tuples
+//	@param v The first tuple
+//	@param u The second tuple
+//	@return The sum of the two tuples
+t_tuple4	vadd(t_tuple4 v, t_tuple4 u);
 
-//	vsub: Subtract two vectors
-//	@param v The first vector
-//	@param u The second vector
-//	@return The difference of the two vectors
-t_vector3	vsub(t_vector3 v, t_vector3 u);
+//	vsub: Subtract two tuples
+//	@param v The first tuple
+//	@param u The second tuple
+//	@return The difference of the two tuples
+t_tuple4	vsub(t_tuple4 v, t_tuple4 u);
 
-//	vmul: Multiply a vector by a scalar
-//	@param v The vector
+//	vmul: Multiply a tuple by a scalar
+//	@param v The tuple
 //	@param scalar The scalar
-//	@return The product of the vector and the scalar
-t_vector3	vmul(t_vector3 v, double scalar);
+//	@return The product of the tuple and the scalar
+t_tuple4	vmul(t_tuple4 v, double scalar);
 
-//	vdiv: Divide a vector by a scalar
-//	@param v The vector
+//	vdiv: Divide a tuple by a scalar
+//	@param v The tuple
 //	@param scalar The scalar
-//	@return The quotient of the vector and the scalar
-t_vector3	vdiv(t_vector3 v, double scalar);
+//	@return The quotient of the tuple and the scalar
+t_tuple4	vdiv(t_tuple4 v, double scalar);
 
-//	vneg: Negate a vector
-//	@param v The vector
-//	@return The negated vector
-t_vector3	vneg(t_vector3 v);
+//	vneg: Negate a tuple
+//	@param v The tuple
+//	@return The negated tuple
+t_tuple4	vneg(t_tuple4 v);
 
 //	vdot: Get the dot product of two vectors
 //	@param v The first vector
