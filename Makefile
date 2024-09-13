@@ -118,7 +118,11 @@ debug_b : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo " \t$(NAME) compiled (debug) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) 
+	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME)
+	@echo " \t$(NAME) compiled (debug_g) ✅"
+
+debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME)
 	@echo " \t$(NAME) compiled (debug_g) ✅"
 
 %.o: %.c
