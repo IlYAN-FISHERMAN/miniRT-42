@@ -24,7 +24,7 @@ t_ray	make_ray(t_camera *camera, t_vector2 point)
 {
 	t_vector3	direction;
 
-	direction = vadd(vadd(camera->forward, vmul(camera->right, point.u
-					* camera->w)), vmul(camera->up, point.v * camera->h));
+	direction = vadd(vadd(camera->forward, vmul(camera->right, point.x
+					* camera->w)), vmul(camera->up, point.y * camera->h));
 	return (ray(camera->origin, vnormalized(direction)));
 }
