@@ -27,17 +27,18 @@ t_matrix4	m4mul(t_matrix4 m, t_matrix4 n)
 	return (res);
 }
 
-t_vector3	vm4mul(t_matrix4 m, t_vector3 v)
+t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t)
 {
-	t_vector3	res;
-
-	res.x = m.data[0][0] * v.x + m.data[0][1]
-		* v.y + m.data[0][2] * v.z + m.data[0][3];
-	res.y = m.data[1][0] * v.x + m.data[1][1]
-		* v.y + m.data[1][2] * v.z + m.data[1][3];
-	res.z = m.data[2][0] * v.x + m.data[2][1]
-		* v.y + m.data[2][2] * v.z + m.data[2][3];
-	return (res);
+	return ((t_tuple4){
+		m.data[0][0] * t.x + m.data[0][1] * t.y +
+			m.data[0][2] * t.z + m.data[0][3] * t.w,
+		m.data[1][0] * t.x + m.data[1][1] * t.y +
+			m.data[1][2] * t.z + m.data[1][3] * t.w,
+		m.data[2][0] * t.x + m.data[2][1] * t.y +
+			m.data[2][2] * t.z + m.data[2][3] * t.w,
+		m.data[3][0] * t.x + m.data[3][1] * t.y +
+			m.data[3][2] * t.z + m.data[3][3] * t.w
+	});
 }
 
 t_matrix4	m4identity(t_matrix4 m)

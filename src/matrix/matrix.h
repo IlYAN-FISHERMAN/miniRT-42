@@ -25,9 +25,9 @@ typedef struct s_matrix2
 t_matrix4	m4mul(t_matrix4 m, t_matrix4 n);
 //  m4mulv: Multiply a matrix by a vector
 //  @param m The matrix
-//  @param v The vector
-//  @return The multiplied vector
-t_vector3	vm4mul(t_matrix4 m, t_vector3 v);
+//  @param v The tuple
+//  @return The multiplied tuple
+t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t);
 //  m4identity: Get the identity matrix of a given matrix
 //  @param m The matrix
 //  @return The identity matrix
