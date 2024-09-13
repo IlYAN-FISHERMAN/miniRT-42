@@ -8,20 +8,28 @@
 #  define M_PI 3.14159265358979323846f
 # endif
 
-typedef struct s_vector2
-{
-	double	u;
-	double	v;
-}	t_vector2;
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
-typedef struct s_vector3
+# define VECTOR	0.0
+# define POINT	1.0
+
+typedef struct s_tuple4
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_vector3;
+	double	w;
+}	t_tuple4;
 
-typedef t_vector3	t_point3;
+typedef t_tuple4	t_vector3;
+
+typedef t_tuple4	t_point3;
+
+typedef t_tuple4	t_vector2;
+
+typedef t_tuple4	t_point2;
 
 //	vector2: Create a new 2D vector
 //	@param u The u component
@@ -76,6 +84,11 @@ t_vector3	vmul(t_vector3 v, double scalar);
 //	@param scalar The scalar
 //	@return The quotient of the vector and the scalar
 t_vector3	vdiv(t_vector3 v, double scalar);
+
+//	vneg: Negate a vector
+//	@param v The vector
+//	@return The negated vector
+t_vector3	vneg(t_vector3 v);
 
 //	vdot: Get the dot product of two vectors
 //	@param v The first vector
