@@ -26,4 +26,5 @@ t_vector3	*vnormalize(t_vector3 *v)
 	if (DEBUG && v->w == POINT)
 		printf("Warning: Normalizing a point\n");
 	*v = vdiv(*v, vlength(*v));
+	return (v);
 }
