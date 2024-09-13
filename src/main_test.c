@@ -22,6 +22,9 @@ int	main(void)
 	ft_lstpush(scene, new_sphere(point3(0, 0, -2.8), 1.5, color(0, 255, 0)));
 	ray_trace(image, camera, scene);
 	t_minirt	minirt;
+	minirt.size = galloc(sizeof(t_image));
+	minirt.size->height = HEIGHT;
+	minirt.size->width = WIDTH;
 	init_minirt_mlx(&minirt);
 	for (int i = 0; i < WIDTH; i++)
 	{
