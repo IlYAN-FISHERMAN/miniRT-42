@@ -5,23 +5,24 @@ int	secure_exit(void *data)
 	t_minirt	*minirt;
 
 	minirt = data;
-	if (minirt && minirt->win.mlx)
-		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
+	clear_memory(minirt);
 	cleargarbage();
-	exit(1);
+	exit(0);
 }
 
 void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->win.mlx)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
-	if (minirt->size)
+	if (minirt && minirt->win.mlx)
+		gfree(minirt->win.mlx);
+	if (minirt && minirt->size)
 		gfree(minirt->size);
-	if (minirt->amb)
+	if (minirt && minirt->amb)
 		gfree(minirt->amb);
-	if (minirt->cam)
+	if (minirt && minirt->cam)
 		gfree(minirt->cam);
-	if (minirt->scene)
+	if (minirt && minirt->scene)
 		ft_lstclear(&minirt->scene, &gfree);
 }
 
