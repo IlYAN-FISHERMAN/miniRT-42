@@ -86,6 +86,7 @@ FILES = ft_atoi \
 		garbage_collector \
 		garbage_utils \
 		ft_joint_all \
+		ft_equals \
 
 SECURED_FILES = $(FILES) garbage_galloc_secure
 UNSECURED_FILES = $(FILES) garbage_galloc

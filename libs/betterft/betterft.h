@@ -318,7 +318,17 @@ char		*ft_memtostr(void *mem, size_t size);
 //	array of strings.
 //	Each string in the array must have been allocated dynamically.
 int			ft_free_tab(char **tab);
-// Split all string of **str and return a char * joind by all the string.
+//	ft_joint_all: Concatenates all strings in the null-terminated array 'str'
+//	into a new dynamically allocated string.
+//	Returns the resulting string.
 char		*ft_joint_all(char **str);
+//	ft_equalsf: Compares two floating-point numbers 'a' and 'b' with a
+//	fixed epsilon value of 0.00001f.
+//	Returns true if the difference between 'a' and 'b' is less than the epsilon.
+bool		ft_equalsf(float a, float b);
+//	ft_equalsd: Compares two double-precision floating-point numbers 'a' and 'b'
+//	with a fixed epsilon value of 0.0000000001.
+//	Returns true if the difference between 'a' and 'b' is less than the epsilon.
+bool		ft_equalsd(double a, double b);
 
 #endif
