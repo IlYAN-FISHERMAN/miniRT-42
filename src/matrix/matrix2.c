@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-t_matrix2	m4subm(t_matrix3 m, int row, int col)
+t_matrix2	m2subm(t_matrix3 m, int row, int col)
 {
 	t_matrix2	res;
 	int			i[2];
