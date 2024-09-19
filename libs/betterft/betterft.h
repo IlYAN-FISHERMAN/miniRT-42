@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:19:26 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/08/28 16:18:13 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/09/19 17:23:27 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,5 +330,10 @@ bool		ft_equalsf(float a, float b);
 //	with a fixed epsilon value of 0.0000000001.
 //	Returns true if the difference between 'a' and 'b' is less than the epsilon.
 bool		ft_equalsd(double a, double b);
+//	ft_invsqrt: Returns the inverse square root of the number 'n'.
+float		ft_invsqrt(float n);
+//	ft_invsqrt_iter: Returns the inverse square root of the number 'n' after
+//	2 iterations is a good approximation.
+float		ft_invsqrt_iter(float n, int iter);
 
 #endif
