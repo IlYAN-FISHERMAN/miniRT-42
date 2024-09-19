@@ -1,7 +1,7 @@
 #include "camera.h"
 
 t_camera	*new_camera(t_point3 origin, t_vector3 target,
-	double fov, double aspect)
+	float fov, float aspect)
 {
 	t_camera	*camera;
 	t_vector3	upguide;

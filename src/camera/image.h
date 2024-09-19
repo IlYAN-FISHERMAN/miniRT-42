@@ -6,8 +6,8 @@
 
 typedef struct s_image
 {
-	double	width;
-	double	height;
+	float	width;
+	float	height;
 	int		**data;
 }	t_image;
 

@@ -9,14 +9,14 @@
 
 typedef struct s_amb
 {
-	double	light;
+	float	light;
 	t_color	rgb;
 }	t_amb;
 
 typedef struct s_light
 {
 	t_point3	pos;
-	double		bright;
+	float		bright;
 	t_color		rgb;
 }	t_light;
 

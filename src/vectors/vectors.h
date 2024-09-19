@@ -17,10 +17,10 @@
 
 typedef struct s_tuple4
 {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
+	float	x;
+	float	y;
+	float	z;
+	float	w;
 }	t_tuple4;
 
 typedef t_tuple4	t_vector3;
@@ -35,31 +35,31 @@ typedef t_tuple4	t_point2;
 //	@param u The u component
 //	@param v The v component
 //	@return A new 2D vector
-t_vector2	vector2(double u, double v);
+t_vector2	vector2(float u, float v);
 
 //	vector3: Create a new 3D vector
 //	@param x The x component
 //	@param y The y component
 //	@param z The z component
 //	@return A new 3D vector
-t_vector3	vector3(double x, double y, double z);
+t_vector3	vector3(float x, float y, float z);
 
 //	point3: Create a new 3D point
 //	@param x The x component
 //	@param y The y component
 //	@param z The z component
 //	@return A new 3D point
-t_point3	point3(double x, double y, double z);
+t_point3	point3(float x, float y, float z);
 
 //	vlength: Get the length (magnitude) of a vector
 //	@param v The vector
 //	@return The length of the vector
-double		vlength(t_vector3 v);
+float		vlength(t_vector3 v);
 
 //	vlength2: Get the squared length (magnitude) of a vector
 //	@param v The vector
 //	@return The squared length of the vector
-double		vlength2(t_vector3 v);
+float		vlength2(t_vector3 v);
 
 //	vadd: Add two tuples
 //	@param v The first tuple
@@ -77,13 +77,13 @@ t_tuple4	vsub(t_tuple4 v, t_tuple4 u);
 //	@param v The tuple
 //	@param scalar The scalar
 //	@return The product of the tuple and the scalar
-t_tuple4	vmul(t_tuple4 v, double scalar);
+t_tuple4	vmul(t_tuple4 v, float scalar);
 
 //	vdiv: Divide a tuple by a scalar
 //	@param v The tuple
 //	@param scalar The scalar
 //	@return The quotient of the tuple and the scalar
-t_tuple4	vdiv(t_tuple4 v, double scalar);
+t_tuple4	vdiv(t_tuple4 v, float scalar);
 
 //	vneg: Negate a tuple
 //	@param v The tuple
@@ -94,7 +94,7 @@ t_tuple4	vneg(t_tuple4 v);
 //	@param v The first vector
 //	@param u The second vector
 //	@return The dot product of the two vectors
-double		vdot(t_vector3 v, t_vector3 u);
+float		vdot(t_vector3 v, t_vector3 u);
 
 //	vcross: Get the cross product of two vectors
 //	@param v The first vector
