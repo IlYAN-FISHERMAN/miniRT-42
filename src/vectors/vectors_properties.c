@@ -7,24 +7,29 @@ float	vlength2(t_vector3 v)
 	return (v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-float	vlength(t_vector3 v)
-{
-	if (DEBUG && v.w == POINT)
-		printf("Warning: Getting the length of a point\n");
-	return (sqrt(vlength2(v)));
-}
-
 t_vector3	vnormalized(t_vector3 v)
 {
+	float	invlen;
+
 	if (DEBUG && v.w == POINT)
 		printf("Warning: Normalizing a point\n");
-	return (vdiv(v, vlength(v)));
+	invlen = ft_invsqrt_iter(vlength2(v), 2);
+	return ((t_vector3){
+		v.x * invlen,
+		v.y * invlen,
+		v.z * invlen,
+		VECTOR
+	});
 }
 
 t_vector3	*vnormalize(t_vector3 *v)
 {
+	float	invlen;
+
 	if (DEBUG && v->w == POINT)
 		printf("Warning: Normalizing a point\n");
-	*v = vdiv(*v, vlength(*v));
-	return (v);
+	invlen = ft_invsqrt(vlength2(*v));
+	v->x *= invlen;
+	v->y *= invlen;
+	v->z *= invlen;
 }
