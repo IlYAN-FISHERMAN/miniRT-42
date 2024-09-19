@@ -64,4 +64,24 @@ double		m2det(t_matrix2 m);
 //	@param col The column to remove
 //	@return The cofactor
 double		m3cofactor(t_matrix3 m, int row, int col);
+//	m3det: Get the determinant of a t_matrix3
+//	@param m The matrix
+//	@return The determinant
+double		m3det(t_matrix3 m);
+//	m4minor: Get the minor of a t_matrix4
+//	@param m The matrix
+//	@param row The row to remove
+//	@param col The column to remove
+//	@return The minor
+double		m4minor(t_matrix4 m, int row, int col);
+//	m4cofactor: Get the cofactor of a t_matrix4
+//	@param m The matrix
+//	@param row The row to remove
+//	@param col The column to remove
+double		m4cofactor(t_matrix4 m, int row, int col);
+//	m4det: Get the determinant of a t_matrix4
+//	@param m The matrix
+//	@return The determinant
+double		m4det(t_matrix4 m);
+
 #endif
