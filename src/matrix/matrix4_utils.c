@@ -40,3 +40,31 @@ t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t)
 			m.data[3][2] * t.z + m.data[3][3] * t.w
 	});
 }
+
+t_matrix4	*m4invert(t_matrix4 *m)
+{
+	float		det;
+	t_matrix4	m_buff;
+	int			i;
+	int			j;
+
+	det = m4det(*m);
+	if (!det)
+		return (0);
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+			m_buff.data[i][j] = m4cofactor(*m, i, j);
+	}
+	m_buff = m4transpose(m_buff);
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+			m->data[i][j] = m_buff.data[i][j] / det;
+	}
+	return m;
+}
