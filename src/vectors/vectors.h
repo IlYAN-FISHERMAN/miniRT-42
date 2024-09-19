@@ -51,11 +51,6 @@ t_vector3	vector3(float x, float y, float z);
 //	@return A new 3D point
 t_point3	point3(float x, float y, float z);
 
-//	vlength: Get the length (magnitude) of a vector
-//	@param v The vector
-//	@return The length of the vector
-float		vlength(t_vector3 v);
-
 //	vlength2: Get the squared length (magnitude) of a vector
 //	@param v The vector
 //	@return The squared length of the vector
