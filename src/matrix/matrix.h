@@ -78,14 +78,14 @@ float		m4minor(t_matrix4 m, int row, int col);
 //	@param m The matrix
 //	@param row The row to remove
 //	@param col The column to remove
-float		*m4cofactor(t_matrix4 m, int row, int col);
+float		m4cofactor(t_matrix4 m, int row, int col);
 //	m4det: Get the determinant of a t_matrix4
 //	@param m The matrix
 //	@return The determinant
 float		m4det(t_matrix4 m);
-//	m4invert: Get the inverse of a t_matrix4
+//	m4invert: Invert the given matrix
 //	@param m The matrix
-//	@return The inverted matrix
-t_matrix4	m4invert(t_matrix4 *m);
+//	@return The given matrix
+t_matrix4	*m4invert(t_matrix4 *m);
 
 #endif
