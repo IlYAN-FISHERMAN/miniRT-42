@@ -65,33 +65,3 @@ float	m4det(t_matrix4 m)
 		res += m.data[0][i] * m4cofactor(m, 0, i);
 	return (res);
 }
-
-/*
-//	implement m4invert
-
-int	main(void) {
-	t_matrix4 m4 = {
-		.data = {
-			{ -5, 2, 6, -8 },
-			{ 1, -5, 1, 8 },
-			{ 7, 7, -6, -7 },
-			{ 1, -3, 7, 4 },
-		}
-	};
-	t_matrix4 m4_2 = m4;
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			printf("%f	", m4.data[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-	m4invert(&m4_2);
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			printf("%f	", m4_2.data[i][j]);
-		}
-		printf("\n");
-	}
-}*/

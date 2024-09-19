@@ -66,5 +66,5 @@ t_matrix4	*m4invert(t_matrix4 *m)
 		while (++j < 4)
 			m->data[i][j] = m_buff.data[i][j] / det;
 	}
-	return m;
+	return (m);
 }
