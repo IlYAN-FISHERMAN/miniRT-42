@@ -5,17 +5,17 @@
 
 typedef struct s_matrix4
 {
-	double	data[4][4];
+	float	data[4][4];
 }	t_matrix4;
 
 typedef struct s_matrix3
 {
-	double	data[3][3];
+	float	data[3][3];
 }	t_matrix3;
 
 typedef struct s_matrix2
 {
-	double	data[2][2];
+	float	data[2][2];
 }	t_matrix2;
 
 // m4mul: Multiply two matrices
@@ -25,9 +25,9 @@ typedef struct s_matrix2
 t_matrix4	m4mul(t_matrix4 m, t_matrix4 n);
 //  m4mulv: Multiply a matrix by a vector
 //  @param m The matrix
-//  @param v The vector
-//  @return The multiplied vector
-t_vector3	vm4mul(t_matrix4 m, t_vector3 v);
+//  @param v The tuple
+//  @return The multiplied tuple
+t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t);
 //  m4identity: Get the identity matrix of a given matrix
 //  @param m The matrix
 //  @return The identity matrix
@@ -53,15 +53,35 @@ t_matrix2	m2subm(t_matrix3 m, int row, int col);
 //  @param row The row to remove
 //  @param col The column to remove
 //  @return The minor
-double		m3minor(t_matrix3 m, int row, int col);
+float		m3minor(t_matrix3 m, int row, int col);
 //	m2det: Get the determinant of a t_matrix2
 //	@param m The matrix
 //	@return The determinant
-double		m2det(t_matrix2 m);
+float		m2det(t_matrix2 m);
 //	m3cofactor: Get the cofactor of a t_matrix3
 //	@param m The matrix
 //	@param row The row to remove
 //	@param col The column to remove
 //	@return The cofactor
-double		m3cofactor(t_matrix3 m, int row, int col);
+float		m3cofactor(t_matrix3 m, int row, int col);
+//	m3det: Get the determinant of a t_matrix3
+//	@param m The matrix
+//	@return The determinant
+float		m3det(t_matrix3 m);
+//	m4minor: Get the minor of a t_matrix4
+//	@param m The matrix
+//	@param row The row to remove
+//	@param col The column to remove
+//	@return The minor
+float		m4minor(t_matrix4 m, int row, int col);
+//	m4cofactor: Get the cofactor of a t_matrix4
+//	@param m The matrix
+//	@param row The row to remove
+//	@param col The column to remove
+float		m4cofactor(t_matrix4 m, int row, int col);
+//	m4det: Get the determinant of a t_matrix4
+//	@param m The matrix
+//	@return The determinant
+float		m4det(t_matrix4 m);
+
 #endif

@@ -31,7 +31,7 @@ t_color	color(t_byte r, t_byte g, t_byte b);
 // byte_clamp: Clamp a value between a byte range
 // @param value The value to clamp
 // @return The clamped value in t_byte format
-t_byte	byte_clamp(double value);
+t_byte	byte_clamp(float value);
 
 // color_hex: Convert a t_color to a hexadecimal value
 // @param c The color to convert
@@ -54,13 +54,13 @@ t_color	color_mult(t_color c, t_color d);
 // @param c The color
 // @param scalar The scalar
 // @return The product of the color and the scalar
-t_color	color_scalar(t_color c, double scalar);
+t_color	color_scalar(t_color c, float scalar);
 
 // apply_gamma: Apply gamma correction to a color
 // @param c The color to apply gamma to
 // @param gamma The gamma value
 // @param exposure The exposure value
 // @return The color with gamma applied
-t_color	apply_gamma(t_color c, double gamma, double exposure);
+t_color	apply_gamma(t_color c, float gamma, float exposure);
 
 #endif

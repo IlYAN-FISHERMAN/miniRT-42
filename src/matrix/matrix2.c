@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-t_matrix2	m4subm(t_matrix3 m, int row, int col)
+t_matrix2	m2subm(t_matrix3 m, int row, int col)
 {
 	t_matrix2	res;
 	int			i[2];
@@ -24,7 +24,7 @@ t_matrix2	m4subm(t_matrix3 m, int row, int col)
 	return (res);
 }
 
-double	m2det(t_matrix2 m)
+float	m2det(t_matrix2 m)
 {
 	return (m.data[0][0] * m.data[1][1] - m.data[0][1] * m.data[1][0]);
 }

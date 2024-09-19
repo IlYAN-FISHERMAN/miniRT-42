@@ -10,9 +10,9 @@ typedef struct s_camera
 	t_vector3		forward;
 	t_vector3		up;
 	t_vector3		right;
-	double			h;
-	double			w;
-	double			fov;
+	float			h;
+	float			w;
+	float			fov;
 }	t_camera;
 
 //	new_camera: Create a new camera, note that fov is not set by default
@@ -23,7 +23,7 @@ typedef struct s_camera
 //  @param aspect The aspect ratio of the camera
 //  @return A new camera
 t_camera	*new_camera(t_point3 origin, t_vector3 target,
-				double fov, double aspect);
+				float fov, float aspect);
 
 //	make_ray: Create a ray from the camera to a point on the screen
 //  @param camera The camera to create the ray from

@@ -1,45 +1,5 @@
 #include "matrix.h"
 
-t_matrix4	m4mul(t_matrix4 m, t_matrix4 n)
-{
-	t_matrix4	res;
-	int			i;
-	int			j;
-	int			k;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			res.data[i][j] = 0;
-			k = 0;
-			while (k < 4)
-			{
-				res.data[i][j] += m.data[i][k] * n.data[k][j];
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
-
-t_vector3	vm4mul(t_matrix4 m, t_vector3 v)
-{
-	t_vector3	res;
-
-	res.x = m.data[0][0] * v.x + m.data[0][1]
-		* v.y + m.data[0][2] * v.z + m.data[0][3];
-	res.y = m.data[1][0] * v.x + m.data[1][1]
-		* v.y + m.data[1][2] * v.z + m.data[1][3];
-	res.z = m.data[2][0] * v.x + m.data[2][1]
-		* v.y + m.data[2][2] * v.z + m.data[2][3];
-	return (res);
-}
-
 t_matrix4	m4identity(t_matrix4 m)
 {
 	int	i;
@@ -79,5 +39,29 @@ t_matrix4	m4transpose(t_matrix4 m)
 		}
 		i++;
 	}
+	return (res);
+}
+
+float	m4minor(t_matrix4 m, int row, int col)
+{
+	return (m3det(m3subm(m, row, col)));
+}
+
+float	m4cofactor(t_matrix4 m, int row, int col)
+{
+	if ((row + col) % 2)
+		return (-m4minor(m, row, col));
+	return (m4minor(m, row, col));
+}
+
+float	m4det(t_matrix4 m)
+{
+	float	res;
+	int		i;
+
+	res = 0;
+	i = -1;
+	while (++i < 4)
+		res += m.data[0][i] * m4cofactor(m, 0, i);
 	return (res);
 }

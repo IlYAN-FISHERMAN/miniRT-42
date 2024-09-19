@@ -14,14 +14,14 @@ t_color	color_mult(t_color c, t_color d)
 			byte_clamp((int)c.b * (int)d.b)));
 }
 
-t_color	color_scalar(t_color c, double scalar)
+t_color	color_scalar(t_color c, float scalar)
 {
 	return (color(byte_clamp((int)c.r * scalar),
 			byte_clamp((int)c.g * scalar),
 			byte_clamp((int)c.b * scalar)));
 }
 
-t_color	apply_gamma(t_color c, double gamma, double exposure)
+t_color	apply_gamma(t_color c, float gamma, float exposure)
 {
 	return (color(byte_clamp(pow((int)c.r * exposure, gamma)),
 			byte_clamp(pow((int)c.g * exposure, gamma)),
