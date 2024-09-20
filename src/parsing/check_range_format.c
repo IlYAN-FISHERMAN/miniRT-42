@@ -2,9 +2,9 @@
 
 void	check_xyz_range(char **context, char *str, t_minirt *minirt)
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 
 	if (!ft_atof_xyz(&x, &y, &z, ft_split(str, ',')))
 		crash_exit(minirt,
@@ -17,9 +17,9 @@ void	check_xyz_range(char **context, char *str, t_minirt *minirt)
 
 void	check_vector_range(char **context, char *str, t_minirt *minirt)
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 
 	if (!ft_atof_xyz(&x, &y, &z, ft_split(str, ',')))
 		crash_exit(minirt,

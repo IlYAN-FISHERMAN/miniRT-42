@@ -25,12 +25,14 @@ int	check_standare_shape(t_minirt *minirt)
 	return (1);
 }
 
-void	check_error(int ac, char **av)
+void	check_error(int ac, char **av, t_minirt *minirt)
 {
-	if (ac <= 1 && printf("miniRT: Need <*.rt> file\n"))
-		secure_exit(NULL);
-	if ((!ft_strchr(av[1], '.') \
-		|| ft_strncmp(ft_strchr(av[1], '.'), ".rt", 4))
-		&& printf("miniRT: bad format file, only .rt file accepted\n"))
-		exit(EXIT_FAILURE);
+	if (ac != 2)
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, \
+			"Need *.rt file");
+	if (!ft_strchr(av[1], '.') || ft_strncmp(ft_strchr(av[1], '.'), ".rt", 4))
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, \
+			"Need *.rt file");
 }
