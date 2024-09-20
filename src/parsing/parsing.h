@@ -20,11 +20,11 @@ int			correct_dl(char *gnl);
 //	get a new_image with default size.
 void		get_size_default(t_minirt **minirt);
 //	check basic error for parsing
-void		check_error(int ac, char **av);
+void		check_error(int ac, char **av, t_minirt *minirt);
 //	return a conver float of the string av
-double		ft_atof(char *str);
+float		ft_atof(char *str);
 //	do a ft_atof of x, y and z float. with a splited str gonna be free
-int			ft_atof_xyz(double *x, double *y, double *z, char **str);
+int			ft_atof_xyz(float *x, float *y, float *z, char **str);
 //	do a ft_atoi of x, y and z int. with a splited str gonna be free
 int			ft_atoi_xyz(int *x, int *y, int *z, char **str);
 //	check the format string of ambiance

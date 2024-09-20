@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm -Ofast
+CFLAGS = -Wall -Wextra -Werror -lm
 
 OS =
 
