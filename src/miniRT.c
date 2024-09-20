@@ -24,7 +24,7 @@ void	*init_minirt_mlx(t_minirt *minirt)
 
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 {
-	check_error(argc, argv);
+	check_error(argc, argv, minirt);
 	pars_map(argv, &minirt);
 	if (DEBUG)
 		print_token(minirt, minirt->scene);

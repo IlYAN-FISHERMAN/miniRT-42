@@ -6,9 +6,9 @@ void	pars_map(char **av, t_minirt **minirt)
 	char	*gnl;
 
 	(*minirt)->fd = open(av[1], O_RDONLY);
-	if ((*minirt)->fd == -1
-		&& printf("miniRT: %s: No such file or directory", av[1]))
-		secure_exit(*minirt);
+	if ((*minirt)->fd == -1)
+		crash_exit(*minirt, \
+			(char *[]){"miniRT", av[1], NULL}, "No such file or directory");
 	while (true)
 	{
 		gnl = ft_get_next_line((*minirt)->fd);
