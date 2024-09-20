@@ -50,12 +50,26 @@ float	m4cofactor(t_matrix4 m, int row, int col)
 
 float	m4det(t_matrix4 m)
 {
-	float	res;
-	int		i;
-
-	res = 0;
-	i = -1;
-	while (++i < 4)
-		res += m.data[0][i] * m4cofactor(m, 0, i);
-	return (res);
+	return (
+		m.data[0][0] * (m.data[1][1] * (m.data[2][2] * m.data[3][3] -
+			m.data[2][3] * m.data[3][2]) - m.data[1][2] * (m.data[2][1] *
+			m.data[3][3] - m.data[2][3] * m.data[3][1]) + m.data[1][3] *
+			(m.data[2][1] * m.data[3][2] - m.data[2][2] * m.data[3][1])
+		) -
+		m.data[0][1] * (m.data[1][0] * (m.data[2][2] * m.data[3][3] -
+			m.data[2][3] * m.data[3][2]) - m.data[1][2] * (m.data[2][0] *
+			m.data[3][3] - m.data[2][3] * m.data[3][0]) + m.data[1][3] *
+			(m.data[2][0] * m.data[3][2] - m.data[2][2] * m.data[3][0])
+		) +
+		m.data[0][2] * (m.data[1][0] * (m.data[2][1] * m.data[3][3] -
+			m.data[2][3] * m.data[3][1]) - m.data[1][1] * (m.data[2][0] *
+			m.data[3][3] - m.data[2][3] * m.data[3][0]) + m.data[1][3] *
+			(m.data[2][0] * m.data[3][1] - m.data[2][1] * m.data[3][0])
+		) -
+		m.data[0][3] * (m.data[1][0] * (m.data[2][1] * m.data[3][2] -
+			m.data[2][2] * m.data[3][1]) - m.data[1][1] * (m.data[2][0] *
+			m.data[3][2] - m.data[2][2] * m.data[3][0]) + m.data[1][2] *
+			(m.data[2][0] * m.data[3][1] - m.data[2][1] * m.data[3][0])
+		)
+	);
 }
