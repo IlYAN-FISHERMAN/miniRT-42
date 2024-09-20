@@ -32,4 +32,5 @@ t_vector3	*vnormalize(t_vector3 *v)
 	v->x *= invlen;
 	v->y *= invlen;
 	v->z *= invlen;
+	return (v);
 }

@@ -83,5 +83,9 @@ float		m4cofactor(t_matrix4 m, int row, int col);
 //	@param m The matrix
 //	@return The determinant
 float		m4det(t_matrix4 m);
+//	m4invert: Invert the given matrix
+//	@param m The matrix
+//	@return The given matrix
+t_matrix4	*m4invert(t_matrix4 *m);
 
 #endif

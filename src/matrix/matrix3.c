@@ -38,45 +38,12 @@ float	m3cofactor(t_matrix3 m, int row, int col)
 
 float	m3det(t_matrix3 m)
 {
-	float	res;
-	int		i;
-
-	res = 0;
-	i = -1;
-	while (++i < 3)
-		res += m.data[0][i] * m3cofactor(m, 0, i);
-	return (res);
+	return (
+		m.data[0][0] *
+		(m.data[1][1] * m.data[2][2] - m.data[1][2] * m.data[2][1]) -
+		m.data[0][1] *
+		(m.data[1][0] * m.data[2][2] - m.data[1][2] * m.data[2][0]) +
+		m.data[0][2] *
+		(m.data[1][0] * m.data[2][1] - m.data[1][1] * m.data[2][0])
+	);
 }
-
-/*
-// Computing Cofactors
-
-int	main() {
-	t_matrix3	m3 = {
-		.data = {
-			{ 1, 2, 6 },
-			{ -5, 8, -4 },
-			{ 2, 6, 4 }
-		}
-	};
-
-	printf("cofactor [0;0]: %f\n", m3cofactor(m3, 0, 0));
-	printf("cofactor [0;1]: %f\n", m3cofactor(m3, 0, 1));
-	printf("cofactor [0;2]: %f\n", m3cofactor(m3, 0, 2));
-	printf("det: %f\n", m3det(m3));
-
-	t_matrix4	m4 = {
-		.data = {
-			{ -2, -8, 3, 5 },
-			{ -3, 1, 7, 3 },
-			{ 1, 2, -9, 6 },
-			{ -6, 7, 7, -9 }
-		}
-	};
-
-	printf("cofactor [0;0]: %f\n", m4cofactor(m4, 0, 0));
-	printf("cofactor [0;1]: %f\n", m4cofactor(m4, 0, 1));
-	printf("cofactor [0;2]: %f\n", m4cofactor(m4, 0, 2));
-	printf("cofactor [0;3]: %f\n", m4cofactor(m4, 0, 3));
-	printf("det: %f\n", m4det(m4));
-}*/
