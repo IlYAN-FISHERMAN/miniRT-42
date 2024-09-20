@@ -7,22 +7,17 @@ t_matrix4	m4mul(t_matrix4 m, t_matrix4 n)
 	int			j;
 	int			k;
 
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (++i < 4)
 	{
-		j = 0;
-		while (j < 4)
+		j = -1;
+		while (++j < 4)
 		{
 			res.data[i][j] = 0;
-			k = 0;
-			while (k < 4)
-			{
+			k = -1;
+			while (++k < 4)
 				res.data[i][j] += m.data[i][k] * n.data[k][j];
-				k++;
-			}
-			j++;
 		}
-		i++;
 	}
 	return (res);
 }
