@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:19:26 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 18:34:55 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:11:49 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,5 @@
 # include "ft_print.h"
 # include "ft_garbage_collector.h"
 # include "colors.h"
-
-# ifndef PATH_MAX
-#  define PATH_MAX 4096
-# endif
-
 
 #endif
