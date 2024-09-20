@@ -4,93 +4,47 @@ CFLAGS = -D GARBAGE_COLLECTOR=0
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror
 
-FILES = ft_atoi \
-		ft_atoi_base \
-		ft_bzero \
-		ft_calloc \
-		ft_isalnum \
-		ft_isalpha \
-		ft_isascii \
-		ft_isdigit \
-		ft_isprint \
-		ft_isspace \
-		ft_itoa \
-		ft_memchr \
-		ft_memcmp \
-		ft_memcpy \
-		ft_memmove \
-		ft_memset \
-		ft_printf_utils \
-		ft_printf \
-		ft_putchar_fd \
-		ft_putendl_fd \
-		ft_putnbr_base \
-		ft_putnbr_fd \
-		ft_putstr_fd \
-		ft_split \
-		ft_strchr \
-		ft_strcmp \
-		ft_strdup \
-		ft_striteri \
-		ft_strjoin \
-		ft_strsepjoin \
-		ft_strsjoin \
-		ft_strlcat \
-		ft_strlcpy \
-		ft_strlen \
-		ft_strmapi \
-		ft_strncmp \
-		ft_strnstr \
-		ft_strncat \
-		ft_strrchr \
-		ft_strreplace \
-		ft_strreplace_first \
-		ft_strstr \
-		ft_strtrim \
-		ft_substr \
-		ft_tablen \
-		ft_tolower \
-		ft_toupper \
-		ft_lstadd \
-		ft_lstaddr \
-		ft_lstadd_back \
-		ft_lstadd_front \
-		ft_lstclear \
-		ft_lstdelone \
-		ft_lstget \
-		ft_lstgetid \
-		ft_lstiter \
-		ft_lstlast \
-		ft_lstmap \
-		ft_lstnew \
-		ft_lstpop \
-		ft_lstpush \
-		ft_lstrevrotate \
-		ft_lstrotate \
-		ft_lstsize \
-		ft_lstswap \
-		ft_itoa_base_un \
-		ft_itoa_base \
-		ft_itoa_un \
-		ft_reallocf \
-		ft_get_next_line \
-		ft_memncat \
-		ft_memsuperclear \
-		ft_memtostr \
-		ft_max \
-		ft_min \
-		ft_tabadd \
-		ft_tabjoin \
-		ft_absol \
-		ft_free_tab \
-		garbage_collector \
-		garbage_utils \
-		ft_joint_all \
-		ft_equals \
-		ft_invsqrt \
+FILES =	garbage_collector/ft_garbage_collector \
+		garbage_collector/ft_garbage_utils \
+		get_next_line/ft_get_next_line \
+		linked_list/ft_lstadd \
+		linked_list/ft_lstclear \
+		linked_list/ft_lstgetters \
+		linked_list/ft_lstiter \
+		linked_list/ft_lstrotate \
+		math/ft_equals \
+		math/ft_invsqrt \
+		math/ft_minmaxabs \
+		memory/ft_calloc \
+		memory/ft_memcmp \
+		memory/ft_memcpy \
+		memory/ft_memset \
+		memory/ft_memsuperclear \
+		memory/ft_reallocf \
+		print/ft_print_utils \
+		print/ft_print \
+		print/ft_printf_utils \
+		print/ft_printf \
+		string/ft_atoi \
+		string/ft_charis \
+		string/ft_free_tab \
+		string/ft_itoa \
+		string/ft_split \
+		string/ft_strchr \
+		string/ft_strcmp \
+		string/ft_strdup \
+		string/ft_striteri \
+		string/ft_strjoin \
+		string/ft_strlcpy \
+		string/ft_strlen \
+		string/ft_strreplace \
+		string/ft_strsepjoin \
+		string/ft_substr \
+		string/ft_tab \
+		string/ft_touplo \
 
-SECURED_FILES = $(FILES) garbage_galloc_secure
-UNSECURED_FILES = $(FILES) garbage_galloc
+SECURED_FILES = $(FILES) garbage_collector/ft_garbage_galloc_secure
+UNSECURED_FILES = $(FILES) garbage_collector/ft_garbage_galloc
 
 CFILES = $(UNSECURED_FILES:%=src/%.c)
 OFILES = $(UNSECURED_FILES:%=obj/%.o)
@@ -102,13 +56,11 @@ NAME = betterft.a
 
 all: $(NAME)
 
-obj/%.o: src/%.c obj
+obj/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	@printf "\t🤖 Compiling $<...\r"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I includes
 	@printf "\33[2K"
-
-obj:
-	@mkdir -p obj
 
 $(NAME): $(CFILES) $(OFILES)
 	@printf "\t🤖 Compiling $(NAME)...\r"
