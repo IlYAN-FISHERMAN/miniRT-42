@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rt_generate.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:52:13 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/09/07 14:49:16 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/09/20 18:42:16 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_GENERATE_H
 # define RT_GENERATE_H
 
-# include "../../libs/betterft/betterft.h"
+# include "betterft.h"
 # include <time.h>
 # include <sys/fcntl.h>
 # include <math.h>

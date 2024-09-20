@@ -1,7 +1,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../libs/betterft/betterft.h"
+# include "betterft.h"
 # include "camera/camera.h"
 # include "camera/image.h"
 # include "objects/objects.h"

@@ -2,7 +2,7 @@
 # define EXIT_HANDLER_H
 
 # include "../miniRT.h"
-# include "../../libs/betterft/betterft.h"
+# include "betterft.h"
 
 //	secure_exit: Securely exit the program
 int		secure_exit(void *data);

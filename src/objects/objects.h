@@ -1,7 +1,7 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# include "../../libs/betterft/betterft.h"
+# include "betterft.h"
 # include "../vectors/vectors.h"
 # include "../rays/intersect.h"
 # include "../color/color.h"

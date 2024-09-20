@@ -1,7 +1,7 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
-# include "../../libs/betterft/betterft.h"
+# include "betterft.h"
 # include "math.h"
 
 # ifndef M_PI

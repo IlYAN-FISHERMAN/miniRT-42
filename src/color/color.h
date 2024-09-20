@@ -1,7 +1,7 @@
 #ifndef COLOR_H
 # define COLOR_H
 
-# include "../../libs/betterft/betterft.h"
+# include "betterft.h"
 
 // Defines
 
