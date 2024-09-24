@@ -150,11 +150,11 @@ debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@printf "\33[2K"
 
 $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) -I libs/betterft/includes/
 	@echo " \t$(NAME) compiled ✅"
 
 bonus : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME)
+	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME) -I libs/betterft/includes/
 	@echo " \t$(NAME) compiled with bonus ✅"
 
 
