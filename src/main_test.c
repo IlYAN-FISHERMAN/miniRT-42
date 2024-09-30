@@ -1,6 +1,6 @@
 #include "camera/image.h"
 #include "miniRT.h"
-
+/*
 int	main(void)
 {
 	t_image		*image;
@@ -39,5 +39,29 @@ int	main(void)
 	gfree(image);
 	gfree(camera);
 	ft_lstclear(&scene, gfree);
+	return (0);
+}
+*/
+
+int	main(void)
+{
+	t_sphere	*sphere;
+	t_ray		r;
+	int 		xs;
+	t_point3 	p;
+
+	sphere = new_raw_sphere(point3(0, 0, 0), 1, color(255, 255, 255));
+	r = ray(point3(0, 0, -5), vector3(0, 0, 1));
+	xs = 0;
+	for (float i = RAY_T_MIN; i < 10 && xs < 2; i += EPSILONF)
+	{
+		p = ray_at(r, i);
+		printf("Point: %f %f %f\n", p.x, p.y, p.z);
+		if (ft_equalsf(p.z, sphere->origin.z - sphere->radius) || ft_equalsf(p.z, sphere->origin.z + sphere->radius))
+		{
+			xs++;
+			printf("Intersection %d: %f\n", xs, i);
+		}
+	}
 	return (0);
 }
