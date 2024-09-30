@@ -44,7 +44,7 @@ t_matrix4	*m4invert(t_matrix4 *m)
 	int			j;
 
 	det = m4det(*m);
-	if (!det)
+	if (ft_equalsf(det, 0))
 		return (0);
 	i = -1;
 	while (++i < 4)
