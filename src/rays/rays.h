@@ -13,7 +13,7 @@ typedef struct s_ray
 {
 	t_point3		origin;
 	t_vector3		direction;
-	float			t;
+	float			t;	// to remove once the rework is done
 }	t_ray;
 
 //	ray: Create a new stack-allocated ray

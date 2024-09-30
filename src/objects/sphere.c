@@ -7,9 +7,11 @@ t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
 	sphere = galloc(sizeof(t_sphere));
 	if (!sphere)
 		return (0);
-	sphere->origin = origin;
-	sphere->radius = radius;
-	sphere->color = color;
+	(*sphere) = (t_sphere){
+		.origin = origin,
+		.radius = radius,
+		.color = color
+	};
 	return (sphere);
 }
 
@@ -24,10 +26,12 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
-	object->type = o_sphere;
-	object->data = sphere;
-	object->intersect = intersect_sphere;
-	object->does_intersect = does_intersect_sphere;
+	(*object) = (t_object){
+		.type = o_sphere,
+		.data = sphere,
+		.intersect = intersect_sphere,
+		.does_intersect = does_intersect_sphere
+	};
 	return (object);
 }
 
