@@ -38,6 +38,11 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)matrix/matrix2 \
+		$(FILES_PATH)matrix/matrix3 \
+		$(FILES_PATH)matrix/matrix4_utils \
+		$(FILES_PATH)matrix/matrix4 \
+		$(FILES_PATH)matrix/transformations \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
@@ -76,6 +81,11 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)matrix/matrix2 \
+		$(FILES_PATH)matrix/matrix3 \
+		$(FILES_PATH)matrix/matrix4_utils \
+		$(FILES_PATH)matrix/matrix4 \
+		$(FILES_PATH)matrix/transformations \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \

@@ -104,5 +104,22 @@ float		m4det(t_matrix4 m);
 //	@param m The matrix
 //	@return The given matrix
 t_matrix4	*m4invert(t_matrix4 *m);
+//	m4translation: Get the translation matrix of a tuple
+//	@param t The tuple containing the translation values
+//	@return The translation matrix
+t_matrix4	m4translation(t_tuple4 t);
+//	m4scaling: Get the scaling matrix of a tuple
+//	@param t The tuple containing the scaling values
+//	@return The scaling matrix
+t_matrix4	m4scaling(t_tuple4 t);
+//	m4rotating: Get the rotation matrix of a given angle and axis
+//	@param radian The angle in radian
+//	@param axis The axis to rotate
+//	@return The rotation matrix
+t_matrix4	m4rotating(float radian, t_axis axis);
+//	m4shearing: Get the shearing matrix of a t_shearing
+//	@param sh The shearing values
+//	@return The shearing matrix
+t_matrix4	m4shearing(t_shearing sh);
 
 #endif
