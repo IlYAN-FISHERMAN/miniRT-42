@@ -18,6 +18,23 @@ typedef struct s_matrix2
 	float	data[2][2];
 }	t_matrix2;
 
+typedef enum e_axis
+{
+	X_AXIS = 0,
+	Y_AXIS = 1,
+	Z_AXIS = 2
+}	t_axis;
+
+typedef struct s_shearing
+{
+	float	xy;
+	float	xz;
+	float	yx;
+	float	yz;
+	float	zx;
+	float	zy;
+}	t_shearing;
+
 // m4mul: Multiply two matrices
 // @param m The first matrix
 // @param n The second matrix
