@@ -43,25 +43,32 @@ int	main(void)
 }
 */
 
+t_intersections	intersect2(t_sphere *sphere, t_ray ray)
+{
+	t_intersections	inters;
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+
+	a = vdot(ray.direction, ray.direction);
+	b = 2 * (vdot(ray.direction, ray.origin));
+	c = vdot(ray.origin, ray.origin) - 1;
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (inters);
+	float	t1;
+	float	t2;
+	t1 = (-b - sqrtf(d)) / (2 * a);
+	t2 = ()
+	return (inters);
+	
+}
+
 int	main(void)
 {
-	t_sphere	*sphere;
-	t_ray		r;
-	int 		xs;
-	t_point3 	p;
+	t_vector3	v;
 
-	sphere = new_raw_sphere(point3(0, 0, 0), 1, color(255, 255, 255));
-	r = ray(point3(0, 0, -5), vector3(0, 0, 1));
-	xs = 0;
-	for (float i = RAY_T_MIN; i < 10 && xs < 2; i += EPSILONF)
-	{
-		p = ray_at(r, i);
-		printf("Point: %f %f %f\n", p.x, p.y, p.z);
-		if (ft_equalsf(p.z, sphere->origin.z - sphere->radius) || ft_equalsf(p.z, sphere->origin.z + sphere->radius))
-		{
-			xs++;
-			printf("Intersection %d: %f\n", xs, i);
-		}
-	}
-	return (0);
+	v = (t_vector3){3, 1, 39, 0};
+	printf("%f\n%f", vdot(v, v), vlength2(v));
 }

@@ -41,8 +41,7 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 //	@param a The a value of the quadratic equation
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
-//	@return true if the intersection was found, false otherwise
-static bool	find_intersection(t_intersect *inter, float a, float b, float c)
+static void	find_intersection(t_intersections *inters, float a, float b, float c)
 {
 	float	discriminant;
 	float	t1;
@@ -50,37 +49,35 @@ static bool	find_intersection(t_intersect *inter, float a, float b, float c)
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
-		return (false);
-	t1 = (-b - sqrt(discriminant)) / (2 * a);
-	t2 = (-b + sqrt(discriminant)) / (2 * a);
-	if (t1 > RAY_T_MIN && t1 < inter->t)
-		inter->t = t1;
-	else if (t2 > RAY_T_MIN && t2 < inter->t)
-		inter->t = t2;
-	else
-		return (false);
-	return (true);
+		return ;
+	t1 = (-b - sqrtf(discriminant)) / (2 * a);
+	t2 = (-b + sqrtf(discriminant)) / (2 * a);
+	if (t1 > RAY_T_MIN && t1 < RAY_T_MAX)
+	{
+		// may need to just return t1 and t2, check performances
+		inters->xs[0] = t1;
+		inters->xs[1] = t2;
+		inters->count = 2;
+	}
 }
 
-bool	intersect_sphere(t_intersect *intersect, t_object *object)
-{
-	t_sphere	*sphere;
-	t_ray		local_ray;
-	float		a;
-	float		b;
-	float		c;
 
+
+t_intersections	intersect_sphere(t_object *object, t_ray ray)
+{
+	t_intersections	inters;
+	t_sphere		*sphere;
+	float			a;
+	float			b;
+	float			c;
+
+	ft_bzero(&inters, sizeof(t_intersections));
 	sphere = (t_sphere *)object->data;
-	local_ray = intersect->ray;
-	local_ray.origin = vsub(intersect->ray.origin, sphere->origin);
-	a = vlength2(intersect->ray.direction);
-	b = 2.0f * vdot(local_ray.direction, local_ray.origin);
-	c = vlength2(local_ray.origin) - (sphere->radius * sphere->radius);
-	if (!find_intersection(intersect, a, b, c))
-		return (false);
-	intersect->object = object;
-	intersect->color = sphere->color;
-	return (true);
+	a = vdot(ray.direction, ray.direction);
+	b = 2 * (vdot(ray.direction, ray.origin));
+	c = vdot(ray.origin, ray.origin) - 1;
+	find_intersection(&inters, a, b, c);
+	return (inters);
 }
 
 bool	does_intersect_sphere(t_ray ray, t_object *object)
@@ -99,11 +96,11 @@ bool	does_intersect_sphere(t_ray ray, t_object *object)
 	c = vlength2(local_ray.origin) - (sphere->radius * sphere->radius);
 	if (b * b - 4 * a * c < 0.0f)
 		return (false);
-	if ((-b - sqrt(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
-		&& (-b - sqrt(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
+	if ((-b - sqrtf(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
+		&& (-b - sqrtf(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
 		return (true);
-	if ((-b + sqrt(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
-		&& (-b + sqrt(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
+	if ((-b + sqrtf(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
+		&& (-b + sqrtf(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
 		return (true);
 	return (false);
 }

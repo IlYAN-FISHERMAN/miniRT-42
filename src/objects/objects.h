@@ -8,8 +8,8 @@
 
 typedef struct s_intersections
 {
-	int			count;
-	t_intersect data[10];
+	int		count;
+	float	xs[2];
 }	t_intersections;
 
 //	t_objects_type: The type of object
