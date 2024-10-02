@@ -42,4 +42,4 @@ To execute the raytracer, use the following command:
 - Support for multiple primitives (spheres, planes, etc.)
 - Management of light sources
 - Basic shadows and reflections
-- Configurable camera
+- Configurable camera 
