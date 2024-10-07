@@ -28,7 +28,7 @@ t_vector3	*vnormalize(t_vector3 *v)
 
 	if (DEBUG && v->w == POINT)
 		printf("Warning: Normalizing a point\n");
-	invlen = ft_invsqrtf(vlength2(*v));
+	invlen = ft_invsqrt(vlength2(*v));
 	v->x *= invlen;
 	v->y *= invlen;
 	v->z *= invlen;

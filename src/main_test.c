@@ -43,32 +43,15 @@ int	main(void)
 }
 */
 
-t_intersections	intersect2(t_sphere *sphere, t_ray ray)
-{
-	t_intersections	inters;
-	float	a;
-	float	b;
-	float	c;
-	float	d;
-
-	a = vdot(ray.direction, ray.direction);
-	b = 2 * (vdot(ray.direction, ray.origin));
-	c = vdot(ray.origin, ray.origin) - 1;
-	d = b * b - 4 * a * c;
-	if (d < 0)
-		return (inters);
-	float	t1;
-	float	t2;
-	t1 = (-b - sqrtf(d)) / (2 * a);
-	t2 = ()
-	return (inters);
-	
-}
-
 int	main(void)
 {
-	t_vector3	v;
+	t_ray		r;
+	t_ray		r2;
+	t_matrix4	m;
 
-	v = (t_vector3){3, 1, 39, 0};
-	printf("%f\n%f", vdot(v, v), vlength2(v));
+	r = ray(point3(1, 2, 3), vector3(0, 1, 0));
+	m = m4scaling(vector3(2, 3, 4));
+	r2 = transform(r, m);
+	printf("r2.origin: %f %f %f\n", r2.origin.x, r2.origin.y, r2.origin.z);
+	printf("r2.direction: %f %f %f\n", r2.direction.x, r2.direction.y, r2.direction.z);
 }

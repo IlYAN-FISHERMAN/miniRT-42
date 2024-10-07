@@ -26,7 +26,7 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 		return (0);
 	object->type = o_plane;
 	object->data = plane;
-	object->intersect = intersect_plane;
+	object->intersect = 0; // need to refactor intersect_plane
 	object->does_intersect = does_intersect_plane;
 	return (object);
 }

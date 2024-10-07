@@ -6,12 +6,6 @@
 # include "../rays/intersect.h"
 # include "../color/color.h"
 
-typedef struct s_intersections
-{
-	int		count;
-	float	xs[2];
-}	t_intersections;
-
 //	t_objects_type: The type of object
 typedef enum e_objects_type
 {
@@ -26,11 +20,12 @@ typedef t_list			t_scene;
 
 //	t_object: An object in the scene
 typedef struct s_object	t_object;
+
 typedef struct s_object
 {
 	t_objects_type	type;
 	void			*data;
-	bool			(*intersect)(t_intersect *, t_object *);
+	t_xs			(*intersect)(t_object *, t_ray);
 	bool			(*does_intersect)(t_ray, t_object *);
 }	t_object;
 

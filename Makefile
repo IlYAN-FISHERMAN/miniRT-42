@@ -46,6 +46,8 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
+		$(FILES_PATH)rays/intersection_utils \
+		$(FILES_PATH)rays/intersection \
 		$(FILES_PATH)rays/rays \
 		$(FILES_PATH)vectors/vectors_instance \
 		$(FILES_PATH)vectors/vectors_operations \
@@ -89,6 +91,8 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
+		$(FILES_PATH)rays/intersection_utils \
+		$(FILES_PATH)rays/intersection \
 		$(FILES_PATH)rays/rays \
 		$(FILES_PATH)vectors/vectors_instance \
 		$(FILES_PATH)vectors/vectors_operations \

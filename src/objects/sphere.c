@@ -36,47 +36,43 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 }
 
 //	find_intersection: Find the intersection of a ray with a sphere
-//	and store the result in the given intersection
-//	@param inter The intersection to store the result in
+//	and return the intersection data
 //	@param a The a value of the quadratic equation
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
-static void	find_intersection(t_intersections *inters, float a, float b, float c)
+//	@param obj The object to check
+static t_xs	find_intersection(float a, float b, float c, t_object *obj)
 {
+	t_xs	inters;
 	float	discriminant;
 	float	t1;
 	float	t2;
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
-		return ;
+		return ((t_xs){0});
 	t1 = (-b - sqrtf(discriminant)) / (2 * a);
 	t2 = (-b + sqrtf(discriminant)) / (2 * a);
-	if (t1 > RAY_T_MIN && t1 < RAY_T_MAX)
-	{
-		// may need to just return t1 and t2, check performances
-		inters->xs[0] = t1;
-		inters->xs[1] = t2;
-		inters->count = 2;
-	}
+	inters = xs();
+	add_intersection(&inters, intersection(t1, obj));
+	add_intersection(&inters, intersection(t2, obj));
+	return (inters);
 }
 
-
-
-t_intersections	intersect_sphere(t_object *object, t_ray ray)
+t_xs	intersect_sphere(t_object *object, t_ray ray)
 {
-	t_intersections	inters;
-	t_sphere		*sphere;
-	float			a;
-	float			b;
-	float			c;
+	t_xs		inters;
+	float		a;
+	float		b;
+	float		c;
+	t_point3	sphere_to_ray;
 
-	ft_bzero(&inters, sizeof(t_intersections));
-	sphere = (t_sphere *)object->data;
+	ft_bzero(&inters, sizeof(t_xs));
+	sphere_to_ray = vsub(ray.origin, ((t_sphere *)object->data)->origin);
 	a = vdot(ray.direction, ray.direction);
-	b = 2 * (vdot(ray.direction, ray.origin));
-	c = vdot(ray.origin, ray.origin) - 1;
-	find_intersection(&inters, a, b, c);
+	b = 2 * (vdot(ray.direction, sphere_to_ray));
+	c = vdot(sphere_to_ray, sphere_to_ray) - 1;
+	inters = find_intersection(a, b, c, object);
 	return (inters);
 }
 
