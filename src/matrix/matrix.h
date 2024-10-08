@@ -103,10 +103,11 @@ float		m4cofactor(t_matrix4 m, int row, int col);
 //	@param m The matrix
 //	@return The determinant
 float		m4det(t_matrix4 m);
-//	m4invert: Invert the given matrix
+//	m4invert: Get the inverse of a t_matrix4
 //	@param m The matrix
-//	@return The given matrix
-t_matrix4	*m4invert(t_matrix4 *m);
+//	@param status The status of the inversion
+//	@return The inverted matrix
+t_matrix4	m4invert(t_matrix4 m, int *status);
 //	m4translation: Get the translation matrix of a tuple
 //	@param t The tuple containing the translation values
 //	@return The translation matrix

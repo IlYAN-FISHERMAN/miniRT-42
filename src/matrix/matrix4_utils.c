@@ -36,22 +36,18 @@ t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t)
 	});
 }
 
-t_matrix4	*m4invert(t_matrix4 *m)
+static t_matrix4	invert_process(t_matrix4 m, float det)
 {
-	float		det;
 	t_matrix4	m_buff;
 	int			i;
 	int			j;
 
-	det = m4det(*m);
-	if (ft_equalsf(det, 0))
-		return (0);
 	i = -1;
 	while (++i < 4)
 	{
 		j = -1;
 		while (++j < 4)
-			m_buff.data[i][j] = m4cofactor(*m, i, j);
+			m_buff.data[i][j] = m4cofactor(m, i, j);
 	}
 	m_buff = m4transpose(m_buff);
 	i = -1;
@@ -59,7 +55,21 @@ t_matrix4	*m4invert(t_matrix4 *m)
 	{
 		j = -1;
 		while (++j < 4)
-			m->data[i][j] = m_buff.data[i][j] / det;
+			m.data[i][j] = m_buff.data[i][j] / det;
 	}
 	return (m);
+}
+
+t_matrix4	m4invert(t_matrix4 m, int *status)
+{
+	float		det;
+
+	det = m4det(m);
+	if (ft_equalsf(det, 0))
+	{
+		if (status)
+			*status = 1;
+		return (m);
+	}
+	return (invert_process(m, det));
 }
