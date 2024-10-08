@@ -4,7 +4,7 @@ float	vlength2(t_vector3 v)
 {
 	if (DEBUG && v.w == POINT)
 		printf("Warning: Getting the squared length of a point\n");
-	return (v.x * v.x + v.y * v.y + v.z * v.z);
+	return (v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 }
 
 t_vector3	vnormalized(t_vector3 v)
