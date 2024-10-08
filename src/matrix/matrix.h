@@ -35,6 +35,9 @@ typedef struct s_shearing
 	float	zy;
 }	t_shearing;
 
+// m4default: Get the default matrix
+// @return The default matrix
+t_matrix4	m4default();
 // m4mul: Multiply two matrices
 // @param m The first matrix
 // @param n The second matrix
