@@ -27,6 +27,8 @@ typedef struct s_object
 	void			*data;
 	t_xs			(*intersect)(t_object *, t_ray);
 	bool			(*does_intersect)(t_ray, t_object *);
+	t_vector3		(*normal_at)(t_object *, t_point3);
+	t_matrix4		transform;
 }	t_object;
 
 //	does_intersect: Check if a ray intersects any object in the object list
@@ -41,5 +43,10 @@ bool	does_intersect(t_ray ray, t_scene *scene);
 //	@param scene The object list to check
 //	@return true if the ray intersects any object, false otherwise
 bool	intersect(t_intersect *intersect, t_scene *scene);
+
+//	set_transform: Set the transformation matrix of an object
+//	@param obj The object to transform
+//	@param transform The transformation matrix
+void	set_transform(t_object *obj, t_matrix4 transform);
 
 #endif

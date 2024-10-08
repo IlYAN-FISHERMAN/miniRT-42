@@ -1,36 +1,30 @@
 #include "sphere.h"
 
-t_sphere	*new_raw_sphere(t_point3 origin, float radius, t_color color)
-{
-	t_sphere	*sphere;
-
-	sphere = galloc(sizeof(t_sphere));
-	if (!sphere)
-		return (0);
-	(*sphere) = (t_sphere){
-		.origin = origin,
-		.radius = radius,
-		.color = color
-	};
-	return (sphere);
-}
-
 t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 {
 	t_sphere	*sphere;
 	t_object	*object;
 
-	sphere = new_raw_sphere(origin, radius, color);
+	sphere = galloc(sizeof(t_sphere));
+	if (!sphere)
+		return (0);
+	(*sphere) = (t_sphere){ .origin = origin, .radius = radius,
+		.color = color };
 	if (!sphere)
 		return (0);
 	object = galloc(sizeof(t_object));
 	if (!object)
+	{
+		gfree(sphere);
 		return (0);
+	}
 	(*object) = (t_object){
 		.type = o_sphere,
 		.data = sphere,
 		.intersect = intersect_sphere,
-		.does_intersect = does_intersect_sphere
+		.does_intersect = does_intersect_sphere,
+		.transform = m4default(),
+		.normal_at = normal_at_sphere
 	};
 	return (object);
 }
@@ -66,7 +60,10 @@ t_xs	intersect_sphere(t_object *object, t_ray ray)
 	float		b;
 	float		c;
 	t_point3	sphere_to_ray;
+	t_matrix4	tmp;
 
+	tmp = object->transform;
+	ray = transform(ray, m4invert(tmp, 0));
 	ft_bzero(&inters, sizeof(t_xs));
 	sphere_to_ray = vsub(ray.origin, ((t_sphere *)object->data)->origin);
 	a = vdot(ray.direction, ray.direction);
@@ -99,4 +96,18 @@ bool	does_intersect_sphere(t_ray ray, t_object *object)
 		&& (-b + sqrtf(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
 		return (true);
 	return (false);
+}
+
+t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
+{
+	t_point3	object_point;
+	t_point3	object_normal;
+	t_point3	world_normal;
+
+	object_point = tm4mul(m4invert(object->transform, 0), world_point);
+	object_normal = vsub(object_point, ((t_sphere *)object->data)->origin);
+	world_normal = tm4mul(m4transpose(m4invert(object->transform, 0)), object_normal);
+	world_normal.w = VECTOR;
+	vnormalize(&world_normal);
+	return (world_normal);
 }

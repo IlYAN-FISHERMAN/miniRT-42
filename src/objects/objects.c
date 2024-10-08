@@ -15,3 +15,8 @@ bool	intersect(t_intersect *intersect, t_scene *objects)
 	(void)objects;
 	return (true);
 }
+
+void	set_transform(t_object *obj, t_matrix4 transform)
+{
+	obj->transform = transform;
+}
