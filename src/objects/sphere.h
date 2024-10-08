@@ -8,14 +8,14 @@ typedef struct s_sphere
 {
 	t_point3	origin;
 	float		radius;
-	t_color		color;	
 }	t_sphere;
 
 //  new_sphere: Create a new sphere object
 //  @param origin The origin of the sphere
 //  @param radius The radius of the sphere
+//	@param material The object material
 //  @return A new sphere object
-t_object		*new_sphere(t_point3 origin, float radius, t_color color);
+t_object		*new_sphere(t_point3 origin, float radius, t_material material);
 
 //  intersect_sphere: Check if ray intersects sphere and update
 //  intersection data
@@ -24,7 +24,7 @@ t_object		*new_sphere(t_point3 origin, float radius, t_color color);
 //	math: if t1 > RAY_T_MIN && t1 < intersect->t, intersect->t = t1
 //	math: if t2 > RAY_T_MIN && t2 < intersect->t, intersect->t = t2
 //  @return true if the ray intersects the sphere, false otherwise
-t_xs	intersect_sphere(t_object *object, t_ray ray);
+t_xs			intersect_sphere(t_object *object, t_ray ray);
 
 //  does_intersect_sphere: Check if a ray intersects a sphere
 //  @param ray The ray to check

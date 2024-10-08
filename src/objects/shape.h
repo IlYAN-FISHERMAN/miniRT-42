@@ -6,6 +6,7 @@
 # include "objects.h"
 # include "plane.h"
 # include "sphere.h"
+# include "light.h"
 
 typedef struct s_amb
 {

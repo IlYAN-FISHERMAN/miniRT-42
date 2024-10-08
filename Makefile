@@ -43,6 +43,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
 		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
@@ -53,6 +54,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)vectors/vectors_operations \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
+		$(FILES_PATH)vectors/vectors_utils \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)generator/rt_generator \
@@ -88,6 +90,7 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
 		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
@@ -98,6 +101,7 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)vectors/vectors_operations \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
+		$(FILES_PATH)vectors/vectors_utils \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)generator/rt_generator \

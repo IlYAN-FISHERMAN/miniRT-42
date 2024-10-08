@@ -96,14 +96,10 @@ int	main(void)
 
 int	main(void)
 {
-	t_object	*shape;
-	t_vector3	normal;
-	t_matrix4	m;
+	t_object	*s;
+	t_material	m;
 
-	shape = new_sphere(point3(0, 0, 0), 1, color(255, 0, 0));
-	m = m4scaling(vector3(1, 0.5, 1));
-	m = m4mul(m, m4rotating(M_PI / 5, Z_AXIS));
-	set_transform(shape, m);
-	normal = shape->normal_at(shape, point3(0, sqrtf(2) / 2, -sqrtf(2) / 2));
-	printf("normal: %f %f %f\n", normal.x, normal.y, normal.z);
+	m = material(0.1, 0.9, 0.9, 200);
+	m.color = color(1, 1, 1);
+	s = new_sphere(point3(0, 0, 0), 1, m);
 }
