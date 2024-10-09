@@ -8,4 +8,10 @@
 # include "sphere.h"
 # include "light.h"
 
+typedef struct s_amb
+{
+	float	light;
+	t_color	rgb;
+}	t_amb;
+
 #endif
