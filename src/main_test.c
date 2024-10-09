@@ -99,6 +99,7 @@ int	main(void)
 	t_object	*s;
 	t_material	m;
 
+	(void)s;
 	m = material(0.1, 0.9, 0.9, 200);
 	m.color = color(1, 1, 1);
 	s = new_sphere(point3(0, 0, 0), 1, m);

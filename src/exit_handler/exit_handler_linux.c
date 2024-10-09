@@ -10,8 +10,6 @@ void	clear_memory(t_minirt *minirt)
 		gfree(minirt->win.mlx);
 	if (minirt && minirt->size)
 		gfree(minirt->size);
-	if (minirt && minirt->amb)
-		gfree(minirt->amb);
 	if (minirt && minirt->cam)
 		gfree(minirt->cam);
 	if (minirt && minirt->scene)

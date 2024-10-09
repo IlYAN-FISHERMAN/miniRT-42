@@ -42,7 +42,6 @@ typedef struct s_minirt
 	t_win		win;
 	t_image		*size;
 	t_camera	*cam;
-	t_amb		*amb;
 	t_scene		*scene;
 }	t_minirt;
 
