@@ -1,27 +1,25 @@
 #include "sphere.h"
 
-t_object	*new_sphere(t_point3 origin, float radius, t_material material)
+t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 {
-	t_sphere	*sphere;
 	t_object	*object;
 
-	sphere = galloc(sizeof(t_sphere));
-	if (!sphere)
-		return (0);
-	(*sphere) = (t_sphere){.origin = origin, .radius = radius};
-	if (!sphere)
-		return (0);
 	object = galloc(sizeof(t_object));
 	if (!object)
+		return (0);
+	object->data = galloc(sizeof(t_sphere));
+	if (!object->data)
 	{
-		gfree(sphere);
+		gfree(object);
 		return (0);
 	}
-	(*object) = (t_object){.type = o_sphere, .data = sphere,
-		.intersect = intersect_sphere, .does_intersect = does_intersect_sphere,
-		.transform = m4default(), .normal_at = normal_at_sphere,
-		.material = material
-	};
+	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
+		.radius = radius};
+	*object = (t_object){.data = object->data, .material = dfmaterial(),
+		.transform = m4default(), .intersect = intersect_sphere,
+		.does_intersect = does_intersect_sphere, .type = o_sphere,
+		.normal_at = normal_at_sphere};
+	object->material.color = color;
 	return (object);
 }
 

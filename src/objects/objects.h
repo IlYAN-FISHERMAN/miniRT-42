@@ -51,6 +51,11 @@ typedef struct s_object
 t_material	material(float ambient, float diffuse,
 	float specular, float shininess);
 
+//	dfmaterial: Create a new default material
+//	Default color is green
+//	@return A new default material
+t_material	dfmaterial(void);
+
 //	does_intersect: Check if a ray intersects any object in the object list
 //	@param ray The ray to check
 //	@param scene The object list to check
