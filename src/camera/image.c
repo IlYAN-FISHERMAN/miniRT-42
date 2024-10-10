@@ -23,7 +23,7 @@ t_image	*new_image(int width, int height)
 {
 	t_image	*image;
 
-	image = galloc(sizeof(t_image));
+	image = ft_calloc(sizeof(t_image), 1);
 	if (!image)
 		return (0);
 	image->width = width;

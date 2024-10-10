@@ -32,8 +32,9 @@ typedef struct s_lightning
 //  new_light: Create a new light object
 //  @param pos The position of the light
 //	@param rgb The color of the light
+//	@param bright The brightness of the light
 //  @return A new light object
-t_object		*new_light(t_point3 pos, t_color rgb);
+t_object		*new_light(t_point3 pos, t_color rgb, float bright);
 //	new_lightning: Create a new lightning object
 //	@param l The light object
 //	@param p The point of intersection

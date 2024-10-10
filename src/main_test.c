@@ -43,7 +43,7 @@ int	main(void)
 }
 */
 
-/**int    main(void)
+int    main(void)
 {
 	t_point3	ray_origin;
 	float		wall_z;
@@ -53,9 +53,14 @@ int	main(void)
 	float		half;
 	t_image		*image;
 	t_object	*shape;
+	t_object	*light;
+	t_amb		amb;
 
-	shape = new_sphere(point3(0, 0, 0), 1, color(255, 0, 0));
-	ray_origin = point3(0, 0, -10);
+	shape = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
+	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
+	amb = (t_amb){.light = 0.2, .rgb = color(255, 255, 255),
+		.is_calc = true, .c_rgb = color_scalar(color(255, 255, 255), 0.1)};
+	ray_origin = point3(0, 0, -5);
 	wall_z = 10;
 	wall_size = 7;
 	canvas_pixels = 500;
@@ -72,17 +77,23 @@ int	main(void)
 			t_ray r = ray(ray_origin, vnormalized(vsub(position, ray_origin)));
 			t_xs xs = shape->intersect(shape, r);
 			if (hit(xs))
-				image->data[y][x] = color_hex(color(255, 0, 0));
+			{
+				float t = xs.xs[0].t;
+				t_point3 point = ray_at(r, t);
+				t_vector3 normal = shape->normal_at(shape, point);
+				t_vector3 eye = vneg(r.direction);
+				t_lightning ln = new_lightning(*(t_light *)light->data, point, eye, normal);
+				t_color c = lightning(shape, &amb, ln);
+				image->data[y][x] = color_hex(c);
+			}
 		}
 	}
 	void *mlx = mlx_init();
 	void *win = mlx_new_window(mlx, canvas_pixels, canvas_pixels, "Hello world!");
 	for (int i = 0; i < canvas_pixels; i++)
 	{
-		printf("i: %d\n", i);
 		for (int j = 0; j < canvas_pixels; j++)
 		{
-			printf("j: %d\n", j);
 			int color = image->data[j][i];
 			mlx_pixel_put(mlx, win, i, j, color);
 		}
@@ -92,25 +103,34 @@ int	main(void)
 	gfree(image);
 	gfree(shape);
 	return (0);
-}**/
-
-int	main(void)
-{
-	t_object	*s;
-	t_mat		m;
-
-	(void)s;
-	m = material(color(0, 255, 0), 0.9, 0.9, 200);
-	m.color = color(1, 1, 1);
-	s = new_sphere(point3(0, 0, 0), 1, m.color);
-	s->mat = m;
-	printf("s: %p\n", s);
-	printf("s->type: %d\n", s->type);
-	printf("s->mat.diff: %f\n", s->mat.diff);
-	printf("s->mat.spec: %f\n", s->mat.spec);
-	printf("s->mat.shin: %f\n", s->mat.shin);
-	printf("s->mat.color.r: %d\n", s->mat.color.r);
-	printf("s->mat.color.g: %d\n", s->mat.color.g);
-	printf("s->mat.color.b: %d\n", s->mat.color.b);
-	return (0);
 }
+
+/*int	main(void)
+{
+	t_object	*obj;
+	t_object	*light;
+	t_amb		amb;
+	void		*mlx;
+	void		*win;
+
+	obj = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
+	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
+	amb = (t_amb){.light = 0.2, .rgb = color(255, 255, 255),
+		.is_calc = true, .c_rgb = color_scalar(color(255, 255, 255), 0.2)};
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 600, 600, "Hello world!");
+	for (int i = 0; i < 600; i++)
+	{
+		for (int j = 0; j < 600; j++)
+		{
+			t_ray r = ray(point3(0, 0, -5), point3(0, 0, 1));
+			t_lightning ln = new_lightning(*(t_light *)light->data, point3(0, 0, 0), vneg(r.direction), vnormalized(vsub(point3(0, 0, 0), point3(0, 0, 0))));
+			t_color c = lightning(obj, &amb, ln);
+			mlx_pixel_put(mlx, win, i, j, color_hex(c));
+		}
+	}
+	mlx_loop(mlx);
+	gfree(obj);
+	gfree(light);
+	return (0);
+}*/
