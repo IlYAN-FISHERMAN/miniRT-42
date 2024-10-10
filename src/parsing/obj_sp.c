@@ -53,7 +53,6 @@ void	get_sp(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT",
 			"parsing: sp bad rgb format", NULL}, str[3]);
-	((t_object *)scene->content)->data = \
-		new_sphere(origin, ft_atof(str[2]), color);
+	scene->content = new_sphere(origin, ft_atof(str[2]), color);
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }
