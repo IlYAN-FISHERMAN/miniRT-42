@@ -1,23 +1,23 @@
 #include "objects.h"
 
-t_material	material(t_color color, float diff,
+t_mat	material(t_color color, float diff,
 	float spec, float shininess)
 {
-	return ((t_material){
+	return ((t_mat){
 		.color = color,
 		.diff = diff,
 		.spec = spec,
-		.shininess = shininess
+		.shin = shininess
 	});
 }
 
-t_material	dfmaterial(t_color color)
+t_mat	dfmaterial(t_color color)
 {
-	return ((t_material){
+	return ((t_mat){
 		.color = color,
 		.diff = 0.9,
 		.spec = 0.9,
-		.shininess = 200
+		.shin = 200
 	});
 }
 

@@ -18,13 +18,13 @@ typedef enum e_objects_type
 // t_scene: A linked list of objects
 typedef t_list			t_scene;
 
-typedef struct s_material
+typedef struct s_mat
 {
 	t_color	color;
 	float	diff;
 	float	spec;
-	float	shininess;
-}	t_material;
+	float	shin;
+}	t_mat;
 
 //	t_object: An object in the scene
 typedef struct s_object	t_object;
@@ -37,22 +37,21 @@ typedef struct s_object
 	bool			(*does_intersect)(t_ray, t_object *);
 	t_vector3		(*normal_at)(t_object *, t_point3);
 	t_matrix4		transform;
-	t_material		material;
+	t_mat			mat;
 }	t_object;
 
 //	material: Create a new material
 //	@param color The color value
 //	@param diff The diffuse value
 //	@param spec The specular value
-//	@param shininess The shininess value
+//	@param shin The shininess value
 //	@return A new material
-t_material	material(t_color color, float diff,
-				float spec, float shininess);
+t_mat		material(t_color color, float diff, float spec, float shin);
 
 //	dfmaterial: Create a new default material
 //	@param color The color value
 //	@return A new default material
-t_material	dfmaterial(t_color color);
+t_mat		dfmaterial(t_color color);
 
 //	does_intersect: Check if a ray intersects any object in the object list
 //	@param ray The ray to check

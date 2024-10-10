@@ -110,7 +110,7 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)utils/ft_split_sp_tab \
 		$(FILES_PATH)utils/ft_strlen_tab \
 		$(FILES_PATH)utils/ft_atof \
-		# $(FILES_PATH)miniRT \
+		$(FILES_PATH)miniRT \
 		$(FILES_PATH)parsing/parsing \
 		$(FILES_PATH)parsing/error_handling \
 		$(FILES_PATH)parsing/get_amb \

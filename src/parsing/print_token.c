@@ -1,31 +1,39 @@
 #include "parsing.h"
 
-void	print_obj1(t_plane *pl, t_sphere *sp, t_cylin *cy)
+static void	print_tuple(t_tuple4 tuple)
 {
-	if (cy)
-		printf("cy: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f \
-		\nDiameter: %.2f\nheight: %.2f\nRGB: %d,%d,%d\n\n",
-			cy->origin.x, cy->origin.y, cy->origin.z, cy->normal.x,
-			cy->normal.y, cy->normal.z, cy->diam, cy->height,
-			cy->rgb.r, cy->rgb.g, cy->rgb.b);
-	else if (pl)
-		printf("pl: XYZ: %.2f,%.2f,%.2f\n"\
-			"vector: %.2f,%.2f,%.2f\nRGB: %d,%d,%d\n\n", \
-			pl->origin.x, pl->origin.y, pl->origin.z,
-			pl->normal.x, pl->normal.y,
-			pl->normal.z, pl->color.r, pl->color.g, pl->color.b);
-	else if (sp)
-		printf("sp: XYZ: %.2f,%.2f,%.2f\ndiameter: %.2f\nRGB: %d,%d,%d\n\n", \
-			sp->origin.x, sp->origin.y, sp->origin.z, sp->radius,
-			sp->color.r, sp->color.g, sp->color.b);
+	if (tuple.w == POINT)
+		printf("XYZ: %.2f,%.2f,%.2f\n", tuple.x, tuple.y, tuple.z);
+	else if (tuple.w == VECTOR)
+		printf("vector: %.2f,%.2f,%.2f\n", tuple.x, tuple.y, tuple.z);
 }
 
-void	print_light(t_light *lig)
+void	print_obj1(t_object *obj)
 {
-	if (lig)
-		printf("L: XYZ: %.2f,%.2f,%.2f\nLratio: %.2f\nRGB: %d,%d,%d\n\n",
-			lig->pos.x, lig->pos.y, lig->pos.z, lig->bright,
-			lig->rgb.r, lig->rgb.g, lig->rgb.b);
+	if (obj->type == o_cylin)
+	{
+		print_tuple(((t_cylin *)obj->data)->origin);
+		print_tuple(((t_cylin *)obj->data)->normal);
+		printf("Diameter: %.2f\nheight: %.2f\n\n",
+			((t_cylin *)obj->data)->diam, ((t_cylin *)obj->data)->height);
+	}
+	else if (obj->type == o_plane)
+	{
+		print_tuple(((t_plane *)obj->data)->origin);
+		print_tuple(((t_plane *)obj->data)->normal);
+	}
+	else if (obj->type == o_sphere)
+	{
+		print_tuple(((t_sphere *)obj->data)->origin);
+		printf("Diameter: %.2f\n\n", 2 * ((t_sphere *)obj->data)->radius);
+	}
+	else if (obj->type == o_light)
+	{
+		print_tuple(((t_light *)obj->data)->pos);
+		printf("Lratio: %.2f\n", ((t_light *)obj->data)->bright);
+	}
+	printf("RGB: %d,%d,%d\n\n",
+		obj->mat.color.r, obj->mat.color.g, obj->mat.color.b);
 }
 
 void	print_obj_main(t_scene *tmp)
@@ -35,14 +43,7 @@ void	print_obj_main(t_scene *tmp)
 	while (tmp && tmp->content)
 	{
 		obj = tmp->content;
-		if (obj->type == o_light)
-			print_light(obj->data);
-		else if (obj->type == o_cylin)
-			print_obj1(NULL, NULL, obj->data);
-		else if (obj->type == o_plane)
-			print_obj1(obj->data, NULL, NULL);
-		else if (obj->type == o_sphere)
-			print_obj1(NULL, obj->data, NULL);
+		print_obj1(obj);
 		tmp = tmp->next;
 	}
 }

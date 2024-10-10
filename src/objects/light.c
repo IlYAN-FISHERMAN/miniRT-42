@@ -57,7 +57,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 	t_vector3	reflectv;
 	float		r_dot_e;
 
-	eff_color = color_scalar(obj->material.color, ln.l.bright);
+	eff_color = color_scalar(obj->mat.color, ln.l.bright);
 	lightv = vnormalized(vsub(ln.l.pos, ln.p));
 	ambient = get_ambient(amb);
 	l_dot_n = vdot(lightv, ln.nv);
@@ -68,7 +68,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 	}
 	else
 	{
-		diff = color_scalar(eff_color, obj->material.diff * l_dot_n);
+		diff = color_scalar(eff_color, obj->mat.diff * l_dot_n);
 		reflectv = vreflect(vneg(lightv), ln.nv);
 		r_dot_e = vdot(reflectv, ln.ev);
 	}
@@ -76,8 +76,8 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 		spec = color(0, 0, 0);
 	else
 	{
-		spec = color_scalar(get_light(ln.l), obj->material.spec
-				* powf(r_dot_e, obj->material.shininess));
+		spec = color_scalar(get_light(ln.l), obj->mat.spec
+				* powf(r_dot_e, obj->mat.shin));
 	}
 	return (color_add(ambient, color_add(diff, spec)));
 }

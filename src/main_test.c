@@ -97,20 +97,20 @@ int	main(void)
 int	main(void)
 {
 	t_object	*s;
-	t_material	m;
+	t_mat		m;
 
 	(void)s;
 	m = material(color(0, 255, 0), 0.9, 0.9, 200);
 	m.color = color(1, 1, 1);
 	s = new_sphere(point3(0, 0, 0), 1, m.color);
-	s->material = m;
+	s->mat = m;
 	printf("s: %p\n", s);
 	printf("s->type: %d\n", s->type);
-	printf("s->material.diff: %f\n", s->material.diff);
-	printf("s->material.spec: %f\n", s->material.spec);
-	printf("s->material.shininess: %f\n", s->material.shininess);
-	printf("s->material.color.r: %d\n", s->material.color.r);
-	printf("s->material.color.g: %d\n", s->material.color.g);
-	printf("s->material.color.b: %d\n", s->material.color.b);
+	printf("s->mat.diff: %f\n", s->mat.diff);
+	printf("s->mat.spec: %f\n", s->mat.spec);
+	printf("s->mat.shin: %f\n", s->mat.shin);
+	printf("s->mat.color.r: %d\n", s->mat.color.r);
+	printf("s->mat.color.g: %d\n", s->mat.color.g);
+	printf("s->mat.color.b: %d\n", s->mat.color.b);
 	return (0);
 }
