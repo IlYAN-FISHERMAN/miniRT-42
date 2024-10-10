@@ -33,7 +33,7 @@ static t_color	get_light(t_light light)
 {
 	if (!light.is_calc)
 	{
-		light.c_rgb = color_scalar(light.rgb, light.intensity);
+		light.c_rgb = color_scalar(light.rgb, light.bright);
 		light.is_calc = true;
 	}
 	return (light.c_rgb);
@@ -57,7 +57,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 	t_vector3	reflectv;
 	float		r_dot_e;
 
-	eff_color = color_scalar(obj->material.color, ln.l.intensity);
+	eff_color = color_scalar(obj->material.color, ln.l.bright);
 	lightv = vnormalized(vsub(ln.l.pos, ln.p));
 	ambient = get_ambient(amb);
 	l_dot_n = vdot(lightv, ln.nv);

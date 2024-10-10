@@ -16,7 +16,7 @@ typedef struct s_light
 {
 	t_point3	pos;
 	t_color		rgb;
-	float		intensity;
+	float		bright;
 	bool		is_calc;
 	t_color		c_rgb;
 }	t_light;
