@@ -14,11 +14,11 @@ typedef struct s_amb
 
 typedef struct s_light
 {
-	t_point3	origin;
-	t_color		color;
+	t_point3	pos;
+	t_color		rgb;
 	float		intensity;
 	bool		is_calc;
-	t_color		c_color;
+	t_color		c_rgb;
 }	t_light;
 
 typedef struct s_lightning
@@ -30,10 +30,10 @@ typedef struct s_lightning
 }	t_lightning;
 
 //  new_light: Create a new light object
-//  @param origin The origin of the light
-//  @param radius The radius of the light
+//  @param pos The position of the light
+//	@param rgb The color of the light
 //  @return A new light object
-t_object		*new_light(t_point3 origin, t_color color);
+t_object		*new_light(t_point3 pos, t_color rgb);
 //	new_lightning: Create a new lightning object
 //	@param l The light object
 //	@param p The point of intersection

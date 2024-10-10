@@ -1,6 +1,6 @@
 #include "light.h"
 
-t_object	*new_light(t_point3 origin, t_color color)
+t_object	*new_light(t_point3 pos, t_color rgb)
 {
 	t_object	*object;
 
@@ -13,8 +13,8 @@ t_object	*new_light(t_point3 origin, t_color color)
 		gfree(object);
 		return (0);
 	}
-	((t_light *)object->data)->origin = origin;
-	((t_light *)object->data)->color = color;
+	((t_light *)object->data)->pos = pos;
+	((t_light *)object->data)->rgb = rgb;
 	object->type = o_light;
 	return (object);
 }
@@ -33,10 +33,10 @@ static t_color	get_light(t_light light)
 {
 	if (!light.is_calc)
 	{
-		light.c_color = color_scalar(light.color, light.intensity);
+		light.c_rgb = color_scalar(light.rgb, light.intensity);
 		light.is_calc = true;
 	}
-	return (light.c_color);
+	return (light.c_rgb);
 }
 
 t_lightning	new_lightning(t_light l, t_point3 p, t_vector3 ev, t_vector3 nv)
@@ -58,7 +58,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 	float		r_dot_e;
 
 	eff_color = color_scalar(obj->material.color, ln.l.intensity);
-	lightv = vnormalized(vsub(ln.l.origin, ln.p));
+	lightv = vnormalized(vsub(ln.l.pos, ln.p));
 	ambient = get_ambient(amb);
 	l_dot_n = vdot(lightv, ln.nv);
 	if (l_dot_n < 0)
