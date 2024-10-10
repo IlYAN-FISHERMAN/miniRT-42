@@ -58,8 +58,8 @@ int    main(void)
 
 	shape = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
 	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
-	amb = (t_amb){.light = 0.2, .rgb = color(255, 255, 255),
-		.is_calc = true, .c_rgb = color_scalar(color(255, 255, 255), 0.1)};
+	amb = (t_amb){.light = 0.1, .rgb = color(255, 255, 255),
+		.is_calc = false};
 	ray_origin = point3(0, 0, -5);
 	wall_z = 10;
 	wall_size = 7;
