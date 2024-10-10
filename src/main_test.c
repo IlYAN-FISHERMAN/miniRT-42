@@ -100,15 +100,14 @@ int	main(void)
 	t_material	m;
 
 	(void)s;
-	m = material(0.1, 0.9, 0.9, 200);
+	m = material(color(0, 255, 0), 0.9, 0.9, 200);
 	m.color = color(1, 1, 1);
 	s = new_sphere(point3(0, 0, 0), 1, m.color);
 	s->material = m;
 	printf("s: %p\n", s);
 	printf("s->type: %d\n", s->type);
-	printf("s->material.ambient: %f\n", s->material.ambient);
-	printf("s->material.diffuse: %f\n", s->material.diffuse);
-	printf("s->material.specular: %f\n", s->material.specular);
+	printf("s->material.diff: %f\n", s->material.diff);
+	printf("s->material.spec: %f\n", s->material.spec);
 	printf("s->material.shininess: %f\n", s->material.shininess);
 	printf("s->material.color.r: %d\n", s->material.color.r);
 	printf("s->material.color.g: %d\n", s->material.color.g);

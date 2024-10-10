@@ -1,24 +1,22 @@
 #include "objects.h"
 
-t_material	material(float ambient, float diffuse,
-	float specular, float shininess)
+t_material	material(t_color color, float diff,
+	float spec, float shininess)
 {
 	return ((t_material){
-		.color = color(0, 255, 0),
-		.ambient = ambient,
-		.diffuse = diffuse,
-		.specular = specular,
+		.color = color,
+		.diff = diff,
+		.spec = spec,
 		.shininess = shininess
 	});
 }
 
-t_material	dfmaterial(void)
+t_material	dfmaterial(t_color color)
 {
 	return ((t_material){
-		.color = color(0, 255, 0),
-		.ambient = 0.1,
-		.diffuse = 0.9,
-		.specular = 0.9,
+		.color = color,
+		.diff = 0.9,
+		.spec = 0.9,
 		.shininess = 200
 	});
 }

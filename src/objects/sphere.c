@@ -15,11 +15,10 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 	}
 	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
 		.radius = radius};
-	*object = (t_object){.data = object->data, .material = dfmaterial(),
+	*object = (t_object){.data = object->data, .material = dfmaterial(color),
 		.transform = m4default(), .intersect = intersect_sphere,
 		.does_intersect = does_intersect_sphere, .type = o_sphere,
 		.normal_at = normal_at_sphere};
-	object->material.color = color;
 	return (object);
 }
 

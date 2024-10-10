@@ -21,9 +21,8 @@ typedef t_list			t_scene;
 typedef struct s_material
 {
 	t_color	color;
-	float	ambient;
-	float	diffuse;
-	float	specular;
+	float	diff;
+	float	spec;
 	float	shininess;
 }	t_material;
 
@@ -42,19 +41,18 @@ typedef struct s_object
 }	t_object;
 
 //	material: Create a new material
-//	Default color is green
-//	@param ambient The ambient value
-//	@param diffuse The diffuse value
-//	@param specular The specular value
+//	@param color The color value
+//	@param diff The diffuse value
+//	@param spec The specular value
 //	@param shininess The shininess value
 //	@return A new material
-t_material	material(float ambient, float diffuse,
-	float specular, float shininess);
+t_material	material(t_color color, float diff,
+				float spec, float shininess);
 
 //	dfmaterial: Create a new default material
-//	Default color is green
+//	@param color The color value
 //	@return A new default material
-t_material	dfmaterial(void);
+t_material	dfmaterial(t_color color);
 
 //	does_intersect: Check if a ray intersects any object in the object list
 //	@param ray The ray to check
