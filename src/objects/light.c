@@ -22,11 +22,12 @@ t_object	*new_light(t_point3 pos, t_color rgb, float bright)
 	return (object);
 }
 
-static t_color	get_ambient(t_amb *amb)
+static t_color	get_ambient(t_amb *amb, t_object *obj)
 {
 	if (!amb->is_calc)
 	{
 		amb->c_rgb = color_scalar(amb->rgb, amb->light);
+		amb->c_rgb = color_mult(amb->c_rgb, obj->mat.color);
 		amb->is_calc = true;
 	}
 	return (amb->c_rgb);
@@ -62,7 +63,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln)
 
 	eff_color = color_scalar(obj->mat.color, ln.l.bright);
 	lightv = vnormalized(vsub(ln.l.pos, ln.p));
-	ambient = get_ambient(amb);
+	ambient = get_ambient(amb, obj);
 	l_dot_n = vdot(lightv, ln.nv);
 	r_dot_e = 0;
 	if (l_dot_n < 0)
