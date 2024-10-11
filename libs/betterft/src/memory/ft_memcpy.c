@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 07:27:54 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 18:23:18 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/08 10:07:27 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ void	*ft_memncat(void *dest, size_t start, void *src, size_t nb)
 	}
 	return (dest);
 }
-

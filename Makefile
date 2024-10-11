@@ -38,14 +38,24 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)lightning/lightning \
+		$(FILES_PATH)matrix/matrix2 \
+		$(FILES_PATH)matrix/matrix3 \
+		$(FILES_PATH)matrix/matrix4_utils \
+		$(FILES_PATH)matrix/matrix4 \
+		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
+		$(FILES_PATH)rays/intersection_utils \
+		$(FILES_PATH)rays/intersection \
 		$(FILES_PATH)rays/rays \
 		$(FILES_PATH)vectors/vectors_instance \
 		$(FILES_PATH)vectors/vectors_operations \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
+		$(FILES_PATH)vectors/vectors_utils \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)generator/rt_generator \
@@ -72,18 +82,27 @@ FILES =	$(FILES_PATH)main \
 CFILES = $(FILES:%=%.c)
 
 FILES_TEST =	$(FILES_PATH)main_test \
-		$(FILES_PATH)miniRT \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)lightning/lightning \
+		$(FILES_PATH)matrix/matrix2 \
+		$(FILES_PATH)matrix/matrix3 \
+		$(FILES_PATH)matrix/matrix4_utils \
+		$(FILES_PATH)matrix/matrix4 \
+		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
+		$(FILES_PATH)rays/intersection_utils \
+		$(FILES_PATH)rays/intersection \
 		$(FILES_PATH)rays/rays \
 		$(FILES_PATH)vectors/vectors_instance \
 		$(FILES_PATH)vectors/vectors_operations \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
+		$(FILES_PATH)vectors/vectors_utils \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)generator/rt_generator \
@@ -92,9 +111,10 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)generator/rt_generator_obj \
 		$(FILES_PATH)utils/ft_split_sp_tab \
 		$(FILES_PATH)utils/ft_strlen_tab \
-		$(FILES_PATH)parsing/error_handling \
 		$(FILES_PATH)utils/ft_atof \
+		$(FILES_PATH)miniRT \
 		$(FILES_PATH)parsing/parsing \
+		$(FILES_PATH)parsing/error_handling \
 		$(FILES_PATH)parsing/get_amb \
 		$(FILES_PATH)parsing/get_cam \
 		$(FILES_PATH)parsing/get_obj \

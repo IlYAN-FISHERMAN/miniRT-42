@@ -1,7 +1,7 @@
 #ifndef RAYS_H
 # define RAYS_H
 
-# include "../vectors/vectors.h"
+# include "../matrix/matrix.h"
 
 //	Define the minimum and maximum t values for the ray, preventing
 //	the ray from intersecting with itself
@@ -13,7 +13,7 @@ typedef struct s_ray
 {
 	t_point3		origin;
 	t_vector3		direction;
-	float			t;
+	float			t;	// to remove once the rework is done
 }	t_ray;
 
 //	ray: Create a new stack-allocated ray
@@ -28,5 +28,13 @@ t_ray		ray(t_point3 origin, t_vector3 direction);
 //  math: p + t * d
 //  @return The point at the given t value along the ray
 t_point3	ray_at(t_ray ray, float t);
+
+//	transform: Transform a ray by a matrix
+//  @param r The ray to transform
+//  @param m The matrix to transform the ray by
+//  math: r.origin = m * r.origin
+//  math: r.direction = m * r.direction
+//  @return The transformed ray
+t_ray		transform(t_ray r, t_matrix4 m);
 
 #endif

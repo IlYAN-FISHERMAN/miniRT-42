@@ -9,6 +9,7 @@
 # include "color/color.h"
 # include "generator/rt_generate.h"
 # include "objects/shape.h"
+# include "lightning/lightning.h"
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
@@ -42,8 +43,8 @@ typedef struct s_minirt
 	t_win		win;
 	t_image		*size;
 	t_camera	*cam;
-	t_amb		*amb;
 	t_scene		*scene;
+	t_amb		*amb;
 }	t_minirt;
 
 //	init_minirt: Initialize the miniRT minirt structure
@@ -51,6 +52,9 @@ typedef struct s_minirt
 //	@param argv The arguments
 //	@return The new minirt structure
 t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv);
+//	get_minirt: Get the minirt structure as a static variable
+//	@return The minirt structure
+t_minirt	*get_minirt(void);
 void		*memcheck(t_minirt *minirt, void *new);
 void		*init_minirt_mlx(t_minirt *minirt);
 

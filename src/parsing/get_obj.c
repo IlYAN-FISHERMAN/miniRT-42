@@ -8,10 +8,6 @@ t_scene	*get_scene_struct(t_minirt **minirt)
 	if (!scene)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	scene->content = ft_calloc(1, sizeof(t_object));
-	if (!scene->content)
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	return (scene);
 }
 

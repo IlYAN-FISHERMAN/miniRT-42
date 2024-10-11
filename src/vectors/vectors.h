@@ -107,4 +107,10 @@ t_vector3	vnormalized(t_vector3 v);
 //	@return The normalized vector
 t_vector3	*vnormalize(t_vector3 *v);
 
+//	vreflect: Reflect a vector off a surface
+//	@param v The vector
+//	@param normal The normal
+//	@return The reflected vector
+t_vector3	vreflect(t_vector3 v, t_vector3 normal);
+
 #endif

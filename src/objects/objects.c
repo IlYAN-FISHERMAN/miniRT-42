@@ -1,31 +1,43 @@
 #include "objects.h"
 
+t_mat	material(t_color color, float diff,
+	float spec, float shininess)
+{
+	return ((t_mat){
+		.color = color,
+		.diff = diff,
+		.spec = spec,
+		.shin = shininess
+	});
+}
+
+t_mat	dfmaterial(t_color color)
+{
+	return ((t_mat){
+		.color = color,
+		.diff = 0.9,
+		.spec = 0.9,
+		.shin = 200
+	});
+}
+
 bool	does_intersect(t_ray ray, t_scene *objects)
 {
-	t_object	*object;
-
-	while (objects)
-	{
-		object = (t_object *)objects->content;
-		if (object->does_intersect(ray, object))
-			return (true);
-		objects = objects->next;
-	}
-	return (false);
+	// redo
+	(void)ray;
+	(void)objects;
+	return (true);
 }
 
 bool	intersect(t_intersect *intersect, t_scene *objects)
 {
-	bool		intersected;
-	t_object	*object;
+	// redo
+	(void)intersect;
+	(void)objects;
+	return (true);
+}
 
-	intersected = false;
-	while (objects)
-	{
-		object = (t_object *)objects->content;
-		if (object->intersect(intersect, object))
-			intersected = true;
-		objects = objects->next;
-	}
-	return (intersected);
+void	set_transform(t_object *obj, t_matrix4 transform)
+{
+	obj->transform = m4mul(transform, obj->transform);
 }

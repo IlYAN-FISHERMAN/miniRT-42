@@ -1,4 +1,5 @@
 # Custom
+c_cpp_properties.json
 .vscode
 miniRT
 test*.c

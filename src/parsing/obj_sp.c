@@ -37,24 +37,22 @@ void	check_sp_info(char **str, t_minirt *minirt)
 void	get_sp(char **str, t_minirt **minirt)
 {
 	t_scene		*scene;
-	t_sphere	*tmp;
+	t_point3	origin;
+	t_color		color;
 
 	check_sp_info(str, *minirt);
 	check_sp_range(str, *minirt);
 	scene = get_scene_struct(minirt);
-	((t_object *)scene->content)->data = ft_calloc(1, sizeof(t_sphere));
 	if (!((t_object *)scene->content))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	((t_object *)scene->content)->type = o_sphere;
-	tmp = ((t_object *)scene->content)->data;
-	ft_atof_xyz(&tmp->origin.x, &tmp->origin.y, &tmp->origin.z,
+	ft_atof_xyz(&origin.x, &origin.y, &origin.z,
 		ft_split(str[1], ','));
-	tmp->radius = ft_atof(str[2]);
-	if (!ft_atoi_rgb(&tmp->color.r, &tmp->color.g, &tmp->color.b,
+	if (!ft_atoi_rgb(&color.r, &color.g, &color.b,
 			ft_split(str[3], ',')))
 		crash_exit(*minirt,
 			(char *[]){"miniRT",
 			"parsing: sp bad rgb format", NULL}, str[3]);
+	scene->content = new_sphere(origin, ft_atof(str[2]), color);
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }
