@@ -1,27 +1,5 @@
 #include "sphere.h"
 
-t_object	*new_sphere(t_point3 origin, float radius, t_color color)
-{
-	t_object	*object;
-
-	object = galloc(sizeof(t_object));
-	if (!object)
-		return (0);
-	object->data = galloc(sizeof(t_sphere));
-	if (!object->data)
-	{
-		gfree(object);
-		return (0);
-	}
-	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
-		.radius = radius};
-	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
-		.transform = m4default(), .intersect = intersect_sphere,
-		.does_intersect = does_intersect_sphere, .type = o_sphere,
-		.normal_at = normal_at_sphere};
-	return (object);
-}
-
 //	find_intersection: Find the intersection of a ray with a sphere
 //	and return the intersection data
 //	@param a The a value of the quadratic equation
@@ -46,7 +24,14 @@ static t_xs	find_intersection(float a, float b, float c, t_object *obj)
 	return (inters);
 }
 
-t_xs	intersect_sphere(t_object *object, t_ray ray)
+//  intersect_sphere: Check if ray intersects sphere and update
+//  intersection data
+//  @param intersect The intersection data
+//  @param object The object to check
+//	math: if t1 > RAY_T_MIN && t1 < intersect->t, intersect->t = t1
+//	math: if t2 > RAY_T_MIN && t2 < intersect->t, intersect->t = t2
+//  @return true if the ray intersects the sphere, false otherwise
+static t_xs	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs		inters;
 	float		a;
@@ -64,32 +49,11 @@ t_xs	intersect_sphere(t_object *object, t_ray ray)
 	return (inters);
 }
 
-bool	does_intersect_sphere(t_ray ray, t_object *object)
-{
-	t_sphere	*sphere;
-	t_ray		local_ray;
-	float		a;
-	float		b;
-	float		c;
-
-	sphere = (t_sphere *)object->data;
-	local_ray = ray;
-	local_ray.origin = vsub(ray.origin, sphere->origin);
-	a = vlength2(ray.direction);
-	b = 2.0f * vdot(local_ray.direction, local_ray.origin);
-	c = vlength2(local_ray.origin) - (sphere->radius * sphere->radius);
-	if (b * b - 4 * a * c < 0.0f)
-		return (false);
-	if ((-b - sqrtf(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
-		&& (-b - sqrtf(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
-		return (true);
-	if ((-b + sqrtf(b * b - 4 * a * c)) / (2 * a) > RAY_T_MIN
-		&& (-b + sqrtf(b * b - 4 * a * c)) / (2 * a) < RAY_T_MAX)
-		return (true);
-	return (false);
-}
-
-t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
+//  normal_at_sphere: Get the normal at a point on the sphere
+//  @param object The object
+//  @param world_point The point on the sphere
+//  @return The normal at the point
+static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 {
 	t_point3	object_p;
 	t_point3	object_n;
@@ -101,4 +65,25 @@ t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 	world_n.w = VECTOR;
 	vnormalize(&world_n);
 	return (world_n);
+}
+
+t_object	*new_sphere(t_point3 origin, float radius, t_color color)
+{
+	t_object	*object;
+
+	object = galloc(sizeof(t_object));
+	if (!object)
+		return (0);
+	object->data = galloc(sizeof(t_sphere));
+	if (!object->data)
+	{
+		gfree(object);
+		return (0);
+	}
+	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
+		.radius = radius};
+	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
+		.transform = m4default(), .intersect = intersect_sphere,
+		.type = o_sphere, .normal_at = normal_at_sphere};
+	return (object);
 }
