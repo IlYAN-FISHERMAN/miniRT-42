@@ -1,4 +1,5 @@
 #include "camera/image.h"
+#include "parsing/parsing.h"
 #include "miniRT.h"
 /*
 int	main(void)
@@ -44,7 +45,7 @@ int	main(void)
 */
 
 
-int    main(void)
+int    main(int argc, char **argv)
 {
 	t_point3	ray_origin;
 	float		wall_z;
@@ -56,11 +57,28 @@ int    main(void)
 	t_object	*shape;
 	t_object	*light;
 	t_amb		amb;
+	t_minirt	minirt;
 
-	shape = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
-	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
-	amb = (t_amb){.light = 0.1, .rgb = color(255, 255, 255),
-		.is_calc = false};
+	ft_bzero(&minirt, sizeof(minirt));
+	init_minirt(&minirt, argc, argv);
+	init_minirt_mlx(&minirt);
+	t_scene	*scene;
+	scene = minirt.scene;
+	while (scene && ((t_object *)scene->content)->type != o_sphere)
+		scene = scene->next;
+	if (scene)
+		shape = scene->content;
+	scene = minirt.scene;
+	print_token(&minirt, scene);
+	while (scene && ((t_object *)scene->content)->type != o_light)
+		scene = scene->next;
+	if (scene)
+		light = scene->content;
+	else
+		exit(1);
+	amb = *minirt.amb;
+	print_token(&minirt, scene);
+	printf("%d %d %d\n", ((t_light *)light->data)->rgb.r, ((t_light *)light->data)->rgb.g, ((t_light *)light->data)->rgb.b);
 	ray_origin = point3(0, 0, -10);
 	wall_z = 10;
 	wall_size = 7;
@@ -83,23 +101,33 @@ int    main(void)
 				t_point3 point = ray_at(r, t);
 				t_vector3 normal = shape->normal_at(shape, point);
 				t_vector3 eye = vneg(r.direction);
-				t_lightning ln = new_lightning(*(t_light *)light->data, point, eye, normal);
+				t_lightning ln = new_lightning(*((t_light *)light->data), point, eye, normal);
 				t_color c = lightning(shape, &amb, ln);
 				image->data[y][x] = color_hex(c);
 			}
 		}
 	}
-	void *mlx = mlx_init();
-	void *win = mlx_new_window(mlx, canvas_pixels, canvas_pixels, "miniRT !");
+	void *mlx_img = mlx_new_image(minirt.win.mlx, canvas_pixels, canvas_pixels);
+	if (!mlx_img)
+	{
+		printf("Error: mlx_new_image failed\n");
+		exit(1);
+	}
+	int bits_per_pixel, size_line, endian;
+	char *img_data = mlx_get_data_addr(mlx_img, &bits_per_pixel, &size_line, &endian);
 	for (int i = 0; i < canvas_pixels; i++)
 	{
 		for (int j = 0; j < canvas_pixels; j++)
 		{
-			int color = image->data[j][i];
-			mlx_pixel_put(mlx, win, i, j, color);
+			if (!image->data[j][i])
+				continue;
+			int color = mlx_get_color_value(minirt.win.mlx, image->data[j][i]);
+			int pixel_index = (j * size_line) + (i * (bits_per_pixel / 8));
+			*(int *)(img_data + pixel_index) = color;
 		}
 	}
-	mlx_loop(mlx);
+	mlx_put_image_to_window(minirt.win.mlx, minirt.win.windo, mlx_img, 0, 0);
+	mlx_loop(minirt.win.mlx);
 	gfree(image->data);
 	gfree(image);
 	gfree(shape);

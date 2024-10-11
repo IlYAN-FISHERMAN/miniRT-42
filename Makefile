@@ -148,7 +148,7 @@ re :
 	@make all
 
 test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g -o $(NAME) -D DEBUG=1 -I libs/betterft/includes/
+	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g -o $(NAME) -D BONUS=1 -D DEBUG=1 -I libs/betterft/includes/
 	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
