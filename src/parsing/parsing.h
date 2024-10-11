@@ -51,7 +51,7 @@ void		check_cy_info(char **str, t_minirt *minirt);
 //	get the struct for t_obj->cy
 void		get_cy(char **str, t_minirt **minirt);
 //	check the format string for light
-void		check_light_format(char **str, t_minirt **minirt, bool *bonus);
+void		check_light_format(char **str, t_minirt **minirt);
 //	get the struct for t_obj->light
 void		get_light(char **str, t_minirt **minirt);
 //	check the format string for plane

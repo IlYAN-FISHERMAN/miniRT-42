@@ -45,6 +45,8 @@ void	get_cam(char **str, t_minirt **minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Only one C accepted");
 	check_cam_format(str, minirt);
 	check_cam_range(str, minirt);
+	origin.w = POINT;
+	target.w = VECTOR;
 	if (!ft_atof_xyz(&origin.x, &origin.y, &origin.z, ft_split(str[1], ','))
 		|| !ft_atof_xyz(&target.x, &target.y, &target.z, ft_split(str[2], ',')))
 		crash_exit(*minirt,

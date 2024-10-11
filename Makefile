@@ -157,7 +157,7 @@ debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 
 debug_b : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) -I libs/betterft/includes/
-	@echo " \t$(NAME) compiled (debug) ✅"
+	@echo " \t$(NAME) compiled (debug_b) ✅"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME) -I libs/betterft/includes/
@@ -165,7 +165,7 @@ debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 
 debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) -I libs/betterft/includes/
-	@echo " \t$(NAME) compiled (debug_g) ✅"
+	@echo " \t$(NAME) compiled (debug_gb) ✅"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

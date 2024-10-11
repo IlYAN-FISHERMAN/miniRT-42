@@ -14,8 +14,8 @@ void	print_obj1(t_object *obj)
 	{
 		print_tuple(((t_cylin *)obj->data)->origin);
 		print_tuple(((t_cylin *)obj->data)->normal);
-		printf("Diameter: %.2f\nheight: %.2f\n\n",
-			((t_cylin *)obj->data)->diam, ((t_cylin *)obj->data)->height);
+		printf("Radius: %.2f\nheight: %.2f\n",
+			((t_cylin *)obj->data)->radius, ((t_cylin *)obj->data)->height);
 	}
 	else if (obj->type == o_plane)
 	{
@@ -25,7 +25,7 @@ void	print_obj1(t_object *obj)
 	else if (obj->type == o_sphere)
 	{
 		print_tuple(((t_sphere *)obj->data)->origin);
-		printf("Diameter: %.2f\n\n", 2 * ((t_sphere *)obj->data)->radius);
+		printf("Radius: %.2f\n", 2 * ((t_sphere *)obj->data)->radius);
 	}
 	else if (obj->type == o_light)
 	{
@@ -43,6 +43,15 @@ void	print_obj_main(t_scene *tmp)
 	while (tmp && tmp->content)
 	{
 		obj = tmp->content;
+		printf("-----------------------\n");
+		if (obj->type == o_cylin)
+			printf("cy :\n");
+		else if (obj->type == o_light)
+			printf("light :\n");
+		else if (obj->type == o_plane)
+			printf("pl :\n");
+		else if (obj->type == o_sphere)
+			printf("sp :\n");
 		print_obj1(obj);
 		tmp = tmp->next;
 	}

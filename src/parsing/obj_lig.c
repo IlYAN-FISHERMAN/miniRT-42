@@ -11,7 +11,7 @@ int	strchr_light(t_scene *tmp)
 	return (0);
 }
 
-void	check_light_range(char **str, t_minirt *minirt, bool *bonus)
+void	check_light_range(char **str, t_minirt *minirt)
 {
 	check_xyz_range((char *[]){"miniRT", "parsing: Light: "
 		"Bad range for xyz position\n"
@@ -19,13 +19,13 @@ void	check_light_range(char **str, t_minirt *minirt, bool *bonus)
 	if (ft_atof(str[2]) < 0.0 || ft_atof(str[2]) > 1.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Light: "
 			"Bad range for brightness\n[brightness: >0.0/<1.0]", NULL}, str[2]);
-	if (*bonus)
+	if (BONUS && str[3])
 		check_rgb_range((char *[]){"miniRT", "parsing: Light: "
 			"Bad range for rgb\n[rgb: >0/<255]", NULL}, \
 			str[3], minirt);
 }
 
-void	check_light_format_bonus(char **str, t_minirt **minirt, bool *bonus)
+void	check_light_format_bonus(char **str, t_minirt **minirt)
 {
 	if (ft_strlen_tab(str) < 3 || ft_strlen_tab(str) > 4)
 		crash_exit(*minirt,
@@ -43,14 +43,9 @@ void	check_light_format_bonus(char **str, t_minirt **minirt, bool *bonus)
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
 			"Light: Bad rgb format\n"
 			"[rgb: 0,0,0]", NULL}, str[3]);
-	if (str[3])
-		if (only_digit_xyz(str[3], *minirt))
-			*bonus = true;
-	if (!str[3])
-		*bonus = false;
 }
 
-void	check_light_format(char **str, t_minirt **minirt, bool *bonus)
+void	check_light_format(char **str, t_minirt **minirt)
 {
 	if (strchr_light((*minirt)->scene))
 		crash_exit(*minirt,
@@ -67,37 +62,32 @@ void	check_light_format(char **str, t_minirt **minirt, bool *bonus)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", "Light: Bad brightness format\n"
 			"[brightness: 0.0]", NULL}, str[2]);
-	if (str[3] && !only_digit_xyz(str[3], *minirt))
-		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
-			"Light: Bad rgb format\n"
-			"[rgb: 0,0,0]", NULL}, str[3]);
-	*bonus = false;
 }
 
 void	get_light(char **str, t_minirt **minirt)
 {
-	t_scene	*light;
-	t_light	*tmp;
-	bool	bonus;
+	t_scene		*light;
+	t_point3	pos;
+	t_color		rgb;
 
 	if (BONUS)
-		check_light_format_bonus(str, minirt, &bonus);
+		check_light_format_bonus(str, minirt);
 	else
-		check_light_format(str, minirt, &bonus);
-	check_light_range(str, *minirt, &bonus);
+		check_light_format(str, minirt);
+	check_light_range(str, *minirt);
 	light = get_scene_struct(minirt);
-	((t_object *)light->content)->data = ft_calloc(1, sizeof(t_light));
+	ft_atof_xyz(&pos.x, &pos.y, &pos.z, ft_split(str[1], ','));
+	if (BONUS && str[3])
+	{
+		if (!ft_atoi_rgb(&rgb.r, &rgb.g, &rgb.b, ft_split(str[3], ',')))
+			crash_exit(*minirt,
+				(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+	}
+	else
+		rgb = (t_color){.r = 255, .g = 255, .b = 255};
+	light->content = new_light(pos, rgb, ft_atof(str[2]));
 	if (!((t_object *)light->content))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	((t_object *)light->content)->type = o_light;
-	tmp = ((t_object *)light->content)->data;
-	ft_atof_xyz(&tmp->pos.x, &tmp->pos.y, &tmp->pos.z, ft_split(str[1], ','));
-	tmp->bright = ft_atof(str[2]);
-	if (bonus)
-		if (!ft_atoi_rgb(&tmp->rgb.r, &tmp->rgb.g, &tmp->rgb.b,
-				ft_split(str[3], ',')))
-			crash_exit(*minirt,
-				(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	ft_lstadd_back(&(*minirt)->scene, light);
 }

@@ -35,26 +35,28 @@ void	check_pl_info(char **str, t_minirt *minirt)
 
 void	get_pl(char **str, t_minirt **minirt)
 {
-	t_scene	*scene;
-	t_plane	*tmp;
+	t_scene		*scene;
+	t_color		color;
+	t_point3	origin;
+	t_vector3	normal;
 
 	check_pl_info(str, *minirt);
 	check_pl_range(str, *minirt);
 	scene = get_scene_struct(minirt);
-	((t_object *)scene->content)->data = ft_calloc(1, sizeof(t_plane));
-	if (!((t_object *)scene->content))
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	((t_object *)scene->content)->type = o_plane;
-	tmp = ((t_object *)scene->content)->data;
-	ft_atof_xyz(&tmp->origin.x, &tmp->origin.y, &tmp->origin.z,
+	origin.w = POINT;
+	normal.w = VECTOR;
+	ft_atof_xyz(&origin.x, &origin.y, &origin.z,
 		ft_split(str[1], ','));
-	ft_atof_xyz(&tmp->normal.x, &tmp->normal.y, &tmp->normal.z,
+	ft_atof_xyz(&normal.x, &normal.y, &normal.z,
 		ft_split(str[2], ','));
-	if (!ft_atoi_rgb(&tmp->color.r, &tmp->color.g, &tmp->color.b,
+	if (!ft_atoi_rgb(&color.r, &color.g, &color.b,
 			ft_split(str[3], ',')))
 		crash_exit(*minirt,
 			(char *[]){"miniRT",
 			"parsing: pl bad number format", NULL}, str[3]);
+	scene->content = new_plane(origin, normal, color);
+	if (!scene->content)
+		crash_exit(*minirt,
+			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	ft_lstadd_back(&(*minirt)->scene, scene);
 }
