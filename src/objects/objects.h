@@ -34,7 +34,6 @@ typedef struct s_object
 	t_objects_type	type;
 	void			*data;
 	t_xs			(*intersect)(t_object *, t_ray);
-	bool			(*does_intersect)(t_ray, t_object *);
 	t_vector3		(*normal_at)(t_object *, t_point3);
 	t_matrix4		transform;
 	t_mat			mat;

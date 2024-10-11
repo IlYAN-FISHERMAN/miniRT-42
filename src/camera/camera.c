@@ -6,6 +6,8 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target,
 	t_camera	*camera;
 	t_vector3	upguide;
 
+	origin.w = POINT;
+	target.w = VECTOR;
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
