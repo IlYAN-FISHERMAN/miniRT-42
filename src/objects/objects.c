@@ -39,5 +39,5 @@ bool	intersect(t_intersect *intersect, t_scene *objects)
 
 void	set_transform(t_object *obj, t_matrix4 transform)
 {
-	obj->transform = transform;
+	obj->transform = m4mul(transform, obj->transform);
 }
