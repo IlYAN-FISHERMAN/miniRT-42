@@ -32,6 +32,8 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
 	t_object	*object;
 
+	origin.w = POINT;
+	normal.w = VECTOR;
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);

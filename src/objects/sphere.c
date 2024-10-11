@@ -71,6 +71,7 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 {
 	t_object	*object;
 
+	origin.w = POINT;
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);

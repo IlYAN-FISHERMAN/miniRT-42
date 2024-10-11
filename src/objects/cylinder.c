@@ -33,6 +33,8 @@ t_object	*new_cylinder(t_point3 origin, float *rad_hei,
 {
 	t_object	*object;
 
+	origin.w = POINT;
+	normal.w = VECTOR;
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
