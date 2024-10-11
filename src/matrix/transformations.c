@@ -1,12 +1,13 @@
 #include "matrix.h"
-t_matrix4	m4default()
+
+t_matrix4	m4default(void)
 {
 	return ((t_matrix4){.data = {
-		{1, 0, 0, 0},
-		{0, 1, 0, 0},
-		{0, 0, 1, 0},
-		{0, 0, 0, 1},
-	}});
+			{1, 0, 0, 0},
+			{0, 1, 0, 0},
+			{0, 0, 1, 0},
+			{0, 0, 0, 1},
+		}});
 }
 
 t_matrix4	m4translation(t_tuple4 t)

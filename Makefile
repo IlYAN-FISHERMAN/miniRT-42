@@ -38,6 +38,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)lightning/lightning \
 		$(FILES_PATH)matrix/matrix2 \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \
@@ -84,6 +85,7 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)lightning/lightning \
 		$(FILES_PATH)matrix/matrix2 \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \

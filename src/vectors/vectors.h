@@ -111,6 +111,6 @@ t_vector3	*vnormalize(t_vector3 *v);
 //	@param v The vector
 //	@param normal The normal
 //	@return The reflected vector
-t_vector3   vreflect(t_vector3 v, t_vector3 normal);
+t_vector3	vreflect(t_vector3 v, t_vector3 normal);
 
 #endif
