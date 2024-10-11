@@ -43,6 +43,7 @@ int	main(void)
 }
 */
 
+
 int    main(void)
 {
 	t_point3	ray_origin;
@@ -58,9 +59,9 @@ int    main(void)
 
 	shape = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
 	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
-	amb = (t_amb){.light = 0.2, .rgb = color(255, 255, 255),
+	amb = (t_amb){.light = 0.1, .rgb = color(255, 255, 255),
 		.is_calc = false};
-	ray_origin = point3(0, 0, -5);
+	ray_origin = point3(0, 0, -10);
 	wall_z = 10;
 	wall_size = 7;
 	canvas_pixels = 500;
@@ -89,7 +90,7 @@ int    main(void)
 		}
 	}
 	void *mlx = mlx_init();
-	void *win = mlx_new_window(mlx, canvas_pixels, canvas_pixels, "Hello world!");
+	void *win = mlx_new_window(mlx, canvas_pixels, canvas_pixels, "miniRT !");
 	for (int i = 0; i < canvas_pixels; i++)
 	{
 		for (int j = 0; j < canvas_pixels; j++)
@@ -105,32 +106,21 @@ int    main(void)
 	return (0);
 }
 
-/*int	main(void)
+
+/*int    main(void)
 {
 	t_object	*obj;
 	t_object	*light;
+	t_vector3	eyev;
+	t_vector3	normalv;
+	t_color		color_;
 	t_amb		amb;
-	void		*mlx;
-	void		*win;
 
-	obj = new_sphere(point3(0, 0, 0), 1, color(255, 51, 255));
-	light = new_light(point3(-10, 10, -10), color(255, 255, 255), 1);
-	amb = (t_amb){.light = 0.2, .rgb = color(255, 255, 255),
-		.is_calc = true, .c_rgb = color_scalar(color(255, 255, 255), 0.2)};
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 600, 600, "Hello world!");
-	for (int i = 0; i < 600; i++)
-	{
-		for (int j = 0; j < 600; j++)
-		{
-			t_ray r = ray(point3(0, 0, -5), point3(0, 0, 1));
-			t_lightning ln = new_lightning(*(t_light *)light->data, point3(0, 0, 0), vneg(r.direction), vnormalized(vsub(point3(0, 0, 0), point3(0, 0, 0))));
-			t_color c = lightning(obj, &amb, ln);
-			mlx_pixel_put(mlx, win, i, j, color_hex(c));
-		}
-	}
-	mlx_loop(mlx);
-	gfree(obj);
-	gfree(light);
-	return (0);
+	obj = new_sphere(point3(0, 0, 0), 1, color(255,255,255));
+	light = new_light(point3(0, 0, -10), color(255,255,255), 1);
+	eyev = vector3(0, sqrtf(2) / 2, -sqrtf(2) / 2);
+	normalv = vector3(0, 0, -1);
+	amb = (t_amb){.rgb = color(255,255,255), .light = 0.1, .is_calc = false};
+	color_ = lightning(obj, &amb, new_lightning(*(t_light *)light->data, point3(0, 0, 0), eyev, normalv));
+	printf("%f %f %f\n", color_.r / 256.0f, color_.g / 256.0f, color_.b / 256.0f);
 }*/
