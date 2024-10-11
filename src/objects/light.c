@@ -4,6 +4,7 @@ t_object	*new_light(t_point3 pos, t_color rgb, float bright)
 {
 	t_object	*object;
 
+	pos.w = POINT;
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
@@ -13,11 +14,9 @@ t_object	*new_light(t_point3 pos, t_color rgb, float bright)
 		gfree(object);
 		return (0);
 	}
-	((t_light *)object->data)->pos = pos;
-	((t_light *)object->data)->rgb = rgb;
-	((t_light *)object->data)->bright = bright;
-	((t_light *)object->data)->c_rgb = color_scalar(rgb, bright);
-	((t_light *)object->data)->is_calc = true;
+	*((t_light *)object->data) = (t_light){.rgb = rgb, .pos = pos,
+		.bright = bright, .c_rgb = color_scalar(rgb, bright),
+		.is_calc = true};
 	object->type = o_light;
 	return (object);
 }

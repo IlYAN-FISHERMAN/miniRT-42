@@ -1,67 +1,52 @@
 #include "plane.h"
 
-t_plane	*new_raw_plane(t_point3 origin, t_vector3 normal, t_color color)
+//  intersect_plane: Check if ray intersects plane
+//  @param intersect The intersection data
+//  @param object The object to check
+//  @return true if the ray intersects the plane, false otherwise
+static t_xs	intersect_plane(t_object *object, t_ray ray)
 {
-	t_plane	*plane;
+	t_xs	xs;
 
-	plane = galloc(sizeof(t_plane));
-	if (!plane)
-		return (0);
-	plane->origin = origin;
-	plane->normal = normal;
-	plane->color = color;
-	return (plane);
+	ft_bzero(&xs, sizeof(t_xs));
+	(void)object;
+	(void)ray;
+	return (xs);
+}
+
+//  normal_at_plane: Get the normal at a point on the plane
+//  @param object The object
+//  @param world_point The point on the plane
+//  @return The normal at the point
+static t_vector3	normal_at_plane(t_object *object, t_point3 world_point)
+{
+	t_vector3	v;
+
+	ft_bzero(&v, sizeof(t_vector3));
+	(void)object;
+	(void)world_point;
+	return (v);
 }
 
 t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
-	t_plane		*plane;
 	t_object	*object;
 
-	plane = new_raw_plane(origin, normal, color);
-	if (!plane)
-		return (0);
+	origin.w = POINT;
+	normal.w = VECTOR;
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
-	object->type = o_plane;
-	object->data = plane;
-	object->intersect = 0; // need to refactor intersect_plane
-	object->does_intersect = does_intersect_plane;
+	object->data = galloc(sizeof(t_plane));
+	if (!object->data)
+	{
+		gfree(object);
+		return (0);
+	}
+	*((t_plane *)object->data) = (t_plane){.origin = origin,
+		.normal = normal, .color = color};
+	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
+		.transform = m4default(), .intersect = intersect_plane,
+		.type = o_plane, .normal_at = normal_at_plane};
 	return (object);
-}
-
-bool	intersect_plane(t_intersect *intersect, t_object *object)
-{
-	t_plane	*plane;
-	float	dotn;
-	float	t;
-
-	plane = (t_plane *)object->data;
-	dotn = vdot(intersect->ray.direction, plane->normal);
-	if (dotn == 0.0f)
-		return (false);
-	t = vdot(vsub(plane->origin, intersect->ray.origin), plane->normal) / dotn;
-	if (t <= RAY_T_MIN || t >= intersect->t)
-		return (false);
-	intersect->t = t;
-	intersect->object = object;
-	intersect->color = plane->color;
-	return (true);
-}
-
-bool	does_intersect_plane(t_ray ray, t_object *object)
-{
-	t_plane	*plane;
-	float	dotn;
-	float	t;
-
-	plane = (t_plane *)object->data;
-	dotn = vdot(ray.direction, plane->normal);
-	if (dotn == 0.0f)
-		return (false);
-	t = vdot(vsub(plane->origin, ray.origin), plane->normal) / dotn;
-	if (t <= RAY_T_MIN || t >= RAY_T_MAX)
-		return (false);
-	return (true);
 }

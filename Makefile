@@ -44,6 +44,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
 		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
@@ -91,6 +92,7 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
 		$(FILES_PATH)matrix/transformations \
+		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
 		$(FILES_PATH)objects/sphere \
