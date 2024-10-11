@@ -1,13 +1,10 @@
 #include "cylinder.h"
 
-//  intersect_cylinder: Check if ray intersects cylinder and update
-//  intersection data
+//  intersect_cylinder: Check if ray intersects cylinder
 //  @param intersect The intersection data
 //  @param object The object to check
-//	math: if t1 > RAY_T_MIN && t1 < intersect->t, intersect->t = t1
-//	math: if t2 > RAY_T_MIN && t2 < intersect->t, intersect->t = t2
 //  @return true if the ray intersects the cylinder, false otherwise
-t_xs	intersect_cylinder(t_object *object, t_ray ray)
+static t_xs	intersect_cylinder(t_object *object, t_ray ray)
 {
 	t_xs	xs;
 
@@ -21,7 +18,7 @@ t_xs	intersect_cylinder(t_object *object, t_ray ray)
 //  @param object The object
 //  @param world_point The point on the cylinder
 //  @return The normal at the point
-t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
+static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
 {
 	t_vector3	v;
 
