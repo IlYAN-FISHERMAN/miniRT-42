@@ -23,10 +23,4 @@ typedef struct s_size
 //  @return A new allocated image
 t_image	*new_image(int width, int height);
 
-//	ray_trace: Trace rays through the scene
-//	@param image The image to render to
-//	@param camera The camera to render from
-//	@param scene The scene to render
-void	ray_trace(t_image *image, t_camera *camera, t_scene *scene);
-
 #endif

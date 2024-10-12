@@ -6,16 +6,16 @@
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
 //	@param obj The object to check
-static t_xs	find_intersection(float a, float b, float c, t_object *obj)
+static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
 {
-	t_xs	inters;
+	t_xs_parent	inters;
 	float	discriminant;
 	float	t1;
 	float	t2;
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
-		return ((t_xs){0});
+		return ((t_xs_parent){0});
 	t1 = (-b - sqrtf(discriminant)) / (2 * a);
 	t2 = (-b + sqrtf(discriminant)) / (2 * a);
 	inters = xs();
@@ -31,16 +31,16 @@ static t_xs	find_intersection(float a, float b, float c, t_object *obj)
 //	math: if t1 > RAY_T_MIN && t1 < intersect->t, intersect->t = t1
 //	math: if t2 > RAY_T_MIN && t2 < intersect->t, intersect->t = t2
 //  @return true if the ray intersects the sphere, false otherwise
-static t_xs	intersect_sphere(t_object *object, t_ray ray)
+static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
-	t_xs		inters;
+	t_xs_parent		inters;
 	float		a;
 	float		b;
 	float		c;
 	t_point3	sphere_to_ray;
 
 	ray = transform(ray, m4invert(object->transform, 0));
-	ft_bzero(&inters, sizeof(t_xs));
+	ft_bzero(&inters, sizeof(t_xs_parent));
 	sphere_to_ray = vsub(ray.origin, ((t_sphere *)object->data)->origin);
 	a = vdot(ray.direction, ray.direction);
 	b = 2 * (vdot(ray.direction, sphere_to_ray));

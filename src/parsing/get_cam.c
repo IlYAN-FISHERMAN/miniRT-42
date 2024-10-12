@@ -52,11 +52,9 @@ void	get_cam(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	if ((*minirt)->size)
-		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]),
-				(float)((*minirt)->size->width / (*minirt)->size->height));
+		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]));
 	else
-		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]),
-				(float)WIDTH / HEIGHT);
+		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]));
 	if (!(*minirt)->cam)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");

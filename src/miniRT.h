@@ -9,7 +9,9 @@
 # include "color/color.h"
 # include "generator/rt_generate.h"
 # include "objects/shape.h"
-# include "lightning/lightning.h"
+# include "compute/lightning.h"
+# include "world/world.h"
+# include "compute/compute.h"
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f

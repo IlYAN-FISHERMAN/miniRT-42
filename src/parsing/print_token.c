@@ -69,7 +69,7 @@ void	print_token(t_minirt *rt, t_scene *tmp)
 	if (rt->cam)
 		printf("C: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f\nFOV: %2.f\n\n",
 			rt->cam->origin.x, rt->cam->origin.y, rt->cam->origin.z,
-			rt->cam->forward.x, rt->cam->forward.y, rt->cam->forward.z,
+			rt->cam->target.x, rt->cam->target.y, rt->cam->target.z,
 			rt->cam->fov);
 	if (tmp)
 		print_obj_main(tmp);

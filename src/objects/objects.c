@@ -1,4 +1,5 @@
 #include "objects.h"
+#include "../camera/camera.h"
 
 t_mat	material(t_color color, float diff,
 	float spec, float shininess)
@@ -31,4 +32,9 @@ bool	intersect(t_intersect *intersect, t_scene *objects)
 void	set_transform(t_object *obj, t_matrix4 transform)
 {
 	obj->transform = m4mul(transform, obj->transform);
+}
+
+void	transform_camera(t_camera *camera, t_matrix4 transform)
+{
+	camera->transform = m4mul(transform, camera->transform);
 }

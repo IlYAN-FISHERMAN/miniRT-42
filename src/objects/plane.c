@@ -4,11 +4,11 @@
 //  @param intersect The intersection data
 //  @param object The object to check
 //  @return true if the ray intersects the plane, false otherwise
-static t_xs	intersect_plane(t_object *object, t_ray ray)
+static t_xs_parent	intersect_plane(t_object *object, t_ray ray)
 {
-	t_xs	xs;
+	t_xs_parent	xs;
 
-	ft_bzero(&xs, sizeof(t_xs));
+	ft_bzero(&xs, sizeof(t_xs_parent));
 	(void)object;
 	(void)ray;
 	return (xs);
