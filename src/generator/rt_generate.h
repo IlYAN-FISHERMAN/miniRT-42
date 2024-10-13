@@ -34,10 +34,10 @@ int	gener_win(char *height, char *width, int fd);
 int	gener_cam(int fd);
 
 int	ran_int(int min, int max, int fd);
-int	ran_float(int min, int max, int fd);
+int	ran_double(int min, int max, int fd);
 
 int	put_xyz_int(int fd, int min, int max);
-int	put_xyz_float(int fd, int min, int max);
+int	put_xyz_double(int fd, int min, int max);
 
 int	exit_generator(int fd, const char *name);
 

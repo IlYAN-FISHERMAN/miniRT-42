@@ -9,7 +9,7 @@ t_comps	precompute(t_intersect *i, t_ray r)
 	comps.point = ray_at(r, comps.t);
 	comps.eyev = vneg(r.direction);
 	comps.normalv = comps.object->normal_at(i->object, comps.point);
-	if (vdot(comps.normalv, comps.eyev) < 0 && !ft_equalsf(comps.t, 0))
+	if (vdot(comps.normalv, comps.eyev) < 0 && !ft_equalsd(comps.t, 0))
 	{
 		comps.inside = true;
 		comps.normalv = vneg(comps.normalv);
@@ -48,7 +48,7 @@ t_color	color_at(t_scene *scene, t_amb *amb, t_ray r)
 	xs_parent = intersect_world(scene, r);
 	i = hit(xs_parent);
 	if (!i)
-		return (amb->c_rgb);
+		return (color(0, 0, 0));
 	comps = precompute(i, r);
 	gfree(xs_parent.xs);
 	return (shade_hit(scene, amb, comps));

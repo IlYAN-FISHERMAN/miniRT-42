@@ -30,10 +30,10 @@ t_matrix4	m4scaling(t_tuple4 t)
 		}});
 }
 
-t_matrix4	m4rotating(float radian, t_axis axis)
+t_matrix4	m4rotating(double radian, t_axis axis)
 {
-	float	cosr;
-	float	sinr;
+	double	cosr;
+	double	sinr;
 
 	cosr = cosf(radian);
 	sinr = sinf(radian);

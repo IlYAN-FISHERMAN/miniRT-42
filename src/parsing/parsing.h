@@ -21,10 +21,10 @@ int			correct_dl(char *gnl);
 void		get_size_default(t_minirt **minirt);
 //	check basic error for parsing
 void		check_error(int ac, char **av, t_minirt *minirt);
-//	return a conver float of the string av
-float		ft_atof(char *str);
-//	do a ft_atof of x, y and z float. with a splited str gonna be free
-int			ft_atof_xyz(float *x, float *y, float *z, char **str);
+//	return a conver double of the string av
+double		ft_atof(char *str);
+//	do a ft_atof of x, y and z double. with a splited str gonna be free
+int			ft_atof_xyz(double *x, double *y, double *z, char **str);
 //	do a ft_atoi of x, y and z int. with a splited str gonna be free
 int			ft_atoi_xyz(int *x, int *y, int *z, char **str);
 //	check the format string of ambiance
@@ -64,13 +64,13 @@ void		check_sp_info(char **str, t_minirt *minirt);
 void		get_sp(char **str, t_minirt **minirt);
 //	return (1) if the string is a int else return (0)
 int			only_digit(char *str);
-//	return (1) if the string is a float else return (0)
-int			only_float(char *str);
+//	return (1) if the string is a double else return (0)
+int			only_double(char *str);
 //	return (1) if the string "split" is a 0,0,0 format with only three int
 int			only_digit_xyz(char *split, t_minirt *minirt);
 //	return (1) if the string "split" is a 0.0,0.0,0.0 format
-//	with only three float
-int			only_float_xyz(char *split, t_minirt *minirt);
+//	with only three double
+int			only_double_xyz(char *split, t_minirt *minirt);
 //	the second function for check et pars the object in the fd
 void		pars_obj(char **str, t_minirt **minirt);
 //	the principal function for the parsing

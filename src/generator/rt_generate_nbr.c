@@ -29,7 +29,7 @@ int	gener_int(int min, int max)
 	return (min + rand() % (max - min + 1));
 }
 
-int	ran_float(int min, int max, int fd)
+int	ran_double(int min, int max, int fd)
 {
 	char	*str;
 	int		nb;

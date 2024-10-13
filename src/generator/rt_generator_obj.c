@@ -15,10 +15,10 @@
 int	gener_sp(int fd)
 {
 	ft_putstr_fd("sp    ", fd);
-	if (!put_xyz_float(fd, -10, 10))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_float(0, 20, fd))
+	if (!ran_double(0, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 256))
@@ -30,16 +30,16 @@ int	gener_sp(int fd)
 int	gener_cy(int fd)
 {
 	ft_putstr_fd("cy    ", fd);
-	if (!put_xyz_float(fd, -10, 10))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_float(fd, -1, 1))
+	if (!put_xyz_double(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_float(0, 30, fd))
+	if (!ran_double(0, 30, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_float(0, 30, fd))
+	if (!ran_double(0, 30, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 256))
@@ -51,10 +51,10 @@ int	gener_cy(int fd)
 int	gener_pl(int fd)
 {
 	ft_putstr_fd("pl    ", fd);
-	if (!put_xyz_float(fd, -10, 10))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_float(fd, -1, 1))
+	if (!put_xyz_double(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 256))

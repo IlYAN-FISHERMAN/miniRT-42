@@ -13,7 +13,7 @@ typedef struct s_ray
 {
 	t_point3		origin;
 	t_vector3		direction;
-	float			t;	// to remove once the rework is done
+	double			t;	// to remove once the rework is done
 }	t_ray;
 
 //	ray: Create a new stack-allocated ray
@@ -27,7 +27,7 @@ t_ray		ray(t_point3 origin, t_vector3 direction);
 //  @param t The t value to calculate the point at
 //  math: p + t * d
 //  @return The point at the given t value along the ray
-t_point3	ray_at(t_ray ray, float t);
+t_point3	ray_at(t_ray ray, double t);
 
 //	transform: Transform a ray by a matrix
 //  @param r The ray to transform

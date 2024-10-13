@@ -31,11 +31,11 @@ void	check_light_format_bonus(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing: Light: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [brightness: 0.0] [bonus][rgb: 0.0.0]\n");
-	if (!only_digit_xyz(str[1], *minirt) && !only_float_xyz(str[1], *minirt))
+	if (!only_digit_xyz(str[1], *minirt) && !only_double_xyz(str[1], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
 			"Light: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float(str[2]) && !only_digit(str[2]))
+	if (!only_double(str[2]) && !only_digit(str[2]))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", "Light: Bad brightness format\n"
 			"[brightness: 0.0]", NULL}, str[2]);
@@ -54,11 +54,11 @@ void	check_light_format(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing: Light: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [brightness: 0.0] [bonus][rgb: 0.0.0]\n");
-	if (!only_digit_xyz(str[1], *minirt) && !only_float_xyz(str[1], *minirt))
+	if (!only_digit_xyz(str[1], *minirt) && !only_double_xyz(str[1], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
 			"Light: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float(str[2]) && !only_digit(str[2]))
+	if (!only_double(str[2]) && !only_digit(str[2]))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", "Light: Bad brightness format\n"
 			"[brightness: 0.0]", NULL}, str[2]);

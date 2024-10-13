@@ -1,8 +1,8 @@
 #include "objects.h"
 #include "../camera/camera.h"
 
-t_mat	material(t_color color, float diff,
-	float spec, float shininess)
+t_mat	material(t_color color, double diff,
+	double spec, double shininess)
 {
 	return ((t_mat){
 		.color = color,

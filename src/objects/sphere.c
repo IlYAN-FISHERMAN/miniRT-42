@@ -6,17 +6,18 @@
 //	@param b The b value of the quadratic equation
 //	@param c The c value of the quadratic equation
 //	@param obj The object to check
-static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
+static t_xs_parent	find_intersection(double a, double b,
+		double c, t_object *obj)
 {
 	t_xs_parent	inters;
-	float		discriminant;
-	float		t1;
-	float		t2;
+	double		discriminant;
+	double		t1;
+	double		t2;
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
 		return ((t_xs_parent){0});
-	discriminant = sqrtf(discriminant);
+	discriminant = sqrt(discriminant);
 	t1 = (-b - discriminant) / (2 * a);
 	t2 = (-b + discriminant) / (2 * a);
 	inters = xs();
@@ -35,9 +36,9 @@ static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
 static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
-	float			a;
-	float			b;
-	float			c;
+	double			a;
+	double			b;
+	double			c;
 	t_point3		sphere_to_ray;
 
 	ray = transform(ray, object->inv_transform);
@@ -68,7 +69,7 @@ static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 	return (world_n);
 }
 
-t_object	*new_sphere(t_point3 origin, float radius, t_color color)
+t_object	*new_sphere(t_point3 origin, double radius, t_color color)
 {
 	t_object	*object;
 

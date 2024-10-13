@@ -18,7 +18,7 @@ void	process_camera(t_camera *camera)
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 }
 
-t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
+t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 {
 	t_camera	*camera;
 	t_minirt	*minirt;
@@ -27,7 +27,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 	origin.w = POINT;
 	target.w = VECTOR;
 	up = vector3(0, 1, 0);
-	if (fabsf(target.x) < EPSILONF && fabsf(target.z) < EPSILONF)
+	if (fabs(target.x) < EPSILONF && fabs(target.z) < EPSILONF)
 	{
 		if (target.y > 0)
 			up = vector3(0, 0, -1);
@@ -69,8 +69,8 @@ t_matrix4	view_transform(t_point3 from, t_point3 to, t_vector3 up)
 
 t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 {
-	float			w_x;
-	float			w_y;
+	double			w_x;
+	double			w_y;
 	static t_point3	origin;
 	static bool		origin_set = false;
 	t_vector3		direction;
@@ -92,20 +92,25 @@ void	render(void)
 	t_minirt	*minirt;
 	int			x;
 	int			y;
+	int			percent[2];
 	t_color		color;
-	t_ray		r;
 
-	y = -1;
 	minirt = get_minirt();
+	percent[0] = 0;
+	percent[1] = minirt->size->height * minirt->size->width;
 	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
 	minirt->amb->is_calc = true;
+	y = -1;
 	while (++y, y < minirt->size->height)
 	{
 		x = -1;
 		while (++x, x < minirt->size->width)
 		{
-			r = ray_for_pixel(minirt->cam, x, y);
-			color = color_at(minirt->scene, minirt->amb, r);
+			percent[0]++;
+			if (!(percent[0] % 100000))
+				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
+			color = color_at(minirt->scene, minirt->amb,
+					ray_for_pixel(minirt->cam, x, y));
 			minirt->size->data[y][x] = color_hex(color);
 		}
 	}

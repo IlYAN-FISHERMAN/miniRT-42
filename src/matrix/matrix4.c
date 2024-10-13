@@ -36,19 +36,19 @@ t_matrix4	m4transpose(t_matrix4 m)
 	return (res);
 }
 
-float	m4minor(t_matrix4 m, int row, int col)
+double	m4minor(t_matrix4 m, int row, int col)
 {
 	return (m3det(m3subm(m, row, col)));
 }
 
-float	m4cofactor(t_matrix4 m, int row, int col)
+double	m4cofactor(t_matrix4 m, int row, int col)
 {
 	if ((row + col) % 2)
 		return (-m4minor(m, row, col));
 	return (m4minor(m, row, col));
 }
 
-float	m4det(t_matrix4 m)
+double	m4det(t_matrix4 m)
 {
 	return (
 		m.data[0][0] * (m.data[1][1] * (m.data[2][2] * m.data[3][3] -

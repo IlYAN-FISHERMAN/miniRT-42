@@ -1,6 +1,6 @@
 #include "light.h"
 
-t_object	*new_light(t_point3 pos, t_color rgb, float bright)
+t_object	*new_light(t_point3 pos, t_color rgb, double bright)
 {
 	t_object	*object;
 

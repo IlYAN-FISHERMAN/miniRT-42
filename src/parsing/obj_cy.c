@@ -27,18 +27,18 @@ void	check_cy_info(char **str, t_minirt *minirt)
 			(char *[]){"miniRT", "parsing: Cy: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0]"
 			" [radius: 0.0] [height: 0.0] [rgb: 0.0.0]\n");
-	if (!only_float_xyz(str[1], minirt))
+	if (!only_double_xyz(str[1], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Cy: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float_xyz(str[2], minirt))
+	if (!only_double_xyz(str[2], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Cy: Bad vector "
 			"format\n[vector: 0.0,0.0,0.0]", NULL}, str[2]);
-	if (!only_float(str[3]) && !only_digit(str[3]))
+	if (!only_double(str[3]) && !only_digit(str[3]))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", "Cy: Bad radius format\n"
 			"[radius: 0.0]", NULL}, str[3]);
-	if (!only_float(str[4]) && !only_digit(str[4]))
+	if (!only_double(str[4]) && !only_digit(str[4]))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", "Cy: Bad height format\n"
 			"[height: 0.0]", NULL}, str[4]);
@@ -51,7 +51,7 @@ void	check_cy_info(char **str, t_minirt *minirt)
 void	get_cy(char **str, t_minirt **minirt)
 {
 	t_scene		*scene;
-	float		rad_hei[2];
+	double		rad_hei[2];
 	t_vector3	normal;
 	t_point3	origin;
 	t_color		color;

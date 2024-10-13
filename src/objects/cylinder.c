@@ -28,7 +28,7 @@ static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
 	return (v);
 }
 
-t_object	*new_cylinder(t_point3 origin, float *rad_hei,
+t_object	*new_cylinder(t_point3 origin, double *rad_hei,
 				t_vector3 normal, t_color color)
 {
 	t_object	*object;

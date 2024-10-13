@@ -7,8 +7,8 @@ typedef struct s_cylin
 {
 	t_vector3	origin;
 	t_vector3	normal;
-	float		radius;
-	float		height;
+	double		radius;
+	double		height;
 	t_color		rgb;
 }	t_cylin;
 
@@ -18,7 +18,7 @@ typedef struct s_cylin
 //	@param height The height of the cylinder
 //	@param normal The normal of the cylinder
 //  @return A new cylinder object
-t_object		*new_cylinder(t_point3 origin, float *rad_hei,
+t_object		*new_cylinder(t_point3 origin, double *rad_hei,
 					t_vector3 normal, t_color color);
 
 #endif

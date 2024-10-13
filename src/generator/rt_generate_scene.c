@@ -15,7 +15,7 @@
 int	gener_amb(int fd)
 {
 	ft_putstr_fd("A    ", fd);
-	if (!ran_float(0, 1, fd))
+	if (!ran_double(0, 1, fd))
 		return (0);
 	ft_putstr_fd("    ", fd);
 	if (!put_xyz_int(fd, 0, 256))
@@ -27,10 +27,10 @@ int	gener_amb(int fd)
 int	gener_lig(int fd, bool	bonus)
 {
 	ft_putstr_fd("L    ", fd);
-	if (!put_xyz_float(fd, -10, 10))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_float(0, 1, fd))
+	if (!ran_double(0, 1, fd))
 		return (0);
 	if (bonus)
 	{
