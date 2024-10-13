@@ -13,7 +13,13 @@ static int	handle_key(int key, t_minirt *minirt)
 		|| key == KEY_SHIFT || key == KEY_R)
 		camera_move(key);
 	else if (key == KEY_ENTER)
+	{
+		printf("C %f,%f,%f %f,%f,%f %f\n", minirt->cam->origin.x,
+			minirt->cam->origin.y, minirt->cam->origin.z,
+			minirt->cam->target.x, minirt->cam->target.y,
+			minirt->cam->target.z, minirt->cam->fov);
 		render();
+	}
 	return (0);
 }
 
