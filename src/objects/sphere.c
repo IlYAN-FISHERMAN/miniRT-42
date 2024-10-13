@@ -9,9 +9,9 @@
 static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
 {
 	t_xs_parent	inters;
-	float	discriminant;
-	float	t1;
-	float	t2;
+	float		discriminant;
+	float		t1;
+	float		t2;
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
@@ -35,10 +35,10 @@ static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
 static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
-	float		a;
-	float		b;
-	float		c;
-	t_point3	sphere_to_ray;
+	float			a;
+	float			b;
+	float			c;
+	t_point3		sphere_to_ray;
 
 	ray = transform(ray, object->inv_transform);
 	ft_bzero(&inters, sizeof(t_xs_parent));
@@ -87,7 +87,8 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
 		.intersect = intersect_sphere, .type = o_sphere,
 		.normal_at = normal_at_sphere};
-	object->transform = m4mul(m4translation(origin), m4scaling(vector3(radius, radius, radius)));
+	object->transform = m4mul(m4translation(origin),
+			m4scaling(vector3(radius, radius, radius)));
 	object->inv_transform = m4invert(object->transform, 0);
 	object->tinv_transform = m4transpose(object->inv_transform);
 	return (object);

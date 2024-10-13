@@ -48,7 +48,7 @@ t_color	color_at(t_scene *scene, t_amb *amb, t_ray r)
 	xs_parent = intersect_world(scene, r);
 	i = hit(xs_parent);
 	if (!i)
-		return (color(0, 0, 0));
+		return (amb->c_rgb);
 	comps = precompute(i, r);
 	gfree(xs_parent.xs);
 	return (shade_hit(scene, amb, comps));
