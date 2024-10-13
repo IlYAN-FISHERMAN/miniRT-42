@@ -53,7 +53,7 @@ void	camera_move(int key)
 		cam->target = vector3(0, 0, 1);
 	}
 	else if (key == KEY_D || key == KEY_A || key == KEY_W || key == KEY_S
-		|| key == KEY_SPACE || key == KEY_D)
+		|| key == KEY_SPACE || key == KEY_SHIFT)
 		camera_pos_move(key, cam);
 	else if (key == KEY_LEFT || key == KEY_UP
 		|| key == KEY_RIGHT || key == KEY_DOWN)
