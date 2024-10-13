@@ -3,9 +3,17 @@
 #include "exit_handler/exit_handler.h"
 #include "parsing/parsing.h"
 
+static int	handle_key(int key, t_minirt *minirt)
+{
+	if (key == 53 || key == 65307)
+		secure_exit(minirt);
+	return (0);
+}
+
 static void	init_hooks(t_minirt *minirt)
 {
 	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
+	mlx_key_hook(minirt->win.windo, handle_key, minirt);
 }
 
 void	*init_minirt_mlx(t_minirt *minirt)
