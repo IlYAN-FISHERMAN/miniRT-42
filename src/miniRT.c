@@ -5,8 +5,15 @@
 
 static int	handle_key(int key, t_minirt *minirt)
 {
-	if (key == 53 || key == 65307)
+	if (key == KEY_ESC)
 		secure_exit(minirt);
+	else if (key == KEY_D || key == KEY_A || key == KEY_W
+		|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
+		|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
+		|| key == KEY_SHIFT || key == KEY_R)
+		camera_move(key);
+	else if (key == KEY_ENTER)
+		render();
 	return (0);
 }
 

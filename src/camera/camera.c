@@ -72,15 +72,15 @@ t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 	double			w_x;
 	double			w_y;
 	static t_point3	origin;
-	static bool		origin_set = false;
+	static t_camera	*cam;
 	t_vector3		direction;
 
 	w_x = camera->half_width - ((x + 0.5) * camera->pixel_size);
 	w_y = camera->half_height - ((y + 0.5) * camera->pixel_size);
-	if (!origin_set)
+	if (cam != camera)
 	{
 		origin = tm4mul(camera->inv_transform, point3(0, 0, 0));
-		origin_set = true;
+		cam = camera;
 	}
 	direction = vnormalized(vsub(tm4mul(camera->inv_transform,
 					point3(w_x, w_y, -1)), origin));
