@@ -92,20 +92,25 @@ void	render(void)
 	t_minirt	*minirt;
 	int			x;
 	int			y;
+	int			percent[2];
 	t_color		color;
-	t_ray		r;
 
-	y = -1;
 	minirt = get_minirt();
+	percent[0] = 0;
+	percent[1] = minirt->size->height * minirt->size->width;
 	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
 	minirt->amb->is_calc = true;
+	y = -1;
 	while (++y, y < minirt->size->height)
 	{
 		x = -1;
 		while (++x, x < minirt->size->width)
 		{
-			r = ray_for_pixel(minirt->cam, x, y);
-			color = color_at(minirt->scene, minirt->amb, r);
+			percent[0]++;
+			if (!(percent[0] % 100000))
+				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
+			color = color_at(minirt->scene, minirt->amb,
+					ray_for_pixel(minirt->cam, x, y));
 			minirt->size->data[y][x] = color_hex(color);
 		}
 	}

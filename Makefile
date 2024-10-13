@@ -35,6 +35,7 @@ LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
 
 FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
+		$(FILES_PATH)camera/camera_utils \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
 		$(FILES_PATH)matrix/matrix2 \
@@ -87,6 +88,7 @@ CFILES = $(FILES:%=%.c)
 
 FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)camera/camera \
+		$(FILES_PATH)camera/camera_utils \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
 		$(FILES_PATH)matrix/matrix2 \

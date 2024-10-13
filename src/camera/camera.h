@@ -46,4 +46,8 @@ t_ray		ray_for_pixel(t_camera *camera, int x, int y);
 //  @return The image rendered by the camera
 void		render(void);
 
+//	print_percent: Print the percentage of the rendering
+//  @param info The information to print
+void		print_percent(char *info);
+
 #endif
