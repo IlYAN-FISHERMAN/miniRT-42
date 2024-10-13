@@ -2,6 +2,7 @@
 # define MINIRT_H
 
 # include "betterft.h"
+# include "camera/render.h"
 # include "camera/camera.h"
 # include "camera/image.h"
 # include "objects/objects.h"

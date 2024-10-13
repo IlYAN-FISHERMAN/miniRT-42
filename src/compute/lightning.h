@@ -9,6 +9,7 @@ typedef struct s_lightning
 	t_point3	p;
 	t_vector3	ev;
 	t_vector3	nv;
+	t_amb		*amb;
 }	t_lightning;
 
 //	new_lightning: Create a new lightning object
@@ -21,12 +22,10 @@ t_lightning		new_lightning(t_object *l, t_point3 p,
 					t_vector3 ev, t_vector3 nv);
 //	lightning: Calculate the lightning of an object
 //	@param obj The object to calculate the lightning for
-//	@param amb The ambient data
 //	@param ln The lightning data
 //	@param in_shadow If the object is in shadow
 //	@return The color of the object
-t_color			lightning(t_object *obj, t_amb *amb, t_lightning ln,
-					bool in_shadow);
+t_color			lightning(t_object *obj, t_lightning ln, bool in_shadow);
 
 //	is_shadowed: Check if a point is in shadow
 //	@param scene The scene

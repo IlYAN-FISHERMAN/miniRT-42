@@ -39,7 +39,7 @@ t_lightning	new_lightning(t_object *l, t_point3 p, t_vector3 ev, t_vector3 nv)
 		.p = p, .ev = ev, .nv = nv});
 }
 
-t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln, bool in_shadow)
+t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow)
 {
 	t_color		eff_color;
 	t_vector3	lightv;
@@ -47,7 +47,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln, bool in_shadow)
 	t_color		ambc;
 
 	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);
-	ambc = color_mult(ambience(amb), eff_color);
+	ambc = color_mult(ambience(ln.amb), eff_color);
 	if (in_shadow)
 		return (ambc);
 	lightv = vnormalized(vsub(((t_light *)(ln.l->data))->pos, ln.p));
