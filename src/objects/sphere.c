@@ -16,8 +16,9 @@ static t_xs_parent	find_intersection(float a, float b, float c, t_object *obj)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0.0f)
 		return ((t_xs_parent){0});
-	t1 = (-b - sqrtf(discriminant)) / (2 * a);
-	t2 = (-b + sqrtf(discriminant)) / (2 * a);
+	discriminant = sqrtf(discriminant);
+	t1 = (-b - discriminant) / (2 * a);
+	t2 = (-b + discriminant) / (2 * a);
 	inters = xs();
 	add_intersection(&inters, intersection(t1, obj));
 	add_intersection(&inters, intersection(t2, obj));
@@ -39,7 +40,7 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 	float		c;
 	t_point3	sphere_to_ray;
 
-	ray = transform(ray, m4invert(object->transform, 0));
+	ray = transform(ray, object->inv_transform);
 	ft_bzero(&inters, sizeof(t_xs_parent));
 	sphere_to_ray = vsub(ray.origin, ((t_sphere *)object->data)->origin);
 	a = vdot(ray.direction, ray.direction);
@@ -59,9 +60,9 @@ static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 	t_point3	object_n;
 	t_point3	world_n;
 
-	object_p = tm4mul(m4invert(object->transform, 0), world_point);
+	object_p = tm4mul(object->inv_transform, world_point);
 	object_n = vsub(object_p, ((t_sphere *)object->data)->origin);
-	world_n = tm4mul(m4transpose(m4invert(object->transform, 0)), object_n);
+	world_n = tm4mul(object->tinv_transform, object_n);
 	world_n.w = VECTOR;
 	vnormalize(&world_n);
 	return (world_n);
@@ -81,10 +82,13 @@ t_object	*new_sphere(t_point3 origin, float radius, t_color color)
 		gfree(object);
 		return (0);
 	}
-	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
-		.radius = radius};
+	*((t_sphere *)object->data) = (t_sphere){.origin = point3(0, 0, 0),
+		.radius = 1};
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
-		.transform = m4default(), .intersect = intersect_sphere,
-		.type = o_sphere, .normal_at = normal_at_sphere};
+		.intersect = intersect_sphere, .type = o_sphere,
+		.normal_at = normal_at_sphere};
+	object->transform = m4mul(m4translation(origin), m4scaling(vector3(radius, radius, radius)));
+	object->inv_transform = m4invert(object->transform, 0);
+	object->tinv_transform = m4transpose(object->inv_transform);
 	return (object);
 }
