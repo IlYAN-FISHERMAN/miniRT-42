@@ -13,6 +13,7 @@ typedef struct s_comps
 	t_vector3		eyev;
 	t_vector3		normalv;
 	bool			inside;
+	t_point3		over_point;
 }	t_comps;
 
 //    precompute: Precompute the intersection
