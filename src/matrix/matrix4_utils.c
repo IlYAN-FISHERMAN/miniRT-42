@@ -65,7 +65,7 @@ t_matrix4	m4invert(t_matrix4 m, int *status)
 	double		det;
 
 	det = m4det(m);
-	if (ft_equalsf(det, 0))
+	if (ft_equalsd(det, 0))
 	{
 		if (status)
 			*status = 1;

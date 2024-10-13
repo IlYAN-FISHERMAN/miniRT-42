@@ -17,7 +17,7 @@ static t_color	specular(t_object *obj, t_lightning ln,
 		return (color(0, 0, 0));
 	reflectv = vreflect(vneg(lv), ln.nv);
 	rde = vdot(reflectv, ln.ev);
-	if (rde < 0 || ft_equalsf(rde, 0))
+	if (rde < 0 || ft_equalsd(rde, 0))
 		return (color(0, 0, 0));
 	return (color_scalar(((t_light *)(ln.l->data))->c_rgb,
 		obj->mat.spec * pow(rde, obj->mat.shin)));
