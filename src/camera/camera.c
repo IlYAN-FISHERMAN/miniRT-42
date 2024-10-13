@@ -79,6 +79,8 @@ void	render(void)
 
 	y = -1;
 	minirt = get_minirt();
+	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
+	minirt->amb->is_calc = true;
 	while (++y, y < minirt->size->height)
 	{
 		x = -1;
