@@ -34,11 +34,9 @@ MINILIBX_LIB := $(MINILIBX_PATH:%=%$(MINILIBX_LIB))
 LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
 
 FILES =	$(FILES_PATH)main \
-		$(FILES_PATH)miniRT \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
-		$(FILES_PATH)lightning/lightning \
 		$(FILES_PATH)matrix/matrix2 \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \
@@ -61,15 +59,18 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)compute/compute \
+		$(FILES_PATH)compute/lightning \
+		$(FILES_PATH)compute/shadow \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \
 		$(FILES_PATH)generator/rt_generate_scene \
 		$(FILES_PATH)generator/rt_generator_obj \
 		$(FILES_PATH)utils/ft_split_sp_tab \
 		$(FILES_PATH)utils/ft_strlen_tab \
-		$(FILES_PATH)parsing/error_handling \
 		$(FILES_PATH)utils/ft_atof \
+		$(FILES_PATH)miniRT \
 		$(FILES_PATH)parsing/parsing \
+		$(FILES_PATH)parsing/error_handling \
 		$(FILES_PATH)parsing/get_amb \
 		$(FILES_PATH)parsing/get_cam \
 		$(FILES_PATH)parsing/get_obj \
