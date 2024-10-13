@@ -22,10 +22,18 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 {
 	t_camera	*camera;
 	t_minirt	*minirt;
+	t_vector3	up;
 
 	origin.w = POINT;
 	target.w = VECTOR;
-	target = vadd(origin, target);
+	up = vector3(0, 1, 0);
+	if (fabsf(target.x) < EPSILONF && fabsf(target.z) < EPSILONF)
+	{
+		if (target.y > 0)
+			up = vector3(0, 0, -1);
+		else
+			up = vector3(0, 0, 1);
+	}
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
@@ -33,7 +41,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 	*camera = (t_camera){.origin = origin, .target = target, .fov = fov,
 		.fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
 		.hsize = minirt->size->width,
-		.transform = view_transform(origin, target, vector3(0, 1, 0))};
+		.transform = view_transform(origin, vadd(origin, target), up)};
 	camera->inv_transform = m4invert(camera->transform, 0);
 	process_camera(camera);
 	return (camera);
