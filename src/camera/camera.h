@@ -18,6 +18,7 @@ typedef struct s_camera
 	float			half_width;
 	float			half_height;
 	float			half_view;
+	t_matrix4		inv_transform;
 }	t_camera;
 
 //	new_camera: Create a new camera, note that fov is not set by default

@@ -11,8 +11,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&minirt, sizeof(minirt));
 	init_minirt(&minirt, argc, argv);
 	init_minirt_mlx(&minirt);
-	minirt.cam->transform =
-		view_transform(minirt.cam->origin, minirt.cam->target, vector3(0, 1, 0));
 	render();
 	printf("rendered\n");
 	i = -1;
@@ -20,7 +18,8 @@ int	main(int argc, char **argv)
 	{
 		j = -1;
 		while (++j < minirt.size->width)
-			mlx_pixel_put(minirt.win.mlx, minirt.win.windo, j, i, minirt.size->data[i][j]);
+			mlx_pixel_put(minirt.win.mlx, minirt.win.windo, j, i,
+				minirt.size->data[i][j]);
 	}
 	printf("rendered\n");
 	mlx_loop(minirt.win.mlx);

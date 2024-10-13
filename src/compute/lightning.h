@@ -33,6 +33,6 @@ t_color			lightning(t_object *obj, t_amb *amb, t_lightning ln,
 //	@param point The point to check
 //	@param light The light object
 //	@return true if the point is in shadow, false otherwise
-bool	is_shadowed(t_scene *scene, t_point3 point, t_object *light);
+bool			is_shadowed(t_scene *scene, t_point3 point, t_object *light);
 
 #endif
