@@ -1,6 +1,18 @@
-#include "camera.h"
+#include "render.h"
 #include "../miniRT.h"
 #include "../exit_handler/exit_handler.h"
+
+static void	print_box(int x_pos, int y_pos)
+{
+	t_minirt	*minirt;
+	void		*img;
+
+	minirt = get_minirt();
+	img = mlx_new_image(minirt->win.mlx, 120, 30);
+	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo, img,
+		x_pos - 10, y_pos - 20);
+	mlx_destroy_image(minirt->win.mlx, img);
+}
 
 void	print_percent(char *info)
 {
@@ -14,7 +26,7 @@ void	print_percent(char *info)
 			"Malloc failed");
 	y_pos = minirt->size->height / 2 - 15;
 	x_pos = minirt->size->width / 2 - 50;
-	mlx_clear_window(minirt->win.mlx, minirt->win.windo);
+	print_box(x_pos, y_pos);
 	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF,
 		"Rendering...");
 	mlx_string_put(minirt->win.mlx, minirt->win.windo,

@@ -26,14 +26,16 @@ t_comps	precompute(t_intersect *i, t_ray r);
 //    @param scene The scene
 //    @param amb The ambient data
 //    @param comps The precomputed intersection
+//    @param fast If the computation should be fast
 //    @return The color of the hit
-t_color	shade_hit(t_scene *scene, t_amb *amb, t_comps comps);
+t_color	shade_hit(t_scene *scene, t_amb *amb, t_comps comps, bool fast);
 
 //    color_at: Get the color at a point
 //    @param scene The scene
 //    @param amb The ambient data
 //    @param r The ray
+//    @param fast If the computation should be fast
 //    @return The color at the point
-t_color	color_at(t_scene *scene, t_amb *amb, t_ray r);
+t_color	color_at(t_scene *scene, t_amb *amb, t_ray r, bool fast);
 
 #endif
