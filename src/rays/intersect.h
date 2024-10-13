@@ -8,7 +8,7 @@ typedef struct s_object	t_object;
 
 typedef struct s_intersect
 {
-	float			t;
+	double			t;
 	t_object		*object;
 }	t_intersect;
 
@@ -26,7 +26,7 @@ t_xs_parent		xs(void);
 //	@param t The t value of the intersection
 //	@param object The object that was intersected
 //	@return The new intersection
-t_intersect		intersection(float t, t_object *object);
+t_intersect		intersection(double t, t_object *object);
 
 //	intersections: Create a new intersection set
 //	@param i1 The first intersection

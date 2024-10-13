@@ -25,15 +25,15 @@ int	put_xyz_int(int fd, int min, int max)
 	return (1);
 }
 
-int	put_xyz_float(int fd, int min, int max)
+int	put_xyz_double(int fd, int min, int max)
 {
-	if (!ran_float(min, max, fd))
+	if (!ran_double(min, max, fd))
 		return (0);
 	ft_putstr_fd(",", fd);
-	if (!ran_float(min, max, fd))
+	if (!ran_double(min, max, fd))
 		return (0);
 	ft_putstr_fd(",", fd);
-	if (!ran_float(min, max, fd))
+	if (!ran_double(min, max, fd))
 		return (0);
 	return (1);
 }

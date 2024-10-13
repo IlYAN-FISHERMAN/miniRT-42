@@ -19,12 +19,12 @@ t_tuple4	vneg(t_tuple4 v)
 	return ((t_tuple4){-v.x, -v.y, -v.z, -v.w});
 }
 
-t_tuple4	vmul(t_tuple4 v, float scalar)
+t_tuple4	vmul(t_tuple4 v, double scalar)
 {
 	return ((t_tuple4){v.x * scalar, v.y * scalar, v.z * scalar, v.w});
 }
 
-t_tuple4	vdiv(t_tuple4 v, float scalar)
+t_tuple4	vdiv(t_tuple4 v, double scalar)
 {
 	return ((t_tuple4){v.x / scalar, v.y / scalar, v.z / scalar, v.w});
 }

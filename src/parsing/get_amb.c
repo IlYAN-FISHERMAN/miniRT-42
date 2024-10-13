@@ -17,9 +17,9 @@ void	check_amb_format(t_minirt **minirt, char **str)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing: Amb: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [brightness: 0.0] [rgb: 0.0.0]\n");
-	if (!only_float(str[1]) && !only_digit(str[1]))
+	if (!only_double(str[1]) && !only_digit(str[1]))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
-			"Amb: Only brihtness ratio in float\n"
+			"Amb: Only brihtness ratio in double\n"
 			"[ambiente: 0.0]", NULL}, str[1]);
 	if (!only_digit_xyz(str[2], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "

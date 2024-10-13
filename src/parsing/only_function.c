@@ -18,7 +18,7 @@ int	only_digit(char *str)
 	return (1);
 }
 
-int	only_float(char *str)
+int	only_double(char *str)
 {
 	int		i;
 
@@ -62,7 +62,7 @@ int	only_digit_xyz(char *split, t_minirt *minirt)
 	return (1);
 }
 
-int	only_float_xyz(char *split, t_minirt *minirt)
+int	only_double_xyz(char *split, t_minirt *minirt)
 {
 	int		j;
 	char	**str;
@@ -76,7 +76,7 @@ int	only_float_xyz(char *split, t_minirt *minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	while (str[++j])
 	{
-		if (!only_float(str[j]) && !only_digit(str[j]))
+		if (!only_double(str[j]) && !only_digit(str[j]))
 		{
 			ft_free_tab(str);
 			return (0);

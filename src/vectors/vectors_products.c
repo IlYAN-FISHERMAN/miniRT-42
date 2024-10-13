@@ -1,6 +1,6 @@
 #include "vectors.h"
 
-float	vdot(t_vector3 v, t_vector3 u)
+double	vdot(t_vector3 v, t_vector3 u)
 {
 	if (DEBUG && (v.w == POINT || u.w == POINT))
 		printf("Warning: Getting the dot product of a point\n");

@@ -20,11 +20,11 @@ void	check_sp_info(char **str, t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing: Sp: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [radius: 0.0] [rgb: 0.0.0]\n");
-	if (!only_float_xyz(str[1], minirt))
+	if (!only_double_xyz(str[1], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Sp: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float(str[2]) && !only_digit(str[2]))
+	if (!only_double(str[2]) && !only_digit(str[2]))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", "Sp: Bad radius format\n"
 			"[radius: 0.0]", NULL}, str[2]);

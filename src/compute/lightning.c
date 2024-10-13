@@ -1,15 +1,16 @@
 #include "lightning.h"
 
-static t_color	diffuse(t_object *obj, t_color eff_color, float l_dot_n)
+static t_color	diffuse(t_object *obj, t_color eff_color, double l_dot_n)
 {
 	if (l_dot_n < 0)
 		return (color(0, 0, 0));
 	return (color_scalar(eff_color, obj->mat.diff * l_dot_n));
 }
 
-static t_color	specular(t_object *obj, t_lightning ln, t_vector3 lv, float ldn)
+static t_color	specular(t_object *obj, t_lightning ln,
+	t_vector3 lv, double ldn)
 {
-	float		rde;
+	double		rde;
 	t_vector3	reflectv;
 
 	if (ldn < 0)
@@ -19,7 +20,7 @@ static t_color	specular(t_object *obj, t_lightning ln, t_vector3 lv, float ldn)
 	if (rde < 0 || ft_equalsf(rde, 0))
 		return (color(0, 0, 0));
 	return (color_scalar(((t_light *)(ln.l->data))->c_rgb,
-		obj->mat.spec * powf(rde, obj->mat.shin)));
+		obj->mat.spec * pow(rde, obj->mat.shin)));
 }
 
 static t_color	ambience(t_amb *amb)
@@ -42,7 +43,7 @@ t_color	lightning(t_object *obj, t_amb *amb, t_lightning ln, bool in_shadow)
 {
 	t_color		eff_color;
 	t_vector3	lightv;
-	float		l_dot_n;
+	double		l_dot_n;
 	t_color		ambc;
 
 	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);

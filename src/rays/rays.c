@@ -1,6 +1,6 @@
 #include "rays.h"
 
-t_point3	ray_at(t_ray ray, float t)
+t_point3	ray_at(t_ray ray, double t)
 {
 	return ((t_point3)vadd((t_vector3)ray.origin, vmul(ray.direction, t)));
 }

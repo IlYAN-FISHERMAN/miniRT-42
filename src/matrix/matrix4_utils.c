@@ -36,7 +36,7 @@ t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t)
 	});
 }
 
-static t_matrix4	invert_process(t_matrix4 m, float det)
+static t_matrix4	invert_process(t_matrix4 m, double det)
 {
 	t_matrix4	m_buff;
 	int			i;
@@ -62,7 +62,7 @@ static t_matrix4	invert_process(t_matrix4 m, float det)
 
 t_matrix4	m4invert(t_matrix4 m, int *status)
 {
-	float		det;
+	double		det;
 
 	det = m4det(m);
 	if (ft_equalsf(det, 0))

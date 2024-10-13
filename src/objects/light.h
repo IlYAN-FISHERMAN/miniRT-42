@@ -5,7 +5,7 @@
 
 typedef struct s_amb
 {
-	float	light;
+	double	light;
 	t_color	rgb;
 	bool	is_calc;
 	t_color	c_rgb;
@@ -15,7 +15,7 @@ typedef struct s_light
 {
 	t_point3	pos;
 	t_color		rgb;
-	float		bright;
+	double		bright;
 	bool		is_calc;
 	t_color		c_rgb;
 }	t_light;
@@ -25,6 +25,6 @@ typedef struct s_light
 //	@param rgb The color of the light
 //	@param bright The brightness of the light
 //  @return A new light object
-t_object		*new_light(t_point3 pos, t_color rgb, float bright);
+t_object		*new_light(t_point3 pos, t_color rgb, double bright);
 
 #endif

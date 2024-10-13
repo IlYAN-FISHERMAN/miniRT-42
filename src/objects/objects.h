@@ -21,9 +21,9 @@ typedef t_list			t_scene;
 typedef struct s_mat
 {
 	t_color	color;
-	float	diff;
-	float	spec;
-	float	shin;
+	double	diff;
+	double	spec;
+	double	shin;
 }	t_mat;
 
 //	t_object: An object in the scene
@@ -47,7 +47,7 @@ typedef struct s_object
 //	@param spec The specular value
 //	@param shin The shininess value
 //	@return A new material
-t_mat		material(t_color color, float diff, float spec, float shin);
+t_mat		material(t_color color, double diff, double spec, double shin);
 
 //	dfmaterial: Create a new default material
 //	@param color The color value

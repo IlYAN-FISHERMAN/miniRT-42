@@ -20,11 +20,11 @@ void	check_cam_format(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing: Cam: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0] [fov: 0]\n");
-	if (!only_float_xyz(str[1], *minirt))
+	if (!only_double_xyz(str[1], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
 			"Cam: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float_xyz(str[2], *minirt))
+	if (!only_double_xyz(str[2], *minirt))
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: "
 			"Cam: Bad vector format\n"
 			"[vector: 0.0,0.0,0.0]", NULL}, str[2]);

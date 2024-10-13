@@ -19,11 +19,11 @@ void	check_pl_info(char **str, t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing: Pl: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0] [rgb: 0,0,0]\n");
-	if (!only_float_xyz(str[1], minirt))
+	if (!only_double_xyz(str[1], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Pl: Bad xyz format\n"
 			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
-	if (!only_float_xyz(str[2], minirt))
+	if (!only_double_xyz(str[2], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Pl: Bad vector format\n"
 			"[vector: 0.0,0.0,0.0]", NULL}, str[2]);

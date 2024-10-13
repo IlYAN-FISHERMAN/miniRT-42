@@ -7,7 +7,7 @@
 
 typedef struct s_comps
 {
-	float			t;
+	double			t;
 	t_object		*object;
 	t_point3		point;
 	t_vector3		eyev;

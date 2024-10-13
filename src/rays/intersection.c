@@ -18,7 +18,7 @@ t_intersect	*hit(t_xs_parent xs)
 	return (hit);
 }
 
-t_intersect	intersection(float t, t_object *object)
+t_intersect	intersection(double t, t_object *object)
 {
 	t_intersect	intersect;
 

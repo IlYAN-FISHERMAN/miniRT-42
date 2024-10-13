@@ -18,7 +18,7 @@ void	process_camera(t_camera *camera)
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 }
 
-t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
+t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 {
 	t_camera	*camera;
 	t_minirt	*minirt;
@@ -27,7 +27,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 	origin.w = POINT;
 	target.w = VECTOR;
 	up = vector3(0, 1, 0);
-	if (fabsf(target.x) < EPSILONF && fabsf(target.z) < EPSILONF)
+	if (fabs(target.x) < EPSILONF && fabs(target.z) < EPSILONF)
 	{
 		if (target.y > 0)
 			up = vector3(0, 0, -1);
@@ -69,8 +69,8 @@ t_matrix4	view_transform(t_point3 from, t_point3 to, t_vector3 up)
 
 t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 {
-	float			w_x;
-	float			w_y;
+	double			w_x;
+	double			w_y;
 	static t_point3	origin;
 	static bool		origin_set = false;
 	t_vector3		direction;

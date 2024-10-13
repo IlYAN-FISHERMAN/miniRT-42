@@ -8,16 +8,16 @@ typedef struct s_camera
 {
 	t_point3		origin;
 	t_vector3		target;
-	float			fov;
-	float			hsize;
-	float			vsize;
-	float			fov_rad;
+	double			fov;
+	double			hsize;
+	double			vsize;
+	double			fov_rad;
 	t_matrix4		transform;
-	float			aspect_ratio;
-	float			pixel_size;
-	float			half_width;
-	float			half_height;
-	float			half_view;
+	double			aspect_ratio;
+	double			pixel_size;
+	double			half_width;
+	double			half_height;
+	double			half_view;
 	t_matrix4		inv_transform;
 }	t_camera;
 
@@ -26,7 +26,7 @@ typedef struct s_camera
 //  @param target The target of the camera
 //  @param fov The field of view of the camera
 //  @return A new camera
-t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov);
+t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov);
 
 //	view_transform: Create a view transform matrix
 //  @param from The origin of the camera
