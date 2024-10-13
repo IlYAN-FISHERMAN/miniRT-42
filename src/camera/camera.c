@@ -25,6 +25,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 
 	origin.w = POINT;
 	target.w = VECTOR;
+	target = vadd(origin, target);
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
@@ -32,15 +33,11 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 	*camera = (t_camera){.origin = origin, .target = target, .fov = fov,
 		.fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
 		.hsize = minirt->size->width,
-		.transform = m4default()};
-	camera->transform = view_transform(camera->origin, camera->target,
-			vector3(0, 1, 0));
+		.transform = view_transform(origin, target, vector3(0, 1, 0))};
 	camera->inv_transform = m4invert(camera->transform, 0);
 	process_camera(camera);
 	return (camera);
 }
-
-//	default upguide is (0, 1, 0)
 
 t_matrix4	view_transform(t_point3 from, t_point3 to, t_vector3 up)
 {

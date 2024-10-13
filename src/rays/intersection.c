@@ -1,4 +1,5 @@
 #include "intersect.h"
+#include "../exit_handler/exit_handler.h"
 
 t_intersect	*hit(t_xs_parent xs)
 {
@@ -80,6 +81,9 @@ t_xs_parent	*add_intersection(t_xs_parent *xs, t_intersect i)
 {
 	xs->xs = ft_reallocf(xs->xs, xs->count * sizeof(t_intersect),
 			(xs->count + 1) * sizeof(t_intersect));
+	if (!xs->xs)
+		crash_exit(get_minirt(), (char *[]){"miniRT:",
+			"render", 0}, "Intersection set allocation failed");
 	xs->xs[xs->count] = i;
 	xs->count++;
 	return (xs);
