@@ -12,8 +12,11 @@ bool	is_shadowed(t_scene *scene, t_point3 point, t_object *light)
 	r = ray(point, vnormalized(v));
 	xs_parent = intersect_world(scene, r);
 	i = hit(xs_parent);
-	gfree(xs_parent.xs);
 	if (i && i->t < sqrt(vlength2(v)))
+	{
+		gfree(xs_parent.xs);
 		return (true);
+	}
+	gfree(xs_parent.xs);
 	return (false);
 }
