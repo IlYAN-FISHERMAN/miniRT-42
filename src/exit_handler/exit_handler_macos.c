@@ -10,6 +10,12 @@ int	secure_exit(void *data)
 	exit(0);
 }
 
+void	free_object(void *object)
+{
+	gfree(((t_object *)object)->data);
+	gfree(object);
+}
+
 void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->win.mlx)
@@ -17,13 +23,17 @@ void	clear_memory(t_minirt *minirt)
 	if (minirt && minirt->win.mlx)
 		gfree(minirt->win.mlx);
 	if (minirt && minirt->size)
+	{
+		if (minirt->size->data)
+			gfree(minirt->size->data);
 		gfree(minirt->size);
+	}
 	if (minirt && minirt->amb)
 		gfree(minirt->amb);
 	if (minirt && minirt->cam)
 		gfree(minirt->cam);
 	if (minirt && minirt->scene)
-		ft_lstclear(&minirt->scene, &gfree);
+		ft_lstclear(&minirt->scene, &free_object);
 }
 
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
