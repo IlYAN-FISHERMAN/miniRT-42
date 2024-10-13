@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast -march=native
 
 OS =
 
@@ -57,8 +57,10 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
 		$(FILES_PATH)vectors/vectors_utils \
+		$(FILES_PATH)world/world \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
+		$(FILES_PATH)compute/compute \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \
 		$(FILES_PATH)generator/rt_generate_scene \
@@ -86,7 +88,6 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
-		$(FILES_PATH)lightning/lightning \
 		$(FILES_PATH)matrix/matrix2 \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \
@@ -105,8 +106,12 @@ FILES_TEST =	$(FILES_PATH)main_test \
 		$(FILES_PATH)vectors/vectors_products \
 		$(FILES_PATH)vectors/vectors_properties \
 		$(FILES_PATH)vectors/vectors_utils \
+		$(FILES_PATH)world/world \
 		$(FILES_PATH)color/color \
 		$(FILES_PATH)color/color_operations \
+		$(FILES_PATH)compute/compute \
+		$(FILES_PATH)compute/lightning \
+		$(FILES_PATH)compute/shadow \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \
 		$(FILES_PATH)generator/rt_generate_scene \
@@ -148,7 +153,7 @@ re :
 	@make all
 
 test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g -o $(NAME) -D DEBUG=1 -I libs/betterft/includes/
+	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g -o $(NAME) -D BONUS=1 -D DEBUG=0 -I libs/betterft/includes/
 	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)

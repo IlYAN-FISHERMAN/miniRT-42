@@ -6,8 +6,8 @@
 
 typedef struct s_image
 {
-	float	width;
-	float	height;
+	int		width;
+	int		height;
 	int		**data;
 }	t_image;
 
@@ -22,11 +22,5 @@ typedef struct s_size
 //  @param height The height of the image
 //  @return A new allocated image
 t_image	*new_image(int width, int height);
-
-//	ray_trace: Trace rays through the scene
-//	@param image The image to render to
-//	@param camera The camera to render from
-//	@param scene The scene to render
-void	ray_trace(t_image *image, t_camera *camera, t_scene *scene);
 
 #endif

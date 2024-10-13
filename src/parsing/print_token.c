@@ -62,14 +62,14 @@ void	print_token(t_minirt *rt, t_scene *tmp)
 	printf("\nminiRT struct\n\033[0;35m__________________________\033[0m"
 		"\n\nfd: %d\n\n", rt->fd);
 	if (rt->size)
-		printf("R: %.0fx%.0f\n\n", rt->size->width, rt->size->height);
+		printf("R: %dx%d\n\n", rt->size->width, rt->size->height);
 	if (rt->amb)
 		printf("A: Lratio: %.2f\nRGB: %d,%d,%d\n\n",
 			rt->amb->light, rt->amb->rgb.r, rt->amb->rgb.g, rt->amb->rgb.b);
 	if (rt->cam)
 		printf("C: XYZ: %.2f,%.2f,%.2f\nvector: %.2f,%.2f,%.2f\nFOV: %2.f\n\n",
 			rt->cam->origin.x, rt->cam->origin.y, rt->cam->origin.z,
-			rt->cam->forward.x, rt->cam->forward.y, rt->cam->forward.z,
+			rt->cam->target.x, rt->cam->target.y, rt->cam->target.z,
 			rt->cam->fov);
 	if (tmp)
 		print_obj_main(tmp);

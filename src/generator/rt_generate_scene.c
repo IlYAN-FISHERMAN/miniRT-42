@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_generate_scene.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/07/22 15:19:11 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/10/12 18:31:12 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:26:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 18:35:32 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:08:35 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 // defines
 # define PI 3.14159265358979323846
+# define DEG2RADF 0.017453292519943295f
+# define RAD2DEGF 57.29577951308232f
 # define EPSILONF 0.00001f
 # define EPSILOND 0.0000000001
 

@@ -1,6 +1,6 @@
 #include "intersect.h"
 
-t_intersect	*hit(t_xs xs)
+t_intersect	*hit(t_xs_parent xs)
 {
 	int			i;
 	t_intersect	*hit;
@@ -32,7 +32,7 @@ t_intersect	intersection(float t, t_object *object)
  * @param i The index of the intersection to delete
  * @return A pointer to the updated intersection set
  */
-static t_xs	*del_intersection(t_xs *xs, int i)
+static t_xs_parent	*del_intersection(t_xs_parent *xs, int i)
 {
 	int			j;
 	t_intersect	tmp;
@@ -51,7 +51,7 @@ static t_xs	*del_intersection(t_xs *xs, int i)
 	return (xs);
 }
 
-t_xs	intersections(t_xs set)
+t_xs_parent	intersections(t_xs_parent set)
 {
 	int			i;
 	t_intersect	tmp;
@@ -76,7 +76,7 @@ t_xs	intersections(t_xs set)
 	return (set);
 }
 
-t_xs	*add_intersection(t_xs *xs, t_intersect i)
+t_xs_parent	*add_intersection(t_xs_parent *xs, t_intersect i)
 {
 	xs->xs = ft_reallocf(xs->xs, xs->count * sizeof(t_intersect),
 			(xs->count + 1) * sizeof(t_intersect));

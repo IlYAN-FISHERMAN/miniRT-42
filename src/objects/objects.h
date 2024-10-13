@@ -33,9 +33,11 @@ typedef struct s_object
 {
 	t_objects_type	type;
 	void			*data;
-	t_xs			(*intersect)(t_object *, t_ray);
+	t_xs_parent			(*intersect)(t_object *, t_ray);
 	t_vector3		(*normal_at)(t_object *, t_point3);
 	t_matrix4		transform;
+	t_matrix4		inv_transform;
+	t_matrix4		tinv_transform;
 	t_mat			mat;
 }	t_object;
 
