@@ -41,4 +41,8 @@ t_matrix4	view_transform(t_point3 from, t_point3 to, t_vector3 up);
 //  @return The ray for the pixel
 t_ray		ray_for_pixel(t_camera *camera, int x, int y);
 
+//	render: Render the camera
+//  @return The image rendered by the camera
+void		render(void);
+
 #endif

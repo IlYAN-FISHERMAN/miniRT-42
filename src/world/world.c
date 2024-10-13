@@ -22,15 +22,11 @@ t_scene	*dfworld(void)
 
 t_object	*get_next_light(t_scene *scene)
 {
-	static t_scene	*first;
 	static t_scene	*current;
 	t_object		*light;
 
-	if (!first)
-	{
+	if (!current)
 		current = scene;
-		first = scene;
-	}
 	while (current)
 	{
 		if (((t_object *)current->content)->type == o_light)

@@ -6,6 +6,8 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, float fov)
 	t_camera	*camera;
 	t_minirt	*minirt;
 
+	origin.w = POINT;
+	target.w = VECTOR;
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
@@ -48,7 +50,7 @@ t_matrix4	view_transform(t_point3 from, t_point3 to, t_vector3 up)
 	{-forward.x, -forward.y, -forward.z, 0},
 	{0, 0, 0, 1}
 	}};
-	return (m4mul(orientation, m4translation(vneg(from))));
+	return (m4mul(orientation, m4translation(point3(-from.x, -from.y, -from.z))));
 }
 
 t_ray	ray_for_pixel(t_camera *camera, int x, int y)
@@ -65,4 +67,26 @@ t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 	origin = tm4mul(inv, point3(0, 0, 0));
 	direction = vnormalized(vsub(tm4mul(inv, point3(w_x, w_y, -1)), origin));
 	return (ray(origin, direction));
+}
+
+void	render(void)
+{
+	t_minirt	*minirt;
+	int			x;
+	int			y;
+	t_color		color;
+	t_ray		r;
+
+	y = -1;
+	minirt = get_minirt();
+	while (++y, y < minirt->size->height)
+	{
+		x = -1;
+		while (++x, x < minirt->size->width)
+		{
+			r = ray_for_pixel(minirt->cam, x, y);
+			color = color_at(minirt->scene, minirt->amb, r);
+			minirt->size->data[y][x] = color_hex(color);
+		}
+	}
 }

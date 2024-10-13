@@ -62,7 +62,7 @@ void	print_token(t_minirt *rt, t_scene *tmp)
 	printf("\nminiRT struct\n\033[0;35m__________________________\033[0m"
 		"\n\nfd: %d\n\n", rt->fd);
 	if (rt->size)
-		printf("R: %.0fx%.0f\n\n", rt->size->width, rt->size->height);
+		printf("R: %dx%d\n\n", rt->size->width, rt->size->height);
 	if (rt->amb)
 		printf("A: Lratio: %.2f\nRGB: %d,%d,%d\n\n",
 			rt->amb->light, rt->amb->rgb.r, rt->amb->rgb.g, rt->amb->rgb.b);
