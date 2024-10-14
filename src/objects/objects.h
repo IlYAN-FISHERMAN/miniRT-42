@@ -25,6 +25,7 @@ typedef struct s_mat
 	double		diff;
 	double		spec;
 	double		shin;
+	double		reflect;
 	t_pattern	pattern;
 }	t_mat;
 

@@ -9,18 +9,19 @@ t_mat	material(t_color color, double diff,
 		.diff = diff,
 		.spec = spec,
 		.shin = shininess,
+		.reflect = 0.0,
 		.pattern = pattern()
 	});
 }
 
 t_mat	dfmaterial(t_color color)
 {
-	(void)c;
 	return ((t_mat){
 		.color = color,
 		.diff = 0.9,
 		.spec = 0.9,
 		.shin = 200,
+		.reflect = 0.0,
 		.pattern = pattern()
 	});
 }
