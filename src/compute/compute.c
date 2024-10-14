@@ -1,40 +1,40 @@
 #include "compute.h"
 #include "../miniRT.h"
 
-static void	compute_refractive_indices(t_comps *comps,
-	t_intersect *i, t_xs_parent xs_parent)
+static void	compute_refractive_indices(t_comps *cs,
+	t_intersect *hit, t_xs_parent xs_parent)
 {
 	int			idx;
+	t_list		*objs;
 
-	comps->objs = 0;
+	objs = 0;
 	idx = -1;
 	while (idx++, idx < xs_parent.count)
 	{
-		if (xs_parent.xs + idx == i)
+		if (xs_parent.xs + idx == hit)
 		{
-			comps->n1 = 1.0;
-			if (comps->objs)
-				comps->n1 = comps->last_obj->mat.refract_idx;
+			cs->n1 = 1.0;
+			if (objs)
+				cs->n1 = ((t_object *)(objs->content))->mat.refract_idx;
 		}
-		if (ft_lstremove(&comps->objs, xs_parent.xs[idx].object, 0))
+		if (ft_lstremove(&objs, xs_parent.xs[idx].object, 0))
+			ft_lstnew_front(&objs, xs_parent.xs[idx].object);
+		if (xs_parent.xs + idx == hit)
 		{
-			ft_lstnew_back(comps->objs, xs_parent.xs[idx].object);
-			comps->last_obj = xs_parent.xs[idx].object;
-		}
-		if (xs_parent.xs + idx == i)
-		{
-			comps->n2 = 1.0;
-			if (comps->objs)
-				comps->n2 = comps->last_obj->mat.refract_idx;
+			cs->n2 = 1.0;
+			if (objs)
+				cs->n2 = ((t_object *)(objs->content))->mat.refract_idx;
+			break ;
 		}
 	}
-	ft_lstclear(&comps->objs, 0);
+	ft_lstclear(&objs, 0);
 }
 
 t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 {
 	t_comps	comps;
 
+	ft_bzero(&comps, sizeof(comps));
 	comps.t = i->t;
 	comps.object = i->object;
 	comps.point = ray_at(r, comps.t);
@@ -52,11 +52,6 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	comps.reflectv = vreflect(r.direction, comps.normalv);
 	if (!fast)
 		compute_refractive_indices(&comps, i, xs_parent);
-	else
-	{
-		comps.n1 = 1.0;
-		comps.n2 = 1.0;
-	}
 	return (comps);
 }
 
@@ -84,7 +79,7 @@ t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 	refl_reft[0] = reflected_color(comps, fast, remaining);
 	refl_reft[1] = refracted_color(comps, fast, remaining);
 	material = &comps->object->mat;
-	if (material->reflect > 0 && material->transp > 0)
+	if (!fast && material->reflect > 0 && material->transp > 0)
 	{
 		reflectance = schlick(comps);
 		return (color_add(c, color_add(color_scalar(refl_reft[0], reflectance),
@@ -104,7 +99,10 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	xs_parent = intersect_world(minirt->scene, r);
 	i = hit(xs_parent);
 	if (!i)
+	{
+		gfree(xs_parent.xs);
 		return (color(0, 0, 0));
+	}
 	comps = precompute(i, r, xs_parent, fast);
 	gfree(xs_parent.xs);
 	return (shade_hit(&comps, fast, remaining));
