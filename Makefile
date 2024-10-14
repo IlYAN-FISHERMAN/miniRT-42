@@ -64,6 +64,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)compute/compute \
 		$(FILES_PATH)compute/lightning \
+		$(FILES_PATH)compute/refractions \
 		$(FILES_PATH)compute/shadow \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \

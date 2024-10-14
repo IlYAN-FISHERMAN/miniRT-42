@@ -9,7 +9,9 @@ t_mat	material(t_color color, double diff,
 		.diff = diff,
 		.spec = spec,
 		.shin = shininess,
-		.reflect = 0.0,
+		.reflect = 0.5,
+		.transp = 0.5,
+		.refract_idx = 1.5,
 		.pattern = pattern()
 	});
 }
@@ -22,6 +24,8 @@ t_mat	dfmaterial(t_color color)
 		.spec = 0.9,
 		.shin = 200,
 		.reflect = 0.5,
+		.transp = 0.5,
+		.refract_idx = 1.5,
 		.pattern = pattern()
 	});
 }

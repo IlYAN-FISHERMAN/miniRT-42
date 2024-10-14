@@ -1,7 +1,37 @@
 #include "compute.h"
 #include "../miniRT.h"
 
-t_comps	precompute(t_intersect *i, t_ray r)
+static void	compute_refractive_indices(t_comps *comps,
+	t_intersect *i, t_xs_parent xs_parent)
+{
+	int			idx;
+
+	comps->objs = 0;
+	idx = -1;
+	while (idx++, idx < xs_parent.count)
+	{
+		if (xs_parent.xs + idx == i)
+		{
+			comps->n1 = 1.0;
+			if (comps->objs)
+				comps->n1 = comps->last_obj->mat.refract_idx;
+		}
+		if (ft_lstremove(&comps->objs, xs_parent.xs[idx].object, 0))
+		{
+			ft_lstnew_back(comps->objs, xs_parent.xs[idx].object);
+			comps->last_obj = xs_parent.xs[idx].object;
+		}
+		if (xs_parent.xs + idx == i)
+		{
+			comps->n2 = 1.0;
+			if (comps->objs)
+				comps->n2 = comps->last_obj->mat.refract_idx;
+		}
+	}
+	ft_lstclear(&comps->objs, 0);
+}
+
+t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 {
 	t_comps	comps;
 
@@ -18,31 +48,49 @@ t_comps	precompute(t_intersect *i, t_ray r)
 	else
 		comps.inside = false;
 	comps.over_point = vadd(comps.point, vmul(comps.normalv, EPSILONF));
+	comps.under_point = vsub(comps.point, vmul(comps.normalv, EPSILONF));
 	comps.reflectv = vreflect(r.direction, comps.normalv);
+	if (!fast)
+		compute_refractive_indices(&comps, i, xs_parent);
+	else
+	{
+		comps.n1 = 1.0;
+		comps.n2 = 1.0;
+	}
 	return (comps);
 }
 
-t_color	shade_hit(t_comps comps, bool fast, int remaining)
+t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 {
 	t_lightning	ln;
 	t_color		c;
-	bool		in_shadow;
 	t_minirt	*minirt;
+	t_mat		*material;
+	t_color		refl_reft[2];
+	double		reflectance;
 
 	minirt = get_minirt();
 	c = color(0, 0, 0);
-	ln = new_lightning(0, comps.point,
-			comps.eyev, comps.normalv);
+	ln = new_lightning(0, comps->point,
+			comps->eyev, comps->normalv);
 	ln.amb = minirt->amb;
 	ln.l = get_next_light(minirt->scene);
 	while (ln.l)
 	{
-		in_shadow = (!fast && is_shadowed(minirt->scene, comps.point, ln.l));
-		c = color_add(c, lightning(comps.object, ln, in_shadow));
+		c = color_add(c, lightning(comps->object, ln,
+					(!fast && is_shadowed(minirt->scene, comps->point, ln.l))));
 		ln.l = get_next_light(minirt->scene);
 	}
-	return (color_add(c,
-			reflected_color(comps, fast, remaining)));
+	refl_reft[0] = reflected_color(comps, fast, remaining);
+	refl_reft[1] = refracted_color(comps, fast, remaining);
+	material = &comps->object->mat;
+	if (material->reflect > 0 && material->transp > 0)
+	{
+		reflectance = schlick(comps);
+		return (color_add(c, color_add(color_scalar(refl_reft[0], reflectance),
+					color_scalar(refl_reft[1], 1 - reflectance))));
+	}
+	return (color_add(color_add(c, refl_reft[0]), refl_reft[1]));
 }
 
 t_color	color_at(t_ray r, bool fast, int remaining)
@@ -57,18 +105,7 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	i = hit(xs_parent);
 	if (!i)
 		return (color(0, 0, 0));
-	comps = precompute(i, r);
+	comps = precompute(i, r, xs_parent, fast);
 	gfree(xs_parent.xs);
-	return (shade_hit(comps, fast, remaining));
-}
-
-t_color	reflected_color(t_comps comps, bool fast, int remaining)
-{
-	t_ray		r;
-
-	if (remaining <= 0 || fast || comps.object->mat.reflect == 0)
-		return (color(0, 0, 0));
-	r = ray(comps.over_point, comps.reflectv);
-	return (color_scalar(color_at(r, false, remaining - 1),
-			comps.object->mat.reflect));
+	return (shade_hit(&comps, fast, remaining));
 }

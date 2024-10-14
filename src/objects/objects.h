@@ -26,6 +26,8 @@ typedef struct s_mat
 	double		spec;
 	double		shin;
 	double		reflect;
+	double		transp;
+	double		refract_idx;
 	t_pattern	pattern;
 }	t_mat;
 

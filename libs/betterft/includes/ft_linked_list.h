@@ -51,5 +51,6 @@ void		*ft_lstshift(t_list **lst);
 t_list		*ft_lstrevrotate(t_list *lst);
 t_list		*ft_lstrotate(t_list *lst);
 t_list		*ft_lstswap(t_list *lst);
+int			ft_lstremove(t_list **lst, void *content, void (*del)(void *));
 
 #endif
