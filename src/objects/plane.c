@@ -36,7 +36,6 @@ static t_vector3	normal_at_plane(t_object *object, t_point3 world_point)
 	return (tm4mul(object->transform, ((t_plane *)object->data)->normal));
 }
 
-
 t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 {
 	t_object	*object;
