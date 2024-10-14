@@ -7,10 +7,10 @@ void	pixelate(t_image *image, t_color color, int x, int y)
 	int	j;
 
 	i = -1;
-	while (++i, i <= 5 && y + i < image->height)
+	while (++i, i <= PREVIEW_PIXEL_SIZE && y + i < image->height)
 	{
 		j = -1;
-		while (++j, j <= 5 && x + j < image->width)
+		while (++j, j <= PREVIEW_PIXEL_SIZE && x + j < image->width)
 			image->data[y + i][x + j] = color_hex(color);
 	}
 }
@@ -46,6 +46,8 @@ void	display(void)
 			put_pixel_to_image(img, j, i, minirt->size->data[i][j]);
 	}
 	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo, img, 0, 0);
+	mlx_do_sync(minirt->win.mlx);
+	mlx_do_key_autorepeaton(minirt->win.mlx);
 	mlx_destroy_image(minirt->win.mlx, img);
 }
 
@@ -68,9 +70,9 @@ void	fast_render(void)
 			color = color_at(ray_for_pixel(minirt->cam, x, y),
 					true, MAX_REFLECT);
 			pixelate(minirt->size, color, x, y);
-			x += 5;
+			x += PREVIEW_PIXEL_SIZE;
 		}
-		y += 5;
+		y += PREVIEW_PIXEL_SIZE;
 	}
 	display();
 }

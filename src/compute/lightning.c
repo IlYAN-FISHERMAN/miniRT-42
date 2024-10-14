@@ -39,22 +39,26 @@ t_lightning	new_lightning(t_object *l, t_point3 p, t_vector3 ev, t_vector3 nv)
 		.p = p, .ev = ev, .nv = nv});
 }
 
-t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow)
+t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 {
 	t_color		eff_color;
 	t_vector3	lightv;
 	double		l_dot_n;
-	t_color		ambc;
+	t_color		c[3];
 
 	if (obj->mat.pattern.has_pattern)
 		obj->mat.color = obj->mat.pattern.pattern_at_object(obj->mat.pattern,
 				obj, ln.p);
 	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);
-	ambc = color_mult(ambience(ln.amb), eff_color);
+	c[0] = color_mult(ambience(ln.amb), eff_color);
 	if (in_shadow)
-		return (ambc);
+		return (c[0]);
 	lightv = vnormalized(vsub(((t_light *)(ln.l->data))->pos, ln.p));
 	l_dot_n = vdot(lightv, ln.nv);
-	return (color_add(ambc, color_add(diffuse(obj, eff_color, l_dot_n),
-				specular(obj, ln, lightv, l_dot_n))));
+	c[1] = diffuse(obj, eff_color, l_dot_n);
+	if (!fast)
+		c[2] = specular(obj, ln, lightv, l_dot_n);
+	else
+		c[2] = color(0, 0, 0);
+	return (color_add(c[0], color_add(c[1], c[2])));
 }

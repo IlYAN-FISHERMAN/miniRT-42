@@ -5,6 +5,7 @@
 # include "image.h"
 
 # define MAX_REFLECT 5
+# define PREVIEW_PIXEL_SIZE 6
 
 //	pixelate: Pixelate the image
 //	@param image The image to pixelate
