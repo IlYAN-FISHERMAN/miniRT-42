@@ -15,7 +15,6 @@ static int	handle_key(int key, t_minirt *minirt)
 	else if (key == KEY_ENTER)
 	{
 		print_percent(ft_strdup("0"));
-		mlx_do_sync(minirt->win.mlx);
 		printf("C %f,%f,%f %f,%f,%f %f\n", minirt->cam->origin.x,
 			minirt->cam->origin.y, minirt->cam->origin.z,
 			minirt->cam->target.x, minirt->cam->target.y,

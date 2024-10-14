@@ -30,7 +30,9 @@ void	print_message(char *msg)
 	y_pos = minirt->size->height * 0.5 - 15;
 	x_pos = minirt->size->width * 0.5 - len * 3;
 	print_box(len * 8, 30);
-	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF, msg);
+	mlx_string_put(minirt->win.mlx,
+		minirt->win.windo, x_pos, y_pos, 0xFFFFFF, msg);
+	mlx_do_sync(minirt->win.mlx);
 }
 
 void	print_percent(char *info)
@@ -53,4 +55,5 @@ void	print_percent(char *info)
 	mlx_string_put(minirt->win.mlx, minirt->win.windo,
 		x_pos + 95, y_pos, 0xFFFFFF, "%");
 	gfree(info);
+	mlx_do_sync(minirt->win.mlx);
 }
