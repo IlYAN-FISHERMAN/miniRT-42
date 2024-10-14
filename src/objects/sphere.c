@@ -43,7 +43,7 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 
 	ray = transform(ray, object->inv_transform);
 	ft_bzero(&inters, sizeof(t_xs_parent));
-	sphere_to_ray = vsub(ray.origin, ((t_sphere *)object->data)->origin);
+	sphere_to_ray = vsub(ray.origin, point3(0, 0, 0));
 	a = vdot(ray.direction, ray.direction);
 	b = 2 * (vdot(ray.direction, sphere_to_ray));
 	c = vdot(sphere_to_ray, sphere_to_ray) - 1;
@@ -62,7 +62,7 @@ static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 	t_point3	world_n;
 
 	object_p = tm4mul(object->inv_transform, world_point);
-	object_n = vsub(object_p, ((t_sphere *)object->data)->origin);
+	object_n = vsub(object_p, point3(0, 0, 0));
 	world_n = tm4mul(object->tinv_transform, object_n);
 	world_n.w = VECTOR;
 	vnormalize(&world_n);
@@ -83,8 +83,8 @@ t_object	*new_sphere(t_point3 origin, double radius, t_color color)
 		gfree(object);
 		return (0);
 	}
-	*((t_sphere *)object->data) = (t_sphere){.origin = point3(0, 0, 0),
-		.radius = 1};
+	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
+		.radius = radius};
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
 		.intersect = intersect_sphere, .type = o_sphere,
 		.normal_at = normal_at_sphere};
