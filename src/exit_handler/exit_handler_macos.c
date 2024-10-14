@@ -16,6 +16,19 @@ void	free_object(void *object)
 	gfree(object);
 }
 
+static void	clear_image(t_image *image)
+{
+	int	i;
+
+	i = -1;
+	if (image->data)
+		while (++i < image->height)
+			gfree(image->data[i]);
+	if (image->data)
+		gfree(image->data);
+	gfree(image);
+}
+
 void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->win.mlx)
@@ -23,11 +36,7 @@ void	clear_memory(t_minirt *minirt)
 	if (minirt && minirt->win.mlx)
 		gfree(minirt->win.mlx);
 	if (minirt && minirt->size)
-	{
-		if (minirt->size->data)
-			gfree(minirt->size->data);
-		gfree(minirt->size);
-	}
+		clear_image(minirt->size);
 	if (minirt && minirt->amb)
 		gfree(minirt->amb);
 	if (minirt && minirt->cam)
