@@ -48,6 +48,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
+		$(FILES_PATH)objects/patterns \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
 		$(FILES_PATH)rays/intersection_utils \
