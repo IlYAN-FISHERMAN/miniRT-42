@@ -1,4 +1,4 @@
-#ifndef	PATTERNS_H
+#ifndef PATTERNS_H
 # define PATTERNS_H
 
 # include "../color/color.h"

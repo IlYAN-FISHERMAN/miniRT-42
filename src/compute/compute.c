@@ -55,14 +55,10 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	return (comps);
 }
 
-t_color	shade_hit(t_comps *comps, bool fast, int remaining)
+static t_color	compute_phong(t_comps *comps, t_lightning ln, bool fast)
 {
-	t_lightning	ln;
-	t_color		c;
 	t_minirt	*minirt;
-	t_mat		*material;
-	t_color		refl_reft[2];
-	double		reflectance;
+	t_color		c;
 
 	minirt = get_minirt();
 	c = color(0, 0, 0);
@@ -76,16 +72,27 @@ t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 					(!fast && is_shadowed(minirt->scene, comps->point, ln.l))));
 		ln.l = get_next_light(minirt->scene);
 	}
-	refl_reft[0] = reflected_color(comps, fast, remaining);
-	refl_reft[1] = refracted_color(comps, fast, remaining);
+	return (c);
+}
+
+t_color	shade_hit(t_comps *comps, bool fast, int remaining)
+{
+	t_lightning	ln;
+	t_mat		*material;
+	t_color		c[3];
+	double		reflectance;
+
+	c[0] = compute_phong(comps, ln, fast);
+	c[1] = reflected_color(comps, fast, remaining);
+	c[2] = refracted_color(comps, fast, remaining);
 	material = &comps->object->mat;
 	if (!fast && material->reflect > 0 && material->transp > 0)
 	{
 		reflectance = schlick(comps);
-		return (color_add(c, color_add(color_scalar(refl_reft[0], reflectance),
-					color_scalar(refl_reft[1], 1 - reflectance))));
+		return (color_add(c[0], color_add(color_scalar(c[1], reflectance),
+					color_scalar(c[2], 1 - reflectance))));
 	}
-	return (color_add(color_add(c, refl_reft[0]), refl_reft[1]));
+	return (color_add(color_add(c[0], c[1]), c[2]));
 }
 
 t_color	color_at(t_ray r, bool fast, int remaining)
