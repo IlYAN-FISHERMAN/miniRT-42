@@ -65,8 +65,8 @@ void	fast_render(void)
 		x = 0;
 		while (++x, x < minirt->size->width)
 		{
-			color = color_at(minirt->scene, minirt->amb,
-					ray_for_pixel(minirt->cam, x, y), true);
+			color = color_at(ray_for_pixel(minirt->cam, x, y),
+					true, MAX_REFLECT);
 			pixelate(minirt->size, color, x, y);
 			x += 5;
 		}
@@ -96,8 +96,8 @@ void	render(void)
 			percent[0]++;
 			if (!(percent[0] % 100000))
 				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
-			minirt->size->data[y][x] = color_hex(color_at(minirt->scene,
-						minirt->amb, ray_for_pixel(minirt->cam, x, y), false));
+			minirt->size->data[y][x] = color_hex(color_at(
+						ray_for_pixel(minirt->cam, x, y), false, MAX_REFLECT));
 		}
 	}
 	display();

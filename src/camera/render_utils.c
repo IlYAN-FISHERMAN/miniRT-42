@@ -2,16 +2,35 @@
 #include "../miniRT.h"
 #include "../exit_handler/exit_handler.h"
 
-static void	print_box(int x_pos, int y_pos)
+static void	print_box(int size_x, int size_y)
 {
 	t_minirt	*minirt;
 	void		*img;
+	int			x_pos;
+	int			y_pos;
 
 	minirt = get_minirt();
-	img = mlx_new_image(minirt->win.mlx, 120, 30);
+	x_pos = minirt->size->width / 2 - size_x / 2 + 10;
+	y_pos = minirt->size->height / 2 - size_y / 2;
+	img = mlx_new_image(minirt->win.mlx, size_x, size_y);
 	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo, img,
 		x_pos - 10, y_pos - 20);
 	mlx_destroy_image(minirt->win.mlx, img);
+}
+
+void	print_message(char *msg)
+{
+	t_minirt	*minirt;
+	size_t		len;
+	int			y_pos;
+	int			x_pos;
+
+	len = ft_strlen(msg);
+	minirt = get_minirt();
+	y_pos = minirt->size->height * 0.5 - 15;
+	x_pos = minirt->size->width * 0.5 - len * 3;
+	print_box(len * 8, 30);
+	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF, msg);
 }
 
 void	print_percent(char *info)
@@ -26,7 +45,7 @@ void	print_percent(char *info)
 			"Malloc failed");
 	y_pos = minirt->size->height * 0.5 - 15;
 	x_pos = minirt->size->width * 0.5 - 50;
-	print_box(x_pos, y_pos);
+	print_box(120, 30);
 	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF,
 		"Rendering...");
 	mlx_string_put(minirt->win.mlx, minirt->win.windo,

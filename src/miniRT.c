@@ -14,6 +14,7 @@ static int	handle_key(int key, t_minirt *minirt)
 		camera_move(key);
 	else if (key == KEY_ENTER)
 	{
+		print_percent(ft_strdup("0"));
 		printf("C %f,%f,%f %f,%f,%f %f\n", minirt->cam->origin.x,
 			minirt->cam->origin.y, minirt->cam->origin.z,
 			minirt->cam->target.x, minirt->cam->target.y,

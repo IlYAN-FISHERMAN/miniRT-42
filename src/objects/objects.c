@@ -21,7 +21,7 @@ t_mat	dfmaterial(t_color color)
 		.diff = 0.9,
 		.spec = 0.9,
 		.shin = 200,
-		.reflect = 0.0,
+		.reflect = 0.5,
 		.pattern = pattern()
 	});
 }
