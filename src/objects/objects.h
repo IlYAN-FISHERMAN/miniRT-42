@@ -5,6 +5,7 @@
 # include "../vectors/vectors.h"
 # include "../rays/intersect.h"
 # include "../color/color.h"
+# include "patterns.h"
 
 //	t_objects_type: The type of object
 typedef enum e_objects_type
@@ -20,10 +21,11 @@ typedef t_list			t_scene;
 
 typedef struct s_mat
 {
-	t_color	color;
-	double	diff;
-	double	spec;
-	double	shin;
+	t_color		color;
+	double		diff;
+	double		spec;
+	double		shin;
+	t_pattern	pattern;
 }	t_mat;
 
 //	t_object: An object in the scene

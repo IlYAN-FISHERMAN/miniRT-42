@@ -8,17 +8,20 @@ t_mat	material(t_color color, double diff,
 		.color = color,
 		.diff = diff,
 		.spec = spec,
-		.shin = shininess
+		.shin = shininess,
+		.pattern = pattern()
 	});
 }
 
 t_mat	dfmaterial(t_color color)
 {
+	(void)c;
 	return ((t_mat){
 		.color = color,
 		.diff = 0.9,
 		.spec = 0.9,
-		.shin = 200
+		.shin = 200,
+		.pattern = pattern()
 	});
 }
 
