@@ -24,8 +24,8 @@ void	print_percent(char *info)
 	if (!info)
 		crash_exit(minirt, (char *[]){"miniRT", "render", 0},
 			"Malloc failed");
-	y_pos = minirt->size->height / 2 - 15;
-	x_pos = minirt->size->width / 2 - 50;
+	y_pos = minirt->size->height * 0.5 - 15;
+	x_pos = minirt->size->width * 0.5 - 50;
 	print_box(x_pos, y_pos);
 	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF,
 		"Rendering...");

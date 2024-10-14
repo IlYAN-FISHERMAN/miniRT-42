@@ -2,15 +2,11 @@
 
 t_tuple4	vadd(t_tuple4 v, t_tuple4 u)
 {
-	if (DEBUG && u.w == POINT && v.w == POINT)
-		printf("Warning: Adding two points\n");
 	return ((t_tuple4){v.x + u.x, v.y + u.y, v.z + u.z, v.w + u.w});
 }
 
 t_tuple4	vsub(t_tuple4 v, t_tuple4 u)
 {
-	if (DEBUG && u.w == VECTOR && v.w == POINT)
-		printf("Warning: Subtracting a point from a vector\n");
 	return ((t_tuple4){v.x - u.x, v.y - u.y, v.z - u.z, v.w - u.w});
 }
 

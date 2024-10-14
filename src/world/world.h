@@ -4,11 +4,6 @@
 # include "../objects/objects.h"
 # include "../objects/shape.h"
 
-//  dfworld: Create a default world
-//  @return The default world
-//  @note This function is temporary and will be removed
-t_scene		*dfworld(void);
-
 //  get_next_light: Get the next light in the scene
 //  @param scene The scene
 //  @return The next light

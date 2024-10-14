@@ -4,7 +4,7 @@
 void	process_camera(t_camera *camera)
 {
 	camera->aspect_ratio = camera->hsize / camera->vsize;
-	camera->half_view = tanf(camera->fov_rad * 0.5);
+	camera->half_view = tan(camera->fov_rad * 0.5);
 	if (camera->aspect_ratio >= 1)
 	{
 		camera->half_width = camera->half_view;
