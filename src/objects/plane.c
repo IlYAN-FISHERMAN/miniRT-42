@@ -8,7 +8,7 @@
 static t_xs_parent	intersect_plane(t_object *object, t_ray ray)
 {
 	t_xs_parent	xs_parent;
-	float		t;
+	double		t;
 	t_vector3	normal;
 
 	ray = transform(ray, object->inv_transform);
