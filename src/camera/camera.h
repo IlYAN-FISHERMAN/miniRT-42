@@ -40,6 +40,7 @@ typedef struct s_camera
 {
 	t_point3		origin;
 	t_vector3		target;
+	t_vector3		up;
 	double			fov;
 	double			hsize;
 	double			vsize;

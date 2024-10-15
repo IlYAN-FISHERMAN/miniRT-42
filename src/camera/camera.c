@@ -22,26 +22,26 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 {
 	t_camera	*camera;
 	t_minirt	*minirt;
-	t_vector3	up;
+	t_vector3	up_;
 
 	origin.w = POINT;
 	target.w = VECTOR;
-	up = vector3(0, 1, 0);
+	up_ = vector3(0, 1, 0);
 	if (fabs(target.x) < EPSILONF && fabs(target.z) < EPSILONF)
 	{
 		if (target.y > 0)
-			up = vector3(0, 0, -1);
+			up_ = vector3(0, 0, -1);
 		else
-			up = vector3(0, 0, 1);
+			up_ = vector3(0, 0, 1);
 	}
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
 	minirt = get_minirt();
-	*camera = (t_camera){.origin = origin, .target = target, .fov = fov,
-		.fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
-		.hsize = minirt->size->width,
-		.transform = view_transform(origin, vadd(origin, target), up)};
+	*camera = (t_camera){.origin = origin, .target = vnormalized(target),
+		.fov = fov, .fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
+		.hsize = minirt->size->width, .up = up_,
+		.transform = view_transform(origin, vadd(origin, target), up_)};
 	camera->inv_transform = m4invert(camera->transform, 0);
 	process_camera(camera);
 	return (camera);
