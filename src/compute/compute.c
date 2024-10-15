@@ -34,14 +34,13 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 {
 	t_comps	comps;
 
+	(void)fast;
 	ft_bzero(&comps, sizeof(comps));
 	comps.t = i->t;
 	comps.object = i->object;
 	comps.point = ray_at(r, comps.t);
 	comps.eyev = vneg(r.direction);
 	comps.normalv = comps.object->normal_at(i->object, comps.point);
-	if (fast)
-		return (comps);
 	if (vdot(comps.normalv, comps.eyev) < 0 && !ft_equalsd(comps.t, 0))
 	{
 		comps.inside = true;
@@ -88,7 +87,7 @@ t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 	c[1] = reflected_color(comps, fast, remaining);
 	c[2] = refracted_color(comps, fast, remaining);
 	material = &comps->object->mat;
-	if (!fast && material->reflect > 0 && material->transp > 0)
+	if (material->reflect > 0 && material->transp > 0)
 	{
 		reflectance = schlick(comps);
 		return (color_add(c[0], color_add(color_scalar(c[1], reflectance),
@@ -104,6 +103,8 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	t_comps		comps;
 	t_minirt	*minirt;
 
+	if (fast && remaining >= MAX_REFLECT)
+		remaining = MAX_REFLECT - 1;
 	minirt = get_minirt();
 	xs_parent = intersect_world(minirt->scene, r);
 	i = hit(xs_parent);

@@ -4,7 +4,8 @@ t_color	reflected_color(t_comps *comps, bool fast, int remaining)
 {
 	t_ray		r;
 
-	if (remaining <= 0 || fast || comps->object->mat.reflect == 0)
+	(void)fast;
+	if (remaining <= 0 || comps->object->mat.reflect == 0)
 		return (color(0, 0, 0));
 	r = ray(comps->over_point, comps->reflectv);
 	return (color_scalar(color_at(r, fast, remaining - 1),
