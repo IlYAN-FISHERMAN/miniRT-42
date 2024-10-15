@@ -70,8 +70,8 @@ static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
 	ln->l = get_next_light(minirt->scene);
 	while (ln->l)
 	{
-		c = color_add(c, lightning(comps->object, *ln, (!fast
-						&& is_shadowed(minirt->scene,
+		c = color_add(c, lightning(comps->object, *ln,
+					(is_shadowed(minirt->scene,
 							comps->point, ln->l)), fast));
 		ln->l = get_next_light(minirt->scene);
 	}
