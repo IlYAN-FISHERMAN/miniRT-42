@@ -1,5 +1,7 @@
 #include "compute.h"
 #include "../miniRT.h"
+#include "ft_memory.h"
+#include "lightning.h"
 
 static void	compute_refractive_indices(t_comps *cs,
 	t_intersect *hit, t_xs_parent xs_parent)
@@ -55,23 +57,23 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	return (comps);
 }
 
-static t_color	compute_phong(t_comps *comps, t_lightning ln, bool fast)
+static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
 {
 	t_minirt	*minirt;
 	t_color		c;
 
 	minirt = get_minirt();
 	c = color(0, 0, 0);
-	ln = new_lightning(0, comps->point,
+	*ln = new_lightning(0, comps->point,
 			comps->eyev, comps->normalv);
-	ln.amb = minirt->amb;
-	ln.l = get_next_light(minirt->scene);
-	while (ln.l)
+	ln->amb = minirt->amb;
+	ln->l = get_next_light(minirt->scene);
+	while (ln->l)
 	{
-		c = color_add(c, lightning(comps->object, ln, (!fast
+		c = color_add(c, lightning(comps->object, *ln, (!fast
 						&& is_shadowed(minirt->scene,
-							comps->point, ln.l)), fast));
-		ln.l = get_next_light(minirt->scene);
+							comps->point, ln->l)), fast));
+		ln->l = get_next_light(minirt->scene);
 	}
 	return (c);
 }
@@ -83,7 +85,7 @@ t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 	t_color		c[3];
 	double		reflectance;
 
-	c[0] = compute_phong(comps, ln, fast);
+	c[0] = compute_phong(comps, &ln, fast);
 	c[1] = reflected_color(comps, fast, remaining);
 	c[2] = refracted_color(comps, fast, remaining);
 	material = &comps->object->mat;
