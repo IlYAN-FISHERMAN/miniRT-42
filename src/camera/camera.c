@@ -4,7 +4,7 @@
 void	process_camera(t_camera *camera)
 {
 	camera->aspect_ratio = camera->hsize / camera->vsize;
-	camera->half_view = tanf(camera->fov_rad * 0.5);
+	camera->half_view = tan(camera->fov_rad * 0.5);
 	if (camera->aspect_ratio >= 1)
 	{
 		camera->half_width = camera->half_view;
@@ -22,26 +22,26 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 {
 	t_camera	*camera;
 	t_minirt	*minirt;
-	t_vector3	up;
+	t_vector3	up_;
 
 	origin.w = POINT;
 	target.w = VECTOR;
-	up = vector3(0, 1, 0);
+	up_ = vector3(0, 1, 0);
 	if (fabs(target.x) < EPSILONF && fabs(target.z) < EPSILONF)
 	{
 		if (target.y > 0)
-			up = vector3(0, 0, -1);
+			up_ = vector3(0, 0, -1);
 		else
-			up = vector3(0, 0, 1);
+			up_ = vector3(0, 0, 1);
 	}
 	camera = galloc(sizeof(t_camera));
 	if (!camera)
 		return (0);
 	minirt = get_minirt();
-	*camera = (t_camera){.origin = origin, .target = target, .fov = fov,
-		.fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
-		.hsize = minirt->size->width,
-		.transform = view_transform(origin, vadd(origin, target), up)};
+	*camera = (t_camera){.origin = origin, .target = vnormalized(target),
+		.fov = fov, .fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
+		.hsize = minirt->size->width, .up = up_,
+		.transform = view_transform(origin, vadd(origin, target), up_)};
 	camera->inv_transform = m4invert(camera->transform, 0);
 	process_camera(camera);
 	return (camera);
@@ -72,15 +72,15 @@ t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 	double			w_x;
 	double			w_y;
 	static t_point3	origin;
-	static bool		origin_set = false;
+	static t_camera	*cam;
 	t_vector3		direction;
 
 	w_x = camera->half_width - ((x + 0.5) * camera->pixel_size);
 	w_y = camera->half_height - ((y + 0.5) * camera->pixel_size);
-	if (!origin_set)
+	if (cam != camera)
 	{
 		origin = tm4mul(camera->inv_transform, point3(0, 0, 0));
-		origin_set = true;
+		cam = camera;
 	}
 	direction = vnormalized(vsub(tm4mul(camera->inv_transform,
 					point3(w_x, w_y, -1)), origin));

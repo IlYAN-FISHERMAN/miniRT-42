@@ -4,6 +4,9 @@
 # include "camera.h"
 # include "image.h"
 
+# define MAX_REFLECT 5
+# define PREVIEW_PIXEL_SIZE 6
+
 //	pixelate: Pixelate the image
 //	@param image The image to pixelate
 //	@param color The color to pixelate with
@@ -25,5 +28,8 @@ void	render(void);
 //	print_percent: Print the percentage of the rendering
 //	@param info The percentage to print
 void	print_percent(char *info);
+//	print_message: Print a message to the screen
+//	@param msg The message to print
+void	print_message(char *msg);
 
 #endif

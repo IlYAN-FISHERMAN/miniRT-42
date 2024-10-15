@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 	init_minirt(&minirt, argc, argv);
 	init_minirt_mlx(&minirt);
 	fast_render();
-	render();
+	print_message("Enter to render");
 	mlx_loop(minirt.win.mlx);
 	exit(0);
 }

@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lm -Ofast -march=native
+CFLAGS = -Wall -Wextra -Werror -lm -Ofast -march=native -funroll-loops -ftree-vectorize -mtune=native
 
 OS =
 
@@ -35,6 +35,7 @@ LIBFT_LIB = $(LIBFT_PATH:%=%betterft.a)
 
 FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
+		$(FILES_PATH)camera/camera_utils \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)camera/render \
 		$(FILES_PATH)camera/render_utils \
@@ -47,6 +48,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \
+		$(FILES_PATH)objects/patterns \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/plane \
 		$(FILES_PATH)rays/intersection_utils \
@@ -62,6 +64,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)color/color_operations \
 		$(FILES_PATH)compute/compute \
 		$(FILES_PATH)compute/lightning \
+		$(FILES_PATH)compute/refractions \
 		$(FILES_PATH)compute/shadow \
 		$(FILES_PATH)generator/rt_generator \
 		$(FILES_PATH)generator/rt_generate_nbr \
@@ -87,60 +90,6 @@ FILES =	$(FILES_PATH)main \
 
 CFILES = $(FILES:%=%.c)
 
-FILES_TEST =	$(FILES_PATH)main_test \
-		$(FILES_PATH)camera/camera \
-		$(FILES_PATH)camera/image \
-		$(FILES_PATH)camera/render \
-		$(FILES_PATH)camera/render_utils \
-		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
-		$(FILES_PATH)matrix/matrix2 \
-		$(FILES_PATH)matrix/matrix3 \
-		$(FILES_PATH)matrix/matrix4_utils \
-		$(FILES_PATH)matrix/matrix4 \
-		$(FILES_PATH)matrix/transformations \
-		$(FILES_PATH)objects/cylinder \
-		$(FILES_PATH)objects/light \
-		$(FILES_PATH)objects/objects \
-		$(FILES_PATH)objects/sphere \
-		$(FILES_PATH)objects/plane \
-		$(FILES_PATH)rays/intersection_utils \
-		$(FILES_PATH)rays/intersection \
-		$(FILES_PATH)rays/rays \
-		$(FILES_PATH)vectors/vectors_instance \
-		$(FILES_PATH)vectors/vectors_operations \
-		$(FILES_PATH)vectors/vectors_products \
-		$(FILES_PATH)vectors/vectors_properties \
-		$(FILES_PATH)vectors/vectors_utils \
-		$(FILES_PATH)world/world \
-		$(FILES_PATH)color/color \
-		$(FILES_PATH)color/color_operations \
-		$(FILES_PATH)compute/compute \
-		$(FILES_PATH)compute/lightning \
-		$(FILES_PATH)compute/shadow \
-		$(FILES_PATH)generator/rt_generator \
-		$(FILES_PATH)generator/rt_generate_nbr \
-		$(FILES_PATH)generator/rt_generate_scene \
-		$(FILES_PATH)generator/rt_generator_obj \
-		$(FILES_PATH)utils/ft_split_sp_tab \
-		$(FILES_PATH)utils/ft_strlen_tab \
-		$(FILES_PATH)utils/ft_atof \
-		$(FILES_PATH)miniRT \
-		$(FILES_PATH)parsing/parsing \
-		$(FILES_PATH)parsing/error_handling \
-		$(FILES_PATH)parsing/get_amb \
-		$(FILES_PATH)parsing/get_cam \
-		$(FILES_PATH)parsing/get_obj \
-		$(FILES_PATH)parsing/get_size \
-		$(FILES_PATH)parsing/obj_cy \
-		$(FILES_PATH)parsing/obj_lig \
-		$(FILES_PATH)parsing/obj_pl \
-		$(FILES_PATH)parsing/obj_sp \
-		$(FILES_PATH)parsing/only_function \
-		$(FILES_PATH)parsing/check_range_format \
-		$(FILES_PATH)parsing/print_token
-
-CFILES_TEST = $(FILES_TEST:%=%.c)
-
 all : $(NAME)
 
 clean :
@@ -156,10 +105,6 @@ fclean : clean
 re :
 	@make fclean
 	@make all
-
-test : $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB)
-	@$(CC) $(CFILES_TEST) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g -o $(NAME) -D BONUS=1 -D DEBUG=0 -I libs/betterft/includes/
-	@echo " \t$(NAME) test compiled ✅"
 
 debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME) -I libs/betterft/includes/

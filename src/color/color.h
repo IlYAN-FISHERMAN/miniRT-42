@@ -44,6 +44,12 @@ int		color_hex(t_color c);
 // @return The sum of the two colors
 t_color	color_add(t_color c, t_color d);
 
+// color_sub: Subtract two colors
+// @param c The first color
+// @param d The second color
+// @return The difference of the two colors
+t_color	color_sub(t_color c, t_color d);
+
 // color_mult: Multiply two colors together
 // @param c The first color
 // @param d The second color

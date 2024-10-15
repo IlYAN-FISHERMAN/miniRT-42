@@ -24,8 +24,10 @@ t_lightning		new_lightning(t_object *l, t_point3 p,
 //	@param obj The object to calculate the lightning for
 //	@param ln The lightning data
 //	@param in_shadow If the object is in shadow
+//	@param fast If the computation should be fast
 //	@return The color of the object
-t_color			lightning(t_object *obj, t_lightning ln, bool in_shadow);
+t_color			lightning(t_object *obj, t_lightning ln,
+					bool in_shadow, bool fast);
 
 //	is_shadowed: Check if a point is in shadow
 //	@param scene The scene

@@ -29,12 +29,12 @@ typedef struct s_list
 //	@param lst The list to add the new node to
 //	@param content The content of the new node
 //	@return The new list
-t_list		*ft_lstnew_back(t_list *lst, void *content);
+t_list		*ft_lstnew_back(t_list **lst, void *content);
 //	ft_lstnew_front: Directly adds a new content at the front of the list
 //	@param lst The list to add the new node to
 //	@param content The content of the new node
 //	@return The new list
-t_list		*ft_lstnew_front(t_list *lst, void *content);
+t_list		*ft_lstnew_front(t_list **lst, void *content);
 void		ft_lstadd_back(t_list **lst, t_list *new);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 void		ft_lstclear(t_list **lst, void (*del)(void *));
@@ -51,5 +51,6 @@ void		*ft_lstshift(t_list **lst);
 t_list		*ft_lstrevrotate(t_list *lst);
 t_list		*ft_lstrotate(t_list *lst);
 t_list		*ft_lstswap(t_list *lst);
+int			ft_lstremove(t_list **lst, void *content, void (*del)(void *));
 
 #endif

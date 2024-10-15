@@ -3,9 +3,31 @@
 #include "exit_handler/exit_handler.h"
 #include "parsing/parsing.h"
 
+static int	handle_key(int key, t_minirt *minirt)
+{
+	if (key == KEY_ESC)
+		secure_exit(minirt);
+	else if (key == KEY_D || key == KEY_A || key == KEY_W
+		|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
+		|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
+		|| key == KEY_SHIFT || key == KEY_R)
+		camera_move(key);
+	else if (key == KEY_ENTER)
+	{
+		print_percent(ft_strdup("0"));
+		printf("C %f,%f,%f %f,%f,%f %f\n", minirt->cam->origin.x,
+			minirt->cam->origin.y, minirt->cam->origin.z,
+			minirt->cam->target.x, minirt->cam->target.y,
+			minirt->cam->target.z, minirt->cam->fov);
+		render();
+	}
+	return (0);
+}
+
 static void	init_hooks(t_minirt *minirt)
 {
 	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
+	mlx_key_hook(minirt->win.windo, handle_key, minirt);
 }
 
 void	*init_minirt_mlx(t_minirt *minirt)

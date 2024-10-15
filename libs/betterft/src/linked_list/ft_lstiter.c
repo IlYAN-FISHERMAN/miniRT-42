@@ -48,3 +48,28 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (parent);
 }
+
+int	ft_lstremove(t_list **lst, void *content, void (*del)(void *))
+{
+	t_list	*tmp;
+
+	tmp = *lst;
+	while (tmp)
+	{
+		if (tmp->content == content)
+		{
+			if (tmp->prev)
+				tmp->prev->next = tmp->next;
+			if (tmp->next)
+				tmp->next->prev = tmp->prev;
+			if (tmp == *lst)
+				*lst = tmp->next;
+			if (del)
+				del(tmp->content);
+			gfree(tmp);
+			return (0);
+		}
+		tmp = tmp->next;
+	}
+	return (-1);
+}
