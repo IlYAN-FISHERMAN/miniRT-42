@@ -46,6 +46,7 @@ t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 	double		l_dot_n;
 	t_color		c[3];
 
+	(void)fast;
 	if (obj->mat.pattern.has_pattern)
 		obj->mat.color = obj->mat.pattern.pattern_at_object(obj->mat.pattern,
 				obj, ln.p);
@@ -56,9 +57,6 @@ t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 	lightv = vnormalized(vsub(((t_light *)(ln.l->data))->pos, ln.p));
 	l_dot_n = vdot(lightv, ln.nv);
 	c[1] = diffuse(obj, eff_color, l_dot_n);
-	if (!fast)
-		c[2] = specular(obj, ln, lightv, l_dot_n);
-	else
-		c[2] = color(0, 0, 0);
+	c[2] = specular(obj, ln, lightv, l_dot_n);
 	return (color_add(c[0], color_add(c[1], c[2])));
 }

@@ -85,12 +85,10 @@ t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 	double		reflectance;
 
 	c[0] = compute_phong(comps, ln, fast);
-	if (fast)
-		return (c[0]);
 	c[1] = reflected_color(comps, fast, remaining);
 	c[2] = refracted_color(comps, fast, remaining);
 	material = &comps->object->mat;
-	if (material->reflect > 0 && material->transp > 0)
+	if (!fast && material->reflect > 0 && material->transp > 0)
 	{
 		reflectance = schlick(comps);
 		return (color_add(c[0], color_add(color_scalar(c[1], reflectance),
