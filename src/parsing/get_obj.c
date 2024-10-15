@@ -1,3 +1,4 @@
+#include "ft_string.h"
 #include "parsing.h"
 
 t_scene	*get_scene_struct(t_minirt **minirt)
@@ -36,10 +37,12 @@ void	pars_obj(char **str, t_minirt **minirt)
 		else if (!ft_strcmp(str[0], "pl") || !ft_strcmp(str[0], "cy")
 			|| !ft_strcmp(str[0], "sp"))
 			get_obj(str, minirt);
+		else if (str[0][0] == '#')
+			;
 		else
 			crash_exit(*minirt,
 				(char *[]){"miniRT", "parsing: bad string format\n"
-				"unknown object:", NULL},
+				"unknown object", NULL},
 				str[0]);
 	}
 }
