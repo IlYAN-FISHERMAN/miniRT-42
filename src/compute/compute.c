@@ -113,7 +113,7 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	if (!i)
 	{
 		gfree(xs_parent.xs);
-		return (color(0, 0, 0));
+		return (color_scalar(minirt->amb->rgb, minirt->amb->light));
 	}
 	comps = precompute(i, r, xs_parent, fast);
 	gfree(xs_parent.xs);
