@@ -55,13 +55,13 @@ static void	camera_dir_move(int key, t_camera *cam)
 	right = vcross(cam->up, cam->target);
 	right = vnormalized(right);
 	if (key == KEY_LEFT)
-		rot = m4rotating(-0.2, Y_AXIS);
+		rot = m4rotating(-0.1, Y_AXIS);
 	else if (key == KEY_RIGHT)
-		rot = m4rotating(0.2, Y_AXIS);
+		rot = m4rotating(0.1, Y_AXIS);
 	if (key == KEY_UP)
-		rot = m4rodrigues_rotation(right, -0.2);
+		rot = m4rodrigues_rotation(right, -0.1);
 	else if (key == KEY_DOWN)
-		rot = m4rodrigues_rotation(right, 0.2);
+		rot = m4rodrigues_rotation(right, 0.1);
 	cam->target = tm4mul(rot, cam->target);
 }
 
@@ -83,5 +83,4 @@ void	camera_move(int key)
 		camera_dir_move(key, cam);
 	get_minirt()->cam = new_camera(cam->origin, cam->target, cam->fov);
 	gfree(cam);
-	fast_render();
 }

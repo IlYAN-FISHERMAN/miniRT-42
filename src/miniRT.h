@@ -48,6 +48,8 @@ typedef struct s_minirt
 	t_camera	*cam;
 	t_scene		*scene;
 	t_amb		*amb;
+	bool		is_rendering;
+	bool		update;
 }	t_minirt;
 
 //	init_minirt: Initialize the miniRT minirt structure

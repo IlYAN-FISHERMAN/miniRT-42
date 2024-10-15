@@ -7,11 +7,14 @@ static int	handle_key(int key, t_minirt *minirt)
 {
 	if (key == KEY_ESC)
 		secure_exit(minirt);
-	else if (key == KEY_D || key == KEY_A || key == KEY_W
-		|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
-		|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
-		|| key == KEY_SHIFT || key == KEY_R)
+	else if (!minirt->update && (key == KEY_D || key == KEY_A || key == KEY_W
+			|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
+			|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
+			|| key == KEY_SHIFT || key == KEY_R))
+	{
 		camera_move(key);
+		minirt->update = true;
+	}
 	else if (key == KEY_ENTER)
 	{
 		print_percent(ft_strdup("0"));
@@ -24,10 +27,26 @@ static int	handle_key(int key, t_minirt *minirt)
 	return (0);
 }
 
+int loop_hook(void *param)
+{
+	t_minirt	*minirt;
+
+	minirt = (t_minirt *)param;
+	if (minirt->is_rendering)
+		return (0);
+	if (minirt->update)
+	{
+		fast_render();
+		minirt->update = false;
+	}
+	return (0);
+}
+
 static void	init_hooks(t_minirt *minirt)
 {
 	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
-	mlx_key_hook(minirt->win.windo, handle_key, minirt);
+	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
+	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
 }
 
 void	*init_minirt_mlx(t_minirt *minirt)
