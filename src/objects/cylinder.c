@@ -78,9 +78,9 @@ static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
 	object_point = tm4mul(object->inv_transform, world_point);
 	height = 1;
 	dist = object_point.x * object_point.x + object_point.z * object_point.z;
-	if (dist < 1 && object_point.y >= height - EPSILONF)
+	if (dist < 1 && object_point.y >= height - EPSILOND)
 		normal = vector3(0, 1, 0);
-	else if (dist < 1 && object_point.y <= EPSILONF)
+	else if (dist < 1 && object_point.y <= EPSILOND)
 		normal = vector3(0, -1, 0);
 	else
 		normal = vector3(object_point.x, 0, object_point.z);

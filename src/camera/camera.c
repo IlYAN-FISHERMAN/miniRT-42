@@ -27,7 +27,7 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 	origin.w = POINT;
 	target.w = VECTOR;
 	up_ = vector3(0, 1, 0);
-	if (fabs(target.x) < EPSILONF && fabs(target.z) < EPSILONF)
+	if (fabs(target.x) < EPSILOND && fabs(target.z) < EPSILOND)
 	{
 		if (target.y > 0)
 			up_ = vector3(0, 0, -1);
