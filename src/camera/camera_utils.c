@@ -6,8 +6,8 @@ static void	camera_pos_move(int key, t_camera *cam)
 	t_vector3	side;
 	t_vector3	move;
 
-	side = vnormalized(vcross(vector3(0, 1, 0), cam->target));
-	move = cam->target;
+	side = vmul(vnormalized(vcross(vector3(0, 1, 0), cam->target)), 0.5);
+	move = vmul((cam->target), 0.5);
 	move.y = 0;
 	if (key == KEY_D)
 		cam->origin = vadd(cam->origin, side);
@@ -18,9 +18,9 @@ static void	camera_pos_move(int key, t_camera *cam)
 	else if (key == KEY_S)
 		cam->origin = vsub(cam->origin, move);
 	else if (key == KEY_SPACE)
-		cam->origin.y += 1;
+		cam->origin.y += 0.5;
 	else if (key == KEY_SHIFT)
-		cam->origin.y -= 1;
+		cam->origin.y -= 0.5;
 }
 
 static void	camera_dir_move(int key, t_camera *cam)
@@ -31,13 +31,13 @@ static void	camera_dir_move(int key, t_camera *cam)
 	right = vcross(cam->up, cam->target);
 	right = vnormalized(right);
 	if (key == KEY_LEFT)
-		rot = m4rotating(-0.1, Y_AXIS);
+		rot = m4rotating(-0.05, Y_AXIS);
 	else if (key == KEY_RIGHT)
-		rot = m4rotating(0.1, Y_AXIS);
+		rot = m4rotating(0.05, Y_AXIS);
 	if (key == KEY_UP)
-		rot = m4rodrig_rot(right, -0.1);
+		rot = m4rodrig_rot(right, -0.05);
 	else if (key == KEY_DOWN)
-		rot = m4rodrig_rot(right, 0.1);
+		rot = m4rodrig_rot(right, 0.05);
 	cam->target = tm4mul(rot, cam->target);
 }
 
