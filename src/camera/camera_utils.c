@@ -46,10 +46,10 @@ void	camera_move(int key)
 	t_camera	*cam;
 
 	cam = get_minirt()->cam;
-	if (key == 114)
+	if (key == KEY_R)
 	{
-		cam->origin = point3(0, 0, 0);
-		cam->target = vector3(0, 0, 1);
+		cam->origin = point3(0, 1.8, 0);
+		cam->target = vector3(0, -0.01, 1);
 	}
 	else if (key == KEY_D || key == KEY_A || key == KEY_W || key == KEY_S
 		|| key == KEY_SPACE || key == KEY_SHIFT)
