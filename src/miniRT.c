@@ -42,13 +42,6 @@ int	loop_hook(void *param)
 	return (0);
 }
 
-static void	init_hooks(t_minirt *minirt)
-{
-	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
-	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
-	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
-}
-
 void	*init_minirt_mlx(t_minirt *minirt)
 {
 	minirt->win.mlx = mlx_init();
@@ -59,7 +52,9 @@ void	*init_minirt_mlx(t_minirt *minirt)
 			minirt->size->height, "miniRT");
 	if (!minirt->win.windo)
 		crash_exit(minirt, NULL, "windo malloc fail");
-	init_hooks(minirt);
+	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
+	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
+	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
 	return (minirt);
 }
 

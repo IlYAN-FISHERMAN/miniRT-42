@@ -1,15 +1,9 @@
 #include "cylinder.h"
 
-static bool	check_cap(t_ray ray, double t)
-{
-	double		x;
-	double		z;
-
-	x = ray.origin.x + t * ray.direction.x;
-	z = ray.origin.z + t * ray.direction.z;
-	return (x * x + z * z < 1 || ft_equalsd(x * x + z * z, 1));
-}
-
+//	intersect_caps: Check if the ray intersects the caps of the cylinder
+//	@param object The object to check
+//	@param ray The ray to check
+//	@param xs_parent The intersection data
 static void	intersect_caps(t_object *object, t_ray ray, t_xs_parent *xs_parent)
 {
 	double		t;
@@ -24,6 +18,10 @@ static void	intersect_caps(t_object *object, t_ray ray, t_xs_parent *xs_parent)
 		add_intersection(xs_parent, intersection(t, object));
 }
 
+//	check_bounds: Check if the intersection is within the bounds of the cylinder
+//	@param obj The object to check
+//	@param ray The ray to check
+//	@param xs_parent The intersection data
 static	void	check_bounds(t_object *obj, t_ray ray,
 	t_xs_parent *xs_parent)
 {
