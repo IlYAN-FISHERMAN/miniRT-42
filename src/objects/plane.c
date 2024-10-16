@@ -26,7 +26,7 @@ static t_vector3	normal_at_plane(t_object *object, t_point3 world_point)
 {
 	(void)world_point;
 	(void)object;
-	return ((t_plane *)object->data)->normal;
+	return (((t_plane *)object->data)->normal);
 }
 
 t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
