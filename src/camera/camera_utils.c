@@ -34,7 +34,6 @@ static t_matrix4	m4rodrigues_rotation(t_vector3 a, double angle)
 	cost = cos(angle);
 	sint = sin(angle);
 	a = vnormalized(a);
-
 	xt = a.x * (1 - cost);
 	yt = a.y * (1 - cost);
 	zt = a.z * (1 - cost);
