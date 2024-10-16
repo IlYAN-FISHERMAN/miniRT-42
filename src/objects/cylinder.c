@@ -59,6 +59,8 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 	c = cyl_to_ray.x * cyl_to_ray.x + cyl_to_ray.z * cyl_to_ray.z - 1;
 	if (!quadratic_intersection(a, b, c, object))
 		return (xs_parent);
+	if (object->t[0] > object->t[1])
+		ft_swap(&object->t[0], &object->t[1]);
 	check_bounds(object, ray, &xs_parent);
 	intersect_caps(object, ray, &xs_parent);
 	return (xs_parent);
@@ -68,7 +70,6 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 //  @param object The object
 //  @param world_point The point on the cylinder
 //  @return The normal at the point
-
 static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
 {
 	double		dist;
