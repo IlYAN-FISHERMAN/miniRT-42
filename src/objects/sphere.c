@@ -21,7 +21,11 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 	a = vdot(ray.direction, ray.direction);
 	b = 2 * (vdot(ray.direction, sphere_to_ray));
 	c = vdot(sphere_to_ray, sphere_to_ray) - 1;
-	inters = quadratic_intersection(a, b, c, object);
+	if (quadratic_intersection(a, b, c, object))
+	{
+		add_intersection(&inters, intersection(object->t[0], object));
+		add_intersection(&inters, intersection(object->t[1], object));
+	}
 	return (inters);
 }
 
