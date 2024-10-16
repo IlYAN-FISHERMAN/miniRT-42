@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:11:10 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 18:36:28 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:54:57 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,10 @@ void		*ft_memncat(void *dest, size_t start, void *src, size_t nb);
 //	@param 'size': The size of the memory area.
 //	@return The new string or NULL if the allocation fails.
 char		*ft_memtostr(void *mem, size_t size);
+
+//	ft_swap: Swaps the values of 'a' and 'b'.
+//	@param 'a': The first value.
+//	@param 'b': The second value.
+void		ft_swap(void *a, void *b);
 
 #endif
