@@ -125,5 +125,16 @@ t_matrix4	m4rotating(double radian, t_axis axis);
 //	@param sh The shearing values
 //	@return The shearing matrix
 t_matrix4	m4shearing(t_shearing sh);
+//	m4rodrig_rot: Get the Rodrigues rotation matrix of a
+//	vector and an angle
+//	@param a The vector
+//	@param angle The angle
+//	@return The Rodrigues rotation matrix
+t_matrix4	m4rodrig_rot(t_vector3 a, double angle);
+//	m4rotating_dir: Get the rotation matrix of a vector
+//	@note This function uses Rodrigues' rotation formula
+//	@param from The vector to rotate
+//	@param to The vector to rotate to
+t_matrix4	m4rotating_dir(t_vector3 from, t_vector3 to);
 
 #endif

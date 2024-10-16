@@ -8,21 +8,13 @@
 static t_xs_parent	intersect_plane(t_object *object, t_ray ray)
 {
 	t_xs_parent	xs_parent;
-	double		t;
-	t_vector3	normal;
 
 	ray = transform(ray, object->inv_transform);
-	normal = ((t_plane *)object->data)->normal;
 	xs_parent = xs();
-	if (fabs(vdot(ray.direction, normal)) < EPSILONF)
+	if (ft_equalsd(ray.direction.y, 0))
 		return (xs_parent);
-	t = -vdot(ray.origin, normal) / vdot(ray.direction, normal);
-	xs_parent.xs = galloc(sizeof(t_intersect));
-	if (!xs_parent.xs)
-		crash_exit(get_minirt(),
-			(char *[]){"miniRT", "render", 0}, "Malloc failed");
-	xs_parent.xs[0] = intersection(t, object);
-	xs_parent.count = 1;
+	add_intersection(&xs_parent,
+		intersection(-ray.origin.y / ray.direction.y, object));
 	return (xs_parent);
 }
 
@@ -33,7 +25,8 @@ static t_xs_parent	intersect_plane(t_object *object, t_ray ray)
 static t_vector3	normal_at_plane(t_object *object, t_point3 world_point)
 {
 	(void)world_point;
-	return (tm4mul(object->transform, ((t_plane *)object->data)->normal));
+	(void)object;
+	return ((t_plane *)object->data)->normal;
 }
 
 t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
@@ -54,10 +47,12 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 	*((t_plane *)object->data) = (t_plane){.origin = origin,
 		.normal = normal, .color = color};
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
-		.transform = m4default(), .intersect = intersect_plane,
+		.transform = m4translation(origin), .intersect = intersect_plane,
 		.type = o_plane, .normal_at = normal_at_plane};
-	object->transform = m4translation(vector3(origin.x, origin.y, origin.z));
+	object->transform = m4mul(object->transform,
+			m4rotating_dir(point3(0, 1, 0), normal));
 	object->inv_transform = m4invert(object->transform, 0);
 	object->tinv_transform = m4transpose(object->inv_transform);
+	printf("%f %f %f\n", normal.x, normal.y, normal.z);
 	return (object);
 }
