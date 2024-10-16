@@ -2,11 +2,7 @@
 
 t_xs_parent	xs(void)
 {
-	t_xs_parent	xs;
-
-	xs.count = 0;
-	xs.xs = 0;
-	return (xs);
+	return ((t_xs_parent){.count = 0, .xs = 0});
 }
 
 t_xs_parent	mergef_intersections(t_xs_parent xs1, t_xs_parent xs2)

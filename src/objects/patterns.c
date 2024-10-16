@@ -7,9 +7,8 @@ static t_color	stripe_at_object(t_pattern pattern,
 	t_point3	obj_point;
 	t_point3	pattern_point;
 
-	point = tm4mul(pattern.transform, point);
 	obj_point = tm4mul(((t_object *)object)->inv_transform, point);
-	pattern_point = tm4mul(((t_object *)object)->tinv_transform, obj_point);
+	pattern_point = tm4mul(pattern.transform, obj_point);
 	if ((int)floor(pattern_point.x) % 2 == 0)
 		return (pattern.a);
 	return (pattern.b);

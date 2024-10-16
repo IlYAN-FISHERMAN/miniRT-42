@@ -21,6 +21,7 @@ FILES =	garbage_collector/ft_garbage_collector \
 		memory/ft_memset \
 		memory/ft_memsuperclear \
 		memory/ft_reallocf \
+		memory/ft_swap \
 		print/ft_print_utils \
 		print/ft_print \
 		print/ft_printf_utils \

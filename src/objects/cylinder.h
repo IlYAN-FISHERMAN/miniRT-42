@@ -21,4 +21,10 @@ typedef struct s_cylin
 t_object		*new_cylinder(t_point3 origin, double *rad_hei,
 					t_vector3 normal, t_color color);
 
+//	check_cap: Check if the ray intersects the cap of the cylinder
+//	@param ray The ray to check
+//	@param t The distance to the cap
+//	@return true if the ray intersects the cap, false otherwise
+bool			check_cap(t_ray ray, double t);
+
 #endif

@@ -44,6 +44,7 @@ typedef struct s_object
 	t_matrix4		inv_transform;
 	t_matrix4		tinv_transform;
 	t_mat			mat;
+	double			t[2];
 }	t_object;
 
 //	material: Create a new material
@@ -76,5 +77,12 @@ bool		intersect(t_intersect *intersect, t_scene *scene);
 //	@param obj The object to transform
 //	@param transform The transformation matrix
 void		set_transform(t_object *obj, t_matrix4 transform);
+
+//	quadratic_intersection: Calculate the intersection of a quadratic equation
+//	@param a The a value of the quadratic equation
+//	@param b The b value of the quadratic equation
+//	@param c The c value of the quadratic equation
+//	@param obj The object to check
+bool		quadratic_intersection(double a, double b, double c, t_object *obj);
 
 #endif

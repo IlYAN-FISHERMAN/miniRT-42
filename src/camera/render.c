@@ -47,7 +47,6 @@ void	display(void)
 	}
 	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo, img, 0, 0);
 	mlx_do_sync(minirt->win.mlx);
-	mlx_do_key_autorepeaton(minirt->win.mlx);
 	mlx_destroy_image(minirt->win.mlx, img);
 }
 
@@ -58,6 +57,8 @@ void	fast_render(void)
 	int			y;
 	t_color		color;
 
+	minirt = get_minirt();
+	minirt->is_rendering = true;
 	minirt = get_minirt();
 	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
 	minirt->amb->is_calc = true;
@@ -75,6 +76,7 @@ void	fast_render(void)
 		y += PREVIEW_PIXEL_SIZE;
 	}
 	display();
+	minirt->is_rendering = false;
 }
 
 void	render(void)
@@ -85,6 +87,7 @@ void	render(void)
 	int			percent[2];
 
 	minirt = get_minirt();
+	minirt->is_rendering = true;
 	percent[0] = 0;
 	percent[1] = minirt->size->height * minirt->size->width;
 	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
@@ -95,12 +98,12 @@ void	render(void)
 		x = -1;
 		while (++x, x < minirt->size->width)
 		{
-			percent[0]++;
-			if (!(percent[0] % 100000))
+			if (!(++percent[0] % 100000))
 				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
 			minirt->size->data[y][x] = color_hex(color_at(
 						ray_for_pixel(minirt->cam, x, y), false, MAX_REFLECT));
 		}
 	}
 	display();
+	minirt->is_rendering = false;
 }

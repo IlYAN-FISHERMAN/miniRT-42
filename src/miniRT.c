@@ -7,15 +7,18 @@ static int	handle_key(int key, t_minirt *minirt)
 {
 	if (key == KEY_ESC)
 		secure_exit(minirt);
-	else if (key == KEY_D || key == KEY_A || key == KEY_W
-		|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
-		|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
-		|| key == KEY_SHIFT || key == KEY_R)
+	else if (!minirt->update && (key == KEY_D || key == KEY_A || key == KEY_W
+			|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
+			|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
+			|| key == KEY_SHIFT || key == KEY_R))
+	{
 		camera_move(key);
+		minirt->update = true;
+	}
 	else if (key == KEY_ENTER)
 	{
 		print_percent(ft_strdup("0"));
-		printf("C %f,%f,%f %f,%f,%f %f\n", minirt->cam->origin.x,
+		printf("C %.2f,%.2f,%.2f %.2f,%.2f,%.2f %0.f\n", minirt->cam->origin.x,
 			minirt->cam->origin.y, minirt->cam->origin.z,
 			minirt->cam->target.x, minirt->cam->target.y,
 			minirt->cam->target.z, minirt->cam->fov);
@@ -24,10 +27,19 @@ static int	handle_key(int key, t_minirt *minirt)
 	return (0);
 }
 
-static void	init_hooks(t_minirt *minirt)
+int	loop_hook(void *param)
 {
-	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
-	mlx_key_hook(minirt->win.windo, handle_key, minirt);
+	t_minirt	*minirt;
+
+	minirt = (t_minirt *)param;
+	if (minirt->is_rendering)
+		return (0);
+	if (minirt->update)
+	{
+		fast_render();
+		minirt->update = false;
+	}
+	return (0);
 }
 
 void	*init_minirt_mlx(t_minirt *minirt)
@@ -40,7 +52,9 @@ void	*init_minirt_mlx(t_minirt *minirt)
 			minirt->size->height, "miniRT");
 	if (!minirt->win.windo)
 		crash_exit(minirt, NULL, "windo malloc fail");
-	init_hooks(minirt);
+	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
+	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
+	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
 	return (minirt);
 }
 

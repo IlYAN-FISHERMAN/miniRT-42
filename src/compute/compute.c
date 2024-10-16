@@ -50,8 +50,8 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	}
 	else
 		comps.inside = false;
-	comps.over_point = vadd(comps.point, vmul(comps.normalv, EPSILONF));
-	comps.under_point = vsub(comps.point, vmul(comps.normalv, EPSILONF));
+	comps.over_point = vadd(comps.point, vmul(comps.normalv, EPSILOND));
+	comps.under_point = vsub(comps.point, vmul(comps.normalv, EPSILOND));
 	comps.reflectv = vreflect(r.direction, comps.normalv);
 	compute_refractive_indices(&comps, i, xs_parent);
 	return (comps);
@@ -70,8 +70,8 @@ static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
 	ln->l = get_next_light(minirt->scene);
 	while (ln->l)
 	{
-		c = color_add(c, lightning(comps->object, *ln, (!fast
-						&& is_shadowed(minirt->scene,
+		c = color_add(c, lightning(comps->object, *ln,
+					(is_shadowed(minirt->scene,
 							comps->point, ln->l)), fast));
 		ln->l = get_next_light(minirt->scene);
 	}
@@ -113,7 +113,7 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	if (!i)
 	{
 		gfree(xs_parent.xs);
-		return (color(0, 0, 0));
+		return (color_scalar(minirt->amb->rgb, minirt->amb->light));
 	}
 	comps = precompute(i, r, xs_parent, fast);
 	gfree(xs_parent.xs);
