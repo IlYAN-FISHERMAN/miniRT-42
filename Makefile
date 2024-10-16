@@ -40,7 +40,6 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/render \
 		$(FILES_PATH)camera/render_utils \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
-		$(FILES_PATH)matrix/matrix2 \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
