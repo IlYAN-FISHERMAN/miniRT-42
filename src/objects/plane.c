@@ -35,6 +35,7 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 
 	origin.w = POINT;
 	normal.w = VECTOR;
+	vnormalize(&normal);
 	object = galloc(sizeof(t_object));
 	if (!object)
 		return (0);
@@ -50,9 +51,8 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 		.transform = m4translation(origin), .intersect = intersect_plane,
 		.type = o_plane, .normal_at = normal_at_plane};
 	object->transform = m4mul(object->transform,
-			m4rotating_dir(point3(0, 1, 0), normal));
+			m4rotating_dir(point3(0, 1, 0), ((t_plane *)object->data)->normal));
 	object->inv_transform = m4invert(object->transform, 0);
 	object->tinv_transform = m4transpose(object->inv_transform);
-	printf("%f %f %f\n", normal.x, normal.y, normal.z);
 	return (object);
 }

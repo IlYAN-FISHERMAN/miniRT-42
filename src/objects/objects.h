@@ -77,4 +77,13 @@ bool		intersect(t_intersect *intersect, t_scene *scene);
 //	@param transform The transformation matrix
 void		set_transform(t_object *obj, t_matrix4 transform);
 
+//	quadratic_intersection: Calculate the intersection of a quadratic equation
+//	@param a The a value of the quadratic equation
+//	@param b The b value of the quadratic equation
+//	@param c The c value of the quadratic equation
+//	@param obj The object to check
+//	@return The intersection data
+t_xs_parent	quadratic_intersection(double a, double b,
+				double c, t_object *obj);
+
 #endif
