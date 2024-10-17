@@ -4,7 +4,7 @@
 # include "camera.h"
 # include "image.h"
 
-# define MAX_REFLECT 5
+# define MAX_REFLECT 10
 # define PREVIEW_PIXEL_SIZE 7
 
 //	pixelate: Pixelate the image
