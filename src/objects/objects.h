@@ -14,6 +14,7 @@ typedef enum e_objects_type
 	o_sphere,
 	o_light,
 	o_cylin,
+	o_cone,
 }	t_objects_type;
 
 // t_scene: A linked list of objects

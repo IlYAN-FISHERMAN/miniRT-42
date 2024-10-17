@@ -4,6 +4,7 @@
 # include "../color/color.h"
 # include "../vectors/vectors.h"
 # include "objects.h"
+# include "cone.h"
 # include "cylinder.h"
 # include "plane.h"
 # include "sphere.h"
