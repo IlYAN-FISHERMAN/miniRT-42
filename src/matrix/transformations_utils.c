@@ -30,6 +30,8 @@ t_matrix4	m4rotating_dir(t_vector3 from, t_vector3 to)
 
 	if (from.x == to.x && from.y == to.y && from.z == to.z)
 		return (m4default());
+	else if (from.x == -to.x && from.y == -to.y && from.z == -to.z)
+		return (m4scaling(vector3(-1, -1, -1)));
 	axis = vcross(from, to);
 	vnormalize(&axis);
 	angle = acos(vdot(from, to));

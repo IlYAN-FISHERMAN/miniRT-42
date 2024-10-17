@@ -62,11 +62,4 @@ t_color	color_mult(t_color c, t_color d);
 // @return The product of the color and the scalar
 t_color	color_scalar(t_color c, double scalar);
 
-// apply_gamma: Apply gamma correction to a color
-// @param c The color to apply gamma to
-// @param gamma The gamma value
-// @param exposure The exposure value
-// @return The color with gamma applied
-t_color	apply_gamma(t_color c, double gamma, double exposure);
-
 #endif

@@ -1,25 +1,5 @@
 #include "matrix.h"
 
-t_matrix4	m4identity(t_matrix4 m)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < 4)
-		{
-			if (i == j)
-				m.data[i][j] = 1;
-			else
-				m.data[i][j] = 0;
-		}
-	}
-	return (m);
-}
-
 t_matrix4	m4transpose(t_matrix4 m)
 {
 	t_matrix4	res;

@@ -13,11 +13,6 @@ typedef struct s_matrix3
 	double	data[3][3];
 }	t_matrix3;
 
-typedef struct s_matrix2
-{
-	double	data[2][2];
-}	t_matrix2;
-
 typedef enum e_axis
 {
 	X_AXIS = 0,
@@ -48,10 +43,6 @@ t_matrix4	m4mul(t_matrix4 m, t_matrix4 n);
 //  @param v The tuple
 //  @return The multiplied tuple
 t_tuple4	tm4mul(t_matrix4 m, t_tuple4 t);
-//  m4identity: Get the identity matrix of a given matrix
-//  @param m The matrix
-//  @return The identity matrix
-t_matrix4	m4identity(t_matrix4 m);
 //  m4transpose: Invert columns and rows of a matrix
 //  @param m The matrix
 //  @return The rotated matrix
@@ -62,28 +53,6 @@ t_matrix4	m4transpose(t_matrix4 m);
 //  @param col The column to remove
 //  @return The submatrix
 t_matrix3	m3subm(t_matrix4 m, int row, int col);
-//  m2subm: Get the t_matrix2 submatrix of a t_matrix3
-//  @param m The matrix
-//  @param row The row to remove
-//  @param col The column to remove
-//  @return The submatrix
-t_matrix2	m2subm(t_matrix3 m, int row, int col);
-//  m3minor: Get the minor of a t_matrix3
-//  @param m The matrix
-//  @param row The row to remove
-//  @param col The column to remove
-//  @return The minor
-double		m3minor(t_matrix3 m, int row, int col);
-//	m2det: Get the determinant of a t_matrix2
-//	@param m The matrix
-//	@return The determinant
-double		m2det(t_matrix2 m);
-//	m3cofactor: Get the cofactor of a t_matrix3
-//	@param m The matrix
-//	@param row The row to remove
-//	@param col The column to remove
-//	@return The cofactor
-double		m3cofactor(t_matrix3 m, int row, int col);
 //	m3det: Get the determinant of a t_matrix3
 //	@param m The matrix
 //	@return The determinant
