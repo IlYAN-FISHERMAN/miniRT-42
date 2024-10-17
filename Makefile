@@ -45,6 +45,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)matrix/matrix4 \
 		$(FILES_PATH)matrix/transformations \
 		$(FILES_PATH)matrix/transformations_utils \
+		$(FILES_PATH)objects/cone \
 		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/cylinder_utils \
 		$(FILES_PATH)objects/light \
