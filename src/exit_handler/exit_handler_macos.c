@@ -27,12 +27,12 @@ static void	clear_image(t_minirt *minirt, t_image *image)
 
 void	clear_memory(t_minirt *minirt)
 {
+	if (minirt && minirt->size)
+		clear_image(minirt, minirt->size);
 	if (minirt && minirt->win.mlx)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt && minirt->win.mlx)
 		gfree(minirt->win.mlx);
-	if (minirt && minirt->size)
-		clear_image(minirt, minirt->size);
 	if (minirt && minirt->amb)
 		gfree(minirt->amb);
 	if (minirt && minirt->cam)
