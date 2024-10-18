@@ -48,8 +48,8 @@ t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 
 	(void)fast;
 	if (obj->mat.pattern.has_pattern)
-		obj->mat.color = obj->mat.pattern.pattern_at_object(obj->mat.pattern,
-				obj, ln.p);
+		obj->mat.color = obj->mat.pattern
+			.pattern_at_object(obj->mat.pattern, obj, ln.p);
 	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);
 	c[0] = color_mult(ambience(ln.amb), eff_color);
 	if (in_shadow)
