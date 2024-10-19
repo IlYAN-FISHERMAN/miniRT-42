@@ -24,10 +24,10 @@ t_pattern	pattern(void);
 //	@return The stripe pattern
 t_pattern	stripe_pattern(t_color a, t_color b);
 
-//	gradient_pattern: Create a gradient pattern
+//	checkboard_pattern: Create a checkboard pattern
 //	@param a The first color
 //	@param b The second color
-//	@return The gradient pattern
-t_pattern	gradient_pattern(t_color a, t_color b);
+//	@return The checkboard pattern
+t_pattern	checkboard_pattern(t_color a, t_color b);
 
 #endif

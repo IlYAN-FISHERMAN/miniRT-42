@@ -106,7 +106,7 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	t_minirt	*minirt;
 
 	if (fast && remaining >= MAX_REFLECT)
-		remaining = MAX_REFLECT - 1;
+		remaining = 1;
 	minirt = get_minirt();
 	xs_parent = intersect_world(minirt->scene, r);
 	i = hit(xs_parent);

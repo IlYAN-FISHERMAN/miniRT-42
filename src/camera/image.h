@@ -8,7 +8,7 @@ typedef struct s_image
 {
 	int		width;
 	int		height;
-	int		**data;
+	void	*mlx_img;
 }	t_image;
 
 typedef struct s_size

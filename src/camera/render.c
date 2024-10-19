@@ -11,43 +11,38 @@ void	pixelate(t_image *image, t_color color, int x, int y)
 	{
 		j = -1;
 		while (++j, j <= PREVIEW_PIXEL_SIZE && x + j < image->width)
-			image->data[y + i][x + j] = color_hex(color);
+			put_pixel_to_image(image->mlx_img, x + j, y + i, color_hex(color));
 	}
 }
 
 void	put_pixel_to_image(void *img, int x, int y, int color)
 {
-	char	*data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-	int		bppd;
+	static char	*data;
+	static int	bpp;
+	static int	size_line;
+	static int	endian;
+	static int	bppd;
 
-	data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
-	bppd = bpp >> 3;
+	if (!data)
+	{
+		data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+		bppd = bpp >> 3;
+	}
+	if (x < 0 || x >= get_minirt()->size->width
+		|| y < 0 || y >= get_minirt()->size->height)
+		return ;
+	color = mlx_get_color_value(get_minirt()->win.mlx, color);
 	*(int *)(data + (y * size_line + x * bppd)) = color;
 }
 
 void	display(void)
 {
 	t_minirt	*minirt;
-	void		*img;
-	int			i;
-	int			j;
 
 	minirt = get_minirt();
-	img = mlx_new_image(minirt->win.mlx,
-			minirt->size->width, minirt->size->height);
-	i = -1;
-	while (++i < minirt->size->height)
-	{
-		j = -1;
-		while (++j < minirt->size->width)
-			put_pixel_to_image(img, j, i, minirt->size->data[i][j]);
-	}
-	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo, img, 0, 0);
+	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo,
+		minirt->size->mlx_img, 0, 0);
 	mlx_do_sync(minirt->win.mlx);
-	mlx_destroy_image(minirt->win.mlx, img);
 }
 
 void	fast_render(void)
@@ -100,8 +95,8 @@ void	render(void)
 		{
 			if (!(++percent[0] % 100000))
 				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
-			minirt->size->data[y][x] = color_hex(color_at(
-						ray_for_pixel(minirt->cam, x, y), false, MAX_REFLECT));
+			put_pixel_to_image(minirt->size->mlx_img, x, y, color_hex(color_at(
+						ray_for_pixel(minirt->cam, x, y), false, MAX_REFLECT)));
 		}
 	}
 	display();
