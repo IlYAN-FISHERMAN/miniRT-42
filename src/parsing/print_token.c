@@ -8,6 +8,24 @@ static void	print_tuple(t_tuple4 tuple)
 		printf("vector: %.2f,%.2f,%.2f\n", tuple.x, tuple.y, tuple.z);
 }
 
+void	print_obj2(t_object *obj)
+{
+	if (obj->type == o_light)
+	{
+		print_tuple(((t_light *)obj->data)->pos);
+		printf("Lratio: %.2f\n", ((t_light *)obj->data)->bright);
+	}
+	if (obj->type == o_cone)
+	{
+		print_tuple(((t_cylin *)obj->data)->origin);
+		print_tuple(((t_cylin *)obj->data)->normal);
+		printf("Radius: %.2f\nheight: %.2f\n",
+			((t_cylin *)obj->data)->radius, ((t_cylin *)obj->data)->height);
+	}
+	printf("RGB: %d,%d,%d\n\n",
+		obj->mat.color.r, obj->mat.color.g, obj->mat.color.b);
+}
+
 void	print_obj1(t_object *obj)
 {
 	if (obj->type == o_cylin)
@@ -27,13 +45,7 @@ void	print_obj1(t_object *obj)
 		print_tuple(((t_sphere *)obj->data)->origin);
 		printf("Radius: %.2f\n", 2 * ((t_sphere *)obj->data)->radius);
 	}
-	else if (obj->type == o_light)
-	{
-		print_tuple(((t_light *)obj->data)->pos);
-		printf("Lratio: %.2f\n", ((t_light *)obj->data)->bright);
-	}
-	printf("RGB: %d,%d,%d\n\n",
-		obj->mat.color.r, obj->mat.color.g, obj->mat.color.b);
+	print_obj2(obj);
 }
 
 void	print_obj_main(t_scene *tmp)
@@ -52,6 +64,8 @@ void	print_obj_main(t_scene *tmp)
 			printf("pl :\n");
 		else if (obj->type == o_sphere)
 			printf("sp :\n");
+		else if (obj->type == o_cone)
+			printf("co :\n");
 		print_obj1(obj);
 		tmp = tmp->next;
 	}

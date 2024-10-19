@@ -18,7 +18,7 @@ void	get_size_default(t_minirt **minirt)
 
 int	check_standare_shape(t_minirt *minirt)
 {
-	if (!minirt->cam)
+	if (!minirt->world.cam)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, \
 			"No cam set");

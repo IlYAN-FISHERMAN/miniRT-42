@@ -40,7 +40,7 @@ void	get_cam(char **str, t_minirt **minirt)
 	t_point3	origin;
 	t_vector3	target;
 
-	if ((*minirt)->cam)
+	if ((*minirt)->world.cam)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Only one C accepted");
 	check_cam_format(str, minirt);
@@ -52,10 +52,10 @@ void	get_cam(char **str, t_minirt **minirt)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 	if ((*minirt)->size)
-		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]));
+		(*minirt)->world.cam = new_camera(origin, target, ft_atof(str[3]));
 	else
-		(*minirt)->cam = new_camera(origin, target, ft_atof(str[3]));
-	if (!(*minirt)->cam)
+		(*minirt)->world.cam = new_camera(origin, target, ft_atof(str[3]));
+	if (!(*minirt)->world.cam)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 }

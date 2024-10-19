@@ -84,6 +84,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)parsing/get_obj \
 		$(FILES_PATH)parsing/get_size \
 		$(FILES_PATH)parsing/obj_cy \
+		$(FILES_PATH)parsing/obj_co \
 		$(FILES_PATH)parsing/obj_lig \
 		$(FILES_PATH)parsing/obj_pl \
 		$(FILES_PATH)parsing/obj_sp \
