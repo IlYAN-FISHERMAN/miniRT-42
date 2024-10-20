@@ -40,14 +40,20 @@ typedef struct s_win
 	void	*windo;
 }	t_win;
 
+typedef struct s_world
+{
+	t_camera	*cam;
+	t_scene		*scene;
+	t_light		*lights;
+	t_amb		*amb;
+}	t_world;
+
 typedef struct s_minirt
 {
 	int			fd;
 	t_win		win;
 	t_image		*size;
-	t_camera	*cam;
-	t_scene		*scene;
-	t_amb		*amb;
+	t_world		world;
 	bool		is_rendering;
 	bool		update;
 }	t_minirt;

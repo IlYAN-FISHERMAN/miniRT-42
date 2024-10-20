@@ -18,10 +18,11 @@ static int	handle_key(int key, t_minirt *minirt)
 	else if (key == KEY_ENTER)
 	{
 		print_percent(ft_strdup("0"));
-		printf("C %.2f,%.2f,%.2f %.2f,%.2f,%.2f %0.f\n", minirt->cam->origin.x,
-			minirt->cam->origin.y, minirt->cam->origin.z,
-			minirt->cam->target.x, minirt->cam->target.y,
-			minirt->cam->target.z, minirt->cam->fov);
+		printf("C %.2f,%.2f,%.2f %.2f,%.2f,%.2f %0.f\n",
+			minirt->world.cam->origin.x,
+			minirt->world.cam->origin.y, minirt->world.cam->origin.z,
+			minirt->world.cam->target.x, minirt->world.cam->target.y,
+			minirt->world.cam->target.z, minirt->world.cam->fov);
 		render();
 	}
 	return (0);
@@ -72,7 +73,7 @@ t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 	check_error(argc, argv, minirt);
 	pars_map(argv, &minirt);
 	if (DEBUG)
-		print_token(minirt, minirt->scene);
+		print_token(minirt, minirt->world.scene);
 	return (minirt);
 }
 

@@ -54,5 +54,5 @@ void	get_sp(char **str, t_minirt **minirt)
 	if (!scene->content)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	ft_lstadd_back(&(*minirt)->scene, scene);
+	ft_lstadd_back(&(*minirt)->world.scene, scene);
 }

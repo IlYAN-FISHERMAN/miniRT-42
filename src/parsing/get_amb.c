@@ -29,18 +29,19 @@ void	check_amb_format(t_minirt **minirt, char **str)
 
 void	get_amb(char **str, t_minirt **minirt)
 {
-	if ((*minirt)->amb)
+	if ((*minirt)->world.amb)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Only one A accepted");
 	check_amb_format(minirt, str);
 	check_amb_range(minirt, str);
-	(*minirt)->amb = ft_calloc(1, sizeof(t_amb));
-	if (!(*minirt)->amb)
+	(*minirt)->world.amb = ft_calloc(1, sizeof(t_amb));
+	if (!(*minirt)->world.amb)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	(*minirt)->amb->light = ft_atof(str[1]);
-	if (!ft_atoi_rgb(&(*minirt)->amb->rgb.r, &(*minirt)->amb->rgb.g, \
-			&(*minirt)->amb->rgb.b, ft_split(str[2], ',')))
+	(*minirt)->world.amb->light = ft_atof(str[1]);
+	if (!ft_atoi_rgb(&(*minirt)->world.amb->rgb.r, \
+			&(*minirt)->world.amb->rgb.g, \
+			&(*minirt)->world.amb->rgb.b, ft_split(str[2], ',')))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
 }

@@ -47,7 +47,7 @@ void	check_light_format_bonus(char **str, t_minirt **minirt)
 
 void	check_light_format(char **str, t_minirt **minirt)
 {
-	if (strchr_light((*minirt)->scene))
+	if (strchr_light((*minirt)->world.scene))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Only one Light accepted");
 	if (ft_strlen_tab(str) != 3)
@@ -89,5 +89,5 @@ void	get_light(char **str, t_minirt **minirt)
 	if (!((t_object *)light->content))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	ft_lstadd_back(&(*minirt)->scene, light);
+	ft_lstadd_back(&(*minirt)->world.scene, light);
 }
