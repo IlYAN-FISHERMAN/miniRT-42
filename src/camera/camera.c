@@ -40,8 +40,8 @@ t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
 	*camera = (t_camera){.origin = origin, .target = vnormalized(target),
 		.fov = fov, .fov_rad = fov * DEG2RADF, .vsize = minirt->size->height,
 		.hsize = minirt->size->width, .up = up_,
-		.transform =
-		view_transform(origin, vadd(origin, vnormalized(target)), up_)};
+		.transform
+		= view_transform(origin, vadd(origin, vnormalized(target)), up_)};
 	camera->inv_transform = m4invert(camera->transform, 0);
 	process_camera(camera);
 	return (camera);

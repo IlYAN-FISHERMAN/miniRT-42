@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-int	strchr_light(t_scene *tmp)
+int	strchr_light(t_lights *tmp)
 {
 	while (tmp && tmp->content)
 	{
@@ -47,7 +47,7 @@ void	check_light_format_bonus(char **str, t_minirt **minirt)
 
 void	check_light_format(char **str, t_minirt **minirt)
 {
-	if (strchr_light((*minirt)->world.scene))
+	if (strchr_light((*minirt)->world.lights))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Only one Light accepted");
 	if (ft_strlen_tab(str) != 3)
@@ -89,5 +89,5 @@ void	get_light(char **str, t_minirt **minirt)
 	if (!((t_object *)light->content))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
-	ft_lstadd_back(&(*minirt)->world.scene, light);
+	ft_lstadd_back(&(*minirt)->world.lights, light);
 }

@@ -43,9 +43,11 @@ static void	camera_dir_move(int key, t_camera *cam)
 
 void	camera_move(int key)
 {
+	t_minirt	*minirt;
 	t_camera	*cam;
 
-	cam = get_minirt()->cam;
+	minirt = get_minirt();
+	cam = minirt->world.cam;
 	if (key == KEY_R)
 	{
 		cam->origin = point3(0, 1.8, 0);
@@ -57,6 +59,6 @@ void	camera_move(int key)
 	else if (key == KEY_LEFT || key == KEY_UP
 		|| key == KEY_RIGHT || key == KEY_DOWN)
 		camera_dir_move(key, cam);
-	get_minirt()->cam = new_camera(cam->origin, cam->target, cam->fov);
+	minirt->world.cam = new_camera(cam->origin, cam->target, cam->fov);
 	gfree(cam);
 }

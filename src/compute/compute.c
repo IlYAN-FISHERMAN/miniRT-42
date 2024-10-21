@@ -61,19 +61,21 @@ static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
 {
 	t_minirt	*minirt;
 	t_color		c;
+	t_lights	*lights;
 
 	minirt = get_minirt();
 	c = color(0, 0, 0);
 	*ln = new_lightning(0, comps->point,
 			comps->eyev, comps->normalv);
-	ln->amb = minirt->amb;
-	ln->l = get_next_light(minirt->scene);
-	while (ln->l)
+	ln->amb = minirt->world.amb;
+	lights = minirt->world.lights;
+	while (lights)
 	{
+		ln->l = lights->content;
 		c = color_add(c, lightning(comps->object, *ln,
-					(is_shadowed(minirt->scene,
+					(is_shadowed(minirt->world.scene,
 							comps->point, ln->l)), fast));
-		ln->l = get_next_light(minirt->scene);
+		lights = lights->next;
 	}
 	return (c);
 }
@@ -108,12 +110,12 @@ t_color	color_at(t_ray r, bool fast, int remaining)
 	if (fast && remaining >= MAX_REFLECT)
 		remaining = 1;
 	minirt = get_minirt();
-	xs_parent = intersect_world(minirt->scene, r);
+	xs_parent = intersect_world(minirt->world.scene, r);
 	i = hit(xs_parent);
 	if (!i)
 	{
 		gfree(xs_parent.xs);
-		return (color_scalar(minirt->amb->rgb, minirt->amb->light));
+		return (color_scalar(minirt->world.amb->rgb, minirt->world.amb->light));
 	}
 	comps = precompute(i, r, xs_parent, fast);
 	gfree(xs_parent.xs);

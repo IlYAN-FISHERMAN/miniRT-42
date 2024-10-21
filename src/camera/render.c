@@ -43,6 +43,7 @@ void	display(void)
 	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo,
 		minirt->size->mlx_img, 0, 0);
 	mlx_do_sync(minirt->win.mlx);
+	minirt->is_rendering = false;
 }
 
 void	fast_render(void)
@@ -54,16 +55,16 @@ void	fast_render(void)
 
 	minirt = get_minirt();
 	minirt->is_rendering = true;
-	minirt = get_minirt();
-	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
-	minirt->amb->is_calc = true;
+	minirt->world.amb->c_rgb
+		= color_scalar(minirt->world.amb->rgb, minirt->world.amb->light);
+	minirt->world.amb->is_calc = true;
 	y = 0;
 	while (++y, y < minirt->size->height)
 	{
 		x = 0;
 		while (++x, x < minirt->size->width)
 		{
-			color = color_at(ray_for_pixel(minirt->cam, x, y),
+			color = color_at(ray_for_pixel(minirt->world.cam, x, y),
 					true, MAX_REFLECT);
 			pixelate(minirt->size, color, x, y);
 			x += PREVIEW_PIXEL_SIZE;
@@ -71,34 +72,33 @@ void	fast_render(void)
 		y += PREVIEW_PIXEL_SIZE;
 	}
 	display();
-	minirt->is_rendering = false;
 }
 
 void	render(void)
 {
-	t_minirt	*minirt;
-	int			x;
-	int			y;
+	t_minirt	*mrt;
+	int			p[2];
 	int			percent[2];
 
-	minirt = get_minirt();
-	minirt->is_rendering = true;
+	mrt = get_minirt();
+	mrt->is_rendering = true;
 	percent[0] = 0;
-	percent[1] = minirt->size->height * minirt->size->width;
-	minirt->amb->c_rgb = color_scalar(minirt->amb->rgb, minirt->amb->light);
-	minirt->amb->is_calc = true;
-	y = -1;
-	while (++y, y < minirt->size->height)
+	percent[1] = mrt->size->height * mrt->size->width;
+	mrt->world.amb->c_rgb
+		= color_scalar(mrt->world.amb->rgb, mrt->world.amb->light);
+	mrt->world.amb->is_calc = true;
+	p[0] = -1;
+	while (++p[0], p[0] < mrt->size->height)
 	{
-		x = -1;
-		while (++x, x < minirt->size->width)
+		p[1] = -1;
+		while (++p[1], p[1] < mrt->size->width)
 		{
 			if (!(++percent[0] % 100000))
 				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
-			put_pixel_to_image(minirt->size->mlx_img, x, y, color_hex(color_at(
-						ray_for_pixel(minirt->cam, x, y), false, MAX_REFLECT)));
+			put_pixel_to_image(mrt->size->mlx_img, p[1], p[0], color_hex(
+					color_at(ray_for_pixel(mrt->world.cam, p[1], p[0]),
+						false, MAX_REFLECT)));
 		}
 	}
 	display();
-	minirt->is_rendering = false;
 }

@@ -20,6 +20,9 @@ typedef enum e_objects_type
 // t_scene: A linked list of objects
 typedef t_list			t_scene;
 
+// t_lights: A linked list of lights
+typedef t_list			t_lights;
+
 typedef struct s_mat
 {
 	t_color		color;

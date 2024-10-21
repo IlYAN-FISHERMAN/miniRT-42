@@ -29,16 +29,18 @@ void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->size)
 		clear_image(minirt, minirt->size);
-	if (minirt && minirt->win.mlx)
+	if (minirt && minirt->win.mlx && minirt->win.windo)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt && minirt->win.mlx)
 		gfree(minirt->win.mlx);
-	if (minirt && minirt->amb)
-		gfree(minirt->amb);
-	if (minirt && minirt->cam)
-		gfree(minirt->cam);
-	if (minirt && minirt->scene)
-		ft_lstclear(&minirt->scene, &free_object);
+	if (minirt && minirt->world.amb)
+		gfree(minirt->world.amb);
+	if (minirt && minirt->world.cam)
+		gfree(minirt->world.cam);
+	if (minirt && minirt->world.scene)
+		ft_lstclear(&minirt->world.scene, &free_object);
+	if (minirt && minirt->world.lights)
+		ft_lstclear(&minirt->world.lights, &free_object);
 }
 
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
