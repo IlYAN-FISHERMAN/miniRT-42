@@ -27,7 +27,7 @@ static void	fill_data(t_bumpmap *bumpmap, char ***arr, size_t *i, size_t *j)
 			if (*i >= bumpmap->height)
 				error("Invalid file format", "too many lines");
 		}
-		bumpmap->data[*i][*j] = byte_clamp(ft_atoi(*arr[1]));
+		bumpmap->data[*i * bumpmap->width + *j] = byte_clamp(ft_atoi(*arr[1]));
 		arr[1]++;
 		(*j)++;
 	}
@@ -91,7 +91,6 @@ t_bumpmap	*load_bumpmap(char *filename)
 {
 	t_bumpmap	*bumpmap;
 	int			fd;
-	size_t		i;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -100,16 +99,9 @@ t_bumpmap	*load_bumpmap(char *filename)
 	if (!bumpmap)
 		error("Failed to allocate memory", 0);
 	load_meta(bumpmap, fd);
-	i = 0;
-	bumpmap->data = galloc(sizeof(t_byte *) * bumpmap->height);
+	bumpmap->data = galloc(sizeof(t_byte *) * bumpmap->height * bumpmap->width);
 	if (!bumpmap->data)
 		error("Failed to allocate memory", 0);
-	while (i < bumpmap->height)
-	{
-		bumpmap->data[i] = galloc(sizeof(t_byte) * bumpmap->width);
-		if (!bumpmap->data[i++])
-			error("Failed to allocate memory", 0);
-	}
 	load_data(bumpmap, fd);
 	close(fd);
 	return (bumpmap);

@@ -20,7 +20,7 @@ double	get_bumpv(t_bumpmap *bumpmap, t_vector2 uv)
 		x = bumpmap->width - 1;
 	if ((size_t)y >= bumpmap->height)
 		y = bumpmap->height - 1;
-	return ((double)bumpmap->data[y][x] / 255.0);
+	return ((double)bumpmap->data[y * bumpmap->width + x] / 255.0);
 }
 
 t_vector3	perturbn(t_vector3 normal, double bump_value)
