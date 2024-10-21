@@ -67,7 +67,7 @@ t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 {
 	static t_minirt	*minirt_;
 
-	if (!minirt && minirt_)
+	if (!minirt)
 		return (minirt_);
 	minirt_ = minirt;
 	check_error(argc, argv, minirt);

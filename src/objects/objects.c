@@ -11,7 +11,8 @@ t_mat	material(t_color color, double diff,
 		.reflect = 0.5,
 		.transp = 0.5,
 		.refract_idx = 1.5,
-		.pattern = pattern()
+		.pattern = pattern(),
+		.bumpmap = dfbumpmap()
 	});
 }
 
@@ -19,13 +20,14 @@ t_mat	dfmaterial(t_color color)
 {
 	return ((t_mat){
 		.color = color,
-		.diff = 0.1,
-		.spec = 1.0,
-		.shin = 300,
-		.reflect = 1.0,
+		.diff = 0.6,
+		.spec = 0.2,
+		.shin = 50,
+		.reflect = 0.1,
 		.transp = 0.0,
 		.refract_idx = 1.0,
-		.pattern = pattern()
+		.pattern = pattern(),
+		.bumpmap = dfbumpmap()
 	});
 }
 
