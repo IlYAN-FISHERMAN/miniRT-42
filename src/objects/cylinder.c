@@ -64,6 +64,19 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 	return (xs_parent);
 }
 
+//  uv_mapping_cylin: Map a point on the cylinder to a uv coordinate
+//  @param object_point The point on the cylinder
+//  @return The uv coordinate
+static t_vector2	uv_mapping_cylin(t_point3 object_point)
+{
+	double		theta;
+	double		y;
+
+	y = object_point.y - floor(object_point.y);
+	theta = atan2(object_point.z, object_point.x);
+	return (vector2((theta + M_PI) / (2 * M_PI), y));
+}
+
 //  normal_at_cylinder: Get the normal at a point on the cylinder
 //  @param object The object
 //  @param world_point The point on the cylinder
@@ -85,6 +98,9 @@ static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
 	else
 		normal = vector3(object_point.x, 0, object_point.z);
 	normal = tm4mul(object->tinv_transform, normal);
+	if (object->mat.bumpmap)
+		normal = perturbn(normal,
+				get_bumpv(object->mat.bumpmap, uv_mapping_cylin(object_point)));
 	normal.w = VECTOR;
 	vnormalize(&normal);
 	return (normal);
