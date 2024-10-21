@@ -23,16 +23,16 @@ t_bumpmap	*load_bumpmap(char *filename);
 //	@return The default bumpmap
 t_bumpmap	*dfbumpmap(void);
 
-//	get_bumpmap_value: Get the bumpmap value at a uv coordinate
+//	get_bumpv: Get the bumpmap value at a uv coordinate
 //	@param bumpmap The bumpmap
 //	@param uv The uv coordinate
 //	@return The bumpmap value
-double		get_bumpmap_value(t_bumpmap *bumpmap, t_vector2 uv);
+double		get_bumpv(t_bumpmap *bumpmap, t_vector2 uv);
 
-//	perturb_normal: Perturb the normal with a bump value
+//	perturbn: Perturb the normal with a bump value
 //	@param normal The normal
 //	@param bump_value The bump value
 //	@return The perturbed normal
-t_vector3	perturb_normal(t_vector3 normal, double bump_value);
+t_vector3	perturbn(t_vector3 normal, double bump_value);
 
 #endif

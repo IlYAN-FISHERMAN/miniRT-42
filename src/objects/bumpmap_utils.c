@@ -5,7 +5,7 @@ t_bumpmap	*dfbumpmap(void)
 	return (0);
 }
 
-double	get_bumpmap_value(t_bumpmap *bumpmap, t_vector2 uv)
+double	get_bumpv(t_bumpmap *bumpmap, t_vector2 uv)
 {
 	int		x;
 	int		y;
@@ -23,7 +23,7 @@ double	get_bumpmap_value(t_bumpmap *bumpmap, t_vector2 uv)
 	return ((double)bumpmap->data[y][x] / 255.0);
 }
 
-t_vector3	perturb_normal(t_vector3 normal, double bump_value)
+t_vector3	perturbn(t_vector3 normal, double bump_value)
 {
 	t_vector3	up;
 	t_vector3	tangent;

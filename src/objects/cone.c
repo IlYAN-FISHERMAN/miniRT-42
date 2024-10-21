@@ -62,6 +62,17 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 	return (xs_parent);
 }
 
+//  uv_mapping_cone: Map a point on the cone to a uv coordinate
+//  @param object_p The point on the cone
+//  @return The uv coordinate
+static t_vector2	uv_mapping_cone(t_point3 obj_p)
+{
+	double		theta;
+
+	theta = atan2(obj_p.z, obj_p.x);
+	return (vector2((theta + M_PI) / (2 * M_PI), obj_p.y));
+}
+
 //  normal_at_cone: Get the normal at a point on the cone
 //  @param obj The object
 //  @param world_point The point on the cone
@@ -86,6 +97,9 @@ static t_vector3	normal_at_cone(t_object *obj, t_point3 world_point)
 			y = -y;
 		normal = vector3(obj_point.x, y, obj_point.z);
 	}
+	if (obj->mat.bumpmap)
+		normal = perturbn(normal,
+				get_bumpv(obj->mat.bumpmap, uv_mapping_cone(obj_point)));
 	normal = tm4mul(obj->tinv_transform, normal);
 	vnormalize(&normal);
 	return (normal);
