@@ -23,12 +23,14 @@ void	clear_memory(t_minirt *minirt)
 		mlx_destroy_display(minirt->win.mlx);
 	if (minirt && minirt->win.mlx)
 		gfree(minirt->win.mlx);
-	if (minirt && minirt->amb)
-		gfree(minirt->amb);
-	if (minirt && minirt->cam)
-		gfree(minirt->cam);
-	if (minirt && minirt->scene)
-		ft_lstclear(&minirt->scene, &free_object);
+	if (minirt && minirt->world.amb)
+		gfree(minirt->world.amb);
+	if (minirt && minirt->world.cam)
+		gfree(minirt->world.cam);
+	if (minirt && minirt->world.scene)
+		ft_lstclear(&minirt->world.scene, &free_object);
+	if (minirt && minirt->world.lights)
+		ft_lstclear(&minirt->world.lights, &free_object);
 }
 
 int	secure_exit(void *data)

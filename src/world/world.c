@@ -1,25 +1,5 @@
 #include "world.h"
 
-t_object	*get_next_light(t_scene *scene)
-{
-	static t_scene	*current;
-	t_object		*light;
-
-	if (!current)
-		current = scene;
-	while (current)
-	{
-		if (((t_object *)current->content)->type == o_light)
-		{
-			light = current->content;
-			current = current->next;
-			return (light);
-		}
-		current = current->next;
-	}
-	return (0);
-}
-
 t_xs_parent	intersect_world(t_scene *scene, t_ray ray)
 {
 	t_object	*obj;

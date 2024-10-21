@@ -44,7 +44,7 @@ typedef struct s_world
 {
 	t_camera	*cam;
 	t_scene		*scene;
-	t_light		*lights;
+	t_lights	*lights;
 	t_amb		*amb;
 }	t_world;
 
