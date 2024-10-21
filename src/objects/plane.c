@@ -39,7 +39,7 @@ static t_vector3	normal_at_plane(t_object *object, t_point3 world_point)
 
 	object_p = tm4mul(object->inv_transform, world_point);
 	object_n = vector3(0, 1, 0);
-	if (object->mat.bumpmap->data)
+	if (object->mat.bumpmap)
 		object_n = perturbn(object_n,
 				get_bumpv(object->mat.bumpmap, uv_mapping_plane(object_p)));
 	world_n = tm4mul(object->tinv_transform, object_n);
