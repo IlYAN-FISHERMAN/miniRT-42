@@ -29,6 +29,19 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 	return (inters);
 }
 
+//  uv_mapping_sphere: Map a point on the sphere to a uv coordinate
+//  @param object_p The point on the sphere
+//  @return The uv coordinate
+static t_vector2	uv_mapping_sphere(t_point3 obj_p)
+{
+	double		phi;
+	double		theta;
+
+	theta = atan2(obj_p.z, obj_p.x);
+	phi = acos(obj_p.y);
+	return (vector2((theta + M_PI) / (2 * M_PI), phi / M_PI));
+}
+
 //  normal_at_sphere: Get the normal at a point on the sphere
 //  @param object The object
 //  @param world_point The point on the sphere
@@ -36,11 +49,14 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 {
 	t_point3	object_p;
-	t_point3	object_n;
-	t_point3	world_n;
+	t_vector3	object_n;
+	t_vector3	world_n;
 
 	object_p = tm4mul(object->inv_transform, world_point);
 	object_n = vsub(object_p, point3(0, 0, 0));
+	if (object->mat.bumpmap)
+		object_n = perturbn(object_n,
+				get_bumpv(object->mat.bumpmap, uv_mapping_sphere(object_p)));
 	world_n = tm4mul(object->tinv_transform, object_n);
 	world_n.w = VECTOR;
 	vnormalize(&world_n);
