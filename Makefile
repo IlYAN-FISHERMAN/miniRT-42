@@ -68,7 +68,7 @@ export APP_HEADER
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -Ofast -march=native -mtune=native
+CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -Ofast -march=native -mtune=native -g
 
 OS =
 
@@ -106,7 +106,6 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/camera \
 		$(FILES_PATH)camera/camera_utils \
 		$(FILES_PATH)camera/image \
-		$(FILES_PATH)camera/render \
 		$(FILES_PATH)camera/render_utils \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
 		$(FILES_PATH)matrix/matrix3 \
@@ -163,7 +162,16 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)parsing/check_range_format \
 		$(FILES_PATH)parsing/print_token
 
-CFILES = $(FILES:%=%.c)
+FILES_NON_BONUS =	$(FILES) \
+					$(FILES_PATH)camera/render \
+
+FILES_BONUS =	$(FILES) \
+				$(FILES_PATH)camera/render_fast_thread \
+				$(FILES_PATH)camera/render_thread \
+				$(FILES_PATH)camera/thread_utils \
+
+CFILES = $(FILES_NON_BONUS:%=%.c)
+CFILES_BONUS = $(FILES_BONUS:%=%.c)
 
 $(CFILES): header
 
@@ -191,7 +199,7 @@ debug :  $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 
 debug_b : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
-	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
+	@$(CC) $(CFILES_BONUS) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_b) ✅\n"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
@@ -201,7 +209,7 @@ debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 
 debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
-	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
+	@$(CC) $(CFILES_BONUS) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_gb) ✅\n"
 
 $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
@@ -210,7 +218,7 @@ $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 
 bonus : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
-	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME) 
+	@$(CC) $(CFILES_BONUS) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME) 
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled with bonus ✅\n"
 
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
