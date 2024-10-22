@@ -24,6 +24,7 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 	t_xs_parent	xs_parent;
 	t_quadratic	quad;
 	t_point3	con2ray;
+	double		tmp;
 
 	xs_parent = xs();
 	r = transform(r, obj->inv_transform);
@@ -37,7 +38,11 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 	if (!quadratic_intersection(&quad))
 		return (xs_parent);
 	if (quad.t[0] > quad.t[1])
-		ft_swap(&quad.t[0], &quad.t[1]);
+	{
+		tmp = quad.t[0];
+		quad.t[0] = quad.t[1];
+		quad.t[1] = tmp;
+	}
 	check_bounds(obj, r, &xs_parent, &quad);
 	intersect_caps(obj, r, &xs_parent);
 	return (xs_parent);

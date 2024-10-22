@@ -27,6 +27,7 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 	t_xs_parent	xs_parent;
 	t_quadratic	q;
 	t_point3	cyl2ray;
+	double		tmp;
 
 	xs_parent = xs();
 	ray = transform(ray, object->inv_transform);
@@ -39,7 +40,11 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 	if (!quadratic_intersection(&q))
 		return (xs_parent);
 	if (q.t[0] > q.t[1])
-		ft_swap(&q.t[0], &q.t[1]);
+	{
+		tmp = q.t[0];
+		q.t[0] = q.t[1];
+		q.t[1] = tmp;
+	}
 	check_bounds(object, ray, &xs_parent, &q);
 	intersect_caps(object, ray, &xs_parent);
 	return (xs_parent);
