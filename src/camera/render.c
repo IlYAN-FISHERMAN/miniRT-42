@@ -11,7 +11,7 @@ void	pixelate(t_image *image, t_color color, int x, int y)
 	{
 		j = -1;
 		while (++j, j <= PREVIEW_PIXEL_SIZE && x + j < image->width)
-			put_pixel_to_image(image->mlx_img, x + j, y + i, color_hex(color));
+			put_pixel_to_image(image, x + j, y + i, color_hex(color));
 	}
 }
 
@@ -57,7 +57,7 @@ void	render(void)
 		{
 			if (!(++percent[0] % 100000))
 				print_percent(ft_itoa((percent[0] * 100) / percent[1]));
-			put_pixel_to_image(mrt->size->mlx_img, p[1], p[0], color_hex(
+			put_pixel_to_image(mrt->size, p[1], p[0], color_hex(
 					color_at(ray_for_pixel(mrt->world.cam, p[1], p[0]),
 						false, MAX_REFLECT)));
 		}

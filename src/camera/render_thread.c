@@ -27,7 +27,7 @@ static void	*thread_render(void *data_)
 		p[1] = 0;
 		while (p[1] < minirt->size->width)
 		{
-			put_pixel_to_image(minirt->size->mlx_img, p[1], p[0],
+			put_pixel_to_image(minirt->size, p[1], p[0],
 				global_render(p, true));
 			p[1]++;
 		}

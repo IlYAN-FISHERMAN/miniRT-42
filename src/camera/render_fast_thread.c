@@ -12,7 +12,7 @@ static void	pixelate(t_image *image, int color, int *p, t_thread_data *data)
 	{
 		j = -1;
 		while (++j, j <= PREVIEW_PIXEL_SIZE && p[1] + j < image->width)
-			put_pixel_to_image(image->mlx_img, p[1] + j, p[0] + i, color);
+			put_pixel_to_image(image, p[1] + j, p[0] + i, color);
 	}
 	pthread_mutex_unlock(data->image_mutex);
 }
