@@ -17,18 +17,17 @@ void	free_object(void *object)
 	gfree(object);
 }
 
-static void	clear_image(t_minirt *minirt)
+static void	clear_image(t_minirt *minirt, t_image *image)
 {
-	if (minirt->size && minirt->size->mlx_img)
-		mlx_destroy_image(minirt->win.mlx, minirt->size->mlx_img);
-	if (minirt->size)
-		gfree(minirt->size);
+	if (image->mlx_img)
+		mlx_destroy_image(minirt->win.mlx, image->mlx_img);
+	gfree(image);
 }
 
 void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->size)
-		clear_image(minirt);
+		clear_image(minirt, minirt->size);
 	if (minirt && minirt->win.mlx && minirt->win.windo)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt && minirt->win.mlx)
@@ -41,6 +40,8 @@ void	clear_memory(t_minirt *minirt)
 		ft_lstclear(&minirt->world.scene, &free_object);
 	if (minirt && minirt->world.lights)
 		ft_lstclear(&minirt->world.lights, &free_object);
+	if (minirt && minirt->threads)
+		gfree(minirt->threads);
 }
 
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
