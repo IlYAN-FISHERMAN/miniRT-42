@@ -27,4 +27,11 @@ t_object		*new_cylinder(t_point3 origin, double *rad_hei,
 //	@return true if the ray intersects the cap, false otherwise
 bool			check_cap(t_ray ray, double t);
 
+//	check_bounds: Check if the intersection is within the bounds of the cone
+//	@param obj The object to check
+//	@param ray The ray to check
+//	@param xs_parent The intersection data
+void			check_bounds(t_object *obj, t_ray ray,
+					t_xs_parent *xs_parent, t_quadratic *quad);
+
 #endif

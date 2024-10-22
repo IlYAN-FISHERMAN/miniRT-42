@@ -7,7 +7,6 @@ typedef struct s_amb
 {
 	double	light;
 	t_color	rgb;
-	bool	is_calc;
 	t_color	c_rgb;
 }	t_amb;
 
@@ -16,7 +15,6 @@ typedef struct s_light
 	t_point3	pos;
 	t_color		rgb;
 	double		bright;
-	bool		is_calc;
 	t_color		c_rgb;
 }	t_light;
 

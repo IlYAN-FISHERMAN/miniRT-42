@@ -10,7 +10,7 @@ t_intersect	*hit(t_xs_parent xs)
 	i = 0;
 	while (i < xs.count)
 	{
-		if (xs.xs[i].t > RAY_T_MIN && xs.xs[i].t <= RAY_T_MAX
+		if (xs.xs[i].t > RAY_T_MIN
 			&& (!hit || xs.xs[i].t < hit->t))
 			hit = &xs.xs[i];
 		i++;
@@ -27,31 +27,6 @@ t_intersect	intersection(double t, t_object *object)
 	return (intersect);
 }
 
-/**
- * del_intersection: Delete an intersection from the intersection set
- * @param xs The intersection set
- * @param i The index of the intersection to delete
- * @return A pointer to the updated intersection set
- */
-static t_xs_parent	*del_intersection(t_xs_parent *xs, int i)
-{
-	int			j;
-	t_intersect	tmp;
-
-	j = i;
-	while (j + 1 < xs->count)
-	{
-		tmp = xs->xs[j];
-		xs->xs[j] = xs->xs[j + 1];
-		xs->xs[j + 1] = tmp;
-		j++;
-	}
-	xs->xs = ft_reallocf(xs->xs, xs->count * sizeof(t_intersect),
-			(xs->count - 1) * sizeof(t_intersect));
-	xs->count--;
-	return (xs);
-}
-
 t_xs_parent	intersections(t_xs_parent set)
 {
 	int			i;
@@ -60,13 +35,7 @@ t_xs_parent	intersections(t_xs_parent set)
 	i = -1;
 	while (++i, i < set.count)
 	{
-		if (set.xs[i].t > RAY_T_MAX)
-		{
-			del_intersection(&set, i);
-			i = -1;
-		}
-		else if (i + 1 < set.count && set.xs[i].t > set.xs[i + 1].t
-			&& set.xs[i + 1].t <= RAY_T_MAX)
+		if (i + 1 < set.count && set.xs[i].t > set.xs[i + 1].t)
 		{
 			tmp = set.xs[i];
 			set.xs[i] = set.xs[i + 1];

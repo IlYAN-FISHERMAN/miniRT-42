@@ -10,23 +10,34 @@
 static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
-	double			a;
-	double			b;
-	double			c;
+	t_quadratic		quad;
 	t_point3		sphere_to_ray;
 
 	inters = xs();
 	ray = transform(ray, object->inv_transform);
 	sphere_to_ray = vsub(ray.origin, point3(0, 0, 0));
-	a = vdot(ray.direction, ray.direction);
-	b = 2 * (vdot(ray.direction, sphere_to_ray));
-	c = vdot(sphere_to_ray, sphere_to_ray) - 1;
-	if (quadratic_intersection(a, b, c, object))
+	quad.a = vdot(ray.direction, ray.direction);
+	quad.b = 2 * (vdot(ray.direction, sphere_to_ray));
+	quad.c = vdot(sphere_to_ray, sphere_to_ray) - 1;
+	if (quadratic_intersection(&quad))
 	{
-		add_intersection(&inters, intersection(object->t[0], object));
-		add_intersection(&inters, intersection(object->t[1], object));
+		add_intersection(&inters, intersection(quad.t[0], object));
+		add_intersection(&inters, intersection(quad.t[1], object));
 	}
 	return (inters);
+}
+
+//  uv_mapping_sphere: Map a point on the sphere to a uv coordinate
+//  @param object_p The point on the sphere
+//  @return The uv coordinate
+static t_vector2	uv_mapping_sphere(t_point3 obj_p)
+{
+	double		phi;
+	double		theta;
+
+	theta = atan2(obj_p.z, obj_p.x);
+	phi = acos(obj_p.y);
+	return (vector2((theta + M_PI) / (2 * M_PI), phi / M_PI));
 }
 
 //  normal_at_sphere: Get the normal at a point on the sphere
@@ -36,11 +47,14 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
 {
 	t_point3	object_p;
-	t_point3	object_n;
-	t_point3	world_n;
+	t_vector3	object_n;
+	t_vector3	world_n;
 
 	object_p = tm4mul(object->inv_transform, world_point);
 	object_n = vsub(object_p, point3(0, 0, 0));
+	if (object->mat.bumpmap)
+		object_n = perturbn(object_n,
+				get_bumpv(object->mat.bumpmap, uv_mapping_sphere(object_p)));
 	world_n = tm4mul(object->tinv_transform, object_n);
 	world_n.w = VECTOR;
 	vnormalize(&world_n);
