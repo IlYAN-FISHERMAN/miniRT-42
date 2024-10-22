@@ -57,6 +57,11 @@ void	*init_minirt_mlx(t_minirt *minirt)
 			minirt->size->width, minirt->size->height);
 	if (!minirt->size->mlx_img)
 		crash_exit(minirt, NULL, "mlx image malloc fail");
+	minirt->size->data = mlx_get_data_addr(minirt->size->mlx_img,
+			&minirt->size->bpp, &minirt->size->size_line,
+			&minirt->size->endian);
+	minirt->size->bppd = minirt->size->bpp >> 3;
+	minirt->size->mlx = minirt->win.mlx;
 	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
 	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
 	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
@@ -71,7 +76,7 @@ t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 		return (minirt_);
 	minirt_ = minirt;
 	check_error(argc, argv, minirt);
-	pars_map(argv, &minirt);
+	pars_map(&minirt);
 	if (DEBUG)
 		print_token(minirt, minirt->world.scene);
 	return (minirt);

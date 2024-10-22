@@ -1,18 +1,17 @@
 #include "objects.h"
 
-bool	quadratic_intersection(double a, double b,
-	double c, t_object *obj)
+bool	quadratic_intersection(t_quadratic *quad)
 {
 	double		discriminant;
 
-	discriminant = b * b - 4 * a * c;
+	discriminant = quad->b * quad->b - 4 * quad->a * quad->c;
 	if (discriminant < 0)
 	{
-		obj->t[0] = 0;
-		obj->t[1] = 0;
+		quad->t[0] = 0;
+		quad->t[1] = 0;
 		return (false);
 	}
-	obj->t[0] = (-b - sqrt(discriminant)) / (2 * a);
-	obj->t[1] = (-b + sqrt(discriminant)) / (2 * a);
+	quad->t[0] = (-quad->b - sqrt(discriminant)) / (2 * quad->a);
+	quad->t[1] = (-quad->b + sqrt(discriminant)) / (2 * quad->a);
 	return (true);
 }

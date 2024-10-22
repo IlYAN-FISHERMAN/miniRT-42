@@ -23,16 +23,6 @@ static t_color	specular(t_object *obj, t_lightning ln,
 		obj->mat.spec * pow(rde, obj->mat.shin)));
 }
 
-static t_color	ambience(t_amb *amb)
-{
-	if (!amb->is_calc)
-	{
-		amb->c_rgb = color_scalar(amb->rgb, amb->light);
-		amb->is_calc = true;
-	}
-	return (amb->c_rgb);
-}
-
 t_lightning	new_lightning(t_object *l, t_point3 p, t_vector3 ev, t_vector3 nv)
 {
 	return ((t_lightning){.l = l,
@@ -51,7 +41,7 @@ t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 		obj->mat.color = obj->mat.pattern
 			.pattern_at_object(obj->mat.pattern, obj, ln.p);
 	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);
-	c[0] = color_mult(ambience(ln.amb), eff_color);
+	c[0] = color_mult(ln.amb->c_rgb, eff_color);
 	if (in_shadow)
 		return (c[0]);
 	lightv = vnormalized(vsub(((t_light *)(ln.l->data))->pos, ln.p));

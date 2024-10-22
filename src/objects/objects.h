@@ -50,8 +50,15 @@ typedef struct s_object
 	t_matrix4		inv_transform;
 	t_matrix4		tinv_transform;
 	t_mat			mat;
-	double			t[2];
 }	t_object;
+
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	t[2];
+}	t_quadratic;
 
 //	material: Create a new material
 //	@param color The color value
@@ -72,10 +79,7 @@ t_mat		dfmaterial(t_color color);
 void		set_transform(t_object *obj, t_matrix4 transform);
 
 //	quadratic_intersection: Calculate the intersection of a quadratic equation
-//	@param a The a value of the quadratic equation
-//	@param b The b value of the quadratic equation
-//	@param c The c value of the quadratic equation
-//	@param obj The object to check
-bool		quadratic_intersection(double a, double b, double c, t_object *obj);
+//	@param quad The quadratic equation and the intersection
+bool		quadratic_intersection(t_quadratic *quad);
 
 #endif

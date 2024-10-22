@@ -57,3 +57,23 @@ void	print_percent(char *info)
 	gfree(info);
 	mlx_do_sync(minirt->win.mlx);
 }
+
+void	display(void)
+{
+	t_minirt	*minirt;
+
+	minirt = get_minirt();
+	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo,
+		minirt->size->mlx_img, 0, 0);
+	mlx_do_sync(minirt->win.mlx);
+	minirt->is_rendering = false;
+}
+
+void	put_pixel_to_image(t_image *image, int x, int y, int color)
+{
+	if (x < 0 || x >= image->width
+		|| y < 0 || y >= image->height)
+		return ;
+	color = mlx_get_color_value(image->mlx, color);
+	*(int *)(image->data + (y * image->size_line + x * image->bppd)) = color;
+}

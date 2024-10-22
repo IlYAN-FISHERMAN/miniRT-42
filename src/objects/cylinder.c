@@ -25,24 +25,22 @@ static void	intersect_caps(t_object *object, t_ray ray, t_xs_parent *xs_parent)
 static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 {
 	t_xs_parent	xs_parent;
-	double		a;
-	double		b;
-	double		c;
-	t_point3	cyl_to_ray;
+	t_quadratic	q;
+	t_point3	cyl2ray;
 
 	xs_parent = xs();
 	ray = transform(ray, object->inv_transform);
-	cyl_to_ray = vsub(ray.origin, point3(0, 0, 0));
-	a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
-	if (ft_equalsd(a, 0))
+	cyl2ray = vsub(ray.origin, point3(0, 0, 0));
+	q.a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	if (ft_equalsd(q.a, 0))
 		return (xs_parent);
-	b = 2 * cyl_to_ray.x * ray.direction.x + 2 * cyl_to_ray.z * ray.direction.z;
-	c = cyl_to_ray.x * cyl_to_ray.x + cyl_to_ray.z * cyl_to_ray.z - 1;
-	if (!quadratic_intersection(a, b, c, object))
+	q.b = 2 * cyl2ray.x * ray.direction.x + 2 * cyl2ray.z * ray.direction.z;
+	q.c = cyl2ray.x * cyl2ray.x + cyl2ray.z * cyl2ray.z - 1;
+	if (!quadratic_intersection(&q))
 		return (xs_parent);
-	if (object->t[0] > object->t[1])
-		ft_swap(&object->t[0], &object->t[1]);
-	check_bounds(object, ray, &xs_parent);
+	if (q.t[0] > q.t[1])
+		ft_swap(&q.t[0], &q.t[1]);
+	check_bounds(object, ray, &xs_parent, &q);
 	intersect_caps(object, ray, &xs_parent);
 	return (xs_parent);
 }

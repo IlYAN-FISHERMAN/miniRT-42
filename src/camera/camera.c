@@ -16,6 +16,7 @@ void	process_camera(t_camera *camera)
 		camera->half_height = camera->half_view;
 	}
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+	camera->c_origin = tm4mul(camera->inv_transform, point3(0, 0, 0));
 }
 
 t_camera	*new_camera(t_point3 origin, t_vector3 target, double fov)
@@ -71,18 +72,11 @@ t_ray	ray_for_pixel(t_camera *camera, int x, int y)
 {
 	double			w_x;
 	double			w_y;
-	static t_point3	origin;
-	static t_camera	*cam;
 	t_vector3		direction;
 
 	w_x = camera->half_width - ((x + 0.5) * camera->pixel_size);
 	w_y = camera->half_height - ((y + 0.5) * camera->pixel_size);
-	if (cam != camera)
-	{
-		origin = tm4mul(camera->inv_transform, point3(0, 0, 0));
-		cam = camera;
-	}
 	direction = vnormalized(vsub(tm4mul(camera->inv_transform,
-					point3(w_x, w_y, -1)), origin));
-	return (ray(origin, direction));
+					point3(w_x, w_y, -1)), camera->c_origin));
+	return (ray(camera->c_origin, direction));
 }

@@ -32,6 +32,6 @@ bool			check_cap(t_ray ray, double t);
 //	@param ray The ray to check
 //	@param xs_parent The intersection data
 void			check_bounds(t_object *obj, t_ray ray,
-					t_xs_parent *xs_parent);
+					t_xs_parent *xs_parent, t_quadratic *quad);
 
 #endif
