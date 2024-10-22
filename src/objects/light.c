@@ -15,8 +15,7 @@ t_object	*new_light(t_point3 pos, t_color rgb, double bright)
 		return (0);
 	}
 	*((t_light *)object->data) = (t_light){.rgb = rgb, .pos = pos,
-		.bright = bright, .c_rgb = color_scalar(rgb, bright),
-		.is_calc = true};
+		.bright = bright, .c_rgb = color_scalar(rgb, bright)};
 	object->type = o_light;
 	return (object);
 }

@@ -55,9 +55,6 @@ void	fast_render(void)
 
 	minirt = get_minirt();
 	minirt->is_rendering = true;
-	minirt->world.amb->c_rgb
-		= color_scalar(minirt->world.amb->rgb, minirt->world.amb->light);
-	minirt->world.amb->is_calc = true;
 	y = 0;
 	while (++y, y < minirt->size->height)
 	{
@@ -84,9 +81,6 @@ void	render(void)
 	mrt->is_rendering = true;
 	percent[0] = 0;
 	percent[1] = mrt->size->height * mrt->size->width;
-	mrt->world.amb->c_rgb
-		= color_scalar(mrt->world.amb->rgb, mrt->world.amb->light);
-	mrt->world.amb->is_calc = true;
 	p[0] = -1;
 	while (++p[0], p[0] < mrt->size->height)
 	{
