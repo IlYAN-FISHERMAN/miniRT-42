@@ -15,22 +15,18 @@ t_color	reflected_color(t_comps *comps, bool fast, int remaining)
 t_color	refracted_color(t_comps *comps, bool fast, int remaining)
 {
 	t_vector3	dir;
-	double		n_ratio;
-	double		cos_i;
-	double		sin2_t;
-	double		cos_t;
 
 	if (fast || comps->object->mat.transp == 0 || remaining <= 0)
 		return (color(0, 0, 0));
-	n_ratio = comps->n1 / comps->n2;
-	cos_i = vdot(comps->eyev, comps->normalv);
-	sin2_t = n_ratio * n_ratio * (1.0f - cos_i * cos_i);
-	if (sin2_t > 1.0)
+	comps->n_ratio = comps->n1 / comps->n2;
+	comps->cos_i = vdot(comps->eyev, comps->normalv);
+	comps->sin2_t = comps->n_ratio * comps->n_ratio
+		* (1.0f - comps->cos_i * comps->cos_i);
+	if (comps->sin2_t > 1.0)
 		return (color(0, 0, 0));
-	cos_t = sqrt(1.0 - sin2_t);
-	dir = vsub(vmul(comps->normalv,
-				(n_ratio * comps->cos_i - cos_t)),
-			vmul(comps->eyev, n_ratio));
+	comps->cos_t = sqrt(1.0 - comps->sin2_t);
+	dir = vsub(vmul(comps->normalv, (comps->n_ratio * comps->cos_i
+					- comps->cos_t)), vmul(comps->eyev, comps->n_ratio));
 	return (color_scalar(color_at(ray(comps->under_point, dir),
 				fast, remaining - 1), comps->object->mat.transp));
 }
@@ -52,7 +48,7 @@ double	schlick(t_comps *comps)
 			n_ratio = comps->n1 / comps->n2;
 		sin2_t = comps->sin2_t;
 		if (!sin2_t)
-			sin2_t = n_ratio * n_ratio * (1.0 - cos * cos);
+			sin2_t = n_ratio * n_ratio * (1.0f - cos * cos);
 		if (sin2_t > 1.0)
 			return (1.0);
 		cos = comps->cos_t;

@@ -37,7 +37,7 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	t_comps	comps;
 
 	(void)fast;
-	ft_bzero(&comps, sizeof(comps));
+	ft_bzero(&comps, sizeof(t_comps));
 	comps.t = i->t;
 	comps.object = i->object;
 	comps.point = ray_at(r, comps.t);
