@@ -185,28 +185,33 @@ re :
 	@make all --no-print-directory
 
 debug :  $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug) ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug) ✅\n"
 
 debug_b : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_b) ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_b) ✅\n"
 
 debug_g : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_g) ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_g) ✅\n"
 
 debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@$(CC) $(CFILES) -g $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -D BONUS=1 -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_gb) ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_gb) ✅\n"
 
 $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled ✅\n"
 
 bonus : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D BONUS=1 -o $(NAME) 
-	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled with bonus ✅\n\n"
+	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled with bonus ✅\n"
 
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@echo "$$LIB_HEADER"
@@ -220,8 +225,5 @@ $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 
 header:
 	@echo "$$HEADER"
-
-app_header:
-	@echo "$$APP_HEADER"
 
 .PHONY : clean fclean all debug debug_g bonus re
