@@ -49,24 +49,23 @@ void	display(void)
 void	fast_render(void)
 {
 	t_minirt	*minirt;
-	int			x;
-	int			y;
+	int			p[2];
 	t_color		color;
 
 	minirt = get_minirt();
 	minirt->is_rendering = true;
-	y = 0;
-	while (++y, y < minirt->size->height)
+	p[0] = 0;
+	while (p[0] < minirt->size->height)
 	{
-		x = 0;
-		while (++x, x < minirt->size->width)
+		p[1] = 0;
+		while (p[1] < minirt->size->width)
 		{
-			color = color_at(ray_for_pixel(minirt->world.cam, x, y),
+			color = color_at(ray_for_pixel(minirt->world.cam, p[1], p[0]),
 					true, MAX_REFLECT);
-			pixelate(minirt->size, color, x, y);
-			x += PREVIEW_PIXEL_SIZE;
+			pixelate(minirt->size, color, p[1], p[0]);
+			p[1] += PREVIEW_PIXEL_SIZE;
 		}
-		y += PREVIEW_PIXEL_SIZE;
+		p[0] += PREVIEW_PIXEL_SIZE;
 	}
 	display();
 }
