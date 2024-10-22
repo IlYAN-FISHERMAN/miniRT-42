@@ -60,7 +60,6 @@ void	fast_render(void)
 	data.pos_mutex = &mutex[1];
 	data.perc_mutex = 0;
 	data.p = p;
-	data.fast = true;
 	start_threads(thread_fast_render, (void *)&data);
 	stop_threads(&data);
 	display();

@@ -25,7 +25,7 @@ static void	*thread_render(void *data_)
 		p[1] = -1;
 		while (++p[1], p[1] < minirt->size->width)
 			put_pixel_to_image(minirt->size, p[1], p[0],
-				global_render(p, true));
+				global_render(p, false));
 		if ((p[0] * 100 / data->perc) % 13 == 0)
 		{
 			pthread_mutex_lock(data->perc_mutex);
@@ -57,7 +57,6 @@ void	render(void)
 	data.p = p;
 	percent = minirt->size->height;
 	data.perc = percent;
-	data.fast = false;
 	start_threads(thread_render, (void *)&data);
 	stop_threads(&data);
 	display();

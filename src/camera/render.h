@@ -11,7 +11,6 @@ typedef struct s_thread_data
 {
 	int				*p;
 	int				perc;
-	bool			fast;
 	pthread_mutex_t	*image_mutex;
 	pthread_mutex_t	*pos_mutex;
 	pthread_mutex_t	*perc_mutex;
