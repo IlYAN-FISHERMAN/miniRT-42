@@ -10,9 +10,11 @@
 typedef struct s_thread_data
 {
 	int				*p;
+	int				perc;
 	bool			fast;
 	pthread_mutex_t	*image_mutex;
 	pthread_mutex_t	*pos_mutex;
+	pthread_mutex_t	*perc_mutex;
 }	t_thread_data;
 
 //	put_pixel_to_image: Put a pixel to the image

@@ -6,14 +6,11 @@
 //	Define the minimum and maximum t values for the ray, preventing
 //	the ray from intersecting with itself
 # define RAY_T_MIN 0.0001f
-//	Define the maximum t value for the ray
-# define RAY_T_MAX 1.0e30f
 
 typedef struct s_ray
 {
 	t_point3		origin;
 	t_vector3		direction;
-	double			t;	// to remove once the rework is done
 }	t_ray;
 
 //	ray: Create a new stack-allocated ray
