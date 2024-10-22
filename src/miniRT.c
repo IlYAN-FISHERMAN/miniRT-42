@@ -5,12 +5,14 @@
 
 static int	handle_key(int key, t_minirt *minirt)
 {
+	if (DEBUG)
+		printf("Key: %d\n", key);
 	if (key == KEY_ESC)
 		secure_exit(minirt);
 	else if (!minirt->update && (key == KEY_D || key == KEY_A || key == KEY_W
 			|| key == KEY_S || key == KEY_LEFT || key == KEY_UP
 			|| key == KEY_RIGHT || key == KEY_DOWN || key == KEY_SPACE
-			|| key == KEY_SHIFT || key == KEY_R))
+			|| key == KEY_X || key == KEY_R))
 	{
 		camera_move(key);
 		minirt->update = true;
