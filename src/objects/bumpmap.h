@@ -4,12 +4,12 @@
 # include "../vectors/vectors.h"
 
 # ifndef BUMP_SCALE
-#  define BUMP_SCALE 0.4
+#  define BUMP_SCALE 0.3
 # endif
 
 typedef struct s_bumpmap
 {
-	t_byte	**data;
+	t_byte	*data;
 	size_t	width;
 	size_t	height;
 }	t_bumpmap;
