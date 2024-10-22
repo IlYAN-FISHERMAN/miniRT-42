@@ -10,21 +10,19 @@
 static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
-	double			a;
-	double			b;
-	double			c;
+	t_quadratic		quad;
 	t_point3		sphere_to_ray;
 
 	inters = xs();
 	ray = transform(ray, object->inv_transform);
 	sphere_to_ray = vsub(ray.origin, point3(0, 0, 0));
-	a = vdot(ray.direction, ray.direction);
-	b = 2 * (vdot(ray.direction, sphere_to_ray));
-	c = vdot(sphere_to_ray, sphere_to_ray) - 1;
-	if (quadratic_intersection(a, b, c, object))
+	quad.a = vdot(ray.direction, ray.direction);
+	quad.b = 2 * (vdot(ray.direction, sphere_to_ray));
+	quad.c = vdot(sphere_to_ray, sphere_to_ray) - 1;
+	if (quadratic_intersection(&quad))
 	{
-		add_intersection(&inters, intersection(object->t[0], object));
-		add_intersection(&inters, intersection(object->t[1], object));
+		add_intersection(&inters, intersection(quad.t[0], object));
+		add_intersection(&inters, intersection(quad.t[1], object));
 	}
 	return (inters);
 }

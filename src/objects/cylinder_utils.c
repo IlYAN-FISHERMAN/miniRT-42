@@ -11,14 +11,14 @@ bool	check_cap(t_ray ray, double t)
 }
 
 void	check_bounds(t_object *obj, t_ray ray,
-	t_xs_parent *xs_parent)
+	t_xs_parent *xs_parent, t_quadratic *quad)
 {
 	double		y[2];
 
-	y[0] = ray.origin.y + obj->t[0] * ray.direction.y;
+	y[0] = ray.origin.y + quad->t[0] * ray.direction.y;
 	if (y[0] < 1 && y[0] > 0)
-		add_intersection(xs_parent, intersection(obj->t[0], obj));
-	y[1] = ray.origin.y + obj->t[1] * ray.direction.y;
+		add_intersection(xs_parent, intersection(quad->t[0], obj));
+	y[1] = ray.origin.y + quad->t[1] * ray.direction.y;
 	if (y[1] < 1 && y[1] > 0)
-		add_intersection(xs_parent, intersection(obj->t[1], obj));
+		add_intersection(xs_parent, intersection(quad->t[1], obj));
 }

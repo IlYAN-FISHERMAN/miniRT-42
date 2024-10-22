@@ -22,25 +22,23 @@ static void	intersect_caps(t_object *obj, t_ray ray, t_xs_parent *xs_parent)
 static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 {
 	t_xs_parent	xs_parent;
-	double		a;
-	double		b;
-	double		c;
+	t_quadratic	quad;
 	t_point3	con2ray;
 
 	xs_parent = xs();
 	r = transform(r, obj->inv_transform);
 	con2ray = vsub(r.origin, point3(0, 0, 0));
-	a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
+	quad.a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
 		+ r.direction.z * r.direction.z;
-	b = 2 * con2ray.x * r.direction.x - 2 * con2ray.y * r.direction.y
+	quad.b = 2 * con2ray.x * r.direction.x - 2 * con2ray.y * r.direction.y
 		+ 2 * con2ray.z * r.direction.z;
-	c = con2ray.x * con2ray.x - con2ray.y * con2ray.y
+	quad.c = con2ray.x * con2ray.x - con2ray.y * con2ray.y
 		+ con2ray.z * con2ray.z;
-	if (!quadratic_intersection(a, b, c, obj))
+	if (!quadratic_intersection(&quad))
 		return (xs_parent);
-	if (obj->t[0] > obj->t[1])
-		ft_swap(&obj->t[0], &obj->t[1]);
-	check_bounds(obj, r, &xs_parent);
+	if (quad.t[0] > quad.t[1])
+		ft_swap(&quad.t[0], &quad.t[1]);
+	check_bounds(obj, r, &xs_parent, &quad);
 	intersect_caps(obj, r, &xs_parent);
 	return (xs_parent);
 }
