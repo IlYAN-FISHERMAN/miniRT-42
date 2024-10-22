@@ -31,6 +31,8 @@ void	clear_memory(t_minirt *minirt)
 		ft_lstclear(&minirt->world.scene, &free_object);
 	if (minirt && minirt->world.lights)
 		ft_lstclear(&minirt->world.lights, &free_object);
+	if (minirt && minirt->threads)
+		gfree(minirt->threads);
 }
 
 int	secure_exit(void *data)

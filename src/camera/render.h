@@ -48,6 +48,7 @@ pthread_t	*get_thread(void);
 //	@return The threads null terminated
 pthread_t	*start_threads(void *(*func)(void *), void *data);
 //	stop_threads: Stop the threads
-void		stop_threads(void);
+//	@param data The data of the threads
+void		stop_threads(t_thread_data *data);
 
 #endif

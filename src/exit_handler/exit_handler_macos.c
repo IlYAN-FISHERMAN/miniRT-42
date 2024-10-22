@@ -20,8 +20,6 @@ static void	clear_image(t_minirt *minirt, t_image *image)
 {
 	if (image->mlx_img)
 		mlx_destroy_image(minirt->win.mlx, image->mlx_img);
-	if (image->mlx_img)
-		gfree(image->mlx_img);
 	gfree(image);
 }
 
@@ -41,6 +39,8 @@ void	clear_memory(t_minirt *minirt)
 		ft_lstclear(&minirt->world.scene, &free_object);
 	if (minirt && minirt->world.lights)
 		ft_lstclear(&minirt->world.lights, &free_object);
+	if (minirt && minirt->threads)
+		gfree(minirt->threads);
 }
 
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
