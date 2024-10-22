@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_generate_nbr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 15:17:27 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/12 18:31:12 by rude-jes         ###   ########.fr       */
+/*   Created: 2024/10/21 17:48:01 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/10/21 17:48:03 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

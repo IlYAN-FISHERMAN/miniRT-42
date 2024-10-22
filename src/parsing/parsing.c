@@ -1,14 +1,11 @@
 #include "parsing.h"
 
-void	pars_map(char **av, t_minirt **minirt)
+void	pars_map(t_minirt **minirt)
 {
 	char	**str;
 	char	*gnl;
 
-	(*minirt)->fd = open(av[1], O_RDONLY);
-	if ((*minirt)->fd == -1)
-		crash_exit(*minirt, \
-			(char *[]){"miniRT", av[1], NULL}, "No such file or directory");
+	printf("fd:%d\n", (*minirt)->fd);
 	while (true)
 	{
 		gnl = ft_get_next_line((*minirt)->fd);
