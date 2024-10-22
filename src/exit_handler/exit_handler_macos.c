@@ -1,4 +1,5 @@
 #include "exit_handler.h"
+#include "ft_garbage_collector.h"
 
 int	secure_exit(void *data)
 {
@@ -16,19 +17,18 @@ void	free_object(void *object)
 	gfree(object);
 }
 
-static void	clear_image(t_minirt *minirt, t_image *image)
+static void	clear_image(t_minirt *minirt)
 {
-	if (image->mlx_img)
-		mlx_destroy_image(minirt->win.mlx, image->mlx_img);
-	if (image->mlx_img)
-		gfree(image->mlx_img);
-	gfree(image);
+	if (minirt->size && minirt->size->mlx_img)
+		mlx_destroy_image(minirt->win.mlx, minirt->size->mlx_img);
+	if (minirt->size)
+		gfree(minirt->size);
 }
 
 void	clear_memory(t_minirt *minirt)
 {
 	if (minirt && minirt->size)
-		clear_image(minirt, minirt->size);
+		clear_image(minirt);
 	if (minirt && minirt->win.mlx && minirt->win.windo)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
 	if (minirt && minirt->win.mlx)

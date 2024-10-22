@@ -1,5 +1,6 @@
 #include "../miniRT.h"
 #include "../exit_handler/exit_handler.h"
+#include "ft_string.h"
 
 int	correct_dl(char *gnl)
 {
@@ -27,12 +28,22 @@ int	check_standare_shape(t_minirt *minirt)
 
 void	check_error(int ac, char **av, t_minirt *minirt)
 {
-	if (ac != 2)
+	if (ac > 2)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, \
-			"Need *.rt file");
-	if (!ft_strchr(av[1], '.') || ft_strncmp(ft_strchr(av[1], '.'), ".rt", 4))
+			"Too many information");
+	if (ac < 2)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, \
-			"Need *.rt file");
+			"No enough information");
+	if (!ft_strcmp(av[1], "random"))
+		minirt->fd = rt_generator("1000", "1000", BONUS);
+	else if (!ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1], '.'), ".rt", 4))
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, "Need *.rt file");
+	else
+		minirt->fd = open(av[1], O_RDONLY);
+	if (minirt->fd == -1)
+		crash_exit(minirt, \
+			(char *[]){"miniRT", av[1], NULL}, "No such file or directory");
 }

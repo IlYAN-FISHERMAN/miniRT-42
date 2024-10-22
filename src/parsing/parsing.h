@@ -76,7 +76,7 @@ int			only_double_xyz(char *split, t_minirt *minirt);
 //	the second function for check et pars the object in the fd
 void		pars_obj(char **str, t_minirt **minirt);
 //	the principal function for the parsing
-void		pars_map(char **av, t_minirt **minirt);
+void		pars_map(t_minirt **minirt);
 //	the fonction for print t_minirt token
 void		print_token(t_minirt *rt, t_scene *tmp);
 //	atoi for rgb t_color struct
