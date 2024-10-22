@@ -24,30 +24,29 @@ static void	intersect_caps(t_object *object, t_ray ray, t_xs_parent *xs_parent)
 //  @return true if the ray intersects the cylinder, false otherwise
 static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
 {
-	t_xs_parent	xs_parent;
+	t_xs_parent	inters;
 	t_quadratic	q;
-	t_point3	cyl2ray;
 	double		tmp;
 
-	xs_parent = xs();
+	inters = xs();
 	ray = transform(ray, object->inv_transform);
-	cyl2ray = vsub(ray.origin, point3(0, 0, 0));
 	q.a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
 	if (ft_equalsd(q.a, 0))
-		return (xs_parent);
-	q.b = 2 * cyl2ray.x * ray.direction.x + 2 * cyl2ray.z * ray.direction.z;
-	q.c = cyl2ray.x * cyl2ray.x + cyl2ray.z * cyl2ray.z - 1;
+		return (inters);
+	q.b = 2 * ray.origin.x * ray.direction.x + 2 * ray.origin.z
+		* ray.direction.z;
+	q.c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
 	if (!quadratic_intersection(&q))
-		return (xs_parent);
+		return (inters);
 	if (q.t[0] > q.t[1])
 	{
 		tmp = q.t[0];
 		q.t[0] = q.t[1];
 		q.t[1] = tmp;
 	}
-	check_bounds(object, ray, &xs_parent, &q);
-	intersect_caps(object, ray, &xs_parent);
-	return (xs_parent);
+	check_bounds(object, ray, &inters, &q);
+	intersect_caps(object, ray, &inters);
+	return (inters);
 }
 
 //  uv_mapping_cylin: Map a point on the cylinder to a uv coordinate

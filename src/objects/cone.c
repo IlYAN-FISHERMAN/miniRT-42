@@ -23,18 +23,16 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 {
 	t_xs_parent	xs_parent;
 	t_quadratic	quad;
-	t_point3	con2ray;
 	double		tmp;
 
 	xs_parent = xs();
 	r = transform(r, obj->inv_transform);
-	con2ray = vsub(r.origin, point3(0, 0, 0));
 	quad.a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
 		+ r.direction.z * r.direction.z;
-	quad.b = 2 * con2ray.x * r.direction.x - 2 * con2ray.y * r.direction.y
-		+ 2 * con2ray.z * r.direction.z;
-	quad.c = con2ray.x * con2ray.x - con2ray.y * con2ray.y
-		+ con2ray.z * con2ray.z;
+	quad.b = 2 * r.origin.x * r.direction.x - 2 * r.origin.y * r.direction.y
+		+ 2 * r.origin.z * r.direction.z;
+	quad.c = r.origin.x * r.origin.x - r.origin.y * r.origin.y
+		+ r.origin.z * r.origin.z;
 	if (!quadratic_intersection(&quad))
 		return (xs_parent);
 	if (quad.t[0] > quad.t[1])
