@@ -76,7 +76,7 @@ t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv)
 		return (minirt_);
 	minirt_ = minirt;
 	check_error(argc, argv, minirt);
-	pars_map(argv, &minirt);
+	pars_map(&minirt);
 	if (DEBUG)
 		print_token(minirt, minirt->world.scene);
 	return (minirt);

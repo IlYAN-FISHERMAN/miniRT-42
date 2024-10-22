@@ -1,4 +1,5 @@
 #include "exit_handler.h"
+#include "ft_garbage_collector.h"
 
 int	secure_exit(void *data)
 {
