@@ -5,7 +5,7 @@ void	pars_map(t_minirt **minirt)
 	char	**str;
 	char	*gnl;
 
-	printf("fd:%d\n", (*minirt)->fd);
+	create_default_mat(minirt);
 	while (true)
 	{
 		gnl = ft_get_next_line((*minirt)->fd);

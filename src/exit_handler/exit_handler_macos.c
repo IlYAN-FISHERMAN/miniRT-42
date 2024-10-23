@@ -1,5 +1,6 @@
 #include "exit_handler.h"
 #include "ft_garbage_collector.h"
+#include "ft_linked_list.h"
 
 int	secure_exit(void *data)
 {
@@ -27,6 +28,8 @@ static void	clear_image(t_minirt *minirt)
 
 void	clear_memory(t_minirt *minirt)
 {
+	if (minirt && minirt->mat)
+		ft_lstclear(&minirt->mat, &free_mat);
 	if (minirt && minirt->size)
 		clear_image(minirt);
 	if (minirt && minirt->win.mlx && minirt->win.windo)

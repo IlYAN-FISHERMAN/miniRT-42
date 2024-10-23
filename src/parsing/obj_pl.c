@@ -15,10 +15,12 @@ void	check_pl_range(char **str, t_minirt *minirt)
 
 void	check_pl_info(char **str, t_minirt *minirt)
 {
-	if (ft_strlen_tab(str) != 4)
+	if ((BONUS && (ft_strlen_tab(str) < 4 || ft_strlen_tab(str) > 6))
+		|| (!BONUS && (ft_strlen_tab(str) != 4)))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing: Pl: bad number of arg", NULL}, \
-			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0] [rgb: 0,0,0]\n");
+			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0]"
+			" [rgb: 0.0.0] [material]x[bumpmap][optional])\n");
 	if (!only_double_xyz(str[1], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Pl: Bad xyz format\n"
@@ -31,6 +33,26 @@ void	check_pl_info(char **str, t_minirt *minirt)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
 			"Cy: Bad rgb format\n"
 			"[rgb: 0,0,0]", NULL}, str[3]);
+}
+
+static void	check_pl_material(char **str, t_minirt **minirt,
+							t_object *obj, t_color color)
+{
+	if (BONUS && ft_strlen_tab(str) > 4 && str[4])
+	{
+		if (str[4] && is_dfmat(str[4]))
+			obj->mat = get_dfmat(str[4], color);
+		else if (str[4] && is_define(str[4], (*minirt)->mat))
+			obj->mat = get_define_mat(str[4], (*minirt)->mat, color);
+		else if (str[4])
+			crash_exit(*minirt, (char *[]){"miniRT", "Material: Cy: Bad "
+				"format\nunknown material", NULL}, str[4]);
+		if (str[5])
+		{
+			check_bumpmap_error(str[5], *minirt);
+			obj->mat.bumpmap = load_bumpmap(str[5]);
+		}
+	}
 }
 
 void	get_pl(char **str, t_minirt **minirt)
@@ -51,12 +73,12 @@ void	get_pl(char **str, t_minirt **minirt)
 		ft_split(str[2], ','));
 	if (!ft_atoi_rgb(&color.r, &color.g, &color.b,
 			ft_split(str[3], ',')))
-		crash_exit(*minirt,
-			(char *[]){"miniRT",
+		crash_exit(*minirt, (char *[]){"miniRT",
 			"parsing: pl bad number format", NULL}, str[3]);
 	scene->content = new_plane(origin, normal, color);
 	if (!scene->content)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+	check_pl_material(str, minirt, scene->content, color);
 	ft_lstadd_back(&(*minirt)->world.scene, scene);
 }
