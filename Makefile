@@ -108,6 +108,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)camera/image \
 		$(FILES_PATH)camera/render_utils \
 		$(FILES_PATH)exit_handler/exit_handler_$(OS) \
+		$(FILES_PATH)exit_handler/exit_handler_utils \
 		$(FILES_PATH)matrix/matrix3 \
 		$(FILES_PATH)matrix/matrix4_utils \
 		$(FILES_PATH)matrix/matrix4 \
@@ -123,6 +124,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/objects_utils \
 		$(FILES_PATH)objects/patterns \
 		$(FILES_PATH)objects/sphere \
+		$(FILES_PATH)objects/material \
 		$(FILES_PATH)objects/plane \
 		$(FILES_PATH)rays/intersection_utils \
 		$(FILES_PATH)rays/intersection \
@@ -160,6 +162,8 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)parsing/obj_sp \
 		$(FILES_PATH)parsing/only_function \
 		$(FILES_PATH)parsing/check_range_format \
+		$(FILES_PATH)parsing/get_define \
+		$(FILES_PATH)parsing/get_mat \
 		$(FILES_PATH)parsing/print_token
 
 FILES_NON_BONUS =	$(FILES) \

@@ -15,6 +15,8 @@ static void	clear_image(t_minirt *minirt, t_image *image)
 
 void	clear_memory(t_minirt *minirt)
 {
+	if (minirt && minirt->mat)
+		ft_lstclear(&minirt->mat, &free_mat);
 	if (minirt && minirt->size)
 		clear_image(minirt, minirt->size);
 	if (minirt && minirt->win.mlx && minirt->win.windo)

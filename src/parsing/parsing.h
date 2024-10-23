@@ -6,6 +6,7 @@
 # include "../camera/image.h"
 # include "../camera/camera.h"
 # include "../objects/objects.h"
+# include "../objects/material.h"
 # include "../objects/plane.h"
 # include "../objects/cylinder.h"
 # include "../objects/sphere.h"
@@ -93,6 +94,12 @@ int			check_standare_shape(t_minirt *minirt);
 // return 1 if the string is a object, else return 0
 int			is_obj(char *str);
 // return 1 if the string is a material, else return 0
-int			is_mat(char *str);
+void		get_define(char **str, t_minirt **minirt);
+int			is_dfmat(char *str);
+int			is_define(char *str, t_mats *iter);
+void		check_bumpmap_error(char *str, t_minirt *minirt);
+t_mat		get_dfmat(char *str, t_color color);
+t_mat		get_define_mat(char *str, t_mats *iter, t_color color);
+void		create_default_mat(t_minirt **minirt);
 
 #endif
