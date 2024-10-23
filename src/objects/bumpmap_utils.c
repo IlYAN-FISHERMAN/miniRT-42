@@ -30,7 +30,7 @@ t_vector3	perturbn(t_vector3 normal, double bump_value)
 	t_vector3	bitan;
 	t_vector3	perturb_normal;
 
-	if (fabs(normal.y) > 0.9)
+	if (fabs(normal.y) > 1 - EPSILOND)
 		up = vector3(1, 0, 0);
 	else
 		up = vector3(0, 1, 0);

@@ -19,7 +19,7 @@ static void	camera_pos_move(int key, t_camera *cam)
 		cam->origin = vsub(cam->origin, move);
 	else if (key == KEY_SPACE)
 		cam->origin.y += 0.5;
-	else if (key == KEY_SHIFT)
+	else if (key == KEY_X)
 		cam->origin.y -= 0.5;
 }
 
@@ -54,7 +54,7 @@ void	camera_move(int key)
 		cam->target = vector3(0, -0.01, 1);
 	}
 	else if (key == KEY_D || key == KEY_A || key == KEY_W || key == KEY_S
-		|| key == KEY_SPACE || key == KEY_SHIFT)
+		|| key == KEY_SPACE || key == KEY_X)
 		camera_pos_move(key, cam);
 	else if (key == KEY_LEFT || key == KEY_UP
 		|| key == KEY_RIGHT || key == KEY_DOWN)

@@ -25,8 +25,7 @@ static t_color	specular(t_object *obj, t_lightning ln,
 
 t_lightning	new_lightning(t_object *l, t_point3 p, t_vector3 ev, t_vector3 nv)
 {
-	return ((t_lightning){.l = l,
-		.p = p, .ev = ev, .nv = nv});
+	return ((t_lightning){.l = l, .p = p, .ev = ev, .nv = nv});
 }
 
 t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
