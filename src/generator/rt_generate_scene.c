@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:18:50 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/22 01:22:12 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/10/23 06:39:56 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	gener_lig(int fd, bool	bonus)
 	if (bonus)
 	{
 		ft_putstr_fd("     ", fd);
-		if (!put_xyz_int(fd, 0, 256))
+		if (!put_xyz_int(fd, 0, 255))
 			return (0);
 	}
 	ft_putstr_fd("\n", fd);
