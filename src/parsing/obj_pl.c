@@ -41,7 +41,7 @@ static void	check_pl_material(char **str, t_minirt **minirt,
 	if (BONUS && ft_strlen_tab(str) > 4 && str[4])
 	{
 		if (str[4] && is_dfmat(str[4]))
-			obj->mat = get_dfmat(str[4], color);
+			obj->mat = get_dfmat(str[4], color, *minirt);
 		else if (str[4] && is_define(str[4], (*minirt)->mat))
 			obj->mat = get_define_mat(str[4], (*minirt)->mat, color);
 		else if (str[4])
