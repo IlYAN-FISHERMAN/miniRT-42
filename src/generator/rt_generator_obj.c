@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rt_generator_obj.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 17:47:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/22 01:28:59 by ilyanar          ###   LAUSANNE.ch       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rt_generate.h"
 
 int	gener_sp(int fd)
 {
 	ft_putstr_fd("sp    ", fd);
-	if (!put_xyz_double(fd, -2, 2))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!ran_double(0, 10, fd))
@@ -30,7 +18,7 @@ int	gener_sp(int fd)
 int	gener_cy(int fd)
 {
 	ft_putstr_fd("cy    ", fd);
-	if (!put_xyz_double(fd, -2, 2))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_double(fd, -1, 1))
@@ -51,7 +39,7 @@ int	gener_cy(int fd)
 int	gener_co(int fd)
 {
 	ft_putstr_fd("co    ", fd);
-	if (!put_xyz_double(fd, -2, 2))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_double(fd, -1, 1))
@@ -72,10 +60,10 @@ int	gener_co(int fd)
 int	gener_pl(int fd)
 {
 	ft_putstr_fd("pl    ", fd);
-	if (!put_xyz_double(fd, -2, 2))
+	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_double(fd, -1, 1))
+	if (!put_xyz_double(fd, 0, 0))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))

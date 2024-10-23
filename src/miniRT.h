@@ -13,6 +13,7 @@
 # include "compute/lightning.h"
 # include "world/world.h"
 # include "compute/compute.h"
+# include "objects/material.h"
 
 # define WIDTH 1920.0f
 # define HEIGHT 1080.0f
@@ -54,6 +55,8 @@ typedef struct s_minirt
 	t_win		win;
 	t_image		*size;
 	t_world		world;
+	t_dfmat		df_mat;
+	t_mats		*mat;
 	bool		is_rendering;
 	bool		update;
 	pthread_t	*threads;

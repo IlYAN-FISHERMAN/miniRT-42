@@ -38,7 +38,8 @@ void	check_error(int ac, char **av, t_minirt *minirt)
 			"No enough information");
 	if (!ft_strcmp(av[1], "random"))
 		minirt->fd = rt_generator("1000", "1000", BONUS);
-	else if (!ft_strrchr(av[1], '.') || ft_strncmp(ft_strrchr(av[1], '.'), ".rt", 4))
+	else if (!ft_strrchr(av[1], '.')
+		|| ft_strncmp(ft_strrchr(av[1], '.'), ".rt", 4))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Need *.rt file");
 	else

@@ -20,32 +20,50 @@ void	check_cy_range(char **str, t_minirt *minirt)
 		str[5], minirt);
 }
 
+static void	check_cy_material(char **str, t_minirt **minirt,
+							t_object *obj, t_color color)
+{
+	if (BONUS && ft_strlen_tab(str) > 6 && str[6])
+	{
+		if (str[6] && is_dfmat(str[6]))
+			obj->mat = get_dfmat(str[6], color);
+		else if (str[6] && is_define(str[6], (*minirt)->mat))
+			obj->mat = get_define_mat(str[6], (*minirt)->mat, color);
+		else if (str[6])
+			crash_exit(*minirt, (char *[]){"miniRT", "Material: Cy: Bad "
+				"format\nunknown material", NULL}, str[6]);
+		if (str[7])
+		{
+			check_bumpmap_error(str[7], *minirt);
+			obj->mat.bumpmap = load_bumpmap(str[7]);
+		}
+	}
+}
+
 void	check_cy_info(char **str, t_minirt *minirt)
 {
-	if (ft_strlen_tab(str) != 6)
+	if ((BONUS && (ft_strlen_tab(str) < 6 || ft_strlen_tab(str) > 8))
+		|| (!BONUS && (ft_strlen_tab(str) != 6)))
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing: Cy: bad number of arg", NULL}, \
 			"\n[xyz: 0.0,0.0,0.0] [vector: 0.0,0.0,0.0]"
-			" [radius: 0.0] [height: 0.0] [rgb: 0.0.0]\n");
+			" [radius: 0.0] [height: 0.0] [rgb: 0.0.0] "
+			"[material]x[bumpmap][optional])\n");
 	if (!only_double_xyz(str[1], minirt))
-		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
-			"Cy: Bad xyz format\n"
-			"[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
+		crash_exit(minirt, (char *[]){"miniRT", "parsing: Cy: Bad "
+			"xyz format\n" "[xyz: 0.0,0.0,0.0]", NULL}, str[1]);
 	if (!only_double_xyz(str[2], minirt))
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Cy: Bad vector "
 			"format\n[vector: 0.0,0.0,0.0]", NULL}, str[2]);
 	if (!only_double(str[3]) && !only_digit(str[3]))
-		crash_exit(minirt,
-			(char *[]){"miniRT", "parsing", "Cy: Bad radius format\n"
-			"[radius: 0.0]", NULL}, str[3]);
+		crash_exit(minirt, (char *[]){"miniRT", "parsing", "Cy: Bad radius"
+			" format\n[radius: 0.0]", NULL}, str[3]);
 	if (!only_double(str[4]) && !only_digit(str[4]))
-		crash_exit(minirt,
-			(char *[]){"miniRT", "parsing", "Cy: Bad height format\n"
-			"[height: 0.0]", NULL}, str[4]);
+		crash_exit(minirt, (char *[]){"miniRT", "parsing", "Cy: Bad height"
+			" format\n[height: 0.0]", NULL}, str[4]);
 	if (!only_digit_xyz(str[5], minirt))
-		crash_exit(minirt, (char *[]){"miniRT", "parsing: "
-			"Cy: Bad rgb format\n"
-			"[rgb: 0,0,0]", NULL}, str[5]);
+		crash_exit(minirt, (char *[]){"miniRT", "parsing: Cy: Bad rgb format"
+			"\n[rgb: 0,0,0]", NULL}, str[5]);
 }
 
 void	get_cy(char **str, t_minirt **minirt)
@@ -73,5 +91,6 @@ void	get_cy(char **str, t_minirt **minirt)
 	if (!((t_object *)scene->content))
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+	check_cy_material(str, minirt, scene->content, color);
 	ft_lstadd_back(&(*minirt)->world.scene, scene);
 }

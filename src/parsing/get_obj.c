@@ -1,4 +1,3 @@
-#include "ft_string.h"
 #include "parsing.h"
 
 t_scene	*get_scene_struct(t_minirt **minirt)
@@ -33,10 +32,11 @@ int	is_obj(char *str)
 	return (0);
 }
 
-int	is_mat(char *str)
+int	is_dfmat(char *str)
 {
 	if (!ft_strcmp(str, "metal") || !ft_strcmp(str, "plastic")
-		|| !ft_strcmp(str, "glass") || !ft_strcmp(str, "mirror"))
+		|| !ft_strcmp(str, "glass") || !ft_strcmp(str, "mirror")
+		|| !ft_strcmp(str, "wood"))
 		return (1);
 	return (0);
 }
@@ -53,14 +53,11 @@ void	pars_obj(char **str, t_minirt **minirt)
 		get_light(str, minirt);
 	else if (is_obj(str[0]))
 		get_obj(str, minirt);
-	else if (!ft_strcmp("define", str[0]))
-			/*get_material(str, minirt);*/
-		;
+	else if (!ft_strcmp("define", str[0]) && BONUS)
+		get_define(str, minirt);
 	else if (str[0][0] == '#')
 		;
 	else
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing: bad string format\n"
-			"unknown object", NULL},
-			str[0]);
+		crash_exit(*minirt, (char *[]){"miniRT", "parsing: bad string format\n"
+			"unknown object", NULL}, str[0]);
 }
