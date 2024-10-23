@@ -26,7 +26,7 @@ static void	check_cy_material(char **str, t_minirt **minirt,
 	if (BONUS && ft_strlen_tab(str) > 6 && str[6])
 	{
 		if (str[6] && is_dfmat(str[6]))
-			obj->mat = get_dfmat(str[6], color);
+			obj->mat = get_dfmat(str[6], color, *minirt);
 		else if (str[6] && is_define(str[6], (*minirt)->mat))
 			obj->mat = get_define_mat(str[6], (*minirt)->mat, color);
 		else if (str[6])

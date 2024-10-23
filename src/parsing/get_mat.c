@@ -1,3 +1,4 @@
+#include "ft_memory.h"
 #include "ft_string.h"
 #include "parsing.h"
 
@@ -18,19 +19,23 @@ t_mat	get_define_mat(char *str, t_mats *iter, t_color color)
 	return ((t_mat){});
 }
 
-t_mat	get_dfmat(char *str, t_color color)
+t_mat	get_dfmat(char *str, t_color color, t_minirt *minirt)
 {
+	t_mat	mat;
+
+	ft_bzero(&mat, sizeof(t_mat));
 	if (!ft_strcmp(str, "metal"))
-		return (mat_metal(color));
-	if (!ft_strcmp(str, "plastic"))
-		return (mat_plastic(color));
-	if (!ft_strcmp(str, "glass"))
-		return (mat_glass(color));
-	if (!ft_strcmp(str, "mirror"))
-		return (mat_mirror(color));
-	if (!ft_strcmp(str, "wood"))
-		return (mat_wood(color));
-	return (dfmaterial(color));
+		mat = minirt->df_mat.metal;
+	else if (!ft_strcmp(str, "plastic"))
+		mat = minirt->df_mat.platic;
+	else if (!ft_strcmp(str, "glass"))
+		mat = minirt->df_mat.glass;
+	else if (!ft_strcmp(str, "mirror"))
+		mat = minirt->df_mat.mirror;
+	else if (!ft_strcmp(str, "wood"))
+		mat = minirt->df_mat.wood;
+	mat.color = color;
+	return (mat);
 }
 
 void	create_default_mat(t_minirt **minirt)

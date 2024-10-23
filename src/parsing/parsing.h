@@ -98,7 +98,7 @@ void		get_define(char **str, t_minirt **minirt);
 int			is_dfmat(char *str);
 int			is_define(char *str, t_mats *iter);
 void		check_bumpmap_error(char *str, t_minirt *minirt);
-t_mat		get_dfmat(char *str, t_color color);
+t_mat		get_dfmat(char *str, t_color color, t_minirt *minirt);
 t_mat		get_define_mat(char *str, t_mats *iter, t_color color);
 void		create_default_mat(t_minirt **minirt);
 
