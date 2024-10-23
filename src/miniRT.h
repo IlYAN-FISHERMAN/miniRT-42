@@ -59,6 +59,7 @@ typedef struct s_minirt
 	t_mats		*mat;
 	bool		is_rendering;
 	bool		update;
+	pthread_t	*threads;
 }	t_minirt;
 
 //	init_minirt: Initialize the miniRT minirt structure

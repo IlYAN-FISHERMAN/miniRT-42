@@ -22,7 +22,7 @@ typedef struct s_thread_data
 //	@param x The x coordinate of the pixel
 //	@param y The y coordinate of the pixel
 //	@param color The color of the pixel
-void		put_pixel_to_image(void *img, int x, int y, int color);
+void		put_pixel_to_image(t_image *image, int x, int y, int color);
 //	display: Display the buffered image in the window
 void		display(void);
 //	fast_render: Render the camera fast
@@ -48,6 +48,7 @@ pthread_t	*get_thread(void);
 //	@return The threads null terminated
 pthread_t	*start_threads(void *(*func)(void *), void *data);
 //	stop_threads: Stop the threads
-void		stop_threads(void);
+//	@param data The data of the threads
+void		stop_threads(t_thread_data *data);
 
 #endif

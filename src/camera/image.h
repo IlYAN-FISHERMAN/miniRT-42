@@ -9,6 +9,12 @@ typedef struct s_image
 	int		width;
 	int		height;
 	void	*mlx_img;
+	void	*mlx;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		bppd;
 }	t_image;
 
 typedef struct s_size

@@ -69,22 +69,11 @@ void	display(void)
 	minirt->is_rendering = false;
 }
 
-void	put_pixel_to_image(void *img, int x, int y, int color)
+void	put_pixel_to_image(t_image *image, int x, int y, int color)
 {
-	static char	*data;
-	static int	bpp;
-	static int	size_line;
-	static int	endian;
-	static int	bppd;
-
-	if (!data)
-	{
-		data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
-		bppd = bpp >> 3;
-	}
-	if (x < 0 || x >= get_minirt()->size->width
-		|| y < 0 || y >= get_minirt()->size->height)
+	if (x < 0 || x >= image->width
+		|| y < 0 || y >= image->height)
 		return ;
-	color = mlx_get_color_value(get_minirt()->win.mlx, color);
-	*(int *)(data + (y * size_line + x * bppd)) = color;
+	color = mlx_get_color_value(image->mlx, color);
+	*(int *)(image->data + (y * image->size_line + x * image->bppd)) = color;
 }
