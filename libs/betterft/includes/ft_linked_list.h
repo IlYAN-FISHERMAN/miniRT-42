@@ -18,7 +18,6 @@
 
 //	t_list: A linked list node
 typedef struct s_list
-
 {
 	void				*content;
 	struct s_list		*next;

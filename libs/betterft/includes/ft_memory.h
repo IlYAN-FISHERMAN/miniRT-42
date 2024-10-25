@@ -30,7 +30,7 @@ void		ft_bzero(void *s, size_t n);
 //	@return The allocated memory.
 void		*ft_calloc(size_t count, size_t size);
 
-//	ft_memchr: Locates the first occurrence of 'c' (converted to an unsigned char)
+//	ft_memchr: Locates the first occurrence 'c' (converted to an unsigned char)
 //	in the initial 'n' bytes of the string 's'.
 //	@param 's': The string to search in.
 //	@param 'c': The character to search for.
