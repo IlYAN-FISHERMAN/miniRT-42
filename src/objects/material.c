@@ -71,6 +71,6 @@ t_mat	mat_wood(t_color color)
 		.transp = 0.0,
 		.refract_idx = 1.0,
 		.pattern = pattern(),
-		.bumpmap = dfbumpmap()
+		.bumpmap = load_bumpmap("textures/wood.pgm")
 	});
 }
