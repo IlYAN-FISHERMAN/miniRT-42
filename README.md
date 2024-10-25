@@ -39,7 +39,7 @@ C 1,0.80,-10   0,-0.06,1   70
 l 0,0,0        0.6         255,255,255
 
 # defining a new material
-define moon	0.6	0.2	300	0.1	0.0	1.0	maps/bumptextures/moon.pgm
+define moon	0.6	0.2	300	0.1	0.0	1.0	textures/moon.pgm
 
 sp 0,0,0		   4		      255,255,255 moon
 sp -25,0,50	   30		      0,0,255	   wood
