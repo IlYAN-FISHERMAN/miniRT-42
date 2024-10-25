@@ -28,13 +28,12 @@ static void	camera_dir_move(int key, t_camera *cam)
 	t_vector3	right;
 	t_matrix4	rot;
 
-	right = vcross(cam->up, cam->target);
-	right = vnormalized(right);
+	right = vnormalized(vcross(cam->up, cam->target));
 	if (key == KEY_LEFT)
 		rot = m4rotating(-0.05, Y_AXIS);
 	else if (key == KEY_RIGHT)
 		rot = m4rotating(0.05, Y_AXIS);
-	if (key == KEY_UP)
+	else if (key == KEY_UP)
 		rot = m4rodrig_rot(right, -0.05);
 	else if (key == KEY_DOWN)
 		rot = m4rodrig_rot(right, 0.05);

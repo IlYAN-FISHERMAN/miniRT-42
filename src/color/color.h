@@ -31,7 +31,7 @@ t_color	color(t_byte r, t_byte g, t_byte b);
 // byte_clamp: Clamp a value between a byte range
 // @param value The value to clamp
 // @return The clamped value in t_byte format
-t_byte	byte_clamp(double value);
+t_byte	byte_clamp(int value);
 
 // color_hex: Convert a t_color to a hexadecimal value
 // @param c The color to convert

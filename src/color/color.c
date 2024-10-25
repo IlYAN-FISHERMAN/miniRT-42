@@ -10,7 +10,7 @@ t_color	color(t_byte r, t_byte g, t_byte b)
 	return (new_color);
 }
 
-t_byte	byte_clamp(double value)
+t_byte	byte_clamp(int value)
 {
 	if (value < 0)
 		return (0);
