@@ -82,7 +82,7 @@ int	gener_obj(int fd)
 	enu = 0;
 	obj_nb = gener_int(3, 10);
 	ft_putstr_fd("\n", fd);
-	ft_putstr_fd("pl 0,-10,0 0,0,0 255,255,255\n", fd);
+	ft_putstr_fd("pl 0,-15,0 0,1,0 255,255,255\n", fd);
 	while (obj_nb > 0)
 	{
 		enu = gener_int(1, 3);

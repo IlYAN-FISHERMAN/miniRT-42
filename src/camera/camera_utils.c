@@ -1,5 +1,6 @@
 #include "camera.h"
 #include "../miniRT.h"
+#include "ft_memory.h"
 
 static void	camera_pos_move(int key, t_camera *cam)
 {
@@ -28,6 +29,7 @@ static void	camera_dir_move(int key, t_camera *cam)
 	t_vector3	right;
 	t_matrix4	rot;
 
+	ft_bzero(&rot, sizeof(t_matrix4));
 	right = vnormalized(vcross(cam->up, cam->target));
 	if (key == KEY_LEFT)
 		rot = m4rotating(-0.05, Y_AXIS);
