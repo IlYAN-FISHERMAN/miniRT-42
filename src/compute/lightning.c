@@ -1,13 +1,14 @@
 #include "lightning.h"
 
-static t_color	diffuse(t_object *obj, t_color eff_color, double l_dot_n)
+static inline t_color	diffuse(t_object *obj,
+	t_color eff_color, double l_dot_n)
 {
 	if (l_dot_n < 0)
 		return (color(0, 0, 0));
 	return (color_scalar(eff_color, obj->mat.diff * l_dot_n));
 }
 
-static t_color	specular(t_object *obj, t_lightning ln,
+static inline t_color	specular(t_object *obj, t_lightning ln,
 	t_vector3 lv, double ldn)
 {
 	double		rde;

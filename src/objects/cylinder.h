@@ -34,17 +34,4 @@ typedef struct s_calc_cylin
 t_object		*new_cylinder(t_point3 origin, double *rad_hei,
 					t_vector3 normal, t_color color);
 
-//	check_cap: Check if the ray intersects the cap of the cylinder
-//	@param ray The ray to check
-//	@param t The distance to the cap
-//	@return true if the ray intersects the cap, false otherwise
-bool			check_cap(t_ray ray, double t);
-
-//	check_bounds: Check if the intersection is within the bounds of the cone
-//	@param obj The object to check
-//	@param ray The ray to check
-//	@param xs_parent The intersection data
-void			check_bounds(t_object *obj, t_ray ray,
-					t_xs_parent *xs_parent, t_quadratic *quad);
-
 #endif

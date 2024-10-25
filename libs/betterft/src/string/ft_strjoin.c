@@ -41,6 +41,7 @@ char	*ft_joint_all(char **str)
 	char	*tmp1;
 	char	*tmp2;
 
+	tmp1 = 0;
 	i = 1;
 	if (!str)
 		return (NULL);

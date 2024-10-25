@@ -65,7 +65,11 @@ void	display(void)
 	minirt = get_minirt();
 	mlx_put_image_to_window(minirt->win.mlx, minirt->win.windo,
 		minirt->size->mlx_img, 0, 0);
-	mlx_do_sync(minirt->win.mlx);
+	if (minirt->is_first < 2)
+	{
+		print_message("Enter to render");
+		minirt->is_first++;
+	}
 	minirt->is_rendering = false;
 }
 

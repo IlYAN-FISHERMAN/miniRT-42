@@ -26,21 +26,6 @@ typedef struct s_comps
 	double			cos_t;
 }	t_comps;
 
-//	precompute: Precompute the intersection
-//	@param i The intersection
-//	@param r The ray
-//	@param xs_parent The parent intersection set
-//	@param fast If the computation should be fast
-//	@return The precomputed intersection
-t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast);
-
-//	shade_hit: Shade the hit
-//	@param comps The precomputed intersection
-//	@param fast If the computation should be fast
-//	@param remaining The remaining reflections
-//	@return The color of the hit
-t_color	shade_hit(t_comps *comps, bool fast, int remaining);
-
 //	color_at: Get the color at a point
 //	@param r The ray
 //	@param fast If the computation should be fast

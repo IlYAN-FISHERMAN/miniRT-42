@@ -3,7 +3,11 @@
 #include "ft_memory.h"
 #include "lightning.h"
 
-static void	compute_refractive_indices(t_comps *cs,
+//	compute_refractive_indices: Compute the refractive indices
+//	@param cs The precomputed intersection
+//	@param hit The hit intersection
+//	@param xs_parent The parent intersection set
+static inline void	compute_refractive_indices(t_comps *cs,
 	t_intersect *hit, t_xs_parent xs_parent)
 {
 	int			idx;
@@ -32,7 +36,14 @@ static void	compute_refractive_indices(t_comps *cs,
 	ft_lstclear(&objs, 0);
 }
 
-t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
+//	precompute: Precompute the intersection
+//	@param i The intersection
+//	@param r The ray
+//	@param xs_parent The parent intersection set
+//	@param fast If the computation should be fast
+//	@return The precomputed intersection
+static inline t_comps	precompute(t_intersect *i, t_ray r,
+	t_xs_parent xs_parent, bool fast)
 {
 	t_comps	comps;
 
@@ -57,7 +68,13 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	return (comps);
 }
 
-static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
+//	compute_phong: Compute the Phong lightning
+//	@param comps The precomputed intersection
+//	@param ln The lightning
+//	@param fast If the computation should be fast
+//	@return The Phong lightning
+static inline t_color	compute_phong(t_comps *comps,
+	t_lightning *ln, bool fast)
 {
 	t_minirt	*minirt;
 	t_color		c;
@@ -80,7 +97,12 @@ static t_color	compute_phong(t_comps *comps, t_lightning *ln, bool fast)
 	return (c);
 }
 
-t_color	shade_hit(t_comps *comps, bool fast, int remaining)
+//	shade_hit: Shade the hit
+//	@param comps The precomputed intersection
+//	@param fast If the computation should be fast
+//	@param remaining The remaining reflections
+//	@return The color of the hit
+static inline t_color	shade_hit(t_comps *comps, bool fast, int remaining)
 {
 	t_lightning	ln;
 	t_mat		*material;

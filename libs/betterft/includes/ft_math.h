@@ -23,18 +23,6 @@
 # define EPSILONF 0.00001f
 # define EPSILOND 0.0000000001
 
-//	ft_invsqrt: Returns the inverse square root of 'n'.
-//	@param n: The number to calculate the inverse square root.
-//	@return: The inverse square root of 'n'.
-float	ft_invsqrt(float n);
-
-//	ft_invsqrt_iter: Returns the inverse square root of 'n' after 'iter'
-//	iterations.
-//	@param n: The number to calculate the inverse square root.
-//	@param iter: The number of iterations to perform.
-//	@return: The inverse square root of 'n'.
-float	ft_invsqrt_iter(float n, int iter);
-
 //	ft_absol: Returns the absolute value of 'nb'.
 //	@param nb: The number to calculate the absolute value.
 //	@return: The absolute value of 'nb'.

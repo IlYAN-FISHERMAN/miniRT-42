@@ -11,6 +11,7 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
 	t_calc_sphere	calc;
+	double			inv_a;
 
 	inters = xs();
 	calc.sphere2ray = vsub(ray.origin, point3(0, 0, 0));
@@ -21,8 +22,9 @@ static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 	if (calc.discriminant < -EPSILOND)
 		return (inters);
 	calc.disc_sqrt = sqrt(calc.discriminant);
-	calc.t[0] = (-calc.b - calc.disc_sqrt) / (2 * calc.a);
-	calc.t[1] = (-calc.b + calc.disc_sqrt) / (2 * calc.a);
+	inv_a = 1 / (2 * calc.a);
+	calc.t[0] = (-calc.b - calc.disc_sqrt) * inv_a;
+	calc.t[1] = (-calc.b + calc.disc_sqrt) * inv_a;
 	add_intersection(&inters, intersection(calc.t[0], object));
 	if (!ft_equalsd(calc.discriminant, 0))
 		add_intersection(&inters, intersection(calc.t[1], object));

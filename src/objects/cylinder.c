@@ -32,6 +32,7 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray r)
 {
 	t_xs_parent		inters;
 	t_calc_cylin	c;
+	double			inv_a;
 
 	inters = xs();
 	c.a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;
@@ -41,8 +42,9 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray r)
 	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
 		return (inters);
 	c.disc_sqrt = sqrt(c.discriminant);
-	c.t[0] = (-c.b - c.disc_sqrt) / (2 * c.a);
-	c.t[1] = (-c.b + c.disc_sqrt) / (2 * c.a);
+	inv_a = 1 / (2 * c.a);
+	c.t[0] = (-c.b - c.disc_sqrt) * inv_a;
+	c.t[1] = (-c.b + c.disc_sqrt) * inv_a;
 	c.y[0] = r.origin.y + c.t[0] * r.direction.y;
 	c.y[1] = r.origin.y + c.t[1] * r.direction.y;
 	c.does_inter[0] = ((c.y[0] >= -0.5) && (c.y[0] <= 0.5));

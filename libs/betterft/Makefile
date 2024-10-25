@@ -2,7 +2,7 @@
 CFLAGS = -D GARBAGE_COLLECTOR=0
 
 CC = gcc
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -Ofast -march=native -mtune=native
 
 FILES =	garbage_collector/ft_garbage_collector \
 		garbage_collector/ft_garbage_utils \
@@ -13,7 +13,6 @@ FILES =	garbage_collector/ft_garbage_collector \
 		linked_list/ft_lstiter \
 		linked_list/ft_lstrotate \
 		math/ft_equals \
-		math/ft_invsqrt \
 		math/ft_minmaxabs \
 		memory/ft_calloc \
 		memory/ft_memcmp \

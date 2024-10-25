@@ -6,6 +6,7 @@
 static t_calc_cone	quadratic_cone(t_ray r)
 {
 	t_calc_cone	c;
+	double		inv_a;
 
 	c.a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
 		+ r.direction.z * r.direction.z;
@@ -19,8 +20,9 @@ static t_calc_cone	quadratic_cone(t_ray r)
 	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
 		return (c);
 	c.disc_sqrt = sqrt(c.discriminant);
-	c.t[0] = (-c.b - c.disc_sqrt) / (2 * c.a);
-	c.t[1] = (-c.b + c.disc_sqrt) / (2 * c.a);
+	inv_a = 1 / (2 * c.a);
+	c.t[0] = (-c.b - c.disc_sqrt) * inv_a;
+	c.t[1] = (-c.b + c.disc_sqrt) * inv_a;
 	c.y[0] = r.origin.y + c.t[0] * r.direction.y;
 	c.y[1] = r.origin.y + c.t[1] * r.direction.y;
 	return (c);
@@ -63,7 +65,7 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 		add_intersection(&inters, intersection(-c.c / (2 * c.b), obj));
 		return (inters);
 	}
-	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
+	if (c.discriminant < -EPSILOND || fabs(c.a) < EPSILOND)
 		return (inters);
 	if (c.y[0] > 0 && c.y[0] < 1 - EPSILOND)
 		add_intersection(&inters, intersection(c.t[0], obj));
@@ -84,7 +86,6 @@ static t_vector3	normal_at_cone(t_object *obj, t_point3 local_point)
 	t_vector2	uv;
 	double		theta;
 
-	(void)obj;
 	dist = local_point.x * local_point.x + local_point.z * local_point.z;
 	if (dist < 1 - EPSILOND && local_point.y >= 1 - EPSILOND)
 		normal = vector3(0, 1, 0);

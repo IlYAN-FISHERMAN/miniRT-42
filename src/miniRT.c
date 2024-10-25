@@ -67,6 +67,7 @@ void	*init_minirt_mlx(t_minirt *minirt)
 	mlx_hook(minirt->win.windo, 17, 0, secure_exit, minirt);
 	mlx_hook(minirt->win.windo, 2, 1L << 0, handle_key, minirt);
 	mlx_loop_hook(minirt->win.mlx, loop_hook, minirt);
+	mlx_expose_hook(minirt->win.windo, (void *)display, minirt);
 	return (minirt);
 }
 

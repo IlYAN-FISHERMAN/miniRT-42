@@ -12,10 +12,9 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&minirt, sizeof(minirt));
 	init_minirt(&minirt, argc, argv);
-	init_minirt_mlx(&minirt);
 	post_parsing(&minirt);
+	init_minirt_mlx(&minirt);
 	fast_render();
-	print_message("Enter to render");
 	mlx_loop(minirt.win.mlx);
 	exit(0);
 }
