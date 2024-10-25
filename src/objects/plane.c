@@ -60,7 +60,7 @@ t_object	*new_plane(t_point3 origin, t_vector3 normal, t_color color)
 		.transform = m4translation(origin), .local_intersect = intersect_plane,
 		.type = o_plane, .local_normal_at = normal_at_plane};
 	object->transform = m4mul(object->transform,
-			m4rotating_dir(point3(0, 1, 0), ((t_plane *)object->data)->normal));
+			m4rotating_dir(point3(0, 1, 0), normal));
 	object->inv_transform = m4invert(object->transform, 0);
 	object->tinv_transform = m4transpose(object->inv_transform);
 	return (object);
