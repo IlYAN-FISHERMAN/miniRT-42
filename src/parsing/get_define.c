@@ -35,7 +35,7 @@ void	check_define_range(char **str, t_minirt *minirt)
 	if (ft_atof(str[3]) < 0.0 || ft_atof(str[3]) > 1.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing",
 			"Define: Bad specular range\n[specular: >0.0/<1.0]", NULL}, str[3]);
-	if (ft_atof(str[4]) < 0.0 || ft_atof(str[4]) > 1.0)
+	if (ft_atof(str[4]) < 0.0 || ft_atof(str[4]) > 1000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing", "Define: Bad "
 			"shininess range\n[shininess: >0.0/<1000.0]", NULL}, str[4]);
 	if (ft_atof(str[5]) < 0.0 || ft_atof(str[5]) > 1.0)
@@ -84,6 +84,7 @@ void	get_define(char **str, t_minirt **minirt)
 	t_define	*define;
 
 	check_define_format(str, *minirt);
+	check_define_range(str, *minirt);
 	define = ft_calloc(1, sizeof(t_define));
 	if (!define)
 		crash_exit(*minirt,
