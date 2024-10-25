@@ -39,9 +39,9 @@ t_mat	dfmaterial(t_color color)
 {
 	return ((t_mat){
 		.color = color,
-		.diff = 0.6,
-		.spec = 0.2,
-		.shin = 50,
+		.diff = 0.9,
+		.spec = 0.9,
+		.shin = 200,
 		.reflect = 0.1,
 		.transp = 0.0,
 		.refract_idx = 1.0,
