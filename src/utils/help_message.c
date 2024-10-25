@@ -70,20 +70,23 @@ static void	print_def(void)
 static void	print_def2(void)
 {
 	printf(" materials.\n    Example: 'define new_material 1.0 0.3 0.1 0.4 bump"
-		"map.ppm'\n    This defines a new material with the following parameter"
+		"map.pgm'\n    This defines a new material with the following parameter"
 		"s:\n      - Diffuse reflection (1.0)\n      - Specular reflection (0.3"
 		")\n      - Ambient reflection (0.1)\n      - Shininess (0.4)\n      - "
-		"A bump map texture file ('bumpmap.ppm') for surface detail.\n\n12. Ass"
+		"A bump map texture file ('bumpmap.pgm') for surface detail.\n\n12. Ass"
 		"igning materials to objects:\n    Once a material is defined, you can "
 		"apply it to an object using the material name.\n    Example: 'sp 0,0,2"
 		"0 10 255,255,255 new_material' will apply 'new_material' to the sphere"
 		".\n\n13. Bump mapping allows you to add surface texture to your object"
 		"s. You can specify a bump map file for each material.\n    Example: 'd"
-		"efine mat_with_bump 1.0 0.3 0.1 0.4 0.2 1.5 bump_texture.ppm'\n    Thi"
-		"s uses the 'bump_texture.ppm' file to add bumps to the surface of obje"
-		"cts using this material.\n\nFor more advanced scenes, you can combine "
-		"different materials, bump maps, and objects to create complex environm"
-		"ents.\n");
+		"efine mat_with_bump 1.0 0.3 0.1 0.4 0.2 1.5 bump_texture.pgm'\n    Thi"
+		"s uses the 'bump_texture.pgm' file to add bumps to the surface of obje"
+		"cts using this material.\n\n14. Valid bump mapping textures are in for"
+		"mat PGM P2 and cannot contain comments.\n    You easily can generate y"
+		"our own by using our builtin script in `scripts/imt2pgm.sh`.\n    Note"
+		" that this script requires imagemagick in order to work properly.\n\nF"
+		"or more advanced scenes, you can combine different materials, bump map"
+		"s, and objects to create complex environments.\n");
 }
 
 void	help_message(t_minirt *minirt)
