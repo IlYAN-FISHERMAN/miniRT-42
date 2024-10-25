@@ -10,6 +10,9 @@
 # ✨ MiniRT 42 ✨
 Ahoy, coding voyagers! Welcome to the GitHub harbor for **Minirt-42**. Here, we dive into the thrilling realm of ray tracing—a mystical technique that brings 3D graphics to life! 🌄✨
 
+![Screencast from 2024-10-26 01-50-22 (1)](https://github.com/user-attachments/assets/dec7f312-2abd-424e-8cb8-6bb82488c483)
+
+
 ## What's Minirt, Anyway?
 Minirt invites you to create a mini-ray tracer from scratch. It’s a wild ride where you play with light, shadows, and reflections—bringing a world to life through code! 🌌💡
 
