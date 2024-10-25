@@ -31,7 +31,7 @@ void	check_error(int ac, char **av, t_minirt *minirt)
 	if (ac > 2)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, \
-			"Too many information");
+			"Too much information");
 	if (ac < 2)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", "No enough information", NULL},
