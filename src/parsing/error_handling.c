@@ -36,7 +36,8 @@ void	check_error(int ac, char **av, t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", "No enough information", NULL},
 			"\nTry './miniRT -h' for help.");
-	if (!ft_strcmp(av[1], "-h") || !ft_strcmp(av[1], "-help"))
+	if (!ft_strcmp(av[1], "-h") || !ft_strcmp(av[1], "-help")
+		|| !ft_strcmp(av[1], "-H"))
 		help_message(minirt);
 	else if (!ft_strcmp(av[1], "-random") || !ft_strcmp(av[1], "-r"))
 		minirt->fd = rt_generator("1000", "1000", BONUS);
