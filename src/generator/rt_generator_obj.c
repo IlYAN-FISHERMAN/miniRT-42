@@ -1,3 +1,4 @@
+#include "ft_print.h"
 #include "rt_generate.h"
 
 int	gener_sp(int fd)
@@ -11,7 +12,6 @@ int	gener_sp(int fd)
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
 		return (0);
-	ft_putstr_fd("\n", fd);
 	return (1);
 }
 
@@ -32,7 +32,6 @@ int	gener_cy(int fd)
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
 		return (0);
-	ft_putstr_fd("\n", fd);
 	return (1);
 }
 
@@ -53,23 +52,26 @@ int	gener_co(int fd)
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
 		return (0);
-	ft_putstr_fd("\n", fd);
 	return (1);
 }
 
-int	gener_pl(int fd)
+static void	gener_mat(int fd)
 {
-	ft_putstr_fd("pl    ", fd);
-	if (!put_xyz_double(fd, -10, 10))
-		return (0);
-	ft_putstr_fd("     ", fd);
-	if (!put_xyz_double(fd, 0, 0))
-		return (0);
-	ft_putstr_fd("     ", fd);
-	if (!put_xyz_int(fd, 0, 255))
-		return (0);
-	ft_putstr_fd("\n", fd);
-	return (1);
+	int	gen;
+
+	gen = gener_int(0, 6);
+	if (gen == 0 || gen == 6)
+		ft_putstr_fd("\n", fd);
+	if (gen == 1)
+		ft_putstr_fd(" metal\n", fd);
+	if (gen == 2)
+		ft_putstr_fd(" plastic\n", fd);
+	if (gen == 3)
+		ft_putstr_fd(" mirror\n", fd);
+	if (gen == 4)
+		ft_putstr_fd(" glass\n", fd);
+	if (gen == 5)
+		ft_putstr_fd(" wood\n", fd);
 }
 
 int	gener_obj(int fd)
@@ -80,21 +82,20 @@ int	gener_obj(int fd)
 	enu = 0;
 	obj_nb = gener_int(3, 10);
 	ft_putstr_fd("\n", fd);
+	ft_putstr_fd("pl 0,-10,0 0,0,0 255,255,255\n", fd);
 	while (obj_nb > 0)
 	{
-		enu = gener_int(1, 4);
+		enu = gener_int(1, 3);
 		if (enu == 1)
-			if (!gener_pl(fd))
-				return (0);
-		if (enu == 2)
 			if (!gener_sp(fd))
 				return (0);
-		if (enu == 3)
+		if (enu == 2)
 			if (!gener_cy(fd))
 				return (0);
-		if (enu == 4)
+		if (enu == 3)
 			if (!gener_co(fd))
 				return (0);
+		gener_mat(fd);
 		obj_nb--;
 	}
 	return (1);
