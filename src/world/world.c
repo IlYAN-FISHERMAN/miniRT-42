@@ -14,7 +14,7 @@ t_xs_parent	intersect_world(t_scene *scene, t_ray ray)
 			scene = scene->next;
 			continue ;
 		}
-		xs_parent = mergef_intersections(xs_parent, obj->intersect(obj, ray));
+		xs_parent = mergef_intersections(xs_parent, intersect_at(obj, ray));
 		scene = scene->next;
 	}
 	return (intersections(xs_parent));

@@ -44,8 +44,8 @@ typedef struct s_object
 {
 	t_objects_type	type;
 	void			*data;
-	t_xs_parent			(*intersect)(t_object *, t_ray);
-	t_vector3		(*normal_at)(t_object *, t_point3);
+	t_xs_parent			(*local_intersect)(t_object *, t_ray);
+	t_vector3		(*local_normal_at)(t_object *, t_point3);
 	t_matrix4		transform;
 	t_matrix4		inv_transform;
 	t_matrix4		tinv_transform;
@@ -59,6 +59,18 @@ typedef struct s_quadratic
 	double	c;
 	double	t[2];
 }	t_quadratic;
+
+//	normal_at: Gets the normal of an object using world_point
+//	@param obj The object to get the normal from
+//	@param world_point The point to get the normal from
+//	@return The normal of the object
+t_vector3	normal_at(t_object *obj, t_point3 world_point);
+
+//	intersect_at: Gets the intersections of an object using world ray
+//	@param obj	The object to get the intersections from
+//	@param ray	The ray to get the intersections from
+//	@return The intersections of the object
+t_xs_parent	intersect_at(t_object *obj, t_ray ray);
 
 //	material: Create a new material
 //	@param color The color value

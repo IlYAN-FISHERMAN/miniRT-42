@@ -1,5 +1,24 @@
 #include "objects.h"
 
+t_vector3	normal_at(t_object *obj, t_point3 world_point)
+{
+	t_point3	local_point;
+	t_vector3	local_normal;
+	t_vector3	world_normal;
+
+	local_point = tm4mul(obj->inv_transform, world_point);
+	local_normal = obj->local_normal_at(obj, local_point);
+	world_normal = tm4mul(obj->tinv_transform, local_normal);
+	world_normal.w = 0;
+	vnormalize(&world_normal);
+	return (world_normal);
+}
+
+t_xs_parent	intersect_at(t_object *obj, t_ray ray)
+{
+	return (obj->local_intersect(obj, transform(ray, obj->inv_transform)));
+}
+
 t_mat	material(t_color color, double diff,
 	double spec, double shininess)
 {

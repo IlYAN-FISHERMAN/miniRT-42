@@ -42,7 +42,7 @@ t_comps	precompute(t_intersect *i, t_ray r, t_xs_parent xs_parent, bool fast)
 	comps.object = i->object;
 	comps.point = ray_at(r, comps.t);
 	comps.eyev = vneg(r.direction);
-	comps.normalv = comps.object->normal_at(i->object, comps.point);
+	comps.normalv = normal_at(comps.object, comps.point);
 	if (vdot(comps.normalv, comps.eyev) < 0 && !ft_equalsd(comps.t, 0))
 	{
 		comps.inside = true;
