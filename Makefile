@@ -154,15 +154,17 @@ FILES_BONUS =	$(FILES) \
 CFILES = $(FILES_NON_BONUS:%=%.c)
 CFILES_BONUS = $(FILES_BONUS:%=%.c)
 
-$(CFILES): header
-
 all : $(NAME)
 
+$(CFILES): header
+
 clean :
+	@echo "$$HEADER"
 	@echo "\t[INFO]\t[$(NAME)]\tCleaning residual files... ♻️"
 	@$(MAKE) -C $(LIBFT_PATH) fclean --no-print-directory
 	@echo "\t[INFO]\t[$(NAME)]\tCleaning minilibx... ♻️"
-	@$(MAKE) -C $(MINILIBX_PATH) clean --no-print-directory
+	@$(MAKE) -C $(MINILIBX_PATH) clean --no-print-directory 1>/dev/null
+	@echo "\t[INFO]\t[$(NAME)]\tMinilibx cleaned 🗑️"
 
 fclean : clean
 	@echo "\t[INFO]\t[$(NAME)]\tDeletions of the rest... 🗑️\n"
@@ -173,7 +175,7 @@ re :
 	@make fclean
 	@make all --no-print-directory
 
-debug :  $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+debug : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME) debug...\r"	
 	@$(CC) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -D DEBUG=1 -o $(NAME)
@@ -202,6 +204,7 @@ debug_gb : $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) compiled (debug_gb) ✅\n"
 
 $(NAME): $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB)
+	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
 	@$(CC) $(CFILES) $(LIBFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
@@ -227,4 +230,4 @@ $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 header:
 	@echo "$$HEADER"
 
-.PHONY : clean fclean all debug debug_g bonus re
+.PHONY : clean fclean all debug debug_g bonus re debug_b debug_gb header
