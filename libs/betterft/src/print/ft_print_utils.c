@@ -14,7 +14,10 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	size_t	size;
+
+	size = write(fd, &c, 1);
+	(void)size;
 }
 
 void	ft_putnbr_base(int n, char *base, int fd)

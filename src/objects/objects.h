@@ -52,14 +52,6 @@ typedef struct s_object
 	t_mat			mat;
 }	t_object;
 
-typedef struct s_quadratic
-{
-	double	a;
-	double	b;
-	double	c;
-	double	t[2];
-}	t_quadratic;
-
 //	normal_at: Gets the normal of an object using world_point
 //	@param obj The object to get the normal from
 //	@param world_point The point to get the normal from
@@ -89,9 +81,5 @@ t_mat		dfmaterial(t_color color);
 //	@param obj The object to transform
 //	@param transform The transformation matrix
 void		set_transform(t_object *obj, t_matrix4 transform);
-
-//	quadratic_intersection: Calculate the intersection of a quadratic equation
-//	@param quad The quadratic equation and the intersection
-bool		quadratic_intersection(t_quadratic *quad);
 
 #endif

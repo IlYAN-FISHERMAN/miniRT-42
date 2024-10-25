@@ -10,6 +10,8 @@ pthread_t	*get_thread(void)
 	if (minirt->threads)
 		return (minirt->threads);
 	nb_thread = sysconf(_SC_NPROCESSORS_ONLN);
+	if (nb_thread > 1)
+		nb_thread--;
 	minirt->threads = galloc(sizeof(pthread_t) * (nb_thread + 1));
 	if (!minirt->threads)
 		crash_exit(get_minirt(), NULL, "Thread malloc failed");

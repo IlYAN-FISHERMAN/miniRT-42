@@ -50,6 +50,7 @@ static char	*get_line(t_gnl *gnl)
 	size_t	new_size;
 	char	*newline;
 
+	new_size = 0;
 	gnl->line = 0;
 	line_size = 0;
 	newline = 0;
@@ -65,10 +66,9 @@ static char	*get_line(t_gnl *gnl)
 		if (!join_buffer(gnl, line_size, new_size))
 			return (0);
 		if (!newline)
-		{
 			line_size += gnl->size;
+		if (!newline)
 			gnl->size = read(gnl->fd, gnl->buffer, BUFFER_SIZE);
-		}
 	}
 	return (flush(gnl, newline, line_size, new_size));
 }
