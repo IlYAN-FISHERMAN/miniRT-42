@@ -1,93 +1,89 @@
 #include "cylinder.h"
 
-//	intersect_caps: Check if the ray intersects the caps of the cylinder
-//	@param object The object to check
-//	@param ray The ray to check
-//	@param xs_parent The intersection data
-static void	intersect_caps(t_object *object, t_ray ray, t_xs_parent *xs_parent)
+//  base_cylinder_inter: Check if ray intersects the base of the cylinder
+//  @param r The ray
+//  @param inters The intersection data
+//  @param obj The object to check
+static void	base_cylinder_inter(t_ray r, t_xs_parent *inters, t_object *obj)
 {
 	double		t;
+	double		x_base;
+	double		z_base;
 
-	if (ft_equalsd(ray.direction.y, 0))
+	if (ft_equalsd(r.direction.y, 0))
 		return ;
-	t = (0 - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, t))
-		add_intersection(xs_parent, intersection(t, object));
-	t = (1 - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, t))
-		add_intersection(xs_parent, intersection(t, object));
+	t = (-0.5 - r.origin.y) / r.direction.y;
+	x_base = r.origin.x + t * r.direction.x;
+	z_base = r.origin.z + t * r.direction.z;
+	if (x_base * x_base + z_base * z_base <= 1)
+		add_intersection(inters, intersection(t, obj));
+	t = (0.5 - r.origin.y) / r.direction.y;
+	x_base = r.origin.x + t * r.direction.x;
+	z_base = r.origin.z + t * r.direction.z;
+	if (x_base * x_base + z_base * z_base <= 1)
+		add_intersection(inters, intersection(t, obj));
 }
 
 //  intersect_cylinder: Check if ray intersects cylinder
 //  @param intersect The intersection data
 //  @param object The object to check
 //  @return true if the ray intersects the cylinder, false otherwise
-static t_xs_parent	intersect_cylinder(t_object *object, t_ray ray)
+static t_xs_parent	intersect_cylinder(t_object *object, t_ray r)
 {
-	t_xs_parent	inters;
-	t_quadratic	q;
-	double		tmp;
+	t_xs_parent		inters;
+	t_calc_cylin	c;
 
 	inters = xs();
-	ray = transform(ray, object->inv_transform);
-	q.a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
-	if (ft_equalsd(q.a, 0))
+	c.a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;
+	c.b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
+	c.c = r.origin.x * r.origin.x + r.origin.z * r.origin.z - 1;
+	c.discriminant = c.b * c.b - 4 * c.a * c.c;
+	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
 		return (inters);
-	q.b = 2 * ray.origin.x * ray.direction.x + 2 * ray.origin.z
-		* ray.direction.z;
-	q.c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
-	if (!quadratic_intersection(&q))
-		return (inters);
-	if (q.t[0] > q.t[1])
-	{
-		tmp = q.t[0];
-		q.t[0] = q.t[1];
-		q.t[1] = tmp;
-	}
-	check_bounds(object, ray, &inters, &q);
-	intersect_caps(object, ray, &inters);
+	c.disc_sqrt = sqrt(c.discriminant);
+	c.t[0] = (-c.b - c.disc_sqrt) / (2 * c.a);
+	c.t[1] = (-c.b + c.disc_sqrt) / (2 * c.a);
+	c.y[0] = r.origin.y + c.t[0] * r.direction.y;
+	c.y[1] = r.origin.y + c.t[1] * r.direction.y;
+	c.does_inter[0] = ((c.y[0] >= -0.5) && (c.y[0] <= 0.5));
+	c.does_inter[1] = ((c.y[1] >= -0.5) && (c.y[1] <= 0.5));
+	if (c.does_inter[0])
+		add_intersection(&inters, intersection(c.t[0], object));
+	if (c.does_inter[1])
+		add_intersection(&inters, intersection(c.t[1], object));
+	base_cylinder_inter(r, &inters, object);
 	return (inters);
 }
 
-//  uv_mapping_cylin: Map a point on the cylinder to a uv coordinate
-//  @param object_point The point on the cylinder
-//  @return The uv coordinate
-static t_vector2	uv_mapping_cylin(t_point3 object_point)
+//  uv_mapping_cyl: Map a point on the cylinder to a 2D UV coordinate
+//  @param local_point The point on the cylinder
+//  @return The UV coordinate
+static t_vector2	uv_mapping_cyl(t_point3 local_point)
 {
-	double		theta;
-	double		y;
+	double	theta;
 
-	y = object_point.y - floor(object_point.y);
-	theta = atan2(object_point.z, object_point.x);
-	return (vector2((theta + M_PI) / (2 * M_PI), y));
+	theta = atan2(local_point.x, local_point.z);
+	return (vector2((1 + theta / (2 * M_PI)) / 2, local_point.y));
 }
 
 //  normal_at_cylinder: Get the normal at a point on the cylinder
 //  @param object The object
-//  @param world_point The point on the cylinder
+//  @param local_point The point on the cylinder
 //  @return The normal at the point
-static t_vector3	normal_at_cylinder(t_object *object, t_point3 world_point)
+static t_vector3	normal_at_cylinder(t_object *object, t_point3 local_point)
 {
-	double		dist;
-	double		height;
-	t_point3	object_point;
-	t_vector3	normal;
+	t_vector3		normal;
 
-	object_point = tm4mul(object->inv_transform, world_point);
-	height = 1;
-	dist = object_point.x * object_point.x + object_point.z * object_point.z;
-	if (dist < 1 && object_point.y >= height - EPSILOND)
+	(void)object;
+	if (local_point.y >= 0.5 - EPSILOND)
 		normal = vector3(0, 1, 0);
-	else if (dist < 1 && object_point.y <= EPSILOND)
+	else if (local_point.y <= -0.5 + EPSILOND)
 		normal = vector3(0, -1, 0);
 	else
-		normal = vector3(object_point.x, 0, object_point.z);
-	normal = tm4mul(object->tinv_transform, normal);
+		normal = vector3(local_point.x, 0, local_point.z);
 	if (object->mat.bumpmap)
 		normal = perturbn(normal,
-				get_bumpv(object->mat.bumpmap, uv_mapping_cylin(object_point)));
-	normal.w = VECTOR;
-	vnormalize(&normal);
+				get_bumpv(object->mat.bumpmap, uv_mapping_cyl(local_point)));
 	return (normal);
 }
 
@@ -104,15 +100,15 @@ t_object	*new_cylinder(t_point3 origin, double *rad_hei,
 		return (0);
 	object->data = galloc(sizeof(t_cylin));
 	if (!object->data)
-	{
 		gfree(object);
+	if (!object->data)
 		return (0);
-	}
 	*((t_cylin *)object->data) = (t_cylin){.origin = origin,
 		.radius = rad_hei[0], .height = rad_hei[1], .normal = normal};
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
-		.transform = m4translation(origin), .intersect = intersect_cylinder,
-		.type = o_cylin, .normal_at = normal_at_cylinder};
+		.transform = m4translation(origin),
+		.local_intersect = intersect_cylinder,
+		.type = o_cylin, .local_normal_at = normal_at_cylinder};
 	set_transform(object, m4rotating_dir(point3(0, 1, 0), normal));
 	set_transform(object,
 		m4scaling(vector3(rad_hei[0], rad_hei[1], rad_hei[0])));

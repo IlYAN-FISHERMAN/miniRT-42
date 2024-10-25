@@ -1,18 +1,48 @@
 #include "cone.h"
 
-//	intersect_caps: Check if the ray intersects the caps of the cone
+//  quadratic_cone: Calculate the quadratic formula for the cone
+//  @param r The ray
+//  @return The quadratic formula
+static t_calc_cone	quadratic_cone(t_ray r)
+{
+	t_calc_cone	c;
+
+	c.a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
+		+ r.direction.z * r.direction.z;
+	c.b = 2 * r.origin.x * r.direction.x - 2 * r.origin.y * r.direction.y
+		+ 2 * r.origin.z * r.direction.z;
+	c.c = r.origin.x * r.origin.x - r.origin.y * r.origin.y
+		+ r.origin.z * r.origin.z;
+	if (ft_equalsd(c.a, 0))
+		return (c);
+	c.discriminant = c.b * c.b - 4 * c.a * c.c;
+	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
+		return (c);
+	c.disc_sqrt = sqrt(c.discriminant);
+	c.t[0] = (-c.b - c.disc_sqrt) / (2 * c.a);
+	c.t[1] = (-c.b + c.disc_sqrt) / (2 * c.a);
+	c.y[0] = r.origin.y + c.t[0] * r.direction.y;
+	c.y[1] = r.origin.y + c.t[1] * r.direction.y;
+	return (c);
+}
+
+//	base_cone_inter: Check if ray intersects the base of the cone
+//	@param r The ray
+//	@param inters The intersection data
 //	@param obj The object to check
-//	@param ray The ray to check
-//	@param xs_parent The intersection data
-static void	intersect_caps(t_object *obj, t_ray ray, t_xs_parent *xs_parent)
+static void	base_cone_inter(t_ray r, t_xs_parent *inters, t_object *obj)
 {
 	double		t;
+	double		x_base;
+	double		z_base;
 
-	if (ft_equalsd(ray.direction.y, 0))
+	if (ft_equalsd(r.direction.y, 0))
 		return ;
-	t = (1 - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, t))
-		add_intersection(xs_parent, intersection(t, obj));
+	t = (1 - r.origin.y) / r.direction.y;
+	x_base = r.origin.x + t * r.direction.x;
+	z_base = r.origin.z + t * r.direction.z;
+	if (x_base * x_base + z_base * z_base <= 1)
+		add_intersection(inters, intersection(t, obj));
 }
 
 //  intersect_cone: Check if ray intersects cone
@@ -21,71 +51,54 @@ static void	intersect_caps(t_object *obj, t_ray ray, t_xs_parent *xs_parent)
 //  @return true if the ray intersects the cone, false otherwise
 static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 {
-	t_xs_parent	xs_parent;
-	t_quadratic	quad;
-	double		tmp;
+	t_xs_parent	inters;
+	t_calc_cone	c;
 
-	xs_parent = xs();
-	r = transform(r, obj->inv_transform);
-	quad.a = r.direction.x * r.direction.x - r.direction.y * r.direction.y
-		+ r.direction.z * r.direction.z;
-	quad.b = 2 * r.origin.x * r.direction.x - 2 * r.origin.y * r.direction.y
-		+ 2 * r.origin.z * r.direction.z;
-	quad.c = r.origin.x * r.origin.x - r.origin.y * r.origin.y
-		+ r.origin.z * r.origin.z;
-	if (!quadratic_intersection(&quad))
-		return (xs_parent);
-	if (quad.t[0] > quad.t[1])
+	inters = xs();
+	c = quadratic_cone(r);
+	if (ft_equalsd(c.a, 0))
 	{
-		tmp = quad.t[0];
-		quad.t[0] = quad.t[1];
-		quad.t[1] = tmp;
+		if (ft_equalsd(c.b, 0))
+			return (inters);
+		add_intersection(&inters, intersection(-c.c / (2 * c.b), obj));
+		return (inters);
 	}
-	check_bounds(obj, r, &xs_parent, &quad);
-	intersect_caps(obj, r, &xs_parent);
-	return (xs_parent);
-}
-
-//  uv_mapping_cone: Map a point on the cone to a uv coordinate
-//  @param object_p The point on the cone
-//  @return The uv coordinate
-static t_vector2	uv_mapping_cone(t_point3 obj_p)
-{
-	double		theta;
-
-	theta = atan2(obj_p.z, obj_p.x);
-	return (vector2((theta + M_PI) / (2 * M_PI), obj_p.y));
+	if (fabs(c.a) < EPSILOND || c.discriminant < -EPSILOND)
+		return (inters);
+	if (c.y[0] > 0 && c.y[0] < 1 - EPSILOND)
+		add_intersection(&inters, intersection(c.t[0], obj));
+	if (c.y[1] > 0 && c.y[1] < 1 - EPSILOND)
+		add_intersection(&inters, intersection(c.t[1], obj));
+	base_cone_inter(r, &inters, obj);
+	return (inters);
 }
 
 //  normal_at_cone: Get the normal at a point on the cone
 //  @param obj The object
-//  @param world_point The point on the cone
+//  @param local_point The point on the cone
 //  @return The normal at the point
-static t_vector3	normal_at_cone(t_object *obj, t_point3 world_point)
+static t_vector3	normal_at_cone(t_object *obj, t_point3 local_point)
 {
-	double		dist;
-	t_point3	obj_point;
 	t_vector3	normal;
-	double		y;
+	double		dist;
+	t_vector2	uv;
+	double		theta;
 
-	obj_point = tm4mul(obj->inv_transform, world_point);
-	dist = obj_point.x * obj_point.x + obj_point.z * obj_point.z;
-	if (dist < 1 && obj_point.y >= 1 - EPSILOND)
+	(void)obj;
+	dist = local_point.x * local_point.x + local_point.z * local_point.z;
+	if (dist < 1 - EPSILOND && local_point.y >= 1 - EPSILOND)
 		normal = vector3(0, 1, 0);
-	else if (dist < 1 && obj_point.y <= EPSILOND)
+	else if (dist < 1 - EPSILOND && local_point.y <= EPSILOND)
 		normal = vector3(0, -1, 0);
 	else
-	{
-		y = sqrt(dist);
-		if (obj_point.y > 0)
-			y = -y;
-		normal = vector3(obj_point.x, y, obj_point.z);
-	}
+		normal
+			= vnormalized(vector3(local_point.x, -sqrt(dist), local_point.z));
 	if (obj->mat.bumpmap)
-		normal = perturbn(normal,
-				get_bumpv(obj->mat.bumpmap, uv_mapping_cone(obj_point)));
-	normal = tm4mul(obj->tinv_transform, normal);
-	vnormalize(&normal);
+	{
+		theta = atan2(local_point.x, local_point.z);
+		uv = vector2((1 + theta / (2 * M_PI)) / 2, local_point.y);
+		normal = perturbn(normal, get_bumpv(obj->mat.bumpmap, uv));
+	}
 	return (normal);
 }
 
@@ -109,8 +122,8 @@ t_object	*new_cone(t_point3 origin, double *rad_hei,
 	*((t_cone *)obj->data) = (t_cone){.origin = origin,
 		.radius = rad_hei[0], .height = rad_hei[1], .normal = normal};
 	*obj = (t_object){.data = obj->data, .mat = dfmaterial(color),
-		.transform = m4translation(origin), .intersect = intersect_cone,
-		.type = o_cone, .normal_at = normal_at_cone};
+		.transform = m4translation(origin), .local_intersect = intersect_cone,
+		.type = o_cone, .local_normal_at = normal_at_cone};
 	set_transform(obj, m4rotating_dir(point3(0, 1, 0), normal));
 	set_transform(obj,
 		m4scaling(vector3(rad_hei[0], rad_hei[1], rad_hei[0])));

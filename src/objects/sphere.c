@@ -10,55 +10,49 @@
 static t_xs_parent	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_xs_parent		inters;
-	t_quadratic		quad;
-	t_point3		sphere_to_ray;
+	t_calc_sphere	calc;
 
 	inters = xs();
-	ray = transform(ray, object->inv_transform);
-	sphere_to_ray = vsub(ray.origin, point3(0, 0, 0));
-	quad.a = vdot(ray.direction, ray.direction);
-	quad.b = 2 * (vdot(ray.direction, sphere_to_ray));
-	quad.c = vdot(sphere_to_ray, sphere_to_ray) - 1;
-	if (quadratic_intersection(&quad))
-	{
-		add_intersection(&inters, intersection(quad.t[0], object));
-		add_intersection(&inters, intersection(quad.t[1], object));
-	}
+	calc.sphere2ray = vsub(ray.origin, point3(0, 0, 0));
+	calc.a = vdot(ray.direction, ray.direction);
+	calc.b = 2 * vdot(ray.direction, calc.sphere2ray);
+	calc.c = vdot(calc.sphere2ray, calc.sphere2ray) - 1;
+	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
+	if (calc.discriminant < -EPSILOND)
+		return (inters);
+	calc.disc_sqrt = sqrt(calc.discriminant);
+	calc.t[0] = (-calc.b - calc.disc_sqrt) / (2 * calc.a);
+	calc.t[1] = (-calc.b + calc.disc_sqrt) / (2 * calc.a);
+	add_intersection(&inters, intersection(calc.t[0], object));
+	if (!ft_equalsd(calc.discriminant, 0))
+		add_intersection(&inters, intersection(calc.t[1], object));
 	return (inters);
 }
 
-//  uv_mapping_sphere: Map a point on the sphere to a uv coordinate
-//  @param object_p The point on the sphere
-//  @return The uv coordinate
-static t_vector2	uv_mapping_sphere(t_point3 obj_p)
+//  uv_mapping_sphere: Map a point on the sphere to a 2D UV coordinate
+//  @param local_point The point on the sphere
+//  @return The UV coordinate
+static t_vector2	uv_mapping_sphere(t_point3 local_point)
 {
-	double		phi;
-	double		theta;
+	double	theta;
+	double	phi;
 
-	theta = atan2(obj_p.z, obj_p.x);
-	phi = acos(obj_p.y);
-	return (vector2((theta + M_PI) / (2 * M_PI), phi / M_PI));
+	theta = atan2(local_point.x, local_point.z);
+	phi = acos(local_point.y);
+	return (vector2(1 - (theta + M_PI) / (2 * M_PI),
+			phi / M_PI));
 }
 
 //  normal_at_sphere: Get the normal at a point on the sphere
 //  @param object The object
-//  @param world_point The point on the sphere
+//  @param local_point The point on the sphere
 //  @return The normal at the point
-static t_vector3	normal_at_sphere(t_object *object, t_point3 world_point)
+static t_vector3	normal_at_sphere(t_object *object, t_point3 local_point)
 {
-	t_point3	object_p;
-	t_vector3	object_n;
-	t_vector3	world_n;
-
-	object_p = tm4mul(object->inv_transform, world_point);
-	object_n = vsub(object_p, point3(0, 0, 0));
 	if (object->mat.bumpmap)
-		object_n = perturbn(object_n,
-				get_bumpv(object->mat.bumpmap, uv_mapping_sphere(object_p)));
-	world_n = tm4mul(object->tinv_transform, object_n);
-	world_n.w = VECTOR;
-	vnormalize(&world_n);
-	return (world_n);
+		return (perturbn(local_point, get_bumpv(object->mat.bumpmap,
+					uv_mapping_sphere(local_point))));
+	return (vsub(local_point, point3(0, 0, 0)));
 }
 
 t_object	*new_sphere(t_point3 origin, double radius, t_color color)
@@ -78,8 +72,8 @@ t_object	*new_sphere(t_point3 origin, double radius, t_color color)
 	*((t_sphere *)object->data) = (t_sphere){.origin = origin,
 		.radius = radius};
 	*object = (t_object){.data = object->data, .mat = dfmaterial(color),
-		.intersect = intersect_sphere, .type = o_sphere,
-		.normal_at = normal_at_sphere};
+		.local_intersect = intersect_sphere, .type = o_sphere,
+		.local_normal_at = normal_at_sphere};
 	object->transform = m4mul(m4translation(origin),
 			m4scaling(vector3(radius, radius, radius)));
 	object->inv_transform = m4invert(object->transform, 0);
