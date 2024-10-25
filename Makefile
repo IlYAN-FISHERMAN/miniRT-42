@@ -45,7 +45,7 @@ export APP_HEADER
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -Ofast -march=native -mtune=native
+CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -Ofast -march=native -mtune=native -g
 
 OS =
 
@@ -124,6 +124,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)generator/rt_generator_obj \
 		$(FILES_PATH)utils/ft_split_sp_tab \
 		$(FILES_PATH)utils/ft_strlen_tab \
+		$(FILES_PATH)utils/help_message \
 		$(FILES_PATH)utils/ft_atof \
 		$(FILES_PATH)miniRT \
 		$(FILES_PATH)parsing/parsing \

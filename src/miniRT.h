@@ -72,5 +72,6 @@ t_minirt	*init_minirt(t_minirt *minirt, int argc, char **argv);
 t_minirt	*get_minirt(void);
 void		*memcheck(t_minirt *minirt, void *new);
 void		*init_minirt_mlx(t_minirt *minirt);
+void		help_message(t_minirt *minirt);
 
 #endif

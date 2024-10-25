@@ -6,6 +6,7 @@ void	pars_map(t_minirt **minirt)
 	char	*gnl;
 
 	create_default_mat(minirt);
+	get_standard_size(minirt);
 	while (true)
 	{
 		gnl = ft_get_next_line((*minirt)->fd);
@@ -22,6 +23,6 @@ void	pars_map(t_minirt **minirt)
 		}
 		gfree(gnl);
 	}
-	if (check_standare_shape(*minirt) && !(*minirt)->size)
+	if (check_standard_shape(*minirt) && !(*minirt)->size)
 		get_size_default(minirt);
 }

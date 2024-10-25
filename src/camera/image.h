@@ -15,6 +15,7 @@ typedef struct s_image
 	int		size_line;
 	int		endian;
 	int		bppd;
+	bool	exist;
 }	t_image;
 
 typedef struct s_size

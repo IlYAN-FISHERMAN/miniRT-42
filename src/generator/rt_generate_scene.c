@@ -21,7 +21,7 @@ int	gener_lig(int fd, bool	bonus)
 	if (bonus)
 	{
 		ft_putstr_fd("     ", fd);
-		if (!put_xyz_int(fd, 255, 255))
+		if (!put_xyz_int(fd, 0, 255))
 			return (0);
 	}
 	ft_putstr_fd("\n", fd);

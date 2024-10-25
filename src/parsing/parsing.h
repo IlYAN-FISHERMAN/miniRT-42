@@ -90,7 +90,8 @@ void		check_vector_range(char **context, char *str, t_minirt *minirt);
 //	check rgb range
 void		check_rgb_range(char **context, char *str, t_minirt *minirt);
 // check if necessery obj is set
-int			check_standare_shape(t_minirt *minirt);
+int			check_standard_shape(t_minirt *minirt);
+void		get_standard_size(t_minirt **minirt);
 // return 1 if the string is a object, else return 0
 int			is_obj(char *str);
 // return 1 if the string is a material, else return 0

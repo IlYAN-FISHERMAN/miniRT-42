@@ -26,8 +26,7 @@ void	get_obj(char **str, t_minirt **minirt)
 int	is_obj(char *str)
 {
 	if (!ft_strcmp(str, "pl") || !ft_strcmp(str, "cy") || !ft_strcmp(str, "sp")
-		|| !ft_strcmp(str, "co") || !ft_strcmp(str, "cu")
-		|| !ft_strcmp(str, "py"))
+		|| !ft_strcmp(str, "co"))
 		return (1);
 	return (0);
 }

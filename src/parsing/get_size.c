@@ -1,5 +1,13 @@
 #include "parsing.h"
 
+void	get_standard_size(t_minirt **minirt)
+{
+	(*minirt)->size = new_image(WIDTH, HEIGHT);
+	if (!(*minirt)->size)
+		crash_exit(*minirt,
+			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+}
+
 void	check_size_format(char **str, t_minirt **minirt)
 {
 	if (ft_strlen_tab(str) != 3)
@@ -26,12 +34,11 @@ void	check_size_format(char **str, t_minirt **minirt)
 
 void	get_size(char **str, t_minirt **minirt)
 {
-	if ((*minirt)->size)
+	if ((*minirt)->size->exist)
 		crash_exit(*minirt,
 			(char *[]){"miniRT", "parsing", NULL}, "Only one R accepted");
 	check_size_format(str, minirt);
-	(*minirt)->size = new_image(ft_atoi(str[1]), ft_atoi(str[2]));
-	if (!(*minirt)->size)
-		crash_exit(*minirt,
-			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+	(*minirt)->size->exist = true;
+	(*minirt)->size->height = ft_atof(str[1]);
+	(*minirt)->size->width = ft_atof(str[2]);
 }
