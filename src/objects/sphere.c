@@ -51,10 +51,13 @@ static t_vector2	uv_mapping_sphere(t_point3 local_point)
 //  @return The normal at the point
 static t_vector3	normal_at_sphere(t_object *object, t_point3 local_point)
 {
+	t_vector3	normal;
+
+	normal = vnormalized(vsub(local_point, point3(0, 0, 0)));
 	if (object->mat.bumpmap)
-		return (perturbn(local_point, get_bumpv(object->mat.bumpmap,
+		return (perturbn(normal, get_bumpv(object->mat.bumpmap,
 					uv_mapping_sphere(local_point))));
-	return (vsub(local_point, point3(0, 0, 0)));
+	return (normal);
 }
 
 t_object	*new_sphere(t_point3 origin, double radius, t_color color)
