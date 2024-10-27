@@ -20,9 +20,11 @@ void	free_object(void *object)
 
 static void	clear_image(t_minirt *minirt, t_image *image)
 {
-	if (image->mlx_img)
-		mlx_destroy_image(minirt->win.mlx, image->mlx_img);
-	gfree(image);
+	(void)minirt;
+	(void)image;
+	/*if (image->mlx_img)*/
+	/*	mlx_destroy_image(minirt->win.mlx, image->mlx_img);*/
+	/*gfree(image);*/
 }
 
 void	clear_memory(t_minirt *minirt)
