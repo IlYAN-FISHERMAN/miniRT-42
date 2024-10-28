@@ -67,7 +67,7 @@ t_mat	mat_wood(t_color color)
 		.diff = 0.8,
 		.spec = 0.2,
 		.shin = 30,
-		.reflect = 0.1,
+		.reflect = 0.0,
 		.transp = 0.0,
 		.refract_idx = 1.0,
 		.pattern = pattern(),

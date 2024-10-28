@@ -7,7 +7,7 @@ t_mat	mat_checkerboard(t_color c)
 		.diff = 0.7,
 		.spec = 0.5,
 		.shin = 50,
-		.reflect = 0.2,
+		.reflect = 0.0,
 		.transp = 0.0,
 		.refract_idx = 1.3,
 		.pattern = checkboard_pattern(color(0, 0, 0), color(255, 255, 255)),
