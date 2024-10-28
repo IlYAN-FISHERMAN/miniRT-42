@@ -73,6 +73,7 @@ int	secure_exit(void *data)
 
 int	crash_exit(t_minirt *minirt, char **context, char *msg)
 {
+	printf("Error\n");
 	while (context && *context)
 	{
 		ft_putstr_fd(*context, STDERR_FILENO);
