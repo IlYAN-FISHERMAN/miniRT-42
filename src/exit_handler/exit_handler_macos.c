@@ -18,13 +18,12 @@ void	free_object(void *object)
 	gfree(object);
 }
 
+//	since clear_image wasn't working properly on mac, we decided to
+//	let exit function handle it (lol)
 static void	clear_image(t_minirt *minirt, t_image *image)
 {
 	(void)minirt;
 	(void)image;
-	/*if (image->mlx_img)*/
-	/*	mlx_destroy_image(minirt->win.mlx, image->mlx_img);*/
-	/*gfree(image);*/
 }
 
 void	clear_memory(t_minirt *minirt)
