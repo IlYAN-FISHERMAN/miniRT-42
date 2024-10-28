@@ -35,7 +35,8 @@ int	is_dfmat(char *str)
 {
 	if (!ft_strcmp(str, "metal") || !ft_strcmp(str, "plastic")
 		|| !ft_strcmp(str, "glass") || !ft_strcmp(str, "mirror")
-		|| !ft_strcmp(str, "wood"))
+		|| !ft_strcmp(str, "wood") || !ft_strcmp(str, "checkerboard")
+		|| !ft_strcmp(str, "bricks") || !ft_strcmp(str, "mat"))
 		return (1);
 	return (0);
 }

@@ -34,14 +34,22 @@ t_mat	get_dfmat(char *str, t_color color, t_minirt *minirt)
 		mat = minirt->df_mat.mirror;
 	else if (!ft_strcmp(str, "wood"))
 		mat = minirt->df_mat.wood;
+	else if (!ft_strcmp(str, "checkerboard"))
+		mat = minirt->df_mat.checkerboard;
+	else if (!ft_strcmp(str, "bricks"))
+		mat = minirt->df_mat.bricks;
+	else if (!ft_strcmp(str, "mat"))
+		mat = minirt->df_mat.mat;
 	mat.color = color;
 	return (mat);
 }
 
 void	create_default_mat(t_minirt **minirt)
 {
-	(*minirt)->df_mat = (t_dfmat){.metal = mat_metal(color(0, 0, 0)), \
+	(*minirt)->df_mat = (t_dfmat){.metal = mat_metal(color(0, 0, 0)),
 		.wood = mat_wood(color(0, 0, 0)), .glass = mat_glass(color(0, 0, 0)),
 		.mirror = mat_mirror(color(0, 0, 0)), .platic
-		= mat_plastic(color(0, 0, 0))};
+		= mat_plastic(color(0, 0, 0)),
+		.checkerboard = mat_checkerboard(color(0, 0, 0)),
+		.bricks = mat_bricks(color(0, 0, 0)), .mat = mat_mat(color(0, 0, 0))};
 }

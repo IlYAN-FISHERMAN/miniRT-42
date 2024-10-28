@@ -100,6 +100,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/patterns \
 		$(FILES_PATH)objects/sphere \
 		$(FILES_PATH)objects/material \
+		$(FILES_PATH)objects/material2 \
 		$(FILES_PATH)objects/plane \
 		$(FILES_PATH)rays/intersection_utils \
 		$(FILES_PATH)rays/intersection \
