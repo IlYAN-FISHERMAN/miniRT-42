@@ -22,7 +22,7 @@ t_mat	mat_plastic(t_color color)
 		.diff = 0.7,
 		.spec = 0.5,
 		.shin = 50,
-		.reflect = 0.2,
+		.reflect = 0.03,
 		.transp = 0.0,
 		.refract_idx = 1.3,
 		.pattern = pattern(),
