@@ -38,4 +38,10 @@ typedef struct s_calc_cone
 t_object		*new_cone(t_point3 origin, double *rad_hei,
 					t_vector3 normal, t_color color);
 
+//  uv_mapping_cone: Map a point on the cone to a 2D UV coordinate
+//  @param local_point The point on the cone
+//  @param is_caps True if the point is on the caps, false otherwise
+//  @return The UV coordinate
+t_vector2		uv_mapping_cone(t_point3 local_point, bool is_caps);
+
 #endif

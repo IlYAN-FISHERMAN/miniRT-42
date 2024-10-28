@@ -79,25 +79,27 @@ static t_xs_parent	intersect_cone(t_object *obj, t_ray r)
 //  @param obj The object
 //  @param local_point The point on the cone
 //  @return The normal at the point
-static t_vector3	normal_at_cone(t_object *obj, t_point3 local_point)
+static t_vector3	normal_at_cone(t_object *obj, t_point3 lp)
 {
 	t_vector3	normal;
 	double		dist;
 	t_vector2	uv;
-	double		theta;
+	bool		is_caps;
 
-	dist = local_point.x * local_point.x + local_point.z * local_point.z;
-	if (dist < 1 - EPSILOND && local_point.y >= 1 - EPSILOND)
+	is_caps = true;
+	dist = lp.x * lp.x + lp.z * lp.z;
+	if (dist < 1 - EPSILOND && lp.y >= 1 - EPSILOND)
 		normal = vector3(0, 1, 0);
-	else if (dist < 1 - EPSILOND && local_point.y <= EPSILOND)
+	else if (dist < 1 - EPSILOND && lp.y <= EPSILOND)
 		normal = vector3(0, -1, 0);
 	else
-		normal
-			= vnormalized(vector3(local_point.x, -sqrt(dist), local_point.z));
+	{
+		is_caps = false;
+		normal = vnormalized(vector3(lp.x, -sqrt(dist), lp.z));
+	}
 	if (obj->mat.bumpmap)
 	{
-		theta = atan2(local_point.x, local_point.z);
-		uv = vector2((1 + theta / (2 * M_PI)) / 2, local_point.y);
+		uv = uv_mapping_cone(lp, is_caps);
 		normal = perturbn(normal, get_bumpv(obj->mat.bumpmap, uv));
 	}
 	return (normal);

@@ -94,6 +94,7 @@ FILES =	$(FILES_PATH)main \
 		$(FILES_PATH)objects/bumpmap \
 		$(FILES_PATH)objects/bumpmap_utils \
 		$(FILES_PATH)objects/cone \
+		$(FILES_PATH)objects/cone_utils \
 		$(FILES_PATH)objects/cylinder \
 		$(FILES_PATH)objects/light \
 		$(FILES_PATH)objects/objects \

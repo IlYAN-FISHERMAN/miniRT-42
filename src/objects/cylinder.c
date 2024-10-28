@@ -59,17 +59,25 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray r)
 
 //  uv_mapping_cyl: Map a point on the cylinder to a 2D UV coordinate
 //  @param local_point The point on the cylinder
+//  @param is_caps True if the point is on the caps, false otherwise
 //  @return The UV coordinate
-static t_vector2	uv_mapping_cyl(t_point3 local_point)
+static t_vector2	uv_mapping_cyl(t_point3 local_point, bool is_caps)
 {
 	double	theta;
 	double	u;
 	double	v;
 
-	theta = atan2(local_point.x, local_point.z);
-	u = (theta + M_PI) / (2 * M_PI);
-	v = (local_point.y + 0.5);
-
+	if (!is_caps)
+	{
+		theta = atan2(local_point.x, local_point.z);
+		u = (theta + M_PI) / (2 * M_PI);
+		v = (local_point.y + 0.5);
+	}
+	else
+	{
+		u = (local_point.x + 1) * 0.5;
+		v = (local_point.z + 1) * 0.5;
+	}
 	return (vector2(u, v));
 }
 
@@ -80,17 +88,23 @@ static t_vector2	uv_mapping_cyl(t_point3 local_point)
 static t_vector3	normal_at_cylinder(t_object *object, t_point3 local_point)
 {
 	t_vector3		normal;
+	bool			is_caps;
 
+	is_caps = true;
 	(void)object;
 	if (local_point.y >= 0.5 - EPSILOND)
 		normal = vector3(0, 1, 0);
 	else if (local_point.y <= -0.5 + EPSILOND)
 		normal = vector3(0, -1, 0);
 	else
+	{
+		is_caps = false;
 		normal = vector3(local_point.x, 0, local_point.z);
+	}
 	if (object->mat.bumpmap)
 		normal = perturbn(normal,
-				get_bumpv(object->mat.bumpmap, uv_mapping_cyl(local_point)));
+				get_bumpv(object->mat.bumpmap,
+					uv_mapping_cyl(local_point, is_caps)));
 	return (normal);
 }
 
