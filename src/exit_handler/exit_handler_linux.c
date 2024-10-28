@@ -6,35 +6,59 @@ void	free_object(void *object)
 	gfree(object);
 }
 
-static void	clear_image(t_minirt *minirt, t_image *image)
+static void	clear_materials(t_minirt *minirt)
 {
-	if (image->mlx_img)
-		mlx_destroy_image(minirt->win.mlx, image->mlx_img);
-	gfree(image);
+	t_mat		*mat;
+
+	if (minirt->df_mat.bricks.bumpmap)
+	{
+		gfree(minirt->df_mat.bricks.bumpmap->data);
+		gfree(minirt->df_mat.bricks.bumpmap);
+	}
+	if (minirt->df_mat.wood.bumpmap)
+	{
+		gfree(minirt->df_mat.wood.bumpmap->data);
+		gfree(minirt->df_mat.wood.bumpmap);
+	}
+	while (minirt->mat)
+	{
+		mat = (t_mat *)minirt->mat->content;
+		if (mat->bumpmap)
+		{
+			gfree(mat->bumpmap->data);
+			gfree(mat->bumpmap);
+		}
+		minirt->mat = minirt->mat->next;
+	}
 }
 
 void	clear_memory(t_minirt *minirt)
 {
-	if (minirt && minirt->mat)
+	if (minirt->mat)
 		ft_lstclear(&minirt->mat, &free_mat);
-	if (minirt && minirt->size)
-		clear_image(minirt, minirt->size);
-	if (minirt && minirt->win.mlx && minirt->win.windo)
+	if (minirt->size)
+	{
+		if (minirt->size->mlx_img)
+			mlx_destroy_image(minirt->win.mlx, minirt->size->mlx_img);
+		gfree(minirt->size);
+	}
+	if (minirt->win.mlx && minirt->win.windo)
 		mlx_destroy_window(minirt->win.mlx, minirt->win.windo);
-	if (minirt && minirt->win.mlx)
+	if (minirt->win.mlx)
 		mlx_destroy_display(minirt->win.mlx);
-	if (minirt && minirt->win.mlx)
+	if (minirt->win.mlx)
 		gfree(minirt->win.mlx);
-	if (minirt && minirt->world.amb)
+	if (minirt->world.amb)
 		gfree(minirt->world.amb);
-	if (minirt && minirt->world.cam)
+	if (minirt->world.cam)
 		gfree(minirt->world.cam);
-	if (minirt && minirt->world.scene)
+	if (minirt->world.scene)
 		ft_lstclear(&minirt->world.scene, &free_object);
-	if (minirt && minirt->world.lights)
+	if (minirt->world.lights)
 		ft_lstclear(&minirt->world.lights, &free_object);
-	if (minirt && minirt->threads)
+	if (minirt->threads)
 		gfree(minirt->threads);
+	clear_materials(minirt);
 }
 
 int	secure_exit(void *data)
