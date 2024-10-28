@@ -35,12 +35,15 @@ t_color	lightning(t_object *obj, t_lightning ln, bool in_shadow, bool fast)
 	t_vector3	lightv;
 	double		l_dot_n;
 	t_color		c[3];
+	t_color		object_color;
 
 	(void)fast;
 	if (obj->mat.pattern.has_pattern)
-		obj->mat.color = obj->mat.pattern
+		object_color = obj->mat.pattern
 			.pattern_at_object(obj->mat.pattern, obj, ln.p);
-	eff_color = color_mult(obj->mat.color, ((t_light *)(ln.l->data))->c_rgb);
+	else
+		object_color = obj->mat.color;
+	eff_color = color_mult(object_color, ((t_light *)(ln.l->data))->c_rgb);
 	c[0] = color_mult(ln.amb->c_rgb, eff_color);
 	if (in_shadow)
 		return (c[0]);
