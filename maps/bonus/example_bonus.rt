@@ -1,0 +1,35 @@
+# (optional)  resolution
+#   width   height  
+R   1000    1000
+# ambient light
+#   intensity   color
+A   0.4         255,255,255
+# camera
+#   pos     look_at     fov
+C   0,1.8,0 0,-0.01,1   80
+# light
+#   pos         intensity   color
+L   0.0,2.2,2.1 1.0         255,255,255
+
+# define a new material
+define   moon   0.6 0.1 20 0.0 0.0 0.4 textures/moon.pgm
+
+# you can then refer to this material by name, or use the defaults materials :
+# metal, plastic, glass, mirror, wood, checkerboard, bricks, mat
+
+#plane
+#   pos     normal                  color       material
+pl  0,0,0   0,1,0                   255,255,255 checkerboard
+pl  -8,0,0  1,0,0                   255,255,255 checkerboard
+pl  8,0,0   1,0,0                   255,255,255 checkerboard
+pl  0,0,10  0,0,1                   255,255,255 checkerboard
+#sphere
+#   pos     radius                  color       material
+sp  -2,2,4  2.0                     255,255,255 moon
+sp  2,2,4   2.0                     255,255,255 mirror
+#cylinder
+#   pos     normal  radius  height  color       material
+cy  0,2,4   0,1,0   1.0     2.0     230,180,150 bricks
+#cone
+#   pos     normal  radius  height  color       material
+co  0,5,4   0,-1,0  1.0     2.0     120,120,250 wood
