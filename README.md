@@ -33,19 +33,44 @@ Execute the Minirt project with the following command:
 ```bash
 ./minirt "path/to/scene.rt"
 ```
+For more informations, you can get the miniRT guidelines:
+```bash
+./minirt -h
+```
 
 ## Scene File examples
 ```rt
-R 1280 720
-A 0.2                      255,255,255
-C 1,0.80,-10   0,-0.06,1   70
-l 0,0,0        0.6         255,255,255
+# (optional)  resolution
+#   width   height  
+R   1000    1000
+# ambient light
+#   intensity   color
+A   0.4         255,255,255
+# camera
+#   pos     look_at     fov
+C   0,1.8,0 0,-0.01,1   80
+# light
+#   pos         intensity   color
+L   0.0,2.2,2.1 1.0         255,255,255
 
-# defining a new material
-define moon	0.6	0.2	300	0.1	0.0	1.0	textures/moon.pgm
+# define a new material
+define   moon   0.6 0.1 20 0.0 0.0 0.4 textures/moon.pgm
 
-sp 0,0,0		   4		      255,255,255 moon
-sp -25,0,50	   30		      0,0,255	   wood
+# you can then refer to this material by name, or use the defaults materials :
+# metal, plastic, glass, mirror, wood, checkerboard, bricks, mat
+
+#plane
+#   pos     normal                  color       material
+pl  0,0,0   0,1,0                   255,255,255 checkerboard
+#sphere
+#   pos     radius                  color       material
+sp  -2,2,4  2.0                     255,255,255 moon
+#cylinder
+#   pos     normal  radius  height  color       material
+cy  0,2,4   0,1,0   1.0     2.0     230,180,150 bricks
+#cone
+#   pos     normal  radius  height  color       material
+co  0,5,4   0,-1,0  1.0     2.0     120,120,250 wood
 ```
 You can define your own materials or use the built-in ones:
 - `wood` - A wooden material.
@@ -53,6 +78,9 @@ You can define your own materials or use the built-in ones:
 - `glass` - A glass material.
 - `mirror` - A mirror material.
 - `plastic` - A plastic material.
+- `checkerboard` - A checkerboard material.
+- `bricks` - A bricks material.
+- `mat` - A mat material.
 
 If defining your own material, you can also define (optional) a bump texture for the material.
 The bump texture should be a PGM file (P2 format). No comments are allowed in the PGM file.
