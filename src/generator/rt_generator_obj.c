@@ -7,7 +7,7 @@ int	gener_sp(int fd)
 	if (!put_xyz_double(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(0, 10, fd))
+	if (!ran_double(1, 10, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
@@ -24,10 +24,10 @@ int	gener_cy(int fd)
 	if (!put_xyz_double(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(0, 20, fd))
+	if (!ran_double(1, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(0, 20, fd))
+	if (!ran_double(1, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
@@ -44,10 +44,10 @@ int	gener_co(int fd)
 	if (!put_xyz_double(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(0, 20, fd))
+	if (!ran_double(1, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(0, 20, fd))
+	if (!ran_double(1, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
 	if (!put_xyz_int(fd, 0, 255))
@@ -59,8 +59,8 @@ static void	gener_mat(int fd)
 {
 	int	gen;
 
-	gen = gener_int(0, 6);
-	if (gen == 0 || gen == 6)
+	gen = gener_int(0, 9);
+	if (gen == 0 || gen == 9)
 		ft_putstr_fd("\n", fd);
 	if (gen == 1)
 		ft_putstr_fd(" metal\n", fd);
@@ -72,6 +72,12 @@ static void	gener_mat(int fd)
 		ft_putstr_fd(" glass\n", fd);
 	if (gen == 5)
 		ft_putstr_fd(" wood\n", fd);
+	if (gen == 6)
+		ft_putstr_fd(" mat\n", fd);
+	if (gen == 7)
+		ft_putstr_fd(" bricks\n", fd);
+	if (gen == 8)
+		ft_putstr_fd(" checkerboard\n", fd);
 }
 
 int	gener_obj(int fd)

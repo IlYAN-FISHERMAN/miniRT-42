@@ -8,8 +8,6 @@ void	free_object(void *object)
 
 static void	clear_materials(t_minirt *minirt)
 {
-	t_mat		*mat;
-
 	if (minirt->df_mat.bricks.bumpmap)
 	{
 		gfree(minirt->df_mat.bricks.bumpmap->data);
@@ -19,16 +17,6 @@ static void	clear_materials(t_minirt *minirt)
 	{
 		gfree(minirt->df_mat.wood.bumpmap->data);
 		gfree(minirt->df_mat.wood.bumpmap);
-	}
-	while (minirt->mat)
-	{
-		mat = (t_mat *)minirt->mat->content;
-		if (mat->bumpmap)
-		{
-			gfree(mat->bumpmap->data);
-			gfree(mat->bumpmap);
-		}
-		minirt->mat = minirt->mat->next;
 	}
 }
 

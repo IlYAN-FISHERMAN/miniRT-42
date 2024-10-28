@@ -48,22 +48,21 @@ static void	print_def(void)
 		"0,0 0,0,1 60' for a camera at (0,0,0) looking along the Z-axis with a"
 		" 60-degree FOV.\n4. The light (L) defines the light source position, "
 		"intensity, and color.\n   Example: 'L 10,10,10 1.0 255,255,255' for a"
-		" light at (10,10,10) with full intensity and white light.\n5. The sph"
+		" light at (10,10,10) with full intensity and white light.\n\n5. The sph"
 		"eres (sp) describe their position, radius, and color.\n   Example: 's"
 		"p 0,0,20 10 255,0,0' for a red sphere at (0,0,20) with a radius of 10"
-		" units.\n\n6. Planes (pl) define an infinite plane with a position, n"
+		" units\n6. Planes (pl) define an infinite plane with a position, n"
 		"ormal vector, and color.\n   Example: 'pl 0,1,0 0,1,0 0,255,0' for a "
 		"green plane at Y=0, normal pointing upwards.\n7. Cylinders (cy) are d"
 		"efined by a position, orientation, diameter, height, and color.\n   E"
 		"xample: 'cy 0,0,0 0,1,0 5 20 255,255,0' for a yellow cylinder at (0,0"
-		",0) with diameter 5, height 20, along Y axis.\n8. Squares (sq) are de"
-		"fined by their position, normal vector, side length, and color.\n   E"
-		"xample: 'sq 1,1,1 0,1,0 10 0,0,255' for a blue square at (1,1,1) with"
-		" side length 10.\n9. Triangles (tr) are defined by three vertices and"
-		" their color.\n   Example: 'tr 0,1,0 1,0,0 0,0,1 255,0,255' for a mag"
-		"enta triangle with given vertices.\n\n10. You can add comments in you"
+		",0) with diameter 5, height 20, along Y axis.\n8. Cone (co) are d"
+		"efined by a position, orientation, diameter, height, and color.\n   E"
+		"xample: 'co 0,0,0 0,1,0 5 20 255,255,0' for a yellow cone at (0,0"
+		",0) with diameter 5, height 20, along Y axis.\n\n9. You can add commen"
+		"ts in you"
 		"r .rt file by starting the line with '#'.\n    Example:\n# This is a "
-		"comment and will be ignored by the parser.\n\n11. Materials can be de"
+		"comment and will be ignored by the parser.\n\n10. Materials can be de"
 		"fined with the 'define' keyword, allowing you to create your own");
 }
 
@@ -73,20 +72,18 @@ static void	print_def2(void)
 		"map.pgm'\n    This defines a new material with the following parameter"
 		"s:\n      - Diffuse reflection (1.0)\n      - Specular reflection (0.3"
 		")\n      - Ambient reflection (0.1)\n      - Shininess (0.4)\n      - "
-		"A bump map texture file ('bumpmap.pgm') for surface detail.\n\n12. Ass"
+		"A bump map texture file ('bumpmap.pgm') for surface detail.\n\n11. Ass"
 		"igning materials to objects:\n    Once a material is defined, you can "
 		"apply it to an object using the material name.\n    Example: 'sp 0,0,2"
 		"0 10 255,255,255 new_material' will apply 'new_material' to the sphere"
-		".\n\n13. Bump mapping allows you to add surface texture to your object"
+		".\n\n12. Bump mapping allows you to add surface texture to your object"
 		"s. You can specify a bump map file for each material.\n    Example: 'd"
 		"efine mat_with_bump 1.0 0.3 0.1 0.4 0.2 1.5 bump_texture.pgm'\n    Thi"
 		"s uses the 'bump_texture.pgm' file to add bumps to the surface of obje"
-		"cts using this material.\n\n14. Valid bump mapping textures are in for"
+		"cts using this material.\n\n13. Valid bump mapping textures are in for"
 		"mat PGM P2 and cannot contain comments.\n    You easily can generate y"
 		"our own by using our builtin script in `scripts/imt2pgm.sh`.\n    Note"
-		" that this script requires imagemagick in order to work properly.\n\nF"
-		"or more advanced scenes, you can combine different materials, bump map"
-		"s, and objects to create complex environments.\n");
+		" that this script requires imagemagick in order to work properly.\n\n");
 }
 
 void	help_message(t_minirt *minirt)
@@ -108,5 +105,9 @@ void	help_message(t_minirt *minirt)
 	print_map_ex();
 	print_def();
 	print_def2();
+	printf("14. You can add default material like:\n	- metal\n	- wood\n"
+		"	- plastic\n	- mirror\n	- glass\n	- bricks\n	- checkerboard\n"
+		"	- mat\n\nFor more advanced scenes, you can combine different mat"
+		"erials, bump maps, and objects to create complex environments.\n");
 	secure_exit(minirt);
 }

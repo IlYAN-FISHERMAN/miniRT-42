@@ -1,3 +1,5 @@
+#include "ft_linked_list.h"
+#include "ft_memory.h"
 #include "parsing.h"
 
 static void	check_co_range(char **str, t_minirt *minirt)
@@ -8,9 +10,9 @@ static void	check_co_range(char **str, t_minirt *minirt)
 	check_vector_range((char *[]){"miniRT", "parsing: Co: "
 		"Bad range for vector\n"
 		"[vector : >-1.0/<1.0]", NULL}, str[2], minirt);
-	if (ft_atof(str[3]) < -10000.0 || ft_atof(str[3]) > 10000.0)
+	if (ft_atof(str[3]) < 0.1 || ft_atof(str[3]) > 10000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Co: "
-			"Bad range for radius\n[radius: >-10k.0/<10k.0]", NULL},
+			"Bad range for diameter\n[diam: >0.1/<10k.0]", NULL},
 			str[3]);
 	if (ft_atof(str[4]) < -10000.0 || ft_atof(str[4]) > 10000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Co: "
@@ -24,6 +26,8 @@ static void	check_co_range(char **str, t_minirt *minirt)
 static void	check_co_material(char **str, t_minirt **minirt,
 							t_object *obj, t_color color)
 {
+	t_define	*dif;
+
 	if (BONUS && ft_strlen_tab(str) > 6 && str[6])
 	{
 		if (str[6] && is_dfmat(str[6]))
@@ -36,7 +40,13 @@ static void	check_co_material(char **str, t_minirt **minirt,
 		if (str[7])
 		{
 			check_bumpmap_error(str[7], *minirt);
-			obj->mat.bumpmap = load_bumpmap(str[7]);
+			dif = ft_calloc(1, sizeof(t_define));
+			if (!dif)
+				crash_exit(*minirt,
+					(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+			dif->mat.bumpmap = load_bumpmap(str[7]);
+			obj->mat.bumpmap = dif->mat.bumpmap;
+			ft_lstnew_back(&(*minirt)->mat, dif);
 		}
 	}
 }

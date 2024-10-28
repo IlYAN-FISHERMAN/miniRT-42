@@ -44,9 +44,9 @@ void	check_define_range(char **str, t_minirt *minirt)
 	if (ft_atof(str[6]) < 0.0 || ft_atof(str[6]) > 1.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing", "Define: Bad "
 			"transp range\n[transparency: >0.0/<1.0]", NULL}, str[6]);
-	if (ft_atof(str[7]) < 0.0 || ft_atof(str[7]) > 1.0)
+	if (ft_atof(str[7]) < 0.0 || ft_atof(str[7]) > 2.5)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing", "Define: Bad "
-			"refractive index range\n[refractive Index: >0.0/<1.0]", \
+			"refractive index range\n[refractive Index: >0.0/<2.5]", \
 			NULL}, str[7]);
 }
 
