@@ -12,6 +12,7 @@ typedef struct s_pattern
 	t_color		b;
 	t_color		(*pattern_at_object)(t_pattern, void *, t_point3);
 	t_matrix4	transform;
+	t_matrix4	inv_transform;
 }	t_pattern;
 
 //	abs_pattern: Create a null pattern
