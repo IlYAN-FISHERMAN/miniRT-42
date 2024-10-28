@@ -39,6 +39,6 @@ void	get_size(char **str, t_minirt **minirt)
 			(char *[]){"miniRT", "parsing", NULL}, "Only one R accepted");
 	check_size_format(str, minirt);
 	(*minirt)->size->exist = true;
-	(*minirt)->size->height = ft_atof(str[1]);
-	(*minirt)->size->width = ft_atof(str[2]);
+	(*minirt)->size->width = ft_atof(str[1]);
+	(*minirt)->size->height = ft_atof(str[2]);
 }
