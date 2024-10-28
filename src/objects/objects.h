@@ -64,14 +64,6 @@ t_vector3	normal_at(t_object *obj, t_point3 world_point);
 //	@return The intersections of the object
 t_xs_parent	intersect_at(t_object *obj, t_ray ray);
 
-//	material: Create a new material
-//	@param color The color value
-//	@param diff The diffuse value
-//	@param spec The specular value
-//	@param shin The shininess value
-//	@return A new material
-t_mat		material(t_color color, double diff, double spec, double shin);
-
 //	dfmaterial: Create a new default material
 //	@param color The color value
 //	@return A new default material
