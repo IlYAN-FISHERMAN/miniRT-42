@@ -63,9 +63,14 @@ static t_xs_parent	intersect_cylinder(t_object *object, t_ray r)
 static t_vector2	uv_mapping_cyl(t_point3 local_point)
 {
 	double	theta;
+	double	u;
+	double	v;
 
 	theta = atan2(local_point.x, local_point.z);
-	return (vector2((1 + theta / (2 * M_PI)) / 2, local_point.y));
+	u = (theta + M_PI) / (2 * M_PI);
+	v = (local_point.y + 0.5);
+
+	return (vector2(u, v));
 }
 
 //  normal_at_cylinder: Get the normal at a point on the cylinder
