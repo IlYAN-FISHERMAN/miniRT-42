@@ -10,8 +10,7 @@ t_mat	mat_checkerboard(t_color c)
 		.reflect = 0.2,
 		.transp = 0.0,
 		.refract_idx = 1.3,
-		.pattern = checkboard_pattern((c),
-			color_sub(color(255, 255, 255), c)),
+		.pattern = checkboard_pattern(color(0, 0, 0), color(255, 255, 255)),
 		.bumpmap = dfbumpmap()
 	});
 }
