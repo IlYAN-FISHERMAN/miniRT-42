@@ -10,7 +10,7 @@ int	is_define(char *str, t_mats *iter)
 	while (iter)
 	{
 		tmp = iter->content;
-		if (!ft_strcmp(str, tmp->name))
+		if (tmp->name && !ft_strcmp(str, tmp->name))
 			return (1);
 		iter = iter->next;
 	}
