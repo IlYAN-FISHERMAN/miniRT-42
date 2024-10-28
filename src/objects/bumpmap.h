@@ -4,7 +4,7 @@
 # include "../vectors/vectors.h"
 
 # ifndef BUMP_SCALE
-#  define BUMP_SCALE 0.3
+#  define BUMP_SCALE 1.0
 # endif
 
 typedef struct s_bumpmap
