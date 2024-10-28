@@ -44,3 +44,18 @@ void	check_rgb_range(char **context, char *str, t_minirt *minirt)
 		crash_exit(minirt, context, str);
 	ft_free_tab(split);
 }
+
+void	check_normal_range(t_minirt *minirt, char *str, char *name)
+{
+	double	x;
+	double	y;
+	double	z;
+
+	if (!ft_atof_xyz(&x, &y, &z, ft_split(str, ',')))
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, "Malloc failed");
+	if (x == 0.0 && y == 0.0 && z == 0.0)
+		printf("\nminirt: %s: %s⚠️ Warning: \nYou configured the vect"
+			"or of %s to 0,0,0\nminirt corrected this but the vector can"
+			"not be NULL%s\n\n", name, C_ORANGE, name, C_RESET);
+}

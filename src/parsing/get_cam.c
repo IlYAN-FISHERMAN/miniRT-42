@@ -12,6 +12,7 @@ void	check_cam_range(char **str, t_minirt **minirt)
 		crash_exit(*minirt, (char *[]){"miniRT", "parsing: Cam: "
 			"Bad range for fov\n[fov: >0/<180]", NULL},
 			str[3]);
+	check_normal_range(*minirt, str[2], "Cam");
 }
 
 void	check_cam_format(char **str, t_minirt **minirt)

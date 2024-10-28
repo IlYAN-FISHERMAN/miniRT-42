@@ -1,3 +1,4 @@
+#include "colors.h"
 #include "parsing.h"
 
 void	check_pl_range(char **str, t_minirt *minirt)
@@ -11,6 +12,7 @@ void	check_pl_range(char **str, t_minirt *minirt)
 	check_rgb_range((char *[]){"miniRT", "parsing: Pl: "
 		"Bad range for rgb\n[rgb: >0/<255]", NULL}, \
 		str[3], minirt);
+	check_normal_range(minirt, str[2], "Pl");
 }
 
 void	check_pl_info(char **str, t_minirt *minirt)

@@ -85,6 +85,7 @@ int			ft_atoi_rgb(unsigned char *x, unsigned char *y,
 				unsigned char *z, char **str);
 // check xyz range format
 void		check_xyz_range(char **context, char *str, t_minirt *minirt);
+void		check_normal_range(t_minirt *minirt, char *str, char *name);
 //	check vector range range
 void		check_vector_range(char **context, char *str, t_minirt *minirt);
 //	check rgb range

@@ -23,6 +23,10 @@ int	check_standard_shape(t_minirt *minirt)
 		crash_exit(minirt,
 			(char *[]){"miniRT", "parsing", NULL}, \
 			"No cam set");
+	if (!minirt->world.amb)
+		crash_exit(minirt,
+			(char *[]){"miniRT", "parsing", NULL}, \
+			"No amb set");
 	return (1);
 }
 

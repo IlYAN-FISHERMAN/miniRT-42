@@ -18,6 +18,7 @@ void	check_cy_range(char **str, t_minirt *minirt)
 	check_rgb_range((char *[]){"miniRT", "parsing: Cy: "
 		"Bad range for rgb\n[rgb: >0/<255]", NULL}, \
 		str[5], minirt);
+	check_normal_range(minirt, str[2], "Cy");
 }
 
 static void	check_cy_material(char **str, t_minirt **minirt,

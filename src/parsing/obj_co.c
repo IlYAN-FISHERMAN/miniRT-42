@@ -18,6 +18,7 @@ static void	check_co_range(char **str, t_minirt *minirt)
 	check_rgb_range((char *[]){"miniRT", "parsing: Co: "
 		"Bad range for rgb\n[rgb: >0/<255]", NULL}, \
 		str[5], minirt);
+	check_normal_range(minirt, str[2], "Co");
 }
 
 static void	check_co_material(char **str, t_minirt **minirt,

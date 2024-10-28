@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:26:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/05/08 16:26:52 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:12:24 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //	macros
 //		Colors definition
+# define C_ORANGE "\001\033[38;5;214m\002"
 # define C_RED "\001\033[0;31m\002"
 # define C_GREEN "\001\033[0;32m\002"
 # define C_YELLOW "\001\033[0;33m\002"
