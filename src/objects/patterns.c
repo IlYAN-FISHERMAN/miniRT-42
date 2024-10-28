@@ -39,13 +39,13 @@ static t_color
 	pattern_point = tm4mul(pattern.transform, obj_point);
 	if (obj->type == o_plane)
 	{
-		if (((int)floorf(pattern_point.x)
-				+ (int)floorf(pattern_point.z)) % 2 == 0)
+		if (((int)floor(pattern_point.x)
+				+ (int)floor(pattern_point.z)) % 2 == 0)
 			return (pattern.a);
 		return (pattern.b);
 	}
-	if (((int)floorf(pattern_point.x) + (int)floorf(pattern_point.z)
-			+ (int)floorf(pattern_point.y)) % 2 == 0)
+	if (((int)floor(pattern_point.x) + (int)floor(pattern_point.z)
+			+ (int)floor(pattern_point.y)) % 2 == 0)
 		return (pattern.a);
 	return (pattern.b);
 }
