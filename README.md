@@ -1,3 +1,4 @@
+![](https://raw.githubusercontent.com/IlYAN-FISHERMAN/minirt-42/main/docs/success.png)
 ![](https://github.com/ayogun/42-project-badges/blob/main/badges/minirtm.png?raw=true)
 
 ![42 Badge](https://img.shields.io/badge/42-Project-blue) 
