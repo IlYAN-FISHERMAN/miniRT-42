@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:43:28 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/28 23:43:29 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/10/29 01:02:30 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	check_co_range(char **str, t_minirt *minirt)
 	check_vector_range((char *[]){"miniRT", "parsing: Co: "
 		"Bad range for vector\n"
 		"[vector : >-1.0/<1.0]", NULL}, str[2], minirt);
-	if (ft_atof(str[3]) < 0.1 || ft_atof(str[3]) > 10000.0)
+	if (ft_atof(str[3]) < 0.01 || ft_atof(str[3]) > 10000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Co: "
-			"Bad range for diameter\n[diam: >0.1/<10k.0]", NULL},
+			"Bad range for diameter\n[diam: >0.01/<10k.0]", NULL},
 			str[3]);
 	if (ft_atof(str[4]) < -10000.0 || ft_atof(str[4]) > 10000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Co: "

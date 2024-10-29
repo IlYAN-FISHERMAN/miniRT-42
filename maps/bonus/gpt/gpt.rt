@@ -1,0 +1,38 @@
+R    1920 1080
+A    0.2 255,255,255
+
+C    0,0,-100 0,0,1 75
+
+L    30,50,20 0.5 255,255,255
+L    -30,50,20 0.8 255,220,200
+
+define metal_material 0.7 0.5 0.5 0.9 0.0 1.0
+define glass_material 0.1 0.1 0.9 0.9 0.95 1.5
+define wood_material 0.6 0.4 0.2 0.3 0.0 1.0
+define mirror_material 0.1 0.9 0.9 1.0 0.0 1.0
+
+pl    0,-10,0 0,1,0 150,111,51 wood_material
+
+cy    0,0,10 0,0,1 2 20 120,120,120 metal_material
+cy    5,5,5 1,1,0 1.5 15 160,160,160 glass_material
+cy    -5,5,5 -1,1,0 1.5 15 160,160,160 glass_material
+cy    0,-5,5 0,1,0 1 12 140,140,140 mirror_material
+
+sp    0,0,10 3 100,100,250 glass_material
+sp    3,3,13 1.5 250,100,100 metal_material
+sp    -3,3,13 1.5 250,250,100 wood_material
+sp    0,5,20 1 150,250,150 mirror_material
+
+co    10,0,15 1,0,0 3 8 200,200,200 metal_material
+co    -10,0,15 -1,0,0 3 8 200,200,200 metal_material
+
+cy    0,0,30 0,0,1 0.5 25 100,100,250 metal_material
+cy    2,0,35 1,0,0 0.4 20 100,250,100 glass_material
+cy    -2,0,35 -1,0,0 0.4 20 250,100,100 mirror_material
+
+sp    0,10,50 5 120,80,200 glass_material
+sp    5,5,55 2 255,200,50 metal_material
+sp    -5,5,55 2 200,255,50 wood_material
+
+pl    0,0,60 0,0,-1 255,255,255 mirror_material
+pl    0,-20,0 0,1,0 200,150,100 wood_material

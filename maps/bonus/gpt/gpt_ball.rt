@@ -1,0 +1,24 @@
+R 800 600
+A 0.2 255,255,255
+C 0,0,5 0,0,-1 60
+L 10,10,10 1.0 255,255,255
+
+# Définition des matériaux
+define masterball_body 1.0 0.5 0.5 0.5 0.0 1.0
+define masterball_top 1.0 0.0 0.0 1.0 0.0 1.0
+define masterball_bottom 1.0 0.0 0.0 1.0 0.0 1.0
+define button 1.0 1.0 1.0 0.0 0.0 1.0
+
+# Sol
+pl 0,-1,0 0,1,0 150,150,150
+
+# Corps de la Master Ball
+sp 0,0,5 0.5 255,0,255 masterball_body
+sp 0,0,5.05 0.5 255,255,255 masterball_top
+sp 0,0,4.95 0.5 255,255,255 masterball_bottom
+
+# Détails du bouton central
+sp 0,0,5 0.1 255,0,0 button
+sp 0,0,5 0.1 0,0,0 button
+sp 0.05,0,5 0.1 0,0,0 button
+sp -0.05,0,5 0.1 0,0,0 button

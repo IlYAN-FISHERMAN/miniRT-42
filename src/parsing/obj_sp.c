@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:43:41 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/28 23:43:42 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/10/29 01:02:12 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	check_sp_range(char **str, t_minirt *minirt)
 	check_xyz_range((char *[]){"miniRT", "parsing: Sp: "
 		"Bad range for xyz position\n"
 		"[xyz : >-10 000/<10 000]", NULL}, str[1], minirt);
-	if (ft_atof(str[2]) < 0.1 || ft_atof(str[2]) > 10000.0)
+	if (ft_atof(str[2]) < 0.01 || ft_atof(str[2]) > 10000.0)
 		crash_exit(minirt, (char *[]){"miniRT", "parsing: Sp: "
-			"Bad range for diameter\n[diam: >0.1/<10k.0]", NULL},
+			"Bad range for diameter\n[diam: >0.01/<10k.0]", NULL},
 			str[2]);
 	check_rgb_range((char *[]){"miniRT", "parsing: Sp: "
 		"Bad range for rgb\n[rgb: >0/<255]", NULL}, \
