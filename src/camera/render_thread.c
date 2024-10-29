@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:49:52 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/10/28 22:49:53 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/29 02:49:42 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	*thread_render(void *data_)
 		if ((p[0] * 100 / data->perc) % 13 == 0)
 		{
 			pthread_mutex_lock(data->perc_mutex);
-			print_percent(ft_itoa((p[0] * 100) / data->perc));
+			print_percent(ft_itoa(p[0] * 100 / data->perc));
 			pthread_mutex_unlock(data->perc_mutex);
 		}
 	}

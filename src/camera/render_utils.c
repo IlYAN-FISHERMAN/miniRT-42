@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:49:56 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/10/28 22:49:57 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/29 02:56:49 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	print_percent(char *info)
 			"Malloc failed");
 	y_pos = minirt->size->height * 0.5 - 15;
 	x_pos = minirt->size->width * 0.5 - 50;
+	display();
 	print_box(120, 30);
 	mlx_string_put(minirt->win.mlx, minirt->win.windo, x_pos, y_pos, 0xFFFFFF,
 		"Rendering...");
