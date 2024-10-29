@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   help_message.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 23:42:53 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/10/28 23:45:29 by ilyanar          ###   LAUSANNE.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../miniRT.h"
 #include "../exit_handler/exit_handler.h"
 
@@ -48,7 +60,8 @@ static void	print_def(void)
 		"0,0 0,0,1 60' for a camera at (0,0,0) looking along the Z-axis with a"
 		" 60-degree FOV.\n4. The light (L) defines the light source position, "
 		"intensity, and color.\n   Example: 'L 10,10,10 1.0 255,255,255' for a"
-		" light at (10,10,10) with full intensity and white light.\n\n5. The sph"
+		" light at (10,10,10) with full intensity and white light.\n\n5. The s"
+		"ph"
 		"eres (sp) describe their position, radius, and color.\n   Example: 's"
 		"p 0,0,20 10 255,0,0' for a red sphere at (0,0,20) with a radius of 10"
 		" units\n6. Planes (pl) define an infinite plane with a position, n"
@@ -83,7 +96,8 @@ static void	print_def2(void)
 		"cts using this material.\n\n13. Valid bump mapping textures are in for"
 		"mat PGM P2 and cannot contain comments.\n    You easily can generate y"
 		"our own by using our builtin script in `scripts/imt2pgm.sh`.\n    Note"
-		" that this script requires imagemagick in order to work properly.\n\n");
+		" that this script requires imagemagick in order to work properly."
+		"\n\n");
 }
 
 void	help_message(t_minirt *minirt)
