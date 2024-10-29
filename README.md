@@ -33,6 +33,28 @@ Execute the Minirt project with the following command:
 ```bash
 ./minirt "path/to/scene.rt"
 ```
+### Camera Controls
+
+You can navigate the camera using the following controls:
+
+- **Movement**:
+  - `W`, `A`, `S`, `D` - Move the camera around.
+  
+- **Direction**:
+  - Arrow keys (`↑`, `←`, `↓`, `→`) - Change the camera's direction.
+
+- **Altitude Adjustment**:
+  - `Space` - Raise the camera higher.
+  - `X` - Lower the camera.
+
+**Note**: These controls are based on SWISS and US keyboard layouts.
+
+### Map generator
+You can generate a random map by using :
+```bash
+./minirt -r
+```
+
 For more informations, you can get the miniRT guidelines:
 ```bash
 ./minirt -h
