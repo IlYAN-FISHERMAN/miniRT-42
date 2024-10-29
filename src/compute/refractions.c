@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:51:04 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/10/28 22:51:05 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/29 01:11:18 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_color	refracted_color(t_comps *comps, bool fast, int remaining)
 {
 	t_vector3	dir;
 
-	if (fast || comps->object->mat.transp == 0 || remaining <= 0)
+	if (comps->object->mat.transp == 0 || remaining <= 0)
 		return (color(0, 0, 0));
 	comps->n_ratio = comps->n1 / comps->n2;
 	comps->cos_i = vdot(comps->eyev, comps->normalv);
