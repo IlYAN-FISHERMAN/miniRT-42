@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:42:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/28 23:45:29 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/12/02 08:53:18 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	print_usage(void)
 {
 	printf("\nUsage: ./miniRT <scene.rt>\n       ./miniRT [options]\n\n\
 Options:\n  -h                 Display this help message\n  -r -random         \
-Create a random <scene.rt>\n  <scene.rt> <file>  Load the scene from an \
+Create a random <scene.rt> (only with bonus, use \"make bonus\")\n  <scene.rt> \
+<file>  Load the scene from an \
 .rt file\n\nExamples:\n  ./miniRT scene.rt\n  ./miniRT -r\n\nExemple of a .rt \
 file:\n");
 }
