@@ -44,7 +44,7 @@ export APP_HEADER
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -Ofast -march=native -mtune=native
+CFLAGS = -Wall -Wextra -Werror -I libs/betterft/includes/ -lm -march=native -mtune=native
 
 OS =
 

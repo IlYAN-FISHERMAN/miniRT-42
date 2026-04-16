@@ -1,5 +1,3 @@
-
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/mman.h>
@@ -8,11 +6,28 @@
 #include <err.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include <err.h>
+#include <stdarg.h>
 
 #include "zlib.h"
 
 #include <OpenGL/gl3.h>
 #include	"mlx_int.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#ifndef __linux__
+# define warnx(...) do { \
+    fprintf(stderr, __VA_ARGS__); \
+    fprintf(stderr, "\n"); \
+} while (0)
+
+# define err(code, ...) do { \
+    fprintf(stderr, __VA_ARGS__); \
+    fprintf(stderr, "\n"); \
+    exit(code); \
+} while (0)
+#endif
 
 
 #define	PNG_MAGIC_SIZE	8

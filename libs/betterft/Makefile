@@ -2,7 +2,7 @@
 CFLAGS = -D GARBAGE_COLLECTOR=0
 
 CC = gcc
-CFLAGS += -Wall -Wextra -Werror -Ofast -march=native -mtune=native
+CFLAGS += -Wall -Wextra -Werror -march=native -mtune=native
 
 FILES =	garbage_collector/ft_garbage_collector \
 		garbage_collector/ft_garbage_utils \
